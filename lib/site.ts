@@ -1,9 +1,22 @@
 // Company details and navigation used by every page.
 // Replace the placeholder contact details once they are confirmed.
+
+/**
+ * The site's public address, used for canonical links, the sitemap and social previews.
+ * Set NEXT_PUBLIC_SITE_URL once a custom domain is live (e.g. https://www.elyra.com).
+ * Until then, Vercel's production address is used automatically.
+ */
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:5178");
+
+/** Search engines may index the site only when SITE_INDEXABLE=true (turn on with the real domain). */
+export const indexable = process.env.SITE_INDEXABLE === "true";
+
 export const company = {
   name: "Elyra",
   legal: "ELYRA",
-  url: "https://www.example.com",
+  url: siteUrl.replace(/\/$/, ""),
   email: "hello@example.com",
   phone: "",          // e.g. "+91 00000 00000"
   whatsapp: "",       // e.g. "910000000000" (digits only, used for wa.me)
