@@ -1320,7 +1320,9 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline-offset: 4
   inset: 0;
   z-index: 1;
   display: grid;
-  grid-template-rows: 1fr auto;
+  /* both rows keep their content height (a 1fr row squeezed the grid to nothing on short screens) */
+  grid-template-rows: auto auto;
+  align-content: space-between;
   gap: 2rem;
   padding: clamp(1.5rem, 4vw, 4rem);
   /* clear the floating header once the frame fills the screen */
@@ -1343,6 +1345,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline-offset: 4
   grid-template-columns: repeat(3, 1fr);
   border-radius: 28px;
   overflow: hidden;
+  min-height: min-content;   /* overflow: hidden would otherwise let the layout squash it */
   background: rgb(255 255 255 / .12);
   backdrop-filter: blur(24px) saturate(170%);
   -webkit-backdrop-filter: blur(24px) saturate(170%);
@@ -1365,6 +1368,17 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline-offset: 4
 .cd-item .chev { position: absolute; right: 1.4rem; top: 50%; margin: -3px 0 0; color: rgb(var(--mint)); }
 .cd-item:hover { background: rgb(255 255 255 / .1); }
 .cd-item:hover .chev { transform: translateX(4px) rotate(45deg); }
+/* short desktop screens: text and button sit beside the title, and the title scales with height,
+   so the heading and both rows of the grid fit inside the frame */
+@media (min-width: 861px) and (max-height: 900px) {
+  .cd-layout { --pad: clamp(1.5rem, min(4vw, 6vh), 4rem); padding: var(--pad); padding-top: calc(var(--pad) + var(--p, 0) * 4.5rem); }
+  .cd-head { max-width: none; grid-template-columns: minmax(0, 1fr) minmax(0, 28rem); column-gap: 3rem; align-items: end; }
+  .cd-head .eyebrow { grid-column: 1 / -1; }
+  .bleed-title { grid-column: 1; grid-row: 2 / span 2; font-size: clamp(2.6rem, min(6vw, 9.5vh), 5.5rem); }
+  .cd-text { grid-column: 2; }
+  .cd-cta { grid-column: 2; margin-top: 0; }
+  .cd-item { padding-top: 1rem; padding-bottom: 1.05rem; }
+}
 
 /* ============ MOBILE APPS: bento grid ============ */
 .apps { padding-bottom: 8rem; }
