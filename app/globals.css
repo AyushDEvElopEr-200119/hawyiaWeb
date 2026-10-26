@@ -444,7 +444,7 @@ html:not(.js) .nav-link:hover { background: rgb(255 255 255 / .85); }
   min-height: 11rem;
 }
 .sol small { font-family: var(--mono); color: var(--mint-600); font-size: .75rem; }
-.sol h4 { font-family: var(--serif); font-size: 1.3rem; line-height: 1.12; letter-spacing: -0.02em; margin-top: auto; }
+.sol h3 { font-family: var(--serif); font-size: 1.3rem; line-height: 1.12; letter-spacing: -0.02em; margin-top: auto; }
 .sol p { color: var(--muted); font-size: .8125rem; letter-spacing: .005em; }
 .sol:hover { box-shadow: inset 0 0 0 1px rgb(var(--mint) / .8); }
 
@@ -480,7 +480,7 @@ html:not(.js) .nav-link:hover { background: rgb(255 255 255 / .85); }
 @keyframes marquee { to { transform: translateX(-100%); } }
 .api-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 4rem; background: var(--line); border-radius: 28px; overflow: hidden; }
 .api { background: #fff; padding: 1.6rem 1.5rem; display: grid; gap: .4rem; }
-.api h4 { font-family: var(--serif); font-size: 1.3rem; letter-spacing: -0.02em; }
+.api h3 { font-family: var(--serif); font-size: 1.3rem; letter-spacing: -0.02em; }
 .api p { color: var(--muted); font-size: .875rem; }
 .fineprint { text-align: center; color: var(--muted); font-size: .75rem; letter-spacing: .01em; margin: 1.75rem auto 0; max-width: 34rem; padding: 0 var(--gutter); }
 
@@ -507,7 +507,7 @@ html:not(.js) .nav-link:hover { background: rgb(255 255 255 / .85); }
   box-shadow: inset 0 0 14px rgb(var(--mint) / .7);
   margin-bottom: .6rem;
 }
-.engine h4 { font-family: var(--serif); font-size: 1.4rem; letter-spacing: -0.02em; }
+.engine h3 { font-family: var(--serif); font-size: 1.4rem; letter-spacing: -0.02em; }
 .engine p { color: var(--muted); font-size: .8125rem; letter-spacing: .005em; }
 
 /* ============ BUSINESS MODELS: pinned gallery (see main.js) ============
@@ -636,7 +636,7 @@ html:not(.js) .nav-link:hover { background: rgb(255 255 255 / .85); }
 .panel[hidden] { display: none; }
 @keyframes panelIn { from { opacity: 0; transform: translateY(6px); filter: blur(4px); } }
 .feat { background: #fff; padding: 1.6rem 1.5rem; display: grid; gap: .45rem; align-content: start; }
-.feat h4 { font-weight: 600; font-size: 1rem; letter-spacing: -0.01em; }
+.feat h3 { font-weight: 600; font-size: 1rem; letter-spacing: -0.01em; }
 .feat p { color: var(--muted); font-size: .875rem; }
 
 /* ============ EXTRANET ============ */
@@ -689,7 +689,7 @@ html:not(.js) .nav-link:hover { background: rgb(255 255 255 / .85); }
 .mini-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 16px; }
 .mini-card { display: flex; gap: 14px; padding: 8px; border-radius: 40px; background: var(--card-soft); align-items: center; }
 .mini-card > div:last-child { display: grid; gap: .8rem; padding-right: 10px; }
-.mini-card h4 { font-size: .875rem; font-weight: 600; line-height: 1.3; }
+.mini-card h3 { font-size: .875rem; font-weight: 600; line-height: 1.3; }
 .mini-media { flex: 0 0 90px; aspect-ratio: 1; border-radius: 32px; display: grid; place-items: center; color: #fff; font-family: var(--mono); font-size: 22px; }
 
 /* ============ APPS ============ */
@@ -721,7 +721,7 @@ html:not(.js) .nav-link:hover { background: rgb(255 255 255 / .85); }
 .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem 2rem; }
 .why-item { display: grid; gap: .55rem; padding-top: 1.2rem; border-top: 1px solid var(--ink); }
 .why-item .mono { color: var(--mint-600); }
-.why-item h4 { font-family: var(--serif); font-size: 1.5rem; letter-spacing: -0.02em; }
+.why-item h3 { font-family: var(--serif); font-size: 1.5rem; letter-spacing: -0.02em; }
 .why-item p { color: var(--muted); font-size: .9rem; }
 
 /* ============ EDIT (resources) ============ */
@@ -857,8 +857,47 @@ html:not(.js) .nav-link:hover { background: rgb(255 255 255 / .85); }
 .copyright { font-size: .6875rem; color: var(--muted); max-width: 32rem; letter-spacing: .02em; }
 
 /* ============ REVEAL (materialize: blur + rise together) ============ */
-/* hidden only when JS runs; GSAP ScrollTrigger.batch animates them in */
-.js .reveal:not(.in) { opacity: 0; transform: translateY(24px); filter: blur(6px); }
+/* hidden only when JS runs; GSAP ScrollTrigger.batch animates them in (transform + opacity,
+   so a batch of cards stays cheap to paint) */
+.js .reveal:not(.in) { opacity: 0; transform: translateY(28px) scale(.985); }
+
+/* ============ FIRST-SCREEN ENTRANCES (pure CSS) ============
+   The headline, intro and hero band animate with the HTML itself, so the first screen never
+   waits for the motion script to download. Text starts faintly visible (never opacity 0),
+   so it still counts as the page's first meaningful paint. */
+@keyframes rise-in {
+  from { opacity: .08; transform: translateY(.45em); filter: blur(8px); }
+}
+@keyframes fade-up {
+  from { opacity: .08; transform: translateY(18px); }
+}
+@keyframes band-open {
+  from { clip-path: inset(14% 10% 0% 10% round 60px); }
+  to { clip-path: inset(0% 0% 0% 0% round 40px); }
+}
+@keyframes settle { from { scale: 1.14; } }
+@keyframes materialize {
+  from { opacity: 0; transform: translateY(40px); filter: blur(10px); }
+}
+.hero-title span { animation: rise-in 1.5s var(--ease-out) backwards; animation-delay: calc(.25s + var(--i, 0) * .16s); }
+.ph-title .w { animation: rise-in 1.2s var(--ease-out) backwards; animation-delay: calc(.08s + var(--i, 0) * .05s); }
+.crumbs, .ph-intro > *, .contact-copy > :not(h1) { animation: fade-up 1s var(--ease-out) .3s backwards; }
+.ph-intro > :nth-child(2), .contact-copy > :nth-child(3) { animation-delay: .38s; }
+.ph-media { animation: band-open 1.6s cubic-bezier(.87, 0, .13, 1) .15s backwards; }
+.ph-media .ph-bg { animation: settle 2.2s var(--ease-out) .15s backwards; }
+.ph-highlights { animation: materialize 1.2s var(--ease-out) .7s backwards; }
+.ph-highlights li { animation: fade-up 1s var(--ease-out) .9s backwards; }
+.ph-highlights li:nth-child(2) { animation-delay: .98s; }
+.ph-highlights li:nth-child(3) { animation-delay: 1.06s; }
+
+/* ============ PAGE TRANSITIONS (app/template.tsx) ============
+   The old page recedes quickly; the new one rises in a beat later, so the two never compete. */
+::view-transition { pointer-events: none; }
+::view-transition-old(.page-out) { animation: page-out .22s cubic-bezier(.4, 0, 1, 1) both; }
+::view-transition-new(.page-in) { animation: page-in .5s var(--ease-out) .12s both; }
+@keyframes page-out { to { opacity: 0; transform: scale(.985); filter: blur(4px); } }
+@keyframes page-in { from { opacity: 0; transform: translateY(16px); } }
+@keyframes vt-fade { from { opacity: 0; } }
 .press.reveal.in:active { transform: scale(.97); }
 .statement-text .sw { display: inline; }
 
@@ -1150,7 +1189,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline-offset: 4
 .dir-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
 .dir-item { display: grid; gap: .35rem; align-content: start; padding: 1.4rem 1.3rem; border-radius: 26px; background: var(--card-soft); }
 .dir-item small { font-family: var(--mono); font-size: .6875rem; letter-spacing: .04em; text-transform: uppercase; color: var(--mint-600); }
-.dir-item h4 { font-family: var(--serif); font-size: 1.35rem; letter-spacing: -0.02em; line-height: 1.1; }
+.dir-item h3 { font-family: var(--serif); font-size: 1.35rem; letter-spacing: -0.02em; line-height: 1.1; }
 .dir-item p { color: var(--muted); font-size: .8125rem; }
 .dir-item.is-hidden { display: none; }
 .directory .fineprint { margin-top: 2rem; }
@@ -1343,7 +1382,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline-offset: 4
   background: var(--card-soft);
 }
 .b-ico { width: 34px; height: 34px; margin-bottom: auto; color: var(--mint-900); }
-.b-card h4 { font-family: var(--serif); font-weight: 400; font-size: 1.45rem; line-height: 1.1; letter-spacing: -0.02em; }
+.b-card > h3 { font-family: var(--serif); font-weight: 400; font-size: 1.45rem; line-height: 1.1; letter-spacing: -0.02em; }
 .b-card p { color: var(--muted); font-size: .875rem; }
 .b-dark { background: radial-gradient(120% 120% at 100% 0%, #2c8a7e, #0f3e39 60%); color: #fff; }
 .b-dark p { color: rgb(255 255 255 / .82); }
@@ -1453,8 +1492,10 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline-offset: 4
 .tile-hl { max-width: min(400px, calc(100% - 28px)); }
 @media (max-width: 860px) {
   .tile-cap { display: none; }
+  /* the card hangs from the top of the stage, right under the intro, then grows to fill it */
+  .ph-stage { place-items: start center; }
   .ph-stage .xp-frame { --h0: 72%; --r0: 28px; }
-  .ph-media { height: auto; min-height: 0; }
+  .ph-media { min-height: 0; }
   .effect .xp-frame { --h0: 80%; }
   .carousel.xp .xp-frame { --w0: 86vw; --h0: min(calc(86vw * 4 / 3), 76svh); --r0: 40px; }
 }
@@ -1463,6 +1504,9 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline-offset: 4
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; }
+  /* pages cross-fade without movement */
+  ::view-transition-old(.page-out) { animation: vt-fade .15s ease reverse both !important; }
+  ::view-transition-new(.page-in) { animation: vt-fade .2s ease both !important; }
   .reveal { opacity: 1; transform: none; filter: none; }
   .mobile-menu, .mobile-menu.open { transform: none; filter: none; transition: opacity .2s ease, visibility 0s; }
 }

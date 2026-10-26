@@ -4,13 +4,22 @@ import type { Pair } from "./content";
 
 export type Crumb = { label: string; href?: string };
 
-/** Per-page metadata: title, description, canonical URL and Open Graph. */
+export const siteDescription =
+  "Elyra helps travel businesses launch, customize and scale their own online booking platforms with white-label solutions, custom development and travel API integrations.";
+
+// the share card drawn by app/og.png/route.tsx
+const shareImage = { url: "/og.png", width: 1200, height: 630, alt: `${company.name} — ${company.tagline}` };
+
+/** Per-page metadata: title, description, canonical URL, Open Graph and Twitter card.
+    A page's `openGraph` replaces the layout's instead of merging with it, so every field is set here. */
 export function pageMeta({ title, description, path }: { title?: string; description: string; path: string }): Metadata {
+  const full = title ? `${title} | ${company.name}` : `${company.name} — ${company.tagline}`;
   return {
-    title: title ?? { absolute: `${company.name} — ${company.tagline}` },
+    title: title ?? { absolute: full },
     description,
     alternates: { canonical: path },
-    openGraph: { type: "website", title: title ? `${title} | ${company.name}` : `${company.name} — ${company.tagline}`, description, url: path },
+    openGraph: { type: "website", siteName: company.name, locale: "en_US", title: full, description, url: path, images: [shareImage] },
+    twitter: { card: "summary_large_image", title: full, description, images: [shareImage] },
   };
 }
 
@@ -31,10 +40,38 @@ export function faqSchema(faq: Pair[]) {
   };
 }
 
+/** A product or service page: what it is, who provides it, and where it lives. */
+export function serviceSchema({ name, description, path, type }: { name: string; description: string; path: string; type: string }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name,
+    serviceType: type,
+    description,
+    url: company.url + path,
+    provider: { "@id": `${company.url}/#organization` },
+    areaServed: "Worldwide",
+  };
+}
+
 export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
+  "@id": `${company.url}/#organization`,
   name: company.name,
   url: company.url,
+  logo: `${company.url}/icon.svg`,
+  description: siteDescription,
   ...(company.email && { email: company.email }),
+  ...(company.phone && { telephone: company.phone }),
+};
+
+export const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${company.url}/#website`,
+  name: company.name,
+  url: company.url,
+  publisher: { "@id": `${company.url}/#organization` },
+  inLanguage: "en",
 };

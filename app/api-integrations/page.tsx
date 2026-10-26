@@ -47,7 +47,7 @@ export default function ApiIntegrationsPage() {
         <div className="dir-grid" data-directory>
           {directory.map((d) => (
             <Link href={d.href} className="dir-item press" data-cat={d.cat} key={d.name}>
-              <small>{d.cat}</small><h4>{d.name}</h4><p>{d.desc}</p>
+              <small>{d.cat}</small><h3>{d.name}</h3><p>{d.desc}</p>
             </Link>
           ))}
         </div>

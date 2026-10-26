@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import { CardGrid, CtaBand, Engagement, FaqBlock, JsonLd, PageHero, ProcessTable } from "@/components/sections";
 import { processSteps, servicePages } from "@/lib/content";
-import { company, services } from "@/lib/site";
-import { breadcrumbSchema, faqSchema, pageMeta } from "@/lib/seo";
+import { services } from "@/lib/site";
+import { breadcrumbSchema, faqSchema, pageMeta, serviceSchema } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -69,8 +69,8 @@ export default async function ServicePage({ params }: Props) {
       <CtaBand title="Discuss your project" text="Share your idea and we'll come back with a recommended approach, a rough timeline and next steps." preset="Custom development" />
       <JsonLd data={[
         breadcrumbSchema(trail, path),
+        serviceSchema({ name: meta.name, description: c.meta, path, type: "Travel software development" }),
         faqSchema(c.faq),
-        { "@context": "https://schema.org", "@type": "Service", name: meta.name, description: c.meta, provider: { "@type": "Organization", name: company.name } },
       ]} />
     </>
   );

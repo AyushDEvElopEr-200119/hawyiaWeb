@@ -47,9 +47,9 @@ export default function HireDevelopersPage() {
       <section className="engage container">
         <h2 className="h2 center reveal">Ways to hire</h2>
         <div className="why-grid">
-          <article className="why-item reveal"><span className="mono">A</span><h4>Full-time</h4><p>A dedicated developer working with you every day, billed monthly.</p></article>
-          <article className="why-item reveal"><span className="mono">B</span><h4>Part-time</h4><p>Half-day commitment, for ongoing improvements and maintenance.</p></article>
-          <article className="why-item reveal"><span className="mono">C</span><h4>Hourly</h4><p>A block of hours for short tasks and fixes.</p></article>
+          <article className="why-item reveal"><span className="mono">A</span><h3>Full-time</h3><p>A dedicated developer working with you every day, billed monthly.</p></article>
+          <article className="why-item reveal"><span className="mono">B</span><h3>Part-time</h3><p>Half-day commitment, for ongoing improvements and maintenance.</p></article>
+          <article className="why-item reveal"><span className="mono">C</span><h3>Hourly</h3><p>A block of hours for short tasks and fixes.</p></article>
         </div>
       </section>
 

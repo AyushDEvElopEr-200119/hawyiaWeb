@@ -7,7 +7,7 @@ import { Footer, PageChrome } from "@/components/Footer";
 import { JsonLd } from "@/components/sections";
 import { SiteMotion } from "@/components/motion/SiteMotion";
 import { company, indexable } from "@/lib/site";
-import { organizationSchema } from "@/lib/seo";
+import { organizationSchema, siteDescription, websiteSchema } from "@/lib/seo";
 
 const serif = Newsreader({ subsets: ["latin"], style: ["normal", "italic"], axes: ["opsz"], variable: "--font-serif", display: "swap" });
 const sans = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
@@ -16,8 +16,15 @@ const mono = Fragment_Mono({ subsets: ["latin"], weight: "400", variable: "--fon
 export const metadata: Metadata = {
   metadataBase: new URL(company.url),
   title: { default: `${company.name} — ${company.tagline}`, template: `%s | ${company.name}` },
-  description: "Elyra helps travel businesses launch, customize and scale their own online booking platforms with white-label solutions, custom development and travel API integrations.",
-  robots: indexable ? { index: true, follow: true } : { index: false, follow: false },
+  description: siteDescription,
+  applicationName: company.name,
+  category: "technology",
+  formatDetection: { telephone: false, email: false, address: false },
+  openGraph: { type: "website", siteName: company.name, locale: "en_US" },
+  twitter: { card: "summary_large_image" },
+  robots: indexable
+    ? { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 } }
+    : { index: false, follow: false },
 };
 
 export const viewport: Viewport = { themeColor: "#0f3e39" };
@@ -34,7 +41,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="main" tabIndex={-1}>{children}</main>
         <Footer />
         <PageChrome />
-        <JsonLd data={organizationSchema} />
+        <JsonLd data={[organizationSchema, websiteSchema]} />
         <SiteMotion />
       </body>
     </html>

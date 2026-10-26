@@ -2,7 +2,11 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
-import { initSite } from "./initSite";
+
+// GSAP, ScrollTrigger, Flip and Lenis load in their own chunk, after the page has painted
+// and hydrated, so they never hold up the first screen. Started once, reused per page.
+let motion: Promise<typeof import("./initSite")> | undefined;
+const loadMotion = () => (motion ??= import("./initSite"));
 
 /**
  * Runs the site's motion and interactions for the current page, and tears them down
@@ -13,16 +17,22 @@ export function SiteMotion() {
   useEffect(() => {
     let cleanup: (() => void) | undefined;
     let started = false;
+    let cancelled = false;
     const start = () => {
       if (started) return;
       started = true;
-      cleanup = initSite();
+      loadMotion().then(
+        ({ initSite }) => { if (!cancelled) cleanup = initSite(); },
+        // if the chunk can't load, show everything rather than leave reveals hidden
+        () => document.documentElement.classList.remove("js"),
+      );
     };
     // wait one frame so the new page's DOM and styles are in place before measuring;
     // the timer covers throttled or backgrounded tabs, where frames may not fire
     const frame = requestAnimationFrame(start);
     const timer = window.setTimeout(start, 60);
     return () => {
+      cancelled = true;
       cancelAnimationFrame(frame);
       clearTimeout(timer);
       cleanup?.();

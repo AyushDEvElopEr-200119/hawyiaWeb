@@ -175,7 +175,8 @@ export function initSite(): () => void {
       ScrollTrigger.batch(".reveal", {
         start: "top 92%",
         once: true,
-        onEnter: (batch) => gsap.to(batch, { opacity: 1, y: 0, filter: "blur(0px)", stagger: 0.07, duration: 1.1, overwrite: "auto",
+        // transform + opacity only: blurring a whole batch at once is costly to paint on phones
+        onEnter: (batch) => gsap.to(batch, { opacity: 1, y: 0, scale: 1, stagger: 0.07, duration: 1.1, overwrite: "auto",
           onComplete() { batch.forEach((el) => el.classList.add("in")); } }),
       });
     }
@@ -188,27 +189,6 @@ export function initSite(): () => void {
           scrollTrigger: { trigger: el, start: "top 85%", end: "bottom 45%", scrub: true },
         });
       });
-    }
-
-    /* ---------- inner-page hero: title words rise, media band opens ---------- */
-    const phMedia = $("[data-ph-media]");
-    if (!reduced) {
-      const tl = gsap.timeline({ delay: 0.1 });
-      const words = $$("[data-split] .w");
-      if (words.length) tl.from(words, { yPercent: 60, opacity: 0, filter: "blur(8px)", stagger: 0.05, duration: 1.2 });
-      const intro = $$(".ph-intro > *, .contact-copy > :not(h1), .crumbs");
-      if (intro.length) tl.from(intro, { y: 18, opacity: 0, stagger: 0.08, duration: 1 }, "-=0.9");
-      if (phMedia) {
-        tl.fromTo(phMedia, { clipPath: "inset(14% 10% 0% 10% round 60px)" }, { clipPath: "inset(0% 0% 0% 0% round 40px)", duration: 1.6, ease: "expo.inOut", clearProps: "clipPath" }, 0.15);
-        const bg = $(".ph-bg", phMedia);
-        if (bg) tl.fromTo(bg, { scale: 1.18 }, { scale: 1.04, duration: 2, ease: "expo.out" }, 0.15);
-        const hl = $("[data-ph-hl]", phMedia);
-        if (hl) {
-          // the glass strip materializes (blur + rise), then its items follow one by one
-          tl.from(hl, { y: 40, opacity: 0, filter: "blur(10px)", duration: 1.2 }, 0.7)
-            .from($$("li", hl), { y: 16, opacity: 0, stagger: 0.08, duration: 1 }, 0.9);
-        }
-      }
     }
 
     /* ---------- background videos: play only while visible, never for reduced motion ---------- */
@@ -235,26 +215,38 @@ export function initSite(): () => void {
         gsap.fromTo(im, { yPercent: -4 }, { yPercent: 4, ease: "none", scrollTrigger: { trigger: im.closest(".b-card"), start: "top bottom", end: "bottom top", scrub: true } }));
     }
 
+    /* ---------- media unveil: a frame opens from an inset window while its photo settles
+       from a slight zoom, tied to scroll so it tracks the reader 1:1 and reverses on the way up ---------- */
+    if (!reduced) {
+      $$(".feature-media, .post-media").forEach((frame) => {
+        const r = getComputedStyle(frame).borderTopLeftRadius;
+        gsap.fromTo(frame, { clipPath: `inset(7% 7% 7% 7% round ${r})` }, { clipPath: `inset(0% 0% 0% 0% round ${r})`, ease: "none",
+          scrollTrigger: { trigger: frame, start: "top bottom", end: "top 55%", scrub: 0.4 } });
+      });
+      $$(".feature-media .media-bg, .post-media img, .b-photo .b-img").forEach((img) =>
+        gsap.fromTo(img, { scale: 1.16 }, { scale: 1, ease: "none",
+          scrollTrigger: { trigger: img.parentElement, start: "top bottom", end: "top 40%", scrub: 0.4 } }));
+    }
+
     /* ---------- home hero: headline sharpens, media collapses into a band on scroll ---------- */
     const hero = $(".hero");
     const heroMedia = $("#heroMedia");
     if (hero && heroMedia) {
       const spans = $$("#heroTitle span");
-      const state = { intro: reduced ? 1 : 0, p: 0 };
+      // the headline's entrance is CSS (it paints with the HTML); this only scrubs the exit
+      const state = { p: 0 };
       const paint = () => {
-        spans.forEach((s, i) => {
-          const k = clamp(state.intro * 1.4 - i * 0.25);
-          const out = clamp((state.p - 0.45) / 0.3);
-          s.style.setProperty("--blur", `${(1 - k) * 10 + out * 8}px`);
-          s.style.setProperty("--op", String(Math.max(0.15, k) * (1 - out)));
-          s.style.setProperty("--ty", `${(1 - k) * 16 - out * 30}px`);
+        const out = clamp((state.p - 0.45) / 0.3);
+        spans.forEach((s) => {
+          s.style.setProperty("--blur", `${out * 8}px`);
+          s.style.setProperty("--op", String(1 - out));
+          s.style.setProperty("--ty", `${-out * 30}px`);
         });
         const collapse = clamp((state.p - 0.35) / 0.65);
         heroMedia.style.setProperty("--clip", `${collapse * 88}%`);
         heroMedia.style.setProperty("--r", `${collapse * 60}px`);
       };
-      if (!reduced) gsap.to(state, { intro: 1, duration: 1.6, delay: 0.3, ease: "power2.out", onUpdate: paint });
-      ScrollTrigger.create({ trigger: hero, start: "top top", end: "bottom bottom", onUpdate: (st) => { state.p = st.progress; if (st.progress > 0.02) state.intro = 1; paint(); } });
+      ScrollTrigger.create({ trigger: hero, start: "top top", end: "bottom bottom", onUpdate: (st) => { state.p = st.progress; paint(); } });
       paint();
     }
 

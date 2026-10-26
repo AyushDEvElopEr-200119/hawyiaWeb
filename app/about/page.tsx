@@ -42,9 +42,9 @@ export default function AboutPage() {
       <section className="why container">
         <h2 className="h2 center reveal">What we do</h2>
         <div className="why-grid">
-          <article className="why-item reveal"><span className="mono">01</span><h4>Ready-made platforms</h4><p>White-label software for B2C, B2B, corporate and back-office. <Link className="link" href="/solutions/">Solutions <Chev /></Link></p></article>
-          <article className="why-item reveal"><span className="mono">02</span><h4>Custom development</h4><p>Websites, engines, portals, apps and CRMs built around you. <Link className="link" href="/custom-development/">Services <Chev /></Link></p></article>
-          <article className="why-item reveal"><span className="mono">03</span><h4>API integrations</h4><p>Flights, hotels, ground, experiences and payments. <Link className="link" href="/api-integrations/">Integrations <Chev /></Link></p></article>
+          <article className="why-item reveal"><span className="mono">01</span><h3>Ready-made platforms</h3><p>White-label software for B2C, B2B, corporate and back-office. <Link className="link" href="/solutions/">Solutions <Chev /></Link></p></article>
+          <article className="why-item reveal"><span className="mono">02</span><h3>Custom development</h3><p>Websites, engines, portals, apps and CRMs built around you. <Link className="link" href="/custom-development/">Services <Chev /></Link></p></article>
+          <article className="why-item reveal"><span className="mono">03</span><h3>API integrations</h3><p>Flights, hotels, ground, experiences and payments. <Link className="link" href="/api-integrations/">Integrations <Chev /></Link></p></article>
         </div>
       </section>
 
@@ -57,7 +57,7 @@ export default function AboutPage() {
         <h2 className="h2 center reveal">How we work with you</h2>
         <div className="why-grid">
           {values.map(([t, d], i) => (
-            <article className="why-item reveal" key={t}><span className="mono">{String(i + 1).padStart(2, "0")}</span><h4>{t}</h4><p>{d}</p></article>
+            <article className="why-item reveal" key={t}><span className="mono">{String(i + 1).padStart(2, "0")}</span><h3>{t}</h3><p>{d}</p></article>
           ))}
         </div>
       </section>

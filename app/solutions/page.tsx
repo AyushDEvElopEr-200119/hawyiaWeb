@@ -37,7 +37,7 @@ export default function SolutionsPage() {
         <div className="sol-grid">
           {solutions.map((s, i) => (
             <Link href={`/solutions/${s.slug}/`} className="sol press reveal" key={s.slug}>
-              <small>{String(i + 1).padStart(2, "0")}</small><h4>{s.name}</h4><p>{s.short}</p>
+              <small>{String(i + 1).padStart(2, "0")}</small><h3>{s.name}</h3><p>{s.short}</p>
             </Link>
           ))}
         </div>

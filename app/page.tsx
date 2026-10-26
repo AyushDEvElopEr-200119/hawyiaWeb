@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { preload } from "react-dom";
 import { Chev } from "@/components/Brand";
 import { BgVideo, Photo } from "@/components/Photo";
 import { FaqBlock, JsonLd, ProcessTable, Statement } from "@/components/sections";
@@ -7,11 +8,11 @@ import {
   apiCategories, appFeatures, businessModels, devServices, engines, extranetItems,
   featureTabs, marqueeItems, miniCards, productRows, whyItems,
 } from "@/lib/home";
-import { faqSchema, pageMeta } from "@/lib/seo";
+import { faqSchema, pageMeta, siteDescription } from "@/lib/seo";
 import { solutions } from "@/lib/site";
 
 export const metadata = pageMeta({
-  description: "Elyra helps travel businesses launch, customize and scale their own online booking platforms with white-label solutions, custom development and travel API integrations.",
+  description: siteDescription,
   path: "/",
 });
 
@@ -19,6 +20,8 @@ const pad = (i: number) => String(i + 1).padStart(2, "0");
 const homeFaq = generalFaq.slice(0, 7);
 
 export default function HomePage() {
+  // the hero poster is the first big paint: fetch it alongside the HTML, before the video
+  preload("/assets/media/hero-poster.jpg", { as: "image", fetchPriority: "high" });
   const tabKeys = Object.keys(featureTabs);
   return (
     <>
@@ -26,12 +29,12 @@ export default function HomePage() {
       <section className="hero" id="hero">
         <div className="hero-sticky">
           <div className="hero-media" id="heroMedia">
-            <BgVideo name="hero" poster="/assets/media/hero-poster.jpg" wide />
+            <BgVideo name="hero" poster="/assets/media/hero-poster.jpg" wide eager />
             <div className="hero-grain" />
           </div>
           <h1 className="hero-title" id="heroTitle">
-            <span>Build the future</span>
-            <span>of online travel.</span>
+            <span style={{ "--i": 0 } as React.CSSProperties}>Build the future</span>
+            <span style={{ "--i": 1 } as React.CSSProperties}>of online travel.</span>
           </h1>
         </div>
       </section>
@@ -76,7 +79,7 @@ export default function HomePage() {
           <div className="sol-grid">
             {solutions.map((s, i) => (
               <Link href={`/solutions/${s.slug}/`} className="sol press reveal" key={s.slug}>
-                <small>{pad(i)}</small><h4>{s.name}</h4><p>{s.short}</p>
+                <small>{pad(i)}</small><h3>{s.name}</h3><p>{s.short}</p>
               </Link>
             ))}
           </div>
@@ -120,7 +123,7 @@ export default function HomePage() {
           ))}
         </div>
         <div className="api-grid container">
-          {apiCategories.map(([t, d]) => <article className="api reveal" key={t}><h4>{t}</h4><p>{d}</p></article>)}
+          {apiCategories.map(([t, d]) => <article className="api reveal" key={t}><h3>{t}</h3><p>{d}</p></article>)}
         </div>
         <p className="fineprint">
           <Link className="link" href="/api-integrations/">Browse the integration directory <Chev /></Link><br />
@@ -136,7 +139,7 @@ export default function HomePage() {
         </div>
         <div className="engine-grid">
           {engines.map(([icon, t, d]) => (
-            <article className="engine press reveal" key={t}><span className="eng-ico">{icon}</span><h4>{t}</h4><p>{d}</p></article>
+            <article className="engine press reveal" key={t}><span className="eng-ico">{icon}</span><h3>{t}</h3><p>{d}</p></article>
           ))}
         </div>
       </section>
@@ -178,7 +181,7 @@ export default function HomePage() {
         <div className="panels">
           {tabKeys.map((k, i) => (
             <div key={k} className={`panel${i === 0 ? " is-on" : ""}`} role="tabpanel" id={`fp-${i}`} aria-labelledby={`ft-${i}`} hidden={i !== 0}>
-              {featureTabs[k].map(([t, d]) => <div className="feat" key={t}><h4>{t}</h4><p>{d}</p></div>)}
+              {featureTabs[k].map(([t, d]) => <div className="feat" key={t}><h3>{t}</h3><p>{d}</p></div>)}
             </div>
           ))}
         </div>
@@ -222,7 +225,7 @@ export default function HomePage() {
           {miniCards.map(([photo, title, href]) => (
             <article className="mini-card press reveal" key={title}>
               <div className="mini-media"><Photo name={photo} sizes="90px" /></div>
-              <div><h4>{title}</h4><Link href={href} className="link">Read more <Chev /></Link></div>
+              <div><h3>{title}</h3><Link href={href} className="link">Read more <Chev /></Link></div>
             </article>
           ))}
         </div>
@@ -247,7 +250,7 @@ export default function HomePage() {
           {appFeatures.map((f) => (
             <article className={`b-card${f.tone ? ` b-${f.tone}` : ""} reveal`} key={f.title}>
               <svg className="b-ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" dangerouslySetInnerHTML={{ __html: f.icon }} />
-              <h4>{f.title}</h4>
+              <h3>{f.title}</h3>
               <p>{f.text}</p>
             </article>
           ))}
@@ -301,7 +304,7 @@ export default function HomePage() {
         <h2 className="h2 center reveal">Why travel businesses<br />build with Elyra</h2>
         <div className="why-grid">
           {whyItems.map(([t, d], i) => (
-            <article className="why-item reveal" key={t}><span className="mono">{pad(i)}</span><h4>{t}</h4><p>{d}</p></article>
+            <article className="why-item reveal" key={t}><span className="mono">{pad(i)}</span><h3>{t}</h3><p>{d}</p></article>
           ))}
         </div>
       </section>

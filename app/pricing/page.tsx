@@ -64,7 +64,7 @@ export default function PricingPage() {
       <section className="addons container">
         <h2 className="h2 center reveal">Add-ons</h2>
         <div className="api-grid">
-          {addons.map(([t, d]) => <article className="api reveal" key={t}><h4>{t}</h4><p>{d}</p></article>)}
+          {addons.map(([t, d]) => <article className="api reveal" key={t}><h3>{t}</h3><p>{d}</p></article>)}
         </div>
         <p className="fineprint">Supplier, GDS and payment gateway fees and contracts are separate and agreed directly with each provider.</p>
       </section>

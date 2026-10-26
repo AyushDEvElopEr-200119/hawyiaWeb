@@ -3,8 +3,8 @@ import { notFound } from "next/navigation";
 import { Chev } from "@/components/Brand";
 import { CardGrid, CtaBand, FaqBlock, JsonLd, PageHero, ProcessTable, RelatedCards, TabsBlock, footnote } from "@/components/sections";
 import { solutionPages } from "@/lib/content";
-import { apis, company, solutions } from "@/lib/site";
-import { breadcrumbSchema, faqSchema, pageMeta } from "@/lib/seo";
+import { apis, solutions } from "@/lib/site";
+import { breadcrumbSchema, faqSchema, pageMeta, serviceSchema } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -103,8 +103,8 @@ export default async function SolutionPage({ params }: Props) {
       {footnote}
       <JsonLd data={[
         breadcrumbSchema(trail, path),
+        serviceSchema({ name: meta.name, description: c.meta, path, type: "Travel booking software" }),
         faqSchema(c.faq),
-        { "@context": "https://schema.org", "@type": "Product", name: meta.name, description: c.meta, brand: { "@type": "Brand", name: company.name } },
       ]} />
     </>
   );

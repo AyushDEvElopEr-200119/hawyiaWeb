@@ -22,13 +22,14 @@ export function JsonLd({ data }: { data: object | object[] }) {
 /** Title text where "<br />" marks a line break; each word becomes a span the hero animates. */
 export function SplitTitle({ text }: { text: string }) {
   const lines = text.split(/<br\s*\/?>/);
+  let n = 0;   // word index across lines, so CSS can stagger the rise (--i)
   return (
     <>
       {lines.map((line, li) => (
         <Fragment key={li}>
           {li > 0 && <br />}
           {line.trim().split(/\s+/).map((w, wi) => (
-            <Fragment key={wi}>{wi > 0 && " "}<span className="w">{w}</span></Fragment>
+            <Fragment key={wi}>{wi > 0 && " "}<span className="w" style={{ "--i": n++ } as React.CSSProperties}>{w}</span></Fragment>
           ))}
         </Fragment>
       ))}
@@ -135,7 +136,7 @@ export function CardGrid({ items }: { items: Pair[] }) {
   return (
     <div className="engine-grid">
       {items.map(([t, d], i) => (
-        <article className="engine press reveal" key={t}><span className="eng-ico mono">{String(i + 1).padStart(2, "0")}</span><h4>{t}</h4><p>{d}</p></article>
+        <article className="engine press reveal" key={t}><span className="eng-ico mono">{String(i + 1).padStart(2, "0")}</span><h3>{t}</h3><p>{d}</p></article>
       ))}
     </div>
   );
@@ -155,7 +156,7 @@ export function TabsBlock({ id, groups }: { id: string; groups: Record<string, s
       <div className="panels">
         {keys.map((k, i) => (
           <div key={k} className={`panel${i === 0 ? " is-on" : ""}`} role="tabpanel" id={`${id}-p${i}`} aria-labelledby={`${id}-t${i}`} hidden={i !== 0}>
-            {groups[k].map((f) => <div className="feat" key={f}><h4>{f}</h4></div>)}
+            {groups[k].map((f) => <div className="feat" key={f}><h3>{f}</h3></div>)}
           </div>
         ))}
       </div>
@@ -170,7 +171,7 @@ export function RelatedCards({ items, base }: { items: { slug: string; name: str
       <div className="sol-grid three">
         {items.map((s) => (
           <Link href={`${base}${s.slug}/`} className="sol press reveal" key={s.slug}>
-            <small>{s.short}</small><h4>{s.name}</h4><span className="link">Explore <Chev /></span>
+            <small>{s.short}</small><h3>{s.name}</h3><span className="link">Explore <Chev /></span>
           </Link>
         ))}
       </div>
@@ -183,9 +184,9 @@ export function Engagement() {
     <section className="engage container">
       <h2 className="h2 center reveal">Engagement models</h2>
       <div className="why-grid">
-        <article className="why-item reveal"><span className="mono">A</span><h4>Fixed scope</h4><p>A defined scope, timeline and price. Best when requirements are clear.</p></article>
-        <article className="why-item reveal"><span className="mono">B</span><h4>Milestones</h4><p>Delivered and paid in stages, with reviews at each milestone. Best for larger builds.</p></article>
-        <article className="why-item reveal"><span className="mono">C</span><h4>Dedicated team</h4><p>Developers working as part of your team, month to month. <Link className="link" href="/hire-developers/">Hire developers <Chev /></Link></p></article>
+        <article className="why-item reveal"><span className="mono">A</span><h3>Fixed scope</h3><p>A defined scope, timeline and price. Best when requirements are clear.</p></article>
+        <article className="why-item reveal"><span className="mono">B</span><h3>Milestones</h3><p>Delivered and paid in stages, with reviews at each milestone. Best for larger builds.</p></article>
+        <article className="why-item reveal"><span className="mono">C</span><h3>Dedicated team</h3><p>Developers working as part of your team, month to month. <Link className="link" href="/hire-developers/">Hire developers <Chev /></Link></p></article>
       </div>
     </section>
   );

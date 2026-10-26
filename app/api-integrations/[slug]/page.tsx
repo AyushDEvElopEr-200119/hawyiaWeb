@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { CtaBand, FaqBlock, JsonLd, PageHero, ProcessTable } from "@/components/sections";
 import { apiPages, apiProcessSteps } from "@/lib/content";
 import { apis } from "@/lib/site";
-import { breadcrumbSchema, faqSchema, pageMeta } from "@/lib/seo";
+import { breadcrumbSchema, faqSchema, pageMeta, serviceSchema } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -37,7 +37,7 @@ export default async function ApiPage({ params }: Props) {
           <ul className="ticks reveal">{c.enables.map((e) => <li key={e}>{e}</li>)}</ul>
         </div>
         <div className="api-grid two reveal">
-          {c.covers.map(([t, d]) => <article className="api" key={t}><h4>{t}</h4><p>{d}</p></article>)}
+          {c.covers.map(([t, d]) => <article className="api" key={t}><h3>{t}</h3><p>{d}</p></article>)}
         </div>
       </section>
 
@@ -55,7 +55,7 @@ export default async function ApiPage({ params }: Props) {
 
       <FaqBlock faq={c.faq} />
       <CtaBand title="Plan your integration" text="Tell us which suppliers you work with, or want to work with, and we'll map out the integration." preset="API integration" />
-      <JsonLd data={[breadcrumbSchema(trail, path), faqSchema(c.faq)]} />
+      <JsonLd data={[breadcrumbSchema(trail, path), serviceSchema({ name: meta.name, description: c.meta, path, type: "Travel API integration" }), faqSchema(c.faq)]} />
     </>
   );
 }

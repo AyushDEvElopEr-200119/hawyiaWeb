@@ -28,7 +28,7 @@ export default function CustomDevelopmentPage() {
         <div className="sol-grid three">
           {services.map((s, i) => (
             <Link href={`/custom-development/${s.slug}/`} className="sol press reveal" key={s.slug}>
-              <small>{String(i + 1).padStart(2, "0")}</small><h4>{s.name}</h4><p>{s.short}</p>
+              <small>{String(i + 1).padStart(2, "0")}</small><h3>{s.name}</h3><p>{s.short}</p>
             </Link>
           ))}
         </div>
