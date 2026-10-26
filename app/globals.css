@@ -890,6 +890,171 @@ html:not(.js) .nav-link:hover { background: rgb(255 255 255 / .85); }
 .ph-highlights li:nth-child(2) { animation-delay: .98s; }
 .ph-highlights li:nth-child(3) { animation-delay: 1.06s; }
 
+/* ============ PRELOADER (components/Preloader.tsx) ============
+   About 5s, transform and opacity only (smooth on phones):
+   0.2–1.9s   products flash through: each word slides up through a mask, holds, slides out
+   1.9–3.0s   "One platform. / Your brand."
+   3.0–3.8s   the Elyra mark and wordmark
+   3.85s      the type lifts away; six shutters rise one after another onto the page;
+              4.05s the page's own entrances resume underneath
+   5.0s       the script removes .pl-on and the preloader is gone */
+@property --pl-n { syntax: "<integer>"; inherits: false; initial-value: 0; }
+.preloader { display: none; }
+.pl-on, .pl-on body { overflow: hidden; }
+.pl-hold main *, .pl-hold main *::before, .pl-hold main *::after { animation-play-state: paused; }
+.pl-on .preloader {
+  --pl-bg: #06201d;
+  --pl-in: cubic-bezier(.16, 1, .3, 1);
+  --pl-cut: cubic-bezier(.76, 0, .24, 1);
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: block;
+  color: #fff;
+  pointer-events: none;
+}
+.pl-on body { pointer-events: none; }
+
+/* the screen itself: six columns that lift in turn, each with a rounded leading edge */
+/* the columns hang 40px below the screen so their rounded edges stay hidden until they lift,
+   and a solid backing hides the seams between them until that moment */
+.pl-shutters {
+  position: absolute;
+  inset: 0 0 -40px;
+  display: flex;
+  background: var(--pl-bg);
+  animation: pl-unback 0s linear 3.9s forwards;
+}
+.pl-shutters span {
+  flex: 1;
+  margin-right: -1px;
+  background: var(--pl-bg);
+  border-radius: 0 0 28px 28px;
+  animation: pl-shutter .85s var(--pl-cut) calc(3.9s + var(--i) * .06s) forwards;
+  will-change: transform;
+}
+
+/* the type layer, lifted away as one before the shutters go */
+.pl-ui {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  animation: pl-ui-out .55s var(--pl-cut) 3.75s forwards;
+}
+/* soft mint light drifting behind the type (a gradient, so no filter cost) */
+.pl-glow {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 90vmax;
+  height: 90vmax;
+  margin: -45vmax 0 0 -45vmax;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(var(--mint) / .22), rgb(var(--mint) / .06) 55%, transparent);
+  animation: pl-drift 4s ease-in-out both;
+  will-change: transform;
+}
+
+/* corners: an editorial frame, with the progress hairline across the bottom */
+.pl-corners {
+  position: absolute;
+  inset: 0;
+  padding: 1.6rem var(--gutter) clamp(1.4rem, 4vh, 2.4rem);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto 1fr auto auto;
+  font-size: .75rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / .62);
+  animation: fade-up .8s var(--pl-in) backwards;
+}
+.pl-corners > :nth-child(2) { justify-self: end; }
+.pl-loading { grid-row: 3; align-self: end; }
+.pl-loading i { font-style: normal; animation: pl-blink 1.2s steps(1) infinite; }
+.pl-loading i:nth-child(2) { animation-delay: .2s; }
+.pl-loading i:nth-child(3) { animation-delay: .4s; }
+.pl-count {
+  grid-row: 3;
+  justify-self: end;
+  align-self: end;
+  font-size: 1.25rem;
+  letter-spacing: .02em;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+  counter-reset: pl var(--pl-n);
+  animation: pl-count 3.5s cubic-bezier(.45, 0, .3, 1) .15s forwards;
+}
+.pl-count::after { content: counter(pl) "%"; }
+.pl-line { grid-row: 4; grid-column: 1 / -1; height: 1px; margin-top: .9rem; background: rgb(255 255 255 / .14); position: relative; overflow: hidden; }
+.pl-line::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgb(var(--mint));
+  transform-origin: left;
+  animation: pl-fill 3.5s cubic-bezier(.45, 0, .3, 1) .15s both;
+}
+
+/* the centre: three beats stacked in one spot */
+.pl-center { position: absolute; inset: 0; display: grid; place-items: center; }
+.pl-center > * { grid-area: 1 / 1; margin: 0; text-align: center; }
+
+/* beat 1: kinetic product words, each masked, sliding up through */
+.pl-words {
+  display: grid;
+  overflow: hidden;
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: clamp(3.4rem, 13vw, 11rem);
+  line-height: 1.05;
+  letter-spacing: -0.055em;
+  padding: 0 .06em .06em;
+}
+.pl-words span {
+  grid-area: 1 / 1;
+  translate: 0 110%;
+  animation: pl-flash .5s linear calc(.2s + var(--i) * .32s) forwards;
+}
+.pl-words span:last-child { color: rgb(var(--mint)); }
+
+/* beats 2 and 3: lines rise out of their masks, then leave together */
+.pl-pitch, .pl-brand { font-family: var(--serif); letter-spacing: -0.035em; line-height: 1; }
+.pl-pitch { display: grid; font-size: clamp(2.8rem, 8vw, 6.5rem); animation: pl-beat-out .45s var(--pl-cut) 2.75s forwards; }
+.pl-pitch em { font-style: italic; color: rgb(var(--mint)); }
+.pl-l { display: block; overflow: hidden; padding: 0 .04em .1em; }
+.pl-l > * { display: block; translate: 0 135%; animation: pl-line-in .8s var(--pl-in) forwards; }
+.pl-pitch .pl-l > * { animation-delay: 1.9s; }
+.pl-pitch .pl-l + .pl-l > * { animation-delay: 2.02s; }
+.pl-brand { display: flex; align-items: center; gap: clamp(12px, 1.6vw, 20px); font-size: clamp(3.4rem, 9vw, 7rem); }
+.pl-brand .pl-l > * { animation-delay: 3.1s; }
+.pl-mark { width: .72em; color: #fff; scale: 0; animation: pl-pop .7s cubic-bezier(.34, 1.45, .64, 1) 3.02s forwards; }
+.pl-mark .logo-mark { width: 100%; height: auto; }
+
+@keyframes pl-shutter { to { transform: translateY(-101%); } }
+@keyframes pl-unback { to { background: transparent; } }
+@keyframes pl-ui-out { to { opacity: 0; transform: translateY(-6vh); } }
+@keyframes pl-drift {
+  0% { transform: translate(-6%, 4%) scale(.85); }
+  50% { transform: translate(5%, -3%) scale(1); }
+  100% { transform: translate(-2%, 2%) scale(1.08); }
+}
+@keyframes pl-blink { 50% { opacity: .2; } }
+@keyframes pl-count { to { --pl-n: 100; } }
+@keyframes pl-fill { from { transform: scaleX(0); } }
+@keyframes pl-flash {
+  0% { translate: 0 110%; animation-timing-function: cubic-bezier(.2, .9, .3, 1); }
+  38%, 72% { translate: 0 0; animation-timing-function: cubic-bezier(.7, 0, .8, .3); }
+  100% { translate: 0 -110%; }
+}
+@keyframes pl-line-in { to { translate: 0 0; } }
+@keyframes pl-beat-out { to { opacity: 0; transform: translateY(-.35em); } }
+@keyframes pl-pop { to { scale: 1; } }
+@media (max-width: 640px) {
+  .pl-shutters span { border-radius: 0 0 18px 18px; }
+  .pl-corners > :nth-child(2) { max-width: 9rem; text-align: right; }
+}
+
 /* ============ PAGE TRANSITIONS (app/template.tsx) ============
    The old page recedes quickly; the new one rises in a beat later, so the two never compete. */
 ::view-transition { pointer-events: none; }

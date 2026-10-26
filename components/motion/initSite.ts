@@ -54,6 +54,12 @@ export function initSite(): () => void {
     gsap.ticker.lagSmoothing(0);
   }
   window.__lenis = lenis;
+  // hold smooth scroll while the page-load preloader covers the page (components/Preloader.tsx)
+  const resumeScroll = () => lenis?.start();
+  if (document.documentElement.classList.contains("pl-on")) {
+    lenis?.stop();
+    addEventListener("elyra:preloaded", resumeScroll, { once: true });
+  }
 
   const header = $("#header");
   const menuBtn = $("#menuBtn");
@@ -659,6 +665,7 @@ export function initSite(): () => void {
     $$(".tilt").forEach((el) => el.classList.remove("tilt", "is-hover"));
     ctx.revert();
     gsap.ticker.remove(raf);
+    removeEventListener("elyra:preloaded", resumeScroll);
     lenis?.destroy();
     window.__lenis = null;
   };
