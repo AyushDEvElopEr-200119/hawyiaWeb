@@ -119,7 +119,8 @@ export const nav: NavItem[] = [
           { href: "/contact/", label: "Contact", desc: "Talk to a specialist" },
         ] },
         { title: "Resources", links: [
-          { href: "/resources/", label: "Guides & Insights", desc: "Travel tech, explained plainly" },
+          { href: "/blog/", label: "Blog", desc: "The Elyra Journal: guides and insights" },
+          { href: "/resources/", label: "Resources", desc: "Travel tech, explained plainly" },
           { href: "/resources/#faq", label: "FAQ", desc: "Answers before you ask" },
           { href: "/pricing/", label: "Pricing", desc: "Starting-from tiers" },
         ] },

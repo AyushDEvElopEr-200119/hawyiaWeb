@@ -3,7 +3,8 @@ import { preload } from "react-dom";
 import { Chev } from "@/components/Brand";
 import { BgVideo, Photo } from "@/components/Photo";
 import { FaqBlock, JsonLd, ProcessTable, Statement } from "@/components/sections";
-import { generalFaq, guides, processSteps } from "@/lib/content";
+import { generalFaq, processSteps } from "@/lib/content";
+import { posts } from "@/lib/blog";
 import {
   apiCategories, appFeatures, businessModels, devServices, engines, extranetItems,
   featureTabs, marqueeItems, miniCards, productRows, whyItems,
@@ -313,13 +314,13 @@ export default function HomePage() {
       <section className="edit container" id="resources">
         <h2 className="h2 center reveal">The Travel Tech Edit</h2>
         <div className="edit-grid">
-          {guides.slice(0, 3).map((g, i) => (
-            <article className="post press reveal" key={g.title}>
-              <div className="post-media"><Photo name={`post${i + 1}`} sizes="(min-width: 861px) 320px, 92vw" /></div>
+          {posts.slice(0, 3).map((g) => (
+            <article className="post press reveal" key={g.slug}>
+              <div className="post-media"><Photo name={g.photo} sizes="(min-width: 861px) 320px, 92vw" /></div>
               <small>{g.tag}</small>
               <h3>{g.title}</h3>
-              <p>{g.text}</p>
-              <Link href="/resources/" className="link">Read more <Chev /></Link>
+              <p>{g.excerpt}</p>
+              <Link href={`/blog/${g.slug}/`} className="link">Read article <Chev /></Link>
             </article>
           ))}
         </div>

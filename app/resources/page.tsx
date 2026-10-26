@@ -2,7 +2,8 @@ import Link from "next/link";
 import { Chev } from "@/components/Brand";
 import { Photo } from "@/components/Photo";
 import { CtaBand, FaqBlock, JsonLd, PageHero } from "@/components/sections";
-import { generalFaq, guides } from "@/lib/content";
+import { generalFaq } from "@/lib/content";
+import { posts } from "@/lib/blog";
 import { breadcrumbSchema, faqSchema, pageMeta } from "@/lib/seo";
 
 const path = "/resources/";
@@ -29,16 +30,17 @@ export default function ResourcesPage() {
 
       <section className="edit container">
         <div className="edit-grid">
-          {guides.map((g, i) => (
-            <article className="post reveal" key={g.title}>
-              <div className="post-media"><Photo name={`post${i + 1}`} sizes="(min-width: 861px) 320px, 92vw" /></div>
-              <small>{g.tag} · Coming soon</small>
+          {posts.map((g) => (
+            <article className="post press reveal" key={g.slug}>
+              <div className="post-media"><Photo name={g.photo} sizes="(min-width: 861px) 320px, 92vw" /></div>
+              <small>{g.tag}</small>
               <h3>{g.title}</h3>
-              <p>{g.text}</p>
+              <p>{g.excerpt}</p>
+              <Link href={`/blog/${g.slug}/`} className="link">Read article <Chev /></Link>
             </article>
           ))}
         </div>
-        <p className="fineprint">Want a guide when it&apos;s published? <Link className="link" href="/contact/">Ask us to send it <Chev /></Link></p>
+        <p className="fineprint">Every article lives in <Link className="link" href="/blog/">the Elyra Journal <Chev /></Link></p>
       </section>
 
       <FaqBlock faq={generalFaq} title="Frequently asked questions" />

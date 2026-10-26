@@ -378,15 +378,6 @@ export const industries = [
 ];
 
 /* ======================= RESOURCES ======================= */
-export const guides = [
-  { tag: "Guide", title: "White-label vs custom travel software: how to choose", text: "Time to launch, cost, flexibility and ownership: what each route really means for your business.", tone: 0 },
-  { tag: "Guide", title: "GDS, NDC and airline APIs, explained for agency owners", text: "What credentials, certification and supplier agreements are involved before your first live booking.", tone: 1 },
-  { tag: "Guide", title: "Launching a B2B agent portal: a practical checklist", text: "Credit limits, markups, commissions and onboarding: what to settle before you invite your first agent.", tone: 3 },
-  { tag: "Insight", title: "Why hotel mapping decides your conversion rate", text: "Duplicate listings confuse travellers. Here's how mapping fixes the problem, and what good mapping looks like.", tone: 2 },
-  { tag: "Guide", title: "Payments for travel platforms: gateways, refunds and reconciliation", text: "Choosing gateways, handling refunds and keeping your books clean as volumes grow.", tone: 4 },
-  { tag: "Insight", title: "Building a corporate travel policy that people follow", text: "Policies that are clear, fair and enforced by the booking tool, not by email chains.", tone: 1 },
-];
-
 export const generalFaq: Pair[] = [
   ["What is the difference between white-label and custom?", "White-label is our ready-made platform, configured with your branding, modules and suppliers, so it launches faster and costs less. Custom is built around your own workflows when off-the-shelf software won't fit."],
   ["How long does a launch take?", "That depends on the modules and supplier integrations you choose. White-label projects usually take weeks. Custom projects are planned in milestones over months. You get a timeline with your proposal."],

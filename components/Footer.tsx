@@ -29,7 +29,7 @@ export function Footer() {
           <Col title="Services" links={[...services.map((s) => ({ href: `/custom-development/${s.slug}/`, label: s.name })), { href: "/hire-developers/", label: "Hire Developers" }]} />
           <Col title="Integrations" links={apis.map((a) => ({ href: `/api-integrations/${a.slug}/`, label: a.name }))} />
           <Col title="Company" links={[
-            { href: "/about/", label: "About" }, { href: "/industries/", label: "Industries" }, { href: "/resources/", label: "Resources" },
+            { href: "/about/", label: "About" }, { href: "/industries/", label: "Industries" }, { href: "/blog/", label: "Blog" }, { href: "/resources/", label: "Resources" },
             { href: "/resources/#faq", label: "FAQ" }, { href: "/contact/", label: "Contact" }, { href: "/request-demo/", label: "Request a Demo" },
           ]} />
         </div>
