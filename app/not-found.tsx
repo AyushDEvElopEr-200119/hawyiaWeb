@@ -11,7 +11,7 @@ export default function NotFound() {
       <p>The page you&apos;re looking for doesn&apos;t exist or has moved.</p>
       <div className="cta-row left">
         <Link href="/" className="btn-pill press">Back to home <Chev /></Link>
-        <Link href="/solutions/" className="link">Browse solutions <Chev /></Link>
+        <Link href="/services/" className="link">Browse services <Chev /></Link>
       </div>
     </section>
   );

@@ -1,9 +1,8 @@
 // Company details and navigation used by every page.
-// Replace the placeholder contact details once they are confirmed.
 
 /**
  * The site's public address, used for canonical links, the sitemap and social previews.
- * Set NEXT_PUBLIC_SITE_URL once a custom domain is live (e.g. https://www.elyra.com).
+ * Set NEXT_PUBLIC_SITE_URL once a custom domain is live (e.g. https://corporate-stay.com).
  * Until then, Vercel's production address is used automatically.
  */
 const siteUrl =
@@ -15,13 +14,30 @@ export const indexable = process.env.SITE_INDEXABLE === "true";
 
 export const company = {
   name: "Elyra",
-  legal: "ELYRA",
+  short: "Elyra",
+  legal: "Elyra",
   url: siteUrl.replace(/\/$/, ""),
-  email: "hello@example.com",
-  phone: "",          // e.g. "+91 00000 00000"
-  whatsapp: "",       // e.g. "910000000000" (digits only, used for wa.me)
-  address: "",        // office address
-  tagline: "White-label & custom travel booking software",
+  email: "contact@corporate-stay.com",
+  phone: "+91 22 6232 0033",
+  mobile: "+91 9619 268 883",
+  whatsapp: "919619268883",
+  address: "A-904/5/6, Kailas Business Park, Hiranandani Link Road, Vikhroli (West), Mumbai – 400079, India",
+  tagline: "Corporate Travel Management Company in India",
+  footerLine: "Empowering organizations to travel with ease, efficiency, and confidence.",
+  travgenie: "https://travgenie.com/",
+  social: [
+    { label: "LinkedIn", href: "https://www.linkedin.com/company/corporateworldwidestay/" },
+    { label: "YouTube", href: "https://www.youtube.com/@corporateworldwidestay" },
+    { label: "Facebook", href: "https://www.facebook.com/61579305184218/" },
+    { label: "Instagram", href: "https://www.instagram.com/corporateworldwidestay/" },
+  ],
+  badges: [
+    { src: "/assets/cws/2026-02-iso-c-r4vg2akqnxu4kijh0hr9q6rzxewkcuog19mimp41og.webp", alt: "ISO certified" },
+    { src: "/assets/cws/2026-02-Untitled-design.webp", alt: "IATA TIDS — Travel Industry Designator Service" },
+    { src: "/assets/cws/2026-02-Untitled-design-2.webp", alt: "asap — Association of Serviced Apartment Providers" },
+    { src: "/assets/cws/2026-02-Untitled-design-1.webp", alt: "TAFI — Travel Agents Federation of India" },
+    { src: "/assets/cws/2026-09-otoai.webp", alt: "OTOAI — Outbound Tour Operators Association of India" },
+  ],
 };
 
 export const solutions = [

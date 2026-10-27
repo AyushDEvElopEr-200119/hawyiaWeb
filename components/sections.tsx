@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Fragment } from "react";
 import { company } from "@/lib/site";
-import type { Pair } from "@/lib/content";
+import type { CwsLink, Pair } from "@/lib/cws";
 import type { Crumb } from "@/lib/seo";
 import { Chev } from "./Brand";
 import { Photo } from "./Photo";
@@ -66,9 +66,11 @@ export function Breadcrumbs({ trail }: { trail: Crumb[] }) {
 /* ---------------- page hero ---------------- */
 /** Inner-page hero: serif title and intro, then a full photo band (it expands to fill the
     screen as you scroll) with a glass strip of three real highlights for the page. */
-export function PageHero({ trail, eyebrow, title, intro, ctas = true, image, highlights = [] }: {
-  trail: Crumb[]; eyebrow?: string; title: string; intro: string; ctas?: boolean; image?: string; highlights?: Pair[];
+export function PageHero({ trail, eyebrow, title, intro, ctas = true, links, image, alt, highlights = [] }: {
+  trail: Crumb[]; eyebrow?: string; title: string; intro: string | string[]; ctas?: boolean; links?: CwsLink[];
+  image?: string; alt?: string; highlights?: Pair[];
 }) {
+  const paras = Array.isArray(intro) ? intro : [intro];
   return (
     <section className="page-hero">
       <div className="container ph-head">
@@ -79,11 +81,17 @@ export function PageHero({ trail, eyebrow, title, intro, ctas = true, image, hig
             <h1 className="ph-title" data-split><SplitTitle text={title} /></h1>
           </div>
           <div className="ph-intro">
-            <p>{intro}</p>
+            {paras.map((p) => <p key={p}>{p}</p>)}
             {ctas && (
               <div className="cta-row left">
-                <Link href="/request-demo/" className="btn-pill press">Request a Demo <Chev /></Link>
-                <Link href="/contact/" className="link">Get a quote <Chev /></Link>
+                {links?.length ? (
+                  links.map((l, i) => <CwsAnchor key={l.href + l.text} link={l} className={i === 0 ? "btn-pill press" : "link"} />)
+                ) : (
+                  <>
+                    <Link href="/contact/#enquire" className="btn-pill press">Start an enquiry <Chev /></Link>
+                    <a href={`https://wa.me/${company.whatsapp}`} className="link" target="_blank" rel="noopener">WhatsApp us <Chev /></a>
+                  </>
+                )}
               </div>
             )}
           </div>
@@ -91,7 +99,7 @@ export function PageHero({ trail, eyebrow, title, intro, ctas = true, image, hig
       </div>
       <div className="xp ph-stage" data-expand>
         <div className="ph-media xp-frame" data-ph-media>
-          {image && <Photo name={image} className="ph-bg" priority />}
+          {image && <Photo name={image} alt={alt} className="ph-bg" priority />}
           {highlights.length > 0 && (
             <ul className="ph-highlights" data-ph-hl>
               {highlights.map(([t, d], i) => (
@@ -112,7 +120,7 @@ export function FaqBlock({ faq, title = "Questions, answered", id = "faq" }: { f
       <h2 className="h2 center reveal">{title}</h2>
       <div className="faq-list">
         {faq.map(([q, a]) => (
-          <details className="reveal" key={q}><summary>{q}</summary><p>{a}</p></details>
+          <details className="reveal" key={q}><summary>{q}</summary>{a.split(/\n\n+/).map((x) => <p key={x}>{x}</p>)}</details>
         ))}
       </div>
     </section>
@@ -179,65 +187,66 @@ export function RelatedCards({ items, base }: { items: { slug: string; name: str
   );
 }
 
-export function Engagement() {
+/* ---------------- links ---------------- */
+/** A link from the CWS content: internal paths use the router, everything else opens normally. */
+export function CwsAnchor({ link, className = "link" }: { link: CwsLink; className?: string }) {
+  const external = /^https?:/.test(link.href);
+  if (!external && link.href.startsWith("/")) return <Link href={link.href} className={className}>{link.text} <Chev /></Link>;
   return (
-    <section className="engage container">
-      <h2 className="h2 center reveal">Engagement models</h2>
-      <div className="why-grid">
-        <article className="why-item reveal"><span className="mono">A</span><h3>Fixed scope</h3><p>A defined scope, timeline and price. Best when requirements are clear.</p></article>
-        <article className="why-item reveal"><span className="mono">B</span><h3>Milestones</h3><p>Delivered and paid in stages, with reviews at each milestone. Best for larger builds.</p></article>
-        <article className="why-item reveal"><span className="mono">C</span><h3>Dedicated team</h3><p>Developers working as part of your team, month to month. <Link className="link" href="/hire-developers/">Hire developers <Chev /></Link></p></article>
-      </div>
-    </section>
+    <a href={link.href} className={className} {...(external ? { target: "_blank", rel: "noopener" } : {})}>{link.text} <Chev /></a>
   );
 }
 
-export const footnote = <p className="fineprint container">Feature availability depends on chosen product, supplier contracts, integrations and requirements.</p>;
-
 /* ---------------- forms ---------------- */
-const businessTypes = ["Travel agency", "OTA", "Tour operator", "DMC", "Corporate travel / TMC", "Consolidator / wholesaler", "Travel startup", "Other"];
-const needs = ["White-label platform", "Custom development", "API integration", "Extranet / CMS", "Mobile app", "Hire developers", "Not sure yet"];
-const timelines = ["As soon as possible", "1–3 months", "3–6 months", "6+ months", "Just exploring"];
+export const departments = ["Hotel & Accommodation", "Car Rentals", "MICE & Events", "Relocation & Logistics", "Travgenie Demo", "Leisure Holidays", "General Enquiry"];
 
 /** Enquiry form. Validation and sending are wired by the motion controller. Set `endpoint`
-    to your form handler (CRM, email service); without it the form opens a pre-filled email. */
-export function LeadForm({ id = "leadForm", submit = "Request a Demo", preset = "", endpoint = "" }: { id?: string; submit?: string; preset?: string; endpoint?: string }) {
+    to your form handler (CRM, email service); without it the form opens a pre-filled email.
+    `departments={false}` drops the "which team" question (the partner form). */
+export function LeadForm({ id = "leadForm", submit = "Send enquiry", preset = "", endpoint = "", withDepartment = true }: { id?: string; submit?: string; preset?: string; endpoint?: string; withDepartment?: boolean }) {
   return (
     <form className="lead reveal" id={id} noValidate data-endpoint={endpoint} data-mailto={company.email}>
-      <div className="f"><label htmlFor={`${id}-name`}>Full name</label><input id={`${id}-name`} name="name" autoComplete="name" required /><small className="err" aria-live="polite" /></div>
-      <div className="f"><label htmlFor={`${id}-email`}>Business email</label><input id={`${id}-email`} name="email" type="email" autoComplete="email" required /><small className="err" aria-live="polite" /></div>
-      <div className="f"><label htmlFor={`${id}-company`}>Company</label><input id={`${id}-company`} name="company" autoComplete="organization" /></div>
-      <div className="f"><label htmlFor={`${id}-country`}>Country</label><input id={`${id}-country`} name="country" autoComplete="country-name" /></div>
-      <div className="f"><label htmlFor={`${id}-phone`}>Phone or WhatsApp</label><input id={`${id}-phone`} name="phone" type="tel" autoComplete="tel" /></div>
-      <div className="f"><label htmlFor={`${id}-type`}>Type of travel business</label>
-        <select id={`${id}-type`} name="business" defaultValue=""><option value="">Select…</option>{businessTypes.map((o) => <option key={o}>{o}</option>)}</select></div>
-      <div className="f"><label htmlFor={`${id}-need`}>What do you need?</label>
-        <select id={`${id}-need`} name="need" defaultValue={preset}><option value="">Select…</option>{needs.map((o) => <option key={o}>{o}</option>)}</select></div>
-      <div className="f"><label htmlFor={`${id}-timeline`}>Estimated timeline</label>
-        <select id={`${id}-timeline`} name="timeline" defaultValue=""><option value="">Select…</option>{timelines.map((o) => <option key={o}>{o}</option>)}</select></div>
-      <div className="f full"><label htmlFor={`${id}-msg`}>Project requirements</label><textarea id={`${id}-msg`} name="message" rows={4} placeholder="Products, markets, suppliers, integrations…" /></div>
+      <div className="f"><label htmlFor={`${id}-name`}>Name *</label><input id={`${id}-name`} name="name" autoComplete="name" required /><small className="err" aria-live="polite" /></div>
+      <div className="f"><label htmlFor={`${id}-email`}>Work email *</label><input id={`${id}-email`} name="email" type="email" autoComplete="email" required /><small className="err" aria-live="polite" /></div>
+      <div className="f"><label htmlFor={`${id}-phone`}>Phone *</label><input id={`${id}-phone`} name="phone" type="tel" autoComplete="tel" required /></div>
+      {withDepartment ? (
+        <div className="f"><label htmlFor={`${id}-dept`}>Which team do you need? *</label>
+          <select id={`${id}-dept`} name="department" defaultValue={preset}><option value="">Choose a department</option>{departments.map((o) => <option key={o}>{o}</option>)}</select></div>
+      ) : (
+        <div className="f"><label htmlFor={`${id}-company`}>Property or company</label><input id={`${id}-company`} name="company" autoComplete="organization" /></div>
+      )}
+      <div className="f full"><label htmlFor={`${id}-msg`}>Message</label><textarea id={`${id}-msg`} name="message" rows={4} /></div>
       <div className="f full actions">
         <button type="submit" className="btn-pill press">{submit} <Chev /></button>
         <p className="form-status" role="status" />
       </div>
+      <p className="f full form-note">We reply to every enquiry. Nothing here is added to a marketing list.</p>
     </form>
   );
 }
 
-export function CtaBand({ title = "Let's scope your platform", text = "Tell us what you sell and who you sell to. We'll recommend the fastest route and send a timeline.", preset = "" }: { title?: string; text?: string; preset?: string }) {
+export function CtaBand({ eyebrow = "Talk to us", title = "Tell us where your people need to be.", text = "Send us your travel pattern — routes, volumes, the policy you are working to — and we will come back with a costed programme, not a brochure.", links = [], preset = "", id = "enquire", withDepartment = true }: {
+  eyebrow?: string; title?: string; text?: string | string[]; links?: CwsLink[]; preset?: string; id?: string; withDepartment?: boolean;
+}) {
+  const paras = Array.isArray(text) ? text : [text];
   return (
-    <section className="cta-band container" id="enquire">
+    <section className="cta-band container" id={id}>
       <div className="cta-band-inner">
         <div className="cta-band-copy reveal">
+          {eyebrow && <p className="eyebrow">{eyebrow}</p>}
           <h2 className="h2">{title}</h2>
-          <p>{text}</p>
-          <ul className="ticks">
-            <li>Reply within one business day</li>
-            <li>Live demo on your own use case</li>
-            <li>No obligation proposal</li>
+          {paras.map((p) => <p key={p}>{p}</p>)}
+          <ul className="cta-contact">
+            <li><small>Call</small><a href={`tel:${company.phone.replace(/\s/g, "")}`}>{company.phone}</a></li>
+            <li><small>Call</small><a href={`tel:${company.mobile.replace(/\s/g, "")}`}>{company.mobile}</a></li>
+            <li><small>Email</small><a href={`mailto:${company.email}`}>{company.email}</a></li>
+            <li><small>Corporate head office</small><span>{company.address}</span></li>
           </ul>
+          {links.length > 0 && (
+            <div className="cta-row left">{links.map((l) => <CwsAnchor key={l.href + l.text} link={l} />)}</div>
+          )}
         </div>
-        <LeadForm id="enq" submit="Send enquiry" preset={preset} />
+        <LeadForm id={`${id}-form`} submit="Send enquiry" preset={preset} withDepartment={withDepartment} />
       </div>
     </section>
   );

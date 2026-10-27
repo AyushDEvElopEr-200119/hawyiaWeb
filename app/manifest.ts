@@ -5,7 +5,7 @@ import { siteDescription } from "@/lib/seo";
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: `${company.name} — ${company.tagline}`,
-    short_name: company.name,
+    short_name: company.short,
     description: siteDescription,
     start_url: "/",
     display: "browser",

@@ -1,6 +1,6 @@
-# Elyra — company website
+# Elyra — Corporate Worldwide Stay website
 
-Marketing site for Elyra, a B2B travel technology company (white-label and custom travel booking software, travel API integrations). Built with Next.js (App Router), React and TypeScript, with GSAP and Lenis for motion.
+Website for Corporate Worldwide Stay (CWS), a corporate travel management company in Mumbai, built on the Elyra design. The copy, images and page addresses come from corporate-stay.com. Built with Next.js (App Router), React and TypeScript, with GSAP and Lenis for motion.
 
 ## Run it
 
@@ -17,22 +17,23 @@ Photos and videos are committed in `public/assets/media`. To re-download them (o
 
 | Path | What it is |
 |---|---|
-| `lib/site.ts` | Company details (email, phone, domain) and navigation |
-| `lib/content.ts` | Copy for solution, service and API pages, industries, FAQ |
-| `lib/home.ts` | Homepage copy |
-| `lib/media.ts` | Photo and video manifest (Unsplash / Pexels licences) |
-| `lib/legal.ts` | Starter legal text (have it reviewed before launch) |
-| `app/` | Routes. `solutions/[slug]`, `custom-development/[slug]` and `api-integrations/[slug]` are generated from `lib/content.ts` |
-| `components/` | Header, footer, page sections, photos |
+| `lib/site.ts` | Company details (phones, emails, address, social links, accreditation badges) and navigation |
+| `lib/data/cws-pages.json` | Copy for the home, service and company pages, as lists of sections |
+| `lib/data/cws-posts.json` | The 13 blog articles |
+| `lib/data/cws-legal.json` | Privacy Policy and Terms & Conditions |
+| `lib/cws.ts`, `lib/blog.ts`, `lib/legal.ts` | Types and helpers over that content |
+| `components/cws/Blocks.tsx` | Renders each kind of section (cards, steps, stats, FAQ, testimonials, logos…) in the site's design |
+| `app/[page]/` | `/about-us/`, `/services/`, `/hotel/`, `/mice/` and the other top-level pages, generated from `cws-pages.json` |
+| `app/team/`, `app/contact/`, `app/blog/`, `app/privacy-policy/`, `app/terms-conditions/` | The remaining pages |
+| `public/assets/cws/` | Photos, logos and badges from corporate-stay.com |
+| `lib/media.ts` | Hero and background video manifest (Unsplash / Pexels licences) |
 | `components/motion/initSite.ts` | All motion and interactions (GSAP, ScrollTrigger, Flip, Lenis). Runs after every route change and cleans up before the next |
-| `app/globals.css` | Styles |
+| `app/globals.css` | Styles (CWS sections are under "CWS CONTENT") |
 
 ## Before launch
 
-- Fill in real contact details and the domain in `lib/site.ts`.
-- Add "starting from" prices in `app/pricing/page.tsx`.
+- Set `NEXT_PUBLIC_SITE_URL` to the live domain and `SITE_INDEXABLE=true`.
 - Connect the enquiry forms: pass an `endpoint` to `<LeadForm>` (CRM or email service). Without one, forms open a pre-filled email.
-- Have the legal pages reviewed.
 
 ## Notes for developers
 

@@ -12,7 +12,14 @@ type Props = {
  * A photo from lib/media.ts. Each one is pre-cut at 800 and 1600px wide (see `npm run media`),
  * so a plain <img> with srcset is enough and the site needs no image server.
  */
-export function Photo({ name, sizes = "100vw", className, priority = false }: Props) {
+export function Photo({ name, sizes = "100vw", className, priority = false, alt }: Props & { alt?: string }) {
+  // a public path (CWS images in /assets/cws) is served as-is
+  if (name.startsWith("/")) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img className={className} src={name} alt={alt ?? ""} loading={priority ? "eager" : "lazy"} fetchPriority={priority ? "high" : undefined} decoding="async" />
+    );
+  }
   const p = photos[name];
   if (!p) throw new Error(`Unknown photo: ${name}`);
   const base = `/assets/media/${name}`;
