@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { CtaBand, Engagement, JsonLd, PageHero, ProcessTable } from "@/components/sections";
+import { PosterGrid, StepLine } from "@/components/cinematic";
+import { CtaBand, Engagement, JsonLd, PageHero } from "@/components/sections";
 import { processSteps } from "@/lib/content";
 import { services } from "@/lib/site";
 import { breadcrumbSchema, pageMeta } from "@/lib/seo";
@@ -24,17 +24,17 @@ export default function CustomDevelopmentPage() {
         image="p-custom-development"
         highlights={[["Websites & engines", "Built around your inventory"], ["Apps & portals", "For travellers, agents and staff"], ["Milestones", "Delivered in stages you review"]]}
       />
-      <section className="container">
-        <div className="sol-grid three">
-          {services.map((s, i) => (
-            <Link href={`/custom-development/${s.slug}/`} className="sol press reveal" key={s.slug}>
-              <small>{String(i + 1).padStart(2, "0")}</small><h3>{s.name}</h3><p>{s.short}</p>
-            </Link>
-          ))}
-        </div>
+      <section className="container posters-sec">
+        <PosterGrid items={services.map((s) => ({ href: `/custom-development/${s.slug}/`, title: s.name, text: s.short, image: `d-${s.slug}` }))} />
       </section>
       <Engagement />
-      <ProcessTable steps={processSteps} />
+      <section className="impl container" id="process">
+        <div className="split-head">
+          <h2 className="h2 reveal">How we work</h2>
+          <p className="reveal">Ten steps from understanding your business to supporting the live platform.</p>
+        </div>
+        <StepLine steps={processSteps} />
+      </section>
       <CtaBand title="Discuss your project" preset="Custom development" />
       <JsonLd data={breadcrumbSchema(trail, path)} />
     </>

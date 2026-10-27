@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Chev } from "@/components/Brand";
+import { PosterGrid } from "@/components/cinematic";
 import { CtaBand, JsonLd, PageHero } from "@/components/sections";
 import { solutions } from "@/lib/site";
 import { breadcrumbSchema, pageMeta } from "@/lib/seo";
@@ -21,6 +22,12 @@ const comparison: [string, string, string][] = [
   ["Best for", "Launching fast on a proven model", "Unique models and workflows"],
 ];
 
+const groups = [
+  { id: "platform", title: "Booking platforms", text: "An engine for each product, or every product in one OTA." },
+  { id: "portal", title: "Portals by business model", text: "The same engine, shaped around who you sell to." },
+  { id: "office", title: "Back-office & inventory", text: "Everything that happens before and after the booking." },
+];
+
 export default function SolutionsPage() {
   return (
     <>
@@ -28,19 +35,20 @@ export default function SolutionsPage() {
         trail={trail}
         eyebrow="Ready-made software"
         title="Travel booking software,<br />ready to launch"
-        intro="Eight platforms built on one engine. Pick the ones that fit your business, brand them as your own, and add more as you grow."
+        intro={`${solutions.length} platforms built on one engine. Pick the ones that fit your business, brand them as your own, and add more as you grow.`}
         image="p-solutions"
-        highlights={[["8 platforms", "One engine, configured for you"], ["White-label", "Your brand, domain and pricing"], ["Grow in steps", "Switch on modules any time"]]}
+        highlights={[[`${solutions.length} platforms`, "One engine, configured for you"], ["White-label", "Your brand, domain and pricing"], ["Grow in steps", "Switch on modules any time"]]}
       />
 
-      <section className="container" id="all">
-        <div className="sol-grid">
-          {solutions.map((s, i) => (
-            <Link href={`/solutions/${s.slug}/`} className="sol press reveal" key={s.slug}>
-              <small>{String(i + 1).padStart(2, "0")}</small><h3>{s.name}</h3><p>{s.short}</p>
-            </Link>
-          ))}
-        </div>
+      <section className="container posters-sec" id="all">
+        {groups.map((g) => (
+          <PosterGrid
+            key={g.id}
+            title={g.title}
+            text={g.text}
+            items={solutions.filter((s) => s.group === g.id).map((s) => ({ href: `/solutions/${s.slug}/`, title: s.name, text: s.short, image: `d-${s.slug}` }))}
+          />
+        ))}
       </section>
 
       <section className="compare container">

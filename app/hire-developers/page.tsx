@@ -1,4 +1,6 @@
-import { CtaBand, FaqBlock, JsonLd, PageHero, ProcessTable } from "@/components/sections";
+import { Photo } from "@/components/Photo";
+import { ChoiceCards, StepLine } from "@/components/cinematic";
+import { CtaBand, FaqBlock, JsonLd, PageHero } from "@/components/sections";
 import type { Pair } from "@/lib/content";
 import { breadcrumbSchema, faqSchema, pageMeta } from "@/lib/seo";
 
@@ -38,26 +40,28 @@ export default function HireDevelopersPage() {
       <section className="roles container">
         {roles.map((r, i) => (
           <article className="ind reveal" id={r.id} key={r.id}>
-            <div className="ind-head"><span className="mono">{String(i + 1).padStart(2, "0")}</span><h2>{r.name}</h2></div>
+            <div className="ind-head">
+              <Photo name={`r-${r.id}`} sizes="(min-width: 861px) 420px, 92vw" className="ind-img" />
+              <span className="mono">{String(i + 1).padStart(2, "0")}</span><h2>{r.name}</h2>
+            </div>
             <div className="ind-body"><p>{r.text}</p><ul className="chips">{r.skills.map((s) => <li key={s}>{s}</li>)}</ul></div>
           </article>
         ))}
       </section>
 
-      <section className="engage container">
-        <h2 className="h2 center reveal">Ways to hire</h2>
-        <div className="why-grid">
-          <article className="why-item reveal"><span className="mono">A</span><h3>Full-time</h3><p>A dedicated developer working with you every day, billed monthly.</p></article>
-          <article className="why-item reveal"><span className="mono">B</span><h3>Part-time</h3><p>Half-day commitment, for ongoing improvements and maintenance.</p></article>
-          <article className="why-item reveal"><span className="mono">C</span><h3>Hourly</h3><p>A block of hours for short tasks and fixes.</p></article>
-        </div>
-      </section>
+      <ChoiceCards title="Ways to hire" items={[
+        { tag: "A", title: "Full-time", text: "A dedicated developer working with you every day, billed monthly." },
+        { tag: "B", title: "Part-time", text: "Half-day commitment, for ongoing improvements and maintenance." },
+        { tag: "C", title: "Hourly", text: "A block of hours for short tasks and fixes." },
+      ]} />
 
-      <ProcessTable
-        title="How it works"
-        id="how"
-        steps={[["Share requirements", "Skills, seniority, time zone"], ["Review profiles", "Shortlisted developers"], ["Interview", "Meet and assess"], ["Onboard", "Your tools, your processes"], ["Ongoing management", "Reviews, replacements, reporting"]]}
-      />
+      <section className="impl container" id="how">
+        <div className="split-head">
+          <h2 className="h2 reveal">How it works</h2>
+          <p className="reveal">From your first brief to a developer working in your tools, usually within days.</p>
+        </div>
+        <StepLine steps={[["Share requirements", "Skills, seniority, time zone"], ["Review profiles", "Shortlisted developers"], ["Interview", "Meet and assess"], ["Onboard", "Your tools, your processes"], ["Ongoing management", "Reviews, replacements, reporting"]]} />
+      </section>
       <FaqBlock faq={faq} />
       <CtaBand title="Tell us who you need" preset="Hire developers" />
       <JsonLd data={[breadcrumbSchema(trail, path), faqSchema(faq)]} />

@@ -217,6 +217,7 @@ export function initSite(): () => void {
       drift(".ph-bg", "[data-ph-media]", -4, 6);
       drift(".bleed-media .media-bg", ".bleed", -6, 6);
       drift(".post-media img, .ind-img", null, -3, 3);
+      drift(".cine-bg", ".cine", -8, 8);
       $$(".b-photo .b-img").forEach((im) =>
         gsap.fromTo(im, { yPercent: -4 }, { yPercent: 4, ease: "none", scrollTrigger: { trigger: im.closest(".b-card"), start: "top bottom", end: "bottom top", scrub: true } }));
     }
@@ -275,7 +276,7 @@ export function initSite(): () => void {
     mm.add("(prefers-reduced-motion: no-preference)", () => { $$("[data-expand]").forEach(expand); });
     mm.add("(min-width: 861px) and (prefers-reduced-motion: no-preference)", () => { $$(".product-row").forEach(expand); });
 
-    /* ---------- custom development, the Elyra Effect and the footer ring ---------- */
+    /* ---------- custom development and the Elyra Effect ---------- */
     if (!reduced) {
       const cd = $(".cd-layout");
       if (cd) {
@@ -290,13 +291,6 @@ export function initSite(): () => void {
         arcs.forEach((p) => { const L = p.getTotalLength(); gsap.set(p, { strokeDasharray: L, strokeDashoffset: L }); });
         gsap.to(arcs, { strokeDashoffset: 0, duration: 2.4, stagger: 0.15, ease: "power2.inOut", scrollTrigger: { trigger: effect, start: "top 70%" } });
         gsap.from(".effect-title", { yPercent: 20, opacity: 0, duration: 1.6, scrollTrigger: { trigger: effect, start: "top 70%" } });
-      }
-      const ring = $(".footer .ring");
-      if (ring) {
-        // scrubbed to the last screen of the page, so it lands exactly as you reach the bottom
-        gsap.timeline({ scrollTrigger: { trigger: ".footer-mark", start: "top bottom", end: "bottom bottom", scrub: 0.8 } })
-          .fromTo(ring, { yPercent: 22, scale: 0.88, rotation: -16, transformOrigin: "50% 50%" }, { yPercent: 0, scale: 1, rotation: 0, ease: "none" })
-          .fromTo(".fm-logo", { y: 40, opacity: 0, filter: "blur(8px)" }, { y: 0, opacity: 1, filter: "blur(0px)", ease: "none" }, 0.35);
       }
     }
 
@@ -384,10 +378,10 @@ export function initSite(): () => void {
       document.fonts?.ready.then(() => { if (!ac.signal.aborted) place(); });
     });
 
-    /* ---------- directory filter (GSAP Flip) ---------- */
+    /* ---------- directory and story filter (GSAP Flip) ---------- */
     const dir = $("[data-directory]");
     if (dir) {
-      const items = $$(".dir-item", dir);
+      const items = $$("[data-cat]", dir);
       const buttons = $$("[data-filter]");
       buttons.forEach((b) => on(b, "click", () => {
         const cat = b.dataset.filter;
@@ -492,7 +486,7 @@ export function initSite(): () => void {
 
     /* Cards: gentle 3D tilt + a specular highlight that follows the pointer */
     if (finePointer && !reduced) {
-      $$(".sol, .engine, .dir-item, .tier, .post, .mini-card, .opt, .b-card, .mv").forEach((el) => {
+      $$(".sol, .engine, .dir-item, .tier, .post, .mini-card, .opt, .b-card, .mv, .pers, .duo-card, .bx-card").forEach((el) => {
         el.classList.add("tilt");
         const max = 3.5;   // degrees: enough to feel physical, not enough to distract
         gsap.set(el, { transformPerspective: 900 });

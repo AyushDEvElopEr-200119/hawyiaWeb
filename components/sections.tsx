@@ -5,6 +5,7 @@ import type { Pair } from "@/lib/content";
 import type { Crumb } from "@/lib/seo";
 import { Chev } from "./Brand";
 import { Photo } from "./Photo";
+import { ChoiceCards } from "./cinematic";
 
 /* ---------------- structured data ---------------- */
 export function JsonLd({ data }: { data: object | object[] }) {
@@ -181,14 +182,11 @@ export function RelatedCards({ items, base }: { items: { slug: string; name: str
 
 export function Engagement() {
   return (
-    <section className="engage container">
-      <h2 className="h2 center reveal">Engagement models</h2>
-      <div className="why-grid">
-        <article className="why-item reveal"><span className="mono">A</span><h3>Fixed scope</h3><p>A defined scope, timeline and price. Best when requirements are clear.</p></article>
-        <article className="why-item reveal"><span className="mono">B</span><h3>Milestones</h3><p>Delivered and paid in stages, with reviews at each milestone. Best for larger builds.</p></article>
-        <article className="why-item reveal"><span className="mono">C</span><h3>Dedicated team</h3><p>Developers working as part of your team, month to month. <Link className="link" href="/hire-developers/">Hire developers <Chev /></Link></p></article>
-      </div>
-    </section>
+    <ChoiceCards title="Engagement models" items={[
+      { tag: "A", title: "Fixed scope", text: "A defined scope, timeline and price. Best when requirements are clear." },
+      { tag: "B", title: "Milestones", text: "Delivered and paid in stages, with reviews at each milestone. Best for larger builds." },
+      { tag: "C", title: "Dedicated team", text: "Developers working as part of your team, month to month.", link: { href: "/hire-developers/", label: "Hire developers" } },
+    ]} />
   );
 }
 

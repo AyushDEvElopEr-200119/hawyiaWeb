@@ -18,6 +18,12 @@ export const metadata = pageMeta({
 });
 
 const pad = (i: number) => String(i + 1).padStart(2, "0");
+
+const solutionGroups = [
+  { id: "platform", title: "Booking platforms", text: "Engines for each product, or all of them in one OTA." },
+  { id: "portal", title: "Portals by business model", text: "The same engine, shaped around who you sell to." },
+  { id: "office", title: "Back-office & inventory", text: "Everything that happens before and after the booking." },
+];
 const homeFaq = generalFaq.slice(0, 7);
 
 export default function HomePage() {
@@ -77,12 +83,36 @@ export default function HomePage() {
 
         <div className="container" id="all-solutions">
           <p className="eyebrow-serif">Every solution</p>
-          <div className="sol-grid">
-            {solutions.map((s, i) => (
-              <Link href={`/solutions/${s.slug}/`} className="sol press reveal" key={s.slug}>
-                <small>{pad(i)}</small><h3>{s.name}</h3><p>{s.short}</p>
-              </Link>
-            ))}
+          <div className="sol-groups">
+            {solutionGroups.map((g) => {
+              const items = solutions.filter((s) => s.group === g.id);
+              return (
+                <div className={`sol-group sg-${g.id} reveal`} key={g.id}>
+                  <div className="sg-head">
+                    <p className="sg-title">{g.title}<span>{pad(items.length - 1)}</span></p>
+                    <p className="sg-text">{g.text}</p>
+                  </div>
+                  <ul>
+                    {items.map((s) => (
+                      <li key={s.slug}>
+                        <Link href={`/solutions/${s.slug}/`} className="sg-row press">
+                          <b>{s.name}</b><span>{s.short}</span><Chev />
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                  {g.id === "office" && (
+                    <div className="sg-cta">
+                      <p>Not sure which fits? Compare all {solutions.length} side by side, or see plans by product.</p>
+                      <div className="cta-row">
+                        <Link href="/solutions/" className="btn-pill press">All solutions <Chev /></Link>
+                        <Link href="/pricing/" className="link">Pricing <Chev /></Link>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -138,9 +168,18 @@ export default function HomePage() {
           <h2 className="h2 reveal">A booking engine<br />for every journey</h2>
           <p className="reveal">Each engine covers the whole trip: search, pricing, booking, payment, and the changes that come after. Launch with one engine and add more as you grow.</p>
         </div>
-        <div className="engine-grid">
-          {engines.map(([icon, t, d]) => (
-            <article className="engine press reveal" key={t}><span className="eng-ico">{icon}</span><h3>{t}</h3><p>{d}</p></article>
+        <div className="engine-grid bento">
+          {engines.map(([icon, t, d], i) => (
+            <article className={`engine press reveal${i === 0 ? " eng-hero" : ""}`} key={t}>
+              <span className="eng-ico">{icon}</span>
+              <h3>{t}</h3><p>{d}</p>
+              {i === 0 && (
+                <ul className="eng-chips">
+                  {["GDS · LCC · NDC", "Fare calendar", "Seats & baggage", "Reissues & refunds"].map((c) => <li key={c}>{c}</li>)}
+                </ul>
+              )}
+              {i === 0 && <Link href="/solutions/flight-booking-software/" className="link">Flight booking software <Chev /></Link>}
+            </article>
           ))}
         </div>
       </section>
@@ -195,10 +234,13 @@ export default function HomePage() {
             <span className="tag">Extranet &amp; CMS</span>
             <h2 className="h2">Your inventory.<br />Your rules.</h2>
             <p>Sell more than supplier content. Load your own series fares, contracted hotels and packages, control availability in real time, and book them on the same platform as everything else.</p>
-            <Link href="/contact/" className="link">Ask about extranet <Chev /></Link>
+            <div className="cta-row">
+              <Link href="/solutions/travel-extranet-software/" className="btn-pill press">Explore the extranet <Chev /></Link>
+              <Link href="/contact/" className="link">Ask a question <Chev /></Link>
+            </div>
           </div>
-          <ul className="ext-list">
-            {extranetItems.map(([b, s]) => <li key={b}><b>{b}</b><span>{s}</span></li>)}
+          <ul className="ext-tiles">
+            {extranetItems.map(([b, s], i) => <li key={b}><small>{pad(i)}</small><b>{b}</b><span>{s}</span></li>)}
           </ul>
         </article>
       </section>

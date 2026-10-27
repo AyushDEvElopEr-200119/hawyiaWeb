@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
-import { CardGrid, CtaBand, Engagement, FaqBlock, JsonLd, PageHero, ProcessTable } from "@/components/sections";
+import { ModuleCinema, StepLine } from "@/components/cinematic";
+import { CtaBand, Engagement, FaqBlock, JsonLd, PageHero } from "@/components/sections";
 import { processSteps, servicePages } from "@/lib/content";
 import { services } from "@/lib/site";
 import { breadcrumbSchema, faqSchema, pageMeta, serviceSchema } from "@/lib/seo";
@@ -36,20 +37,25 @@ export default async function ServicePage({ params }: Props) {
         <h2 className="statement-text reveal">{c.need}</h2>
       </section>
 
-      <section className="engines container">
-        <div className="split-head">
-          <h2 className="h2 reveal">What we build</h2>
-          <p className="reveal">Scoped with you, designed in your brand, and built in milestones you can review.</p>
-        </div>
-        <CardGrid items={c.build} />
-      </section>
+      <ModuleCinema
+        title="What we build"
+        intro="Scoped with you, designed in your brand, and built in milestones you can review."
+        image={`d-${slug}`}
+        modules={c.build}
+      />
 
-      <section className="stack container">
-        <div className="split-head">
+      <section className="reel stack-reel">
+        <div className="split-head container">
           <h2 className="h2 reveal">Technology</h2>
           <p className="reveal">We choose proven, well-supported tools, so your platform is easy to maintain and to hire for.</p>
         </div>
-        <ul className="chips big reveal">{c.stack.map((s) => <li key={s}>{s}</li>)}</ul>
+        <div className="marquee reel-marquee" aria-label="Technologies">
+          {[0, 1].map((copy) => (
+            <div className="marquee-track" aria-hidden={copy === 1 || undefined} key={copy}>
+              {c.stack.map((t) => <span key={t}>{t}<i>✦</i></span>)}
+            </div>
+          ))}
+        </div>
       </section>
 
       <section className="extranet container">
@@ -59,12 +65,20 @@ export default async function ServicePage({ params }: Props) {
             <h2 className="h2">What you<br />receive</h2>
             <p>Clear deliverables at every milestone, with documentation and handover included.</p>
           </div>
-          <ul className="ext-list">{c.deliverables.map((x) => <li key={x}><b>{x}</b></li>)}</ul>
+          <ul className="ext-tiles">{c.deliverables.map((x, i) => <li key={x}><small>{String(i + 1).padStart(2, "0")}</small><b>{x}</b></li>)}</ul>
         </article>
       </section>
 
       <Engagement />
-      <ProcessTable steps={processSteps} />
+
+      <section className="impl container" id="process">
+        <div className="split-head">
+          <h2 className="h2 reveal">How we work</h2>
+          <p className="reveal">Ten steps from understanding your business to supporting the live platform.</p>
+        </div>
+        <StepLine steps={processSteps} />
+      </section>
+
       <FaqBlock faq={c.faq} />
       <CtaBand title="Discuss your project" text="Share your idea and we'll come back with a recommended approach, a rough timeline and next steps." preset="Custom development" />
       <JsonLd data={[

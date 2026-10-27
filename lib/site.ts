@@ -25,14 +25,20 @@ export const company = {
 };
 
 export const solutions = [
-  { slug: "white-label-travel-booking-software", name: "White-Label Travel Booking Software", short: "A complete OTA platform under your brand" },
-  { slug: "flight-booking-software", name: "Flight Booking Software", short: "Search, fares, ancillaries and post-booking" },
-  { slug: "hotel-booking-software", name: "Hotel Booking Software", short: "Rooms, rates, mapping and vouchers" },
-  { slug: "holiday-package-booking-software", name: "Holiday Package Booking Software", short: "Itineraries, departures and pricing" },
-  { slug: "b2c-travel-portal", name: "B2C Travel Portal", short: "Self-service booking for travellers" },
-  { slug: "b2b-travel-portal", name: "B2B Travel Agent Portal", short: "Credit, markups and agent control" },
-  { slug: "corporate-travel-software", name: "Corporate Travel Software", short: "Policies, approvals and spend" },
-  { slug: "travel-management-software", name: "Travel Management Software", short: "Back-office, accounting and reports" },
+  { slug: "white-label-travel-booking-software", name: "White-Label Travel Booking Software", short: "A complete OTA platform under your brand", group: "platform" },
+  { slug: "flight-booking-software", name: "Flight Booking Software", short: "Search, fares, ancillaries and post-booking", group: "platform" },
+  { slug: "hotel-booking-software", name: "Hotel Booking Software", short: "Rooms, rates, mapping and vouchers", group: "platform" },
+  { slug: "holiday-package-booking-software", name: "Holiday Package Booking Software", short: "Itineraries, departures and pricing", group: "platform" },
+  { slug: "bus-car-booking-software", name: "Bus & Car Booking Software", short: "Seat maps, routes and rentals", group: "platform" },
+  { slug: "b2c-travel-portal", name: "B2C Travel Portal", short: "Self-service booking for travellers", group: "portal" },
+  { slug: "b2b-travel-portal", name: "B2B Travel Agent Portal", short: "Credit, markups and agent control", group: "portal" },
+  { slug: "b2b2b-travel-portal", name: "B2B2B Distribution Portal", short: "Distributors, sub-agents and margins per level", group: "portal" },
+  { slug: "corporate-travel-software", name: "Corporate Travel Software", short: "Policies, approvals and spend", group: "portal" },
+  { slug: "travel-agency-software", name: "Travel Agency Software", short: "Online and counter sales in one system", group: "portal" },
+  { slug: "tour-operator-software", name: "Tour Operator Software", short: "Itinerary builder, departures and costing", group: "portal" },
+  { slug: "travel-management-software", name: "Travel Management Software", short: "Back-office, accounting and reports", group: "office" },
+  { slug: "travel-extranet-software", name: "Travel Extranet Software", short: "Sell your own fares, hotels and packages", group: "office" },
+  { slug: "travel-crm-software", name: "Travel CRM Software", short: "Enquiries, quotes and follow-ups", group: "office" },
 ];
 
 export const services = [
@@ -50,7 +56,9 @@ export const apis = [
   { slug: "car-rental-api", name: "Car Rental API Integration", short: "Rental fleets by location and date", cat: "Ground" },
   { slug: "bus-api", name: "Bus API Integration", short: "Routes, live seats and ticketing", cat: "Ground" },
   { slug: "transfers-activities-api", name: "Transfers & Activities API", short: "Airport transfers, tours and tickets", cat: "Experiences" },
+  { slug: "travel-insurance-api", name: "Travel Insurance API Integration", short: "Quotes, plans and policies at checkout", cat: "Experiences" },
   { slug: "payment-gateway-integration", name: "Payment Gateway Integration", short: "Gateways, wallets and multi-currency", cat: "Payments" },
+  { slug: "recharge-utility-api", name: "Recharge & Utility Bill API", short: "Mobile, DTH and bill payments", cat: "Business" },
 ];
 
 export type NavLink = { href: string; label: string; desc?: string };
@@ -60,20 +68,23 @@ export type MegaMenu = {
 };
 export type NavItem = { label: string; href: string; mega?: undefined } | { label: string; mega: MegaMenu; href?: undefined };
 
+const solutionLinks = (group: string): NavLink[] =>
+  solutions.filter((s) => s.group === group).map((s) => ({ href: `/solutions/${s.slug}/`, label: s.name, desc: s.short }));
+
 // Primary navigation. `mega` entries open a panel on desktop and an accordion on mobile.
 export const nav: NavItem[] = [
   {
     label: "Solutions",
     mega: {
       columns: [
-        { title: "Ready-made platforms", links: solutions.slice(0, 4).map((s) => ({ href: `/solutions/${s.slug}/`, label: s.name, desc: s.short })) },
-        { title: "Portals & back-office", links: solutions.slice(4).map((s) => ({ href: `/solutions/${s.slug}/`, label: s.name, desc: s.short })) },
+        { title: "Booking platforms", links: solutionLinks("platform") },
+        { title: "Portals by business model", links: solutionLinks("portal") },
+        { title: "Back-office & inventory", links: [
+          ...solutionLinks("office"),
+          { href: "/solutions/", label: "All solutions", desc: "Compare every platform side by side" },
+          { href: "/pricing/", label: "Pricing", desc: "Plans by product, setup plus yearly fee" },
+        ] },
       ],
-      aside: {
-        title: "Not sure where to start?",
-        text: "Compare every platform, then see our starting-from pricing.",
-        links: [{ href: "/solutions/", label: "All solutions" }, { href: "/pricing/", label: "Pricing" }],
-      },
     },
   },
   {
@@ -116,6 +127,8 @@ export const nav: NavItem[] = [
           { href: "/about/", label: "About Elyra", desc: "Who we are and what we build" },
           { href: "/about/#mission", label: "Mission & Vision", desc: "Why we do it" },
           { href: "/about/#process", label: "How We Work", desc: "Our 10-step delivery process" },
+          { href: "/about/#technologies", label: "Technologies", desc: "The stack behind our platforms" },
+          { href: "/testimonials/", label: "Client Stories", desc: "Travel businesses in their own words" },
           { href: "/contact/", label: "Contact", desc: "Talk to a specialist" },
         ] },
         { title: "Resources", links: [

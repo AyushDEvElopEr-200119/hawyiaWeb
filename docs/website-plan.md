@@ -182,3 +182,27 @@ Final company name, logo and domain · office address, phone, email, WhatsApp ·
 
 ## Next step after approval
 Design direction: brand identity, colour palette, typography, icon style, homepage wireframe. Then build Phase 1.
+
+---
+
+## 5. SRDV parity pass (2026-10-28)
+
+Goal: cover everything SRDV's site covers (see `docs/srdv-reference.md`), in Elyra's own words and structure. Their stats, clients, offices, prices and brand names stay out.
+
+| SRDV has | Elyra gets |
+|---|---|
+| Extranets (flight, hotel, package, bus, car) + Visa CMS | `/solutions/travel-extranet-software/` |
+| Travel CRM | `/solutions/travel-crm-software/` |
+| Bus & car booking software | `/solutions/bus-car-booking-software/` |
+| B2B2B portal | `/solutions/b2b2b-travel-portal/` (new) |
+| Tour operator software / itinerary builder | `/solutions/tour-operator-software/` (new) |
+| Travel agency software | `/solutions/travel-agency-software/` (new) |
+| Insurance API | `/api-integrations/travel-insurance-api/` |
+| Recharge & utility API | `/api-integrations/recharge-utility-api/` (new) |
+| Supplier names per API | Named inside each API page's coverage list (category pages, not one page per brand) |
+| White-label: business models, inventory sources, 25+ features, launch steps | Extra sections on the white-label page |
+| Product-wise pricing with setup + yearly fee | Pricing page rebuilt around 7 product plans; prices stay "On request" until Elyra sets its own |
+| 18-question FAQ | General FAQ expanded with the themes that apply to Elyra |
+| About: principles, journey, tech stack, roadmap | About gets a journey (no dates), technologies and "what's next" |
+| Industries | Adds fleet and ground-transport operators |
+| Menus, footer, sitemap | Driven from `lib/site.ts`; Solutions menu regrouped into three columns |

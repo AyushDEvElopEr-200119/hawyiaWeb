@@ -1,61 +1,97 @@
 import Link from "next/link";
 import { apis, company, services, solutions, type NavLink } from "@/lib/site";
-import { Chev, LogoMark, Ring } from "./Brand";
+import { Chev, LogoMark } from "./Brand";
+import { Photo } from "./Photo";
 
-function Col({ title, links }: { title: string; links: NavLink[] }) {
-  return (
-    <div className="fcol">
-      <p className="fcol-title">{title}</p>
-      {links.map((l) => <Link href={l.href} key={l.href}>{l.label}</Link>)}
-    </div>
-  );
-}
+const byGroup = (g: string): NavLink[] =>
+  solutions.filter((s) => s.group === g).map((s) => ({ href: `/solutions/${s.slug}/`, label: s.name }));
 
+// Directory columns, in the order a visitor scans them: what we sell, how we build, who we are.
+const columns: { title: string; links: NavLink[] }[] = [
+  { title: "Booking platforms", links: byGroup("platform") },
+  { title: "Portals", links: byGroup("portal") },
+  { title: "Back-office & inventory", links: [...byGroup("office"), { href: "/pricing/", label: "Pricing" }] },
+  { title: "Custom development", links: [...services.map((s) => ({ href: `/custom-development/${s.slug}/`, label: s.name })), { href: "/hire-developers/", label: "Hire Developers" }] },
+  { title: "API integrations", links: [...apis.map((a) => ({ href: `/api-integrations/${a.slug}/`, label: a.name })), { href: "/api-integrations/", label: "Integration directory" }] },
+  { title: "Company", links: [
+    { href: "/about/", label: "About Elyra" }, { href: "/testimonials/", label: "Client Stories" }, { href: "/industries/", label: "Industries" },
+    { href: "/blog/", label: "Blog" }, { href: "/resources/", label: "Resources" }, { href: "/resources/#faq", label: "FAQ" },
+    { href: "/contact/", label: "Contact" }, { href: "/request-demo/", label: "Request a Demo" },
+  ] },
+];
+
+const legal: NavLink[] = [
+  { href: "/privacy/", label: "Privacy Policy" }, { href: "/terms/", label: "Terms of Use" },
+  { href: "/cookies/", label: "Cookies" }, { href: "/disclaimer/", label: "Disclaimer" }, { href: "/sitemap.xml", label: "Site Map" },
+];
+
+/**
+ * Footer in three layers, lightest last:
+ * a photo card with a glass panel (the one call to action), a quiet directory of every page,
+ * and a single fine-print line. On phones the directory folds into one row per column.
+ */
 export function Footer() {
-  const hasContact = company.email || company.phone || company.whatsapp || company.address;
+  const contact = [
+    company.email && { href: `mailto:${company.email}`, label: company.email },
+    company.phone && { href: `tel:${company.phone.replace(/\s/g, "")}`, label: company.phone },
+    company.whatsapp && { href: `https://wa.me/${company.whatsapp}`, label: "WhatsApp" },
+  ].filter(Boolean) as NavLink[];
+
   return (
     <footer className="footer">
-      <div className="footer-cta container reveal">
-        <h2 className="cta-title"><span>Ready to</span><em>launch your platform?</em></h2>
-        <div className="cta-row">
-          <Link href="/request-demo/" className="btn-pill press">Request a Demo <Chev /></Link>
-          <Link href="/contact/" className="link">Discuss your project <Chev /></Link>
-        </div>
-      </div>
-
-      <div className="footer-inner">
-        <div className="fcols">
-          <Col title="Solutions" links={[...solutions.map((s) => ({ href: `/solutions/${s.slug}/`, label: s.name })), { href: "/pricing/", label: "Pricing" }]} />
-          <Col title="Services" links={[...services.map((s) => ({ href: `/custom-development/${s.slug}/`, label: s.name })), { href: "/hire-developers/", label: "Hire Developers" }]} />
-          <Col title="Integrations" links={apis.map((a) => ({ href: `/api-integrations/${a.slug}/`, label: a.name }))} />
-          <Col title="Company" links={[
-            { href: "/about/", label: "About" }, { href: "/industries/", label: "Industries" }, { href: "/blog/", label: "Blog" }, { href: "/resources/", label: "Resources" },
-            { href: "/resources/#faq", label: "FAQ" }, { href: "/contact/", label: "Contact" }, { href: "/request-demo/", label: "Request a Demo" },
-          ]} />
-        </div>
-        {hasContact && (
-          <div className="fcontact">
-            {company.email && <a href={`mailto:${company.email}`}>{company.email}</a>}
-            {company.phone && <a href={`tel:${company.phone.replace(/\s/g, "")}`}>{company.phone}</a>}
-            {company.whatsapp && <a href={`https://wa.me/${company.whatsapp}`} rel="noopener">WhatsApp</a>}
-            {company.address && <span>{company.address}</span>}
+      <section className="f-cta container reveal" aria-labelledby="f-cta-title">
+        <Photo name="f-cta" className="f-cta-img" sizes="(min-width: 1200px) 1160px, 94vw" />
+        <div className="f-cta-glass">
+          <p className="f-eyebrow">Start your platform</p>
+          <h2 id="f-cta-title" className="f-cta-title">Ready to launch<br />your own brand of travel?</h2>
+          <p className="f-cta-text">Tell us what you sell and who you sell to. We&apos;ll recommend white-label or custom and send a clear timeline.</p>
+          <div className="f-cta-row">
+            <Link href="/request-demo/" className="f-btn f-btn-solid press">Request a Demo <Chev /></Link>
+            <Link href="/contact/" className="f-btn f-btn-glass press">Discuss your project</Link>
           </div>
-        )}
-        <div className="footer-legal">
-          <Link href="/privacy/">Privacy</Link><Link href="/terms/">Terms</Link><Link href="/cookies/">Cookies</Link><Link href="/disclaimer/">Disclaimer</Link>
         </div>
-        <p className="copyright">
-          © {new Date().getFullYear()} {company.legal}. Software provider. Feature availability depends on chosen product, supplier contracts, integrations and requirements.
-        </p>
-      </div>
+      </section>
 
-      {/* the footer ends on the ring: its top half rises from the page edge, the logo sits in its opening */}
-      <div className="footer-mark">
-        <div className="ring-wrap" aria-hidden="true"><Ring /></div>
-        <Link href="/" className="fm-logo" aria-label={`${company.name} home`}>
-          <LogoMark inner="var(--bg)" />
-          <span>elyra</span>
-        </Link>
+      <div className="f-body">
+        <div className="f-top container">
+          <Link href="/" className="f-brand" aria-label={`${company.name} home`}>
+            <LogoMark inner="#f5f5f7" /><span>elyra</span>
+          </Link>
+          <p className="f-tagline">White-label and custom travel booking software, supplier integrations and apps, for travel businesses that want to own their brand.</p>
+          {contact.length > 0 && (
+            <ul className="f-contact">{contact.map((c) => <li key={c.href}><a href={c.href}>{c.label}</a></li>)}</ul>
+          )}
+        </div>
+
+        <nav className="f-dir container" aria-label="Footer">
+          {columns.map((c) => (
+            <div className="f-col" key={c.title}>
+              <h3>{c.title}</h3>
+              <ul>{c.links.map((l) => <li key={l.href}><Link href={l.href}>{l.label}</Link></li>)}</ul>
+            </div>
+          ))}
+        </nav>
+
+        {/* phones: one tappable row per column, the way a long directory stays scannable */}
+        <nav className="f-acc container" aria-label="Footer">
+          {columns.map((c) => (
+            <details key={c.title}>
+              <summary>{c.title}<i aria-hidden="true" /></summary>
+              <ul>{c.links.map((l) => <li key={l.href}><Link href={l.href}>{l.label}</Link></li>)}</ul>
+            </details>
+          ))}
+        </nav>
+
+        <div className="f-legal container">
+          <p className="f-fine">
+            Elyra is a software provider. Bookings, payments and supplier contracts stay with your business.
+            Feature availability depends on the chosen product, supplier contracts, integrations and requirements.
+          </p>
+          <div className="f-legal-row">
+            <p>Copyright © {new Date().getFullYear()} {company.legal}. All rights reserved.</p>
+            <ul>{legal.map((l) => <li key={l.href}>{l.href.endsWith(".xml") ? <a href={l.href}>{l.label}</a> : <Link href={l.href}>{l.label}</Link>}</li>)}</ul>
+          </div>
+        </div>
       </div>
     </footer>
   );

@@ -7,6 +7,8 @@ export type SolutionContent = {
   eyebrow: string; h1: string; intro: string; meta: string;
   who: string[]; modules: Pair[]; features: Record<string, string[]>;
   customize: string[]; faq: Pair[]; related: string[];
+  /** optional extra card sections, shown after the feature tabs */
+  extras?: { title: string; intro: string; items: Pair[]; style?: "rail" | "duo" | "bento" | "steps" }[];
 };
 export type ServiceContent = {
   eyebrow: string; h1: string; intro: string; meta: string; need: string;
@@ -44,6 +46,53 @@ export const solutionPages: Record<string, SolutionContent> = {
       ["Whose supplier contracts are used?", "Usually yours. You contract with GDSs, airlines and hotel suppliers, and we integrate them. We can advise on which suppliers fit your markets."],
     ],
     related: ["flight-booking-software", "hotel-booking-software", "b2b-travel-portal"],
+    extras: [
+      {
+        title: "One platform, every way you sell", style: "rail",
+        intro: "Run direct sales, agent networks and company accounts from a single admin, each with its own pricing and permissions.",
+        items: [
+          ["B2C", "Travellers search, pay and manage trips on your own site and app."],
+          ["B2B", "Approved agents book for their clients using wallets, credit limits and their own markups."],
+          ["B2B2B", "Distributors onboard sub-agents, and you set margins and access at every level."],
+          ["B2E / corporate", "Company accounts with travel policies, approval chains, credit and spend reports."],
+        ],
+      },
+      {
+        title: "Where your inventory comes from", style: "duo",
+        intro: "Pick the supply model that suits your contracts today, and change it later without rebuilding.",
+        items: [
+          ["Built-in connectors", "Use connectors already built into the platform with your own supplier accounts, for a faster setup."],
+          ["New supplier APIs", "We integrate GDS, airline, hotel or ground suppliers the platform doesn't connect to yet."],
+          ["Several sources at once", "Run multiple suppliers side by side, with priority rules deciding which source wins for each search."],
+          ["Your private inventory", "Add series fares, contracted hotels and packages through the extranet."],
+        ],
+      },
+      {
+        title: "Booking extras travellers notice", style: "bento",
+        intro: "The details that make a booking site feel modern, available module by module and subject to supplier support.",
+        items: [
+          ["Chat and voice search", "Search for trips by typing or speaking a request in plain language."],
+          ["Holiday-aware fare calendar", "Date-wise fares with public holidays and festivals marked."],
+          ["Route and hotel maps", "Flight routes, bus routes and hotels plotted on a map with area search."],
+          ["Self-service changes", "Date changes, seats, meals and extra baggage after booking, where the airline allows."],
+          ["Wallets and cashback", "Customer and agent wallets, top-ups, refunds to wallet and cashback offers."],
+          ["Auto invoices and refunds", "Invoices raised on confirmation and refunds processed by your rules once the supplier confirms."],
+          ["Recharge and bill payments", "Mobile, DTH and utility payments as an extra service for customers and agents."],
+          ["Visa information pages", "Country-wise visa requirements and document lists your team edits in the CMS."],
+          ["AI chat assistant", "An optional chatbot that answers common questions and hands over to your team."],
+        ],
+      },
+      {
+        title: "From sign-up to first booking", style: "steps",
+        intro: "Four stages, with a checklist for each so nothing waits on a surprise.",
+        items: [
+          ["1. Pick your modules", "Agree the users, markets, products and launch date."],
+          ["2. Bring your brand", "Logo, colours, domain, content and page themes."],
+          ["3. Connect and configure", "Suppliers, payment gateway, markups, roles and credentials."],
+          ["4. Test, train, go live", "Test bookings and payments, train your team, then launch."],
+        ],
+      },
+    ],
   },
   "flight-booking-software": {
     eyebrow: "Flight booking",
@@ -234,6 +283,168 @@ export const solutionPages: Record<string, SolutionContent> = {
     ],
     related: ["b2b-travel-portal", "corporate-travel-software", "white-label-travel-booking-software"],
   },
+  "travel-extranet-software": {
+    eyebrow: "Inventory extranets",
+    h1: "Sell the inventory<br />only you have",
+    intro: "Load your own flight seats, contracted hotels, tour packages, buses and cars, then sell them next to live supplier content. Your team manages it all from one back-office.",
+    meta: "Travel extranet software for private inventory: flight series fares, contracted hotels, tour packages, bus and car inventory, plus a visa CMS.",
+    who: ["Consolidators with block or series seats", "DMCs and hotel contractors", "Tour operators with fixed departures", "Bus and car fleet owners"],
+    modules: [
+      ["Flight extranet", "Series and private fares, airline and airport masters, seat allocation, PNRs and ticket issue."],
+      ["Hotel extranet", "Contracted properties, room types, allotments, rate plans and stop-sales."],
+      ["Holiday extranet", "Packages with itineraries, departures and seasonal pricing."],
+      ["Bus & car extranet", "Routes, schedules, seat layouts, vehicles and zone-based pricing."],
+      ["Visa CMS", "Publish visa requirements by country and take applications online."],
+      ["Partner logins", "Role-based access so airlines, hotels and fleet vendors can update their own inventory."],
+    ],
+    features: {
+      Traveler: ["Private inventory in normal search results", "Instant tickets and vouchers", "Email and SMS confirmations"],
+      Agent: ["Extranet fares in the B2B portal", "Agent-level markups on private inventory", "Online or offline booking"],
+      Admin: ["Allocation and seat control", "Fare, PNR and ticket management", "Online gateway or manual payment recording", "Invoices and inventory reports"],
+    },
+    customize: ["Custom inventory types", "Supplier self-service portals", "Approval workflows for rate changes", "Integration with your back-office"],
+    faq: [
+      ["Does extranet inventory show alongside API content?", "Yes. Private fares, hotels and packages appear in the same search results as live supplier inventory, with your priority rules applied."],
+      ["Can suppliers update their own inventory?", "Yes. Hotels, airlines and fleet vendors can get their own logins with access limited to their inventory."],
+      ["Can I take payment offline for extranet bookings?", "Yes. Bookings can be paid through your gateway or recorded as manual payments."],
+    ],
+    related: ["flight-booking-software", "hotel-booking-software", "holiday-package-booking-software"],
+  },
+  "travel-crm-software": {
+    eyebrow: "Travel CRM",
+    h1: "Every enquiry,<br />followed through",
+    intro: "One place for enquiries, traveller profiles, quotes and follow-ups, so no lead is lost between the first message and the confirmed trip.",
+    meta: "Travel CRM software for agencies, tour operators and DMCs: lead capture, quotes with versions, follow-up tasks, handover to operations and sales reports.",
+    who: ["Travel agencies and advisors", "Tour operators and DMCs", "Sales teams with shared leads", "Agency networks with partner access"],
+    modules: [
+      ["Lead capture", "Enquiries from web forms, email and messaging, with trip dates, group size, budget and source."],
+      ["Traveller profiles", "Preferences, documents and past enquiries in one record."],
+      ["Quotes & itineraries", "Quote versions, itinerary notes and a history of every change."],
+      ["Tasks & follow-ups", "Owners, due dates and escalation rules so nothing goes quiet."],
+      ["Handover to operations", "Won trips pass to your booking team with all the details attached."],
+      ["Sales reports", "Pipeline, conversion and revenue by agent, source and destination."],
+    ],
+    features: {
+      Traveler: ["Faster, consistent quotes", "Quotes that remember their preferences"],
+      Agent: ["Clear lead ownership", "Daily task list", "Partner access with limited permissions"],
+      Admin: ["Role-based permissions", "Lead source and conversion reports", "Team performance dashboards", "Data import from spreadsheets"],
+    },
+    customize: ["Custom fields and stages", "Approval steps for quotes", "Booking and finance system integration", "WhatsApp and email integration"],
+    faq: [
+      ["Does the CRM replace a booking engine?", "No. The CRM tracks enquiries and quotes. Availability and reservations stay in your booking system, and the two can be connected."],
+      ["Can we move our spreadsheets in?", "Yes. We review your data and run sample imports before migrating everything."],
+      ["Can it connect to WhatsApp?", "Yes, through an approved messaging provider. Their approval and usage fees apply separately."],
+    ],
+    related: ["travel-management-software", "holiday-package-booking-software", "b2b-travel-portal"],
+  },
+  "bus-car-booking-software": {
+    eyebrow: "Bus & car booking",
+    h1: "Ground travel,<br />booked in seconds",
+    intro: "Sell bus seats and car rentals from operator and aggregator APIs, or from your own fleet, with live seat maps, pickup points and instant tickets.",
+    meta: "Bus and car booking software with live seat maps, boarding and drop points, route and schedule management, fleet and driver tools, and agent booking.",
+    who: ["Bus ticket sellers", "Car rental and cab operators", "OTAs adding ground transport", "Agents selling to local travellers"],
+    modules: [
+      ["Route search", "Search by origin, destination, date, operator and departure time."],
+      ["Seat maps", "Pick seats on a live layout wherever the supplier provides it."],
+      ["Boarding & drop points", "Choose pickup and drop-off points along the route."],
+      ["Car rental search", "Vehicles by location and dates, with class, inclusions and rental terms."],
+      ["Fleet & schedules", "Manage your own routes, schedules, vehicles and drivers."],
+      ["Booking service", "Ticket status, cancellations and refunds under each supplier's rules."],
+    ],
+    features: {
+      Traveler: ["Trip timing, duration and bus type", "Instant e-tickets", "Online cancellation where allowed"],
+      Agent: ["B2B accounts with their own pricing", "Wallet and credit booking", "Bookings from web and app"],
+      Admin: ["Operator and supplier priority", "Zone-based pricing for cars", "Driver management", "Sales and cancellation reports"],
+    },
+    customize: ["Own-fleet inventory via extranet", "Operator-specific rules", "Mobile apps", "Local payment methods"],
+    faq: [
+      ["Where do routes and seats come from?", "From the bus operator or aggregator APIs you have access to, or from your own fleet loaded in the extranet."],
+      ["Can passengers choose boarding points?", "Yes, whenever the supplier provides boarding and drop data."],
+      ["Can agents sell bus and car bookings?", "Yes. Agents book through the B2B portal with their own pricing and wallet."],
+    ],
+    related: ["flight-booking-software", "travel-extranet-software", "b2b-travel-portal"],
+  },
+  "b2b2b-travel-portal": {
+    eyebrow: "B2B2B distribution",
+    h1: "Distributors, agents,<br />one engine",
+    intro: "Give distributors their own portal to onboard and manage sub-agents, while you control inventory, credit and margins at every level of the chain.",
+    meta: "B2B2B travel portal for multi-level distribution: distributor and sub-agent logins, margins per level, credit limits, wallets and hierarchy reports.",
+    who: ["Consolidators with regional distributors", "Wholesalers with franchise networks", "Master agents managing sub-agents", "Travel brands expanding into new cities"],
+    modules: [
+      ["Hierarchy manager", "Set up distributors, sub-distributors and agents, and see who sits under whom."],
+      ["Margins per level", "You set a margin for each distributor, and each distributor sets one for their own agents."],
+      ["Credit and wallets", "Credit limits, deposits, top-ups and statements at each level."],
+      ["Distributor portal", "Distributors approve agents, set their pricing and track their sales."],
+      ["White-label storefronts", "Optional branded booking sites for distributors and agents."],
+      ["Network reports", "Sales, commissions and outstanding balances rolled up by level."],
+    ],
+    features: {
+      Traveler: ["Booking through a local agent they know", "Same tickets and vouchers as your direct channel"],
+      Agent: ["Own login and booking dashboard", "Wallet and credit balance", "Markup on top of their distributor's price"],
+      Admin: ["Approve or suspend any account in the chain", "Product and supplier access per distributor", "Commission and margin reports", "Credit alerts and holds"],
+    },
+    customize: ["Extra hierarchy levels", "Revenue-sharing rules", "Distributor-branded apps", "Integration with your accounting"],
+    faq: [
+      ["Who issues agent logins?", "You and your distributors do. The platform lets each level create and manage the accounts beneath it."],
+      ["Can each level set its own margin?", "Yes. You price for distributors, and distributors price for their agents, within the limits you allow."],
+      ["Can a distributor see another distributor's agents?", "No. Each distributor only sees and manages their own network."],
+    ],
+    related: ["b2b-travel-portal", "travel-management-software", "white-label-travel-booking-software"],
+  },
+  "travel-agency-software": {
+    eyebrow: "Travel agency software",
+    h1: "Counter, phone<br />and online, one desk",
+    intro: "Software for agencies that sell across the counter, over the phone and online: bookings, enquiries, payments and invoices in one system instead of five tabs.",
+    meta: "Travel agency software: online booking, offline booking entry, enquiries, quotes, customer records, invoices, payments and agency reports in one system.",
+    who: ["High-street and home-based agencies", "Agencies moving online", "Multi-branch agencies", "Agents selling flights, hotels and holidays"],
+    modules: [
+      ["Booking desk", "Search and book flights, hotels, buses and packages from your connected suppliers."],
+      ["Offline bookings", "Record tickets and services bought elsewhere so every sale sits in one ledger."],
+      ["Enquiries and quotes", "Capture leads, send quotes and follow up from the same screen."],
+      ["Customer records", "Traveller profiles, documents, preferences and trip history."],
+      ["Invoices and receipts", "GST-ready or local tax invoices, receipts, credit notes and statements."],
+      ["Branch and staff control", "Branch-wise access, staff roles and sales targets."],
+    ],
+    features: {
+      Traveler: ["Quotes and e-tickets by email or WhatsApp", "Booking site for self-service trips", "Payment links"],
+      Agent: ["Single screen for search and booking", "Task list of follow-ups", "Commission tracking"],
+      Admin: ["Branch and staff reports", "Supplier payables", "Daily sales and cash reports", "Markups and service fees"],
+    },
+    customize: ["Branch-specific pricing", "Your invoice formats", "Accounting software sync", "Customer website and app"],
+    faq: [
+      ["Can we record bookings made outside the system?", "Yes. Offline entries keep every sale, invoice and payment in one place."],
+      ["Do we also get a public website?", "It can be added, using the same inventory and pricing as your desk."],
+      ["Does it work for more than one branch?", "Yes. Each branch has its own staff, reports and permissions under one admin."],
+    ],
+    related: ["travel-crm-software", "travel-management-software", "b2c-travel-portal"],
+  },
+  "tour-operator-software": {
+    eyebrow: "Tour operator software",
+    h1: "Build the trip,<br />price it, sell it",
+    intro: "An itinerary builder and package CMS for operators: put together day-by-day trips from hotels, transfers and activities, price them by season, and sell direct or through agents.",
+    meta: "Tour operator software with itinerary builder, package CMS, seasonal and dynamic pricing, departures, supplier contracts, agent distribution and vouchers.",
+    who: ["Inbound and outbound tour operators", "DMCs building tailor-made trips", "Group and pilgrimage tour organisers", "Adventure and activity operators"],
+    modules: [
+      ["Itinerary builder", "Day-wise plans with hotels, transfers, sightseeing and meals dragged into place."],
+      ["Package CMS", "Publish packages with photos, inclusions, exclusions, terms and FAQs."],
+      ["Seasonal and dynamic pricing", "Prices by season, departure, room type and group size, with live supplier rates where connected."],
+      ["Departures and allocation", "Fixed departures, seat or room allocation and stop-sell."],
+      ["Supplier contracts", "Contracted hotel, transport and activity rates with validity dates."],
+      ["Quotes, vouchers and brochures", "PDF quotes and itineraries, then service vouchers once confirmed."],
+    ],
+    features: {
+      Traveler: ["Clear day-by-day itinerary", "Enquire or book instantly", "Online deposit and balance payments"],
+      Agent: ["Net rates with their own markup", "Branded PDF itineraries", "Booking and payment tracking"],
+      Admin: ["Costing and margin per package", "Hotel and transport mapping", "Supplier allocation reports", "Departure manifests"],
+    },
+    customize: ["Custom package types", "Group and pilgrimage workflows", "Multi-currency pricing", "Supplier self-service updates"],
+    faq: [
+      ["Can we build tailor-made trips, not just fixed packages?", "Yes. Build a custom itinerary for an enquiry, price it and send it as a quote."],
+      ["Can agents sell our packages?", "Yes. Agents see net rates in the B2B portal and add their own markup."],
+      ["Can hotel prices update automatically?", "Where hotels come from a connected supplier, yes. Contracted rates come from your extranet."],
+    ],
+    related: ["holiday-package-booking-software", "travel-extranet-software", "b2b-travel-portal"],
+  },
 };
 
 /* ======================= CUSTOM DEVELOPMENT ======================= */
@@ -314,7 +525,7 @@ export const apiPages: Record<string, ApiContent> = {
     intro: "Connect GDS, low-cost carrier, NDC and consolidator content to your platform, with fare rules, ancillaries and ticketing.",
     meta: "Flight and GDS API integration: Amadeus, Sabre, Travelport, low-cost carriers, NDC and consolidators.",
     enables: ["Live availability and fares", "Branded fares and fare rules", "Seats, meals and baggage", "Ticketing and PNR management", "Cancellations, reissues and refunds"],
-    covers: [["GDS", "Amadeus, Sabre and Travelport"], ["Low-cost carriers", "Direct airline connections"], ["NDC", "Airline NDC content where available"], ["Consolidators", "Aggregated fares from flight wholesalers"]],
+    covers: [["GDS", "Amadeus, Sabre, Travelport and Galileo"], ["Direct airlines", "IndiGo, SpiceJet, Akasa Air, Air India, Air Arabia and flydubai"], ["Consolidators", "TBO, TripJack, Mystifly (MyFareBox), Kafila, Etrav, Akbar Travels, Air IQ, FlyHub and more"], ["NDC & fixed departures", "Airline NDC content where available, plus 30+ fixed-departure fare suppliers"]],
     timeline: "Typically a few weeks per source, depending on supplier certification.",
     faq: [["Do I need my own GDS contract?", "Usually yes. GDS access is contracted by your business, and we handle the technical integration."], ["Can you combine several flight sources?", "Yes. Results are merged and de-duplicated, with supplier priority rules applied."]],
   },
@@ -323,7 +534,7 @@ export const apiPages: Record<string, ApiContent> = {
     intro: "Connect hotel wholesalers, aggregators and channel managers, with room mapping that turns many feeds into one clean listing.",
     meta: "Hotel API integration with wholesalers, aggregators and channel managers, including room mapping and de-duplication.",
     enables: ["Live rates and availability", "Rich content: photos, amenities, maps", "Room and property mapping", "Booking, vouchers and cancellations", "Mixing with contracted inventory"],
-    covers: [["Wholesalers", "Global and regional bed banks"], ["Aggregators", "Multi-source hotel APIs"], ["Channel managers", "Direct hotel connectivity"], ["GDS hotel content", "Where your GDS contract includes it"]],
+    covers: [["Bed banks", "Hotelbeds, GRN Connect, RoomsXML, Rezlive, DOTW, RateHawk and Juniper"], ["OTA & aggregator content", "Expedia, Booking.com, TBO Holidays, TripJack, TravClan, MakeMyTrip and Yatra"], ["Chains & direct", "Hilton, OYO and channel-manager connections"], ["GDS hotel content", "Amadeus and Travelport, where your GDS contract includes it"]],
     timeline: "Typically two to four weeks per supplier, plus mapping.",
     faq: [["How do you handle duplicates across suppliers?", "Mapping merges identical properties so travellers see one listing with the best available rates."], ["Can I add my own contracted hotels?", "Yes, through the hotel extranet."]],
   },
@@ -332,7 +543,7 @@ export const apiPages: Record<string, ApiContent> = {
     intro: "Add rental cars by pick-up location and dates, with vehicle classes, inclusions and clear rental terms.",
     meta: "Car rental API integration: search vehicles by location and date, show inclusions, and manage bookings.",
     enables: ["Search by location and dates", "Vehicle class and inclusion details", "Insurance and extras", "Booking and cancellation", "Vouchers and notifications"],
-    covers: [["Rental brands", "Direct rental company APIs"], ["Aggregators", "Multi-brand rental APIs"], ["GDS car content", "Where available on your GDS contract"]],
+    covers: [["Rental brands", "Hertz, Europcar, Sixt, Avis and Budget"], ["Aggregators", "CarTrawler and other multi-brand rental APIs"], ["GDS car content", "Amadeus Cars, where your GDS contract includes it"], ["Your own fleet", "Cabs and rentals loaded in the car extranet"]],
     timeline: "Typically two to three weeks per supplier.",
     faq: [["Can cars be added to flight bookings?", "Yes. Cars can be offered as an add-on during or after a flight booking."], ["Do you support one-way rentals?", "Where the supplier supports them, yes."]],
   },
@@ -341,7 +552,7 @@ export const apiPages: Record<string, ApiContent> = {
     intro: "Sell bus tickets with live seat layouts, boarding and drop points, and instant e-tickets.",
     meta: "Bus API integration: live seat layouts, routes, boarding points and instant ticketing.",
     enables: ["Route and operator search", "Live seat layouts", "Boarding and drop points", "Instant e-tickets", "Cancellations and refunds"],
-    covers: [["Bus aggregators", "Multi-operator inventory"], ["Operator systems", "Direct operator connections"], ["Your own fleet", "Via the bus extranet"]],
+    covers: [["Bus aggregators", "redBus, AbhiBus, TicketGoose and Travelyaari"], ["Operator systems", "Bitla-powered operators, VRL Travels and Zingbus"], ["Your own fleet", "Routes, schedules and seats via the bus extranet"]],
     timeline: "Typically two to three weeks per supplier.",
     faq: [["Can I sell my own buses?", "Yes. Load routes, schedules and seats in the bus extranet."], ["Are seat maps live?", "Yes, where the supplier provides real-time layouts."]],
   },
@@ -350,7 +561,7 @@ export const apiPages: Record<string, ApiContent> = {
     intro: "Add airport and city transfers, tours, attractions and experiences, sold on their own or added to a trip.",
     meta: "Transfers and activities API integration: airport transfers, tours, tickets and experiences.",
     enables: ["Point-to-point transfers", "Tours and attraction tickets", "Date and time slot selection", "Vouchers and confirmations", "Cross-sell during checkout"],
-    covers: [["Transfer providers", "Private and shared transfers"], ["Activity platforms", "Tours, tickets and experiences"], ["Travel insurance", "Trip protection at checkout"], ["Your own products", "Via the CMS and extranet"]],
+    covers: [["Transfer providers", "Private and shared airport and city transfers"], ["Activity platforms", "Tours, tickets and experiences, including Viator"], ["Travel insurance", "Trip protection at checkout, see insurance API"], ["Your own products", "Via the CMS and extranet"]],
     timeline: "Typically two to three weeks per supplier.",
     faq: [["Can activities be added to packages?", "Yes. They can be bundled into holidays or offered as add-ons."], ["Can you add travel insurance?", "Yes, with an insurance provider you contract with."]],
   },
@@ -359,9 +570,27 @@ export const apiPages: Record<string, ApiContent> = {
     intro: "Accept cards, wallets, UPI and bank payments in multiple currencies, through your own gateway accounts, with refunds and reconciliation built in.",
     meta: "Payment gateway integration for travel platforms: cards, wallets, UPI, multi-currency, refunds and reconciliation.",
     enables: ["Cards, wallets, UPI and net banking", "Multi-currency checkout", "Refunds and partial refunds", "Agent wallet top-ups", "Reconciliation reports"],
-    covers: [["International gateways", "Global card acquiring"], ["Local gateways", "Regional payment methods"], ["Wallets", "Popular digital wallets"], ["Bank transfers", "Offline payment recording"]],
+    covers: [["India", "Razorpay, PayU, CCAvenue, Cashfree, Paytm, PhonePe, Easebuzz, Atom, HDFC, AgreePay and Traknpay"], ["International", "Stripe, PayPal and Lyra"], ["Middle East & Asia", "Telr, Dragonpay, Khalti and aamarPay"], ["Bank transfers", "Offline payment recording and agent deposits"]],
     timeline: "Typically one to two weeks per gateway.",
     faq: [["Whose gateway account is used?", "Yours. Payments go straight to your business. Elyra is the software provider and never holds your funds."], ["Can I use more than one gateway?", "Yes. Route payments by currency, method or amount."]],
+  },
+  "travel-insurance-api": {
+    eyebrow: "Insurance", h1: "Travel insurance<br />API integration",
+    intro: "Offer trip protection inside your checkout or as its own journey, with live quotes, plan comparison and policy status from the insurers you work with.",
+    meta: "Travel insurance API integration: trip-based quotes, plan comparison, purchase and policy status inside your booking flow.",
+    enables: ["Quotes from trip dates, destination and traveller ages", "Plan comparison with benefits and exclusions", "Purchase inside checkout or standalone", "Policy status and documents", "Service requests where the insurer allows"],
+    covers: [["Global insurers", "Insurers that publish travel APIs, under your own agreement"], ["Local insurers", "Regional providers in your markets"], ["Checkout add-on", "Offered alongside flights, hotels and packages"], ["Standalone journey", "A separate insurance page on your site or app"]],
+    timeline: "Typically two to four weeks per insurer, depending on its approval process.",
+    faq: [["Do I need my own insurer account?", "Yes. You need an approved arrangement with each insurer. We build the connection once you have access."], ["Does a payment mean the policy is active?", "No. The platform checks the insurer's response and shows the policy only once it is confirmed."], ["Who handles claims?", "The insurer. The platform can link travellers to the insurer's claim process."]],
+  },
+  "recharge-utility-api": {
+    eyebrow: "Recharge & bills", h1: "Recharge and bill<br />payment API",
+    intro: "Let customers and agents top up mobiles, renew DTH and pay utility bills from the same wallet they use for travel, adding everyday transactions that bring them back between trips.",
+    meta: "Recharge and utility bill payment API integration for travel portals: mobile prepaid and postpaid, DTH, electricity, gas, water and broadband bills, with agent commissions.",
+    enables: ["Prepaid and postpaid mobile recharge", "Plan lookup by operator and circle", "DTH and broadband renewals", "Electricity, gas and water bill payments", "Agent commissions and wallet debits", "Status checks and failed-transaction refunds"],
+    covers: [["Mobile", "Prepaid and postpaid operators through your recharge provider"], ["DTH & broadband", "Major satellite TV and internet providers"], ["Utility bills", "Electricity, gas, water and other billers your provider supports"], ["Agent network", "Recharges sold by B2B agents with their own commission"]],
+    timeline: "Typically one to two weeks per provider.",
+    faq: [["Do I need my own recharge provider?", "Yes. You hold the account with a recharge or bill-payment aggregator, and we integrate it."], ["What if a recharge fails?", "The platform checks the provider's final status and returns the amount to the wallet when the provider confirms a failure."], ["Is plan lookup included?", "Where the provider offers plan data. Some providers charge separately for lookups."]],
   },
 };
 export const apiProcessSteps = apiProcess;
@@ -375,6 +604,7 @@ export const industries = [
   { id: "corporate", name: "Corporate travel & TMCs", challenge: "Controlling spend and policy without slowing travellers down.", bundle: ["Corporate travel software", "Back-office", "Integrations"], features: ["Policies & approvals", "Cost centres", "Consolidated billing"] },
   { id: "startups", name: "Travel startups", challenge: "Launching quickly and testing a model before investing in custom builds.", bundle: ["White-label platform", "Custom modules", "Mobile apps"], features: ["Fast launch", "Modular growth", "Room to customize later"] },
   { id: "wholesalers", name: "Consolidators & wholesalers", challenge: "Serving a large agent network with credit, fares and reliable service.", bundle: ["B2B / B2B2B portal", "Flight extranet", "Back-office"], features: ["Credit control", "Series & private fares", "Multi-level distribution"] },
+  { id: "fleet", name: "Bus, cab & fleet operators", challenge: "Selling seats and vehicles online without double-booking or chasing payments.", bundle: ["Bus & car booking software", "Bus & car extranet", "Agent portal"], features: ["Live seat maps", "Zone-based pricing", "Driver & vehicle management"] },
 ];
 
 /* ======================= RESOURCES ======================= */
@@ -387,6 +617,13 @@ export const generalFaq: Pair[] = [
   ["What happens after launch?", "We offer maintenance and support plans, plus optional hosting and cloud management, so your platform stays secure and up to date."],
   ["Can I sell my own fares and hotels?", "Yes. The extranet lets you load series fares, private fares, contracted hotels and packages, and sell them alongside supplier inventory."],
   ["Do you offer dedicated developers?", "Yes. You can hire web, mobile or cross-platform developers who work as part of your team, managed by us."],
+  ["Is Elyra a travel agency?", "No. We build and run the technology. Your business sells the travel, holds the supplier accounts and serves the customers."],
+  ["Does Elyra give out agent IDs or sell travel on commission?", "No. We don't run an agent network of our own. Your B2B portal lets you create agent accounts and set their commission and credit."],
+  ["How does a supplier API integration work?", "You get approved access and documentation from the supplier. We then map their data to the platform, build and test in their sandbox, pass their certification and switch to live."],
+  ["Can I connect several suppliers at once?", "Yes. Each supplier runs on your own account, and rules decide which source is shown first for each search."],
+  ["Is pricing in a search result guaranteed?", "No. Suppliers can change fares and rates until booking, so the platform re-checks the price before taking payment."],
+  ["What about hosting, security and support?", "Hosting can be ours or yours. Access is role-based and every release is tested. Support levels, response times and costs are written into your proposal."],
+  ["Which technologies do you use?", "Modern web and mobile tools chosen per project, such as Next.js, React and TypeScript on the web, Node.js or Python on the server, React Native for apps, and cloud hosting."],
 ];
 
 export const processSteps: Pair[] = [

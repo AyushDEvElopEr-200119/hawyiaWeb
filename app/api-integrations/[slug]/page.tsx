@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
-import { CtaBand, FaqBlock, JsonLd, PageHero, ProcessTable } from "@/components/sections";
+import { ExtraSection, PhotoSplit, StepLine } from "@/components/cinematic";
+import { CtaBand, FaqBlock, JsonLd, PageHero } from "@/components/sections";
 import { apiPages, apiProcessSteps } from "@/lib/content";
 import { apis } from "@/lib/site";
 import { breadcrumbSchema, faqSchema, pageMeta, serviceSchema } from "@/lib/seo";
@@ -31,17 +32,17 @@ export default async function ApiPage({ params }: Props) {
     <>
       <PageHero trail={trail} eyebrow={c.eyebrow} title={c.h1} intro={c.intro} image={`a-${slug}`} highlights={c.covers.slice(0, 3)} />
 
-      <section className="apps container api-enables">
-        <div className="split-head">
-          <h2 className="h2 reveal">What it enables</h2>
-          <ul className="ticks reveal">{c.enables.map((e) => <li key={e}>{e}</li>)}</ul>
-        </div>
-        <div className="api-grid two reveal">
-          {c.covers.map(([t, d]) => <article className="api" key={t}><h3>{t}</h3><p>{d}</p></article>)}
-        </div>
-      </section>
+      <PhotoSplit image={`d-${slug}`} eyebrow="What it enables" title="Everything your travellers and team can do" items={c.enables} />
 
-      <ProcessTable steps={apiProcessSteps} title="Integration process" id="integration-process" />
+      <ExtraSection title="What it covers" intro="The supplier types and channels this integration connects, subject to your own access and agreements." items={c.covers} style="duo" />
+
+      <section className="impl container" id="integration-process">
+        <div className="split-head">
+          <h2 className="h2 reveal">Integration process</h2>
+          <p className="reveal">From supplier access to live bookings, with testing at every step.</p>
+        </div>
+        <StepLine steps={apiProcessSteps} />
+      </section>
 
       <section className="resp container">
         <div className="resp-card reveal">

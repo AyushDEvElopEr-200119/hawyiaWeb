@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Chev } from "@/components/Brand";
-import { CardGrid, CtaBand, FaqBlock, JsonLd, PageHero, ProcessTable, RelatedCards, TabsBlock, footnote } from "@/components/sections";
+import { ExtraSection, IntegrationReel, ModuleCinema, Personas, StepLine, WhoLine } from "@/components/cinematic";
+import { CtaBand, FaqBlock, JsonLd, PageHero, RelatedCards, footnote } from "@/components/sections";
 import { solutionPages } from "@/lib/content";
 import { apis, solutions } from "@/lib/site";
 import { breadcrumbSchema, faqSchema, pageMeta, serviceSchema } from "@/lib/seo";
@@ -34,26 +35,18 @@ export default async function SolutionPage({ params }: Props) {
     <>
       <PageHero trail={trail} eyebrow={c.eyebrow} title={c.h1} intro={c.intro} image={`s-${slug}`} highlights={c.modules.slice(0, 3)} />
 
-      <section className="who container">
-        <div className="split-head">
-          <h2 className="h2 reveal">Who it&apos;s for</h2>
-          <ul className="chips reveal">{c.who.map((w) => <li key={w}>{w}</li>)}</ul>
-        </div>
-      </section>
+      <WhoLine who={c.who} />
 
-      <section className="engines container">
-        <div className="split-head">
-          <h2 className="h2 reveal">Key modules</h2>
-          <p className="reveal">Every module is configurable from the admin panel. Switch on what you need today, and add more as you grow.</p>
-        </div>
-        <CardGrid items={c.modules} />
-      </section>
+      <ModuleCinema
+        title="Key modules"
+        intro="Every module is configurable from the admin panel. Switch on what you need today, and add more as you grow."
+        image={`d-${slug}`}
+        modules={c.modules}
+      />
 
-      <section className="features container">
-        <h2 className="h2 center reveal">Features for every user</h2>
-        <p className="sub reveal">What travellers, agents and your own team get out of the box.</p>
-        <TabsBlock id="ft" groups={c.features} />
-      </section>
+      <Personas groups={c.features} />
+
+      {c.extras?.map((x) => <ExtraSection key={x.title} {...x} />)}
 
       <section className="extranet container">
         <article className="ext-card reveal">
@@ -63,32 +56,26 @@ export default async function SolutionPage({ params }: Props) {
             <p>Start from a proven platform, then shape it around your brand and business model. When you need something truly unique, our custom development team takes over.</p>
             <Link href="/custom-development/" className="link">Custom development <Chev /></Link>
           </div>
-          <ul className="ext-list">{c.customize.map((x) => <li key={x}><b>{x}</b></li>)}</ul>
+          <ul className="ext-tiles">{c.customize.map((x, i) => <li key={x}><small>{String(i + 1).padStart(2, "0")}</small><b>{x}</b></li>)}</ul>
         </article>
       </section>
 
-      <section className="integrations-strip container">
-        <div className="split-head">
-          <h2 className="h2 reveal">Supported integrations</h2>
-          <p className="reveal">Connect the suppliers and payment providers you work with. Integrations are subject to supplier access and agreements.</p>
-        </div>
-        <div className="chip-links reveal">
-          {apis.map((a) => <Link href={`/api-integrations/${a.slug}/`} className="press" key={a.slug}>{a.name} <Chev /></Link>)}
-        </div>
-      </section>
+      <IntegrationReel items={apis.map((a) => ({ href: `/api-integrations/${a.slug}/`, label: a.name }))} />
 
-      <ProcessTable
-        title="Implementation"
-        id="implementation"
-        steps={[
+      <section className="impl container" id="implementation">
+        <div className="split-head">
+          <h2 className="h2 reveal">Implementation</h2>
+          <p className="reveal">Six stages from first call to go-live, each with a clear owner and checklist.</p>
+        </div>
+        <StepLine steps={[
           ["Discovery call", "Your model, markets and must-haves"],
           ["Configuration plan", "Modules, suppliers, pricing rules"],
           ["Branding & setup", "Domain, theme, content"],
           ["Supplier & payment integration", "Your approved accounts"],
           ["Testing & training", "End-to-end checks, team onboarding"],
           ["Go-live & support", "Launch, monitoring, updates"],
-        ]}
-      />
+        ]} />
+      </section>
 
       <section className="price-callout container">
         <div className="pc-inner reveal">

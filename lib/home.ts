@@ -36,7 +36,7 @@ export const devServices: [href: string, title: string, sub: string][] = [
 export const marqueeItems = [
   "✈ Airline & LCC APIs", "◎ GDS · Amadeus", "◎ GDS · Sabre", "◎ GDS · Travelport", "◇ NDC content",
   "⌂ Hotel suppliers", "▭ Bus networks", "⛟ Car rental", "⇄ Airport transfers",
-  "☀ Tours & activities", "☂ Travel insurance", "⚓ Cruise", "₹ Payment gateways",
+  "☀ Tours & activities", "☂ Travel insurance", "⚓ Cruise", "₹ Payment gateways", "⚡ Recharge & bill payments", "⌘ Visa CMS",
 ];
 
 export const apiCategories: Pair[] = [
@@ -44,7 +44,7 @@ export const apiCategories: Pair[] = [
   ["Hotel APIs", "Wholesalers and aggregators with live rates, room mapping and de-duplication."],
   ["Bus APIs", "Routes, live seat layouts, boarding points and instant ticketing."],
   ["Car & transfer APIs", "Rental fleets and point-to-point airport and city transfers."],
-  ["Insurance & activities", "Trip protection and things to do, offered inside the booking flow."],
+  ["Insurance, activities & bills", "Trip protection, things to do, and mobile recharge or bill payments from the same wallet."],
   ["Payment gateways", "Local and international gateways, wallets and multi-currency checkout."],
 ];
 
