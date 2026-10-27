@@ -128,7 +128,7 @@ export function initSite(): () => void {
     }
 
     /* ---------- header state over dark media ---------- */
-    const darkZones = $$(".hero, .bleed, .vista-frame, .fx");
+    const darkZones = $$(".hero, .bleed, .vista-frame");
     const updateHeader = () => {
       if (!header) return;
       const probe = 50;
@@ -487,11 +487,12 @@ export function initSite(): () => void {
         gsap.to(arcs, { strokeDashoffset: 0, duration: 2.4, stagger: 0.15, ease: "power2.inOut", scrollTrigger: { trigger: effect, start: "top 70%" } });
         gsap.from(".effect-title", { yPercent: 20, opacity: 0, duration: 1.6, scrollTrigger: { trigger: effect, start: "top 70%" } });
       }
-      const word = $(".fx-word span");
-      if (word) {
-        // scrubbed to the last screen of the page: the wordmark rises out of the panel's bottom edge
-        gsap.fromTo(word, { yPercent: 55, opacity: 0.2, filter: "blur(10px)" }, { yPercent: 0, opacity: 1, filter: "blur(0px)", ease: "none",
-          scrollTrigger: { trigger: ".fx-word", start: "top bottom", end: "bottom bottom", scrub: 0.8 } });
+      const ring = $(".footer .ring");
+      if (ring) {
+        // scrubbed to the last screen of the page, so it lands exactly as you reach the bottom
+        gsap.timeline({ scrollTrigger: { trigger: ".footer-mark", start: "top bottom", end: "bottom bottom", scrub: 0.8 } })
+          .fromTo(ring, { yPercent: 22, scale: 0.88, rotation: -16, transformOrigin: "50% 50%" }, { yPercent: 0, scale: 1, rotation: 0, ease: "none" })
+          .fromTo(".fm-logo", { y: 40, opacity: 0, filter: "blur(8px)" }, { y: 0, opacity: 1, filter: "blur(0px)", ease: "none" }, 0.35);
       }
     }
 
