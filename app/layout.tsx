@@ -16,10 +16,10 @@ const mono = Fragment_Mono({ subsets: ["latin"], weight: "400", variable: "--fon
 
 export const metadata: Metadata = {
   metadataBase: new URL(company.url),
-  title: { default: `${company.tagline} | ${company.short}`, template: `%s | ${company.short}` },
+  title: { default: `${company.name} — ${company.tagline}`, template: `%s | ${company.name}` },
   description: siteDescription,
   applicationName: company.name,
-  category: "travel",
+  category: "technology",
   formatDetection: { telephone: false, email: false, address: false },
   openGraph: { type: "website", siteName: company.name, locale: "en_US" },
   twitter: { card: "summary_large_image" },

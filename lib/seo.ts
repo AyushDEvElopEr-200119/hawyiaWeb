@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { company } from "./site";
-import type { Pair } from "./cws";
+import type { Pair } from "./content";
 
 export type Crumb = { label: string; href?: string };
 
 export const siteDescription =
-  "Elyra manages corporate travel end to end — hotels, serviced apartments, chauffeur cars, MICE and relocation across 185+ countries. Since 2016.";
+  "Elyra helps travel businesses launch, customize and scale their own online booking platforms with white-label solutions, custom development and travel API integrations.";
 
 // the share card drawn by app/og.png/route.tsx
 const shareImage = { url: "/og.png", width: 1200, height: 630, alt: `${company.name} — ${company.tagline}` };
@@ -13,7 +13,7 @@ const shareImage = { url: "/og.png", width: 1200, height: 630, alt: `${company.n
 /** Per-page metadata: title, description, canonical URL, Open Graph and Twitter card.
     A page's `openGraph` replaces the layout's instead of merging with it, so every field is set here. */
 export function pageMeta({ title, description, path }: { title?: string; description: string; path: string }): Metadata {
-  const full = title ? `${title} | ${company.short}` : `${company.tagline} | ${company.short}`;
+  const full = title ? `${title} | ${company.name}` : `${company.name} — ${company.tagline}`;
   return {
     title: title ?? { absolute: full },
     description,
@@ -61,9 +61,6 @@ export const organizationSchema = {
   name: company.name,
   url: company.url,
   logo: `${company.url}/icon.svg`,
-  alternateName: company.short,
-  foundingDate: "2016",
-  sameAs: company.social.map((s) => s.href),
   description: siteDescription,
   ...(company.email && { email: company.email }),
   ...(company.phone && { telephone: company.phone }),

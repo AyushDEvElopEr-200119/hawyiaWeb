@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { categories, type PostCardData } from "@/lib/blog";
+import type { PostCardData } from "@/lib/blog";
 import { PostCard } from "./PostCard";
 
-const filters = ["All", ...categories] as const;
+const filters = ["All", "Guide", "Insight"] as const;
+const label = { All: "All", Guide: "Guides", Insight: "Insights" } as const;
 
 /**
  * The journal grid with an Apple-style segmented control. The selected segment's pill slides
@@ -22,7 +23,7 @@ export function BlogGrid({ posts }: { posts: PostCardData[] }) {
         <div className="segmented" role="tablist" aria-label="Filter articles" style={{ "--seg": index, "--segs": filters.length } as React.CSSProperties}>
           <span className="seg-pill" aria-hidden="true" />
           {filters.map((f) => (
-            <button key={f} type="button" role="tab" aria-selected={f === filter} onClick={() => setFilter(f)}>{f}</button>
+            <button key={f} type="button" role="tab" aria-selected={f === filter} onClick={() => setFilter(f)}>{label[f]}</button>
           ))}
         </div>
       </div>

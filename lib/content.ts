@@ -1,0 +1,403 @@
+// Page content. All copy is original to Elyra.
+// Keep claims honest: no invented clients, stats, certifications or partners.
+
+/* ======================= SOLUTIONS ======================= */
+export type Pair = [string, string];
+export type SolutionContent = {
+  eyebrow: string; h1: string; intro: string; meta: string;
+  who: string[]; modules: Pair[]; features: Record<string, string[]>;
+  customize: string[]; faq: Pair[]; related: string[];
+};
+export type ServiceContent = {
+  eyebrow: string; h1: string; intro: string; meta: string; need: string;
+  build: Pair[]; stack: string[]; deliverables: string[]; faq: Pair[];
+};
+export type ApiContent = {
+  eyebrow: string; h1: string; intro: string; meta: string;
+  enables: string[]; covers: Pair[]; timeline: string; faq: Pair[];
+};
+
+export const solutionPages: Record<string, SolutionContent> = {
+  "white-label-travel-booking-software": {
+    eyebrow: "White-label platform",
+    h1: "Your own OTA,<br />live in weeks",
+    intro: "A complete online travel platform with flights, hotels, holidays, buses and more, configured with your brand, your suppliers and your pricing rules. No code to write and no engine to maintain.",
+    meta: "White-label travel booking software: launch a branded online travel platform with flights, hotels, holidays and more, without building from scratch.",
+    who: ["Travel agencies going online", "Startups launching an OTA", "Tour operators adding flights & hotels", "Consolidators building a consumer brand"],
+    modules: [
+      ["Multi-product search", "Flights, hotels, holidays, buses, cars, transfers and activities from one search bar."],
+      ["Branding & theming", "Your logo, colours, domain and page layouts, plus separate themes for landing, search and checkout."],
+      ["Pricing engine", "Markups, discounts and service fees by product, supplier, route or channel."],
+      ["Payments", "Your own gateway, with multi-currency checkout and refund handling."],
+      ["Customer accounts", "OTP login, saved travellers, booking history and self-service changes."],
+      ["Admin & reports", "Bookings, cancellations, invoices, supplier performance and revenue in one place."],
+    ],
+    features: {
+      Traveler: ["Fare calendar & flexible dates", "Filters, sorting and fare comparison", "Promo codes & offers", "E-tickets, vouchers and reminders", "Mobile-first booking flow"],
+      Agent: ["Optional B2B login for partners", "Agent-wise markups & commissions", "Credit limits and wallets", "Booking on behalf of customers"],
+      Admin: ["Supplier priority & fare switching", "Role-based staff access", "Cancellations, reissues and refunds", "Sales, margin and supplier reports", "CMS for pages, banners and SEO"],
+    },
+    customize: ["Your own domain and branding", "Choice of modules and suppliers", "Custom landing pages", "Additional languages and currencies", "Bespoke features on request"],
+    faq: [
+      ["How is white-label different from custom?", "White-label runs on our proven platform and is configured for you, so it launches faster and costs less. Custom is built from scratch for your exact workflows."],
+      ["Can I start with one product and add more later?", "Yes. Many clients launch with flights or hotels and switch on more modules as they grow."],
+      ["Whose supplier contracts are used?", "Usually yours. You contract with GDSs, airlines and hotel suppliers, and we integrate them. We can advise on which suppliers fit your markets."],
+    ],
+    related: ["flight-booking-software", "hotel-booking-software", "b2b-travel-portal"],
+  },
+  "flight-booking-software": {
+    eyebrow: "Flight booking",
+    h1: "Flight booking,<br />done properly",
+    intro: "A flight engine that searches GDS, low-cost and NDC content, prices it with your rules, and handles everything after booking: seats, baggage, reissues and refunds.",
+    meta: "Flight booking software with GDS, LCC and NDC connectivity, fare calendar, ancillaries, markups and automated post-booking.",
+    who: ["OTAs and online agencies", "B2B consolidators", "Corporate travel providers", "Airline ticketing desks"],
+    modules: [
+      ["Search & shopping", "One-way, return and multi-city, with flexible dates and a fare calendar."],
+      ["Fare comparison", "Fares, brands, inclusions and rules compared across suppliers."],
+      ["Ancillaries & SSR", "Seats, meals, baggage and special service requests during booking."],
+      ["Fare rules engine", "Markups, discounts and fees by airline, route, cabin, agent or channel."],
+      ["Supplier priority", "Prefer certain suppliers, or switch automatically to an equivalent fare with a better price or margin."],
+      ["Post-booking", "Cancellations, reissues, refunds, schedule changes and notifications."],
+    ],
+    features: {
+      Traveler: ["Fare calendar & cheapest-day view", "Filters for stops, times, airlines and baggage", "Seat maps and meal selection", "Instant e-tickets by email and SMS"],
+      Agent: ["Agent fares & commissions", "Queue and PNR management", "Credit-based ticketing", "Offline booking entry"],
+      Admin: ["Airline & route controls", "Private & series fares via extranet", "Fare-change and ticketing alerts", "Sales, margin and supplier reports"],
+    },
+    customize: ["Choice of GDS / LCC / NDC sources", "Branded fares display", "Corporate fares and deals", "Custom post-booking workflows"],
+    faq: [
+      ["Which flight sources can you connect?", "GDSs such as Amadeus, Sabre and Travelport, low-cost carriers, NDC content and consolidators, subject to your supplier access and agreements."],
+      ["Can I sell my own negotiated fares?", "Yes. Load private or series fares in the flight extranet and they appear alongside supplier fares."],
+      ["Do you handle reissues and refunds?", "Yes. Supported changes run through automated workflows, and the rest go to a queue for your team."],
+    ],
+    related: ["white-label-travel-booking-software", "b2b-travel-portal", "travel-management-software"],
+  },
+  "hotel-booking-software": {
+    eyebrow: "Hotel booking",
+    h1: "Every room,<br />one clean listing",
+    intro: "Connect hotel wholesalers and your own contracts, merge duplicate properties into one listing, and sell rooms with clear rates, policies and instant vouchers.",
+    meta: "Hotel booking software with supplier integration, room mapping, contracted inventory, flexible rate plans and instant vouchers.",
+    who: ["OTAs and agencies", "DMCs with contracted hotels", "B2B hotel wholesalers", "Tour operators"],
+    modules: [
+      ["Hotel search", "Destination, landmark and map search, with smart filters."],
+      ["Content & room mapping", "The same hotel from several suppliers is merged into one listing."],
+      ["Rate plans", "Meal plans and refundable or non-refundable rates, with clear cancellation terms."],
+      ["Hotel extranet", "Load your directly contracted hotels, allocations and rates."],
+      ["Hold & pay later", "Hold bookings where suppliers allow, with deadline reminders."],
+      ["Vouchers & notifications", "Branded vouchers and confirmations sent instantly."],
+    ],
+    features: {
+      Traveler: ["Maps, photos and amenities", "Price and rating filters", "Clear cancellation policies", "Instant vouchers"],
+      Agent: ["Net and gross rates", "Agent markups", "Credit-based booking", "Group and multi-room booking"],
+      Admin: ["Supplier priority by destination", "Contracted inventory management", "Cancellation deadline tracking", "Hotel performance reports"],
+    },
+    customize: ["Choice of hotel suppliers", "Destination landing pages", "Custom mapping rules", "Own-contract inventory"],
+    faq: [
+      ["Can I mix supplier and contracted hotels?", "Yes. Contracted hotels from the extranet appear alongside supplier inventory in the same results."],
+      ["How do you avoid duplicate hotels?", "Room and property mapping merges the same hotel from different suppliers into one listing."],
+      ["Can travellers pay at the hotel?", "Where the supplier supports it, yes. Otherwise payment is taken at booking."],
+    ],
+    related: ["white-label-travel-booking-software", "holiday-package-booking-software", "b2c-travel-portal"],
+  },
+  "holiday-package-booking-software": {
+    eyebrow: "Holidays & tours",
+    h1: "Packages people<br />can actually book",
+    intro: "Build day-wise itineraries, set departures and seasonal prices, and sell packages online, either as instant bookings or as enquiries your team follows up.",
+    meta: "Holiday and tour package booking software with itinerary builder, departures, seasonal pricing, enquiries and vouchers.",
+    who: ["Tour operators", "DMCs", "Holiday agencies", "Pilgrimage and group-tour specialists"],
+    modules: [
+      ["Package builder", "Day-wise itineraries combining hotels, transfers, sightseeing and activities."],
+      ["Departures & pricing", "Fixed departures, seasonal prices and per-person pricing by room type."],
+      ["Enquiry or instant book", "Capture leads for tailor-made trips, or sell fixed packages straight away."],
+      ["Holiday CMS", "Destination and theme pages your marketing team can edit."],
+      ["Visa CMS", "Publish visa requirements and take applications."],
+      ["Documents", "Itinerary PDFs, vouchers and invoices generated automatically."],
+    ],
+    features: {
+      Traveler: ["Rich itinerary pages", "Date and room-type pricing", "Part payment where enabled", "Downloadable itinerary"],
+      Agent: ["Agent pricing on packages", "Share-ready brochures", "Enquiry tracking"],
+      Admin: ["Inventory & seat control per departure", "Lead pipeline & follow-ups", "Supplier costing", "Package performance reports"],
+    },
+    customize: ["Custom package types", "Group booking flows", "Destination microsites", "CRM integration"],
+    faq: [
+      ["Can packages include live flights?", "Yes. With a flight engine enabled, packages can be priced with live flights, or sold land-only."],
+      ["Do you support enquiries for custom trips?", "Yes. Each package can be set to instant booking, enquiry, or both."],
+      ["Can I sell packages through agents?", "Yes. Packages can appear in the B2B portal with agent pricing."],
+    ],
+    related: ["hotel-booking-software", "b2b-travel-portal", "white-label-travel-booking-software"],
+  },
+  "b2c-travel-portal": {
+    eyebrow: "B2C portal",
+    h1: "A booking site<br />travellers return to",
+    intro: "A fast, mobile-first consumer site under your brand. It covers multi-product search, simple checkout, customer accounts and the self-service changes travellers expect.",
+    meta: "B2C travel portal: a branded, mobile-first consumer booking website with multi-product search, accounts, offers and self-service.",
+    who: ["Agencies selling direct", "New OTAs", "Brands adding travel to their offer"],
+    modules: [
+      ["Mobile-first UX", "Search and checkout designed for thumbs, built to load fast."],
+      ["Accounts & OTP login", "Saved travellers, booking history and one-tap rebooking."],
+      ["Offers & coupons", "Promo codes, cashback and campaign landing pages."],
+      ["Self-service", "Cancellations and changes without calling support."],
+      ["SEO & CMS", "Editable pages, blogs and destination content."],
+      ["Notifications", "Email, SMS and WhatsApp updates where configured."],
+    ],
+    features: {
+      Traveler: ["Multi-product search", "Flexible-date fares", "Secure checkout & wallets", "Trip reminders"],
+      Agent: ["Optional affiliate tracking", "Corporate sign-up flow"],
+      Admin: ["Campaign & coupon manager", "Conversion and funnel reports", "Content management", "Customer support tools"],
+    },
+    customize: ["Unique design system", "Loyalty or rewards", "Multi-language & currency", "Native apps"],
+    faq: [
+      ["Will the site work well on phones?", "Yes. Layouts are designed mobile-first, and native apps can be added later."],
+      ["Can my marketing team edit pages?", "Yes. Landing pages, banners, blogs and SEO fields are editable in the CMS."],
+      ["Can I add a loyalty programme?", "Yes, as a custom module."],
+    ],
+    related: ["white-label-travel-booking-software", "flight-booking-software", "hotel-booking-software"],
+  },
+  "b2b-travel-portal": {
+    eyebrow: "B2B portal",
+    h1: "Run your agent<br />network online",
+    intro: "Onboard sub-agents and distributors, give them credit and their own markups, and let them book everything you sell, through a B2B, B2B2C or multi-level B2B2B model.",
+    meta: "B2B travel agent portal with agent onboarding, credit limits, wallets, commissions, markups and B2B2C / B2B2B distribution.",
+    who: ["Consolidators & wholesalers", "Host agencies", "DMCs selling through agents", "Distributors with sub-agents"],
+    modules: [
+      ["Agent onboarding", "Registration, KYC documents and approval workflow."],
+      ["Credit & wallets", "Credit limits, top-ups, balances and statements."],
+      ["Markups & commissions", "Set by agent, group, product, supplier or route."],
+      ["B2B2C storefronts", "Agents get their own branded site powered by your inventory."],
+      ["B2B2B levels", "Distributors manage their own sub-agents, with margins at every level."],
+      ["Agent reports", "Sales, outstanding balances and commission statements."],
+    ],
+    features: {
+      Traveler: ["Agent-branded storefront (B2B2C)", "Booking confirmations in agent's name"],
+      Agent: ["Net-fare visibility", "Own markups on top", "Wallet & credit booking", "Booking queue & amendments", "Downloadable invoices"],
+      Admin: ["Agent hierarchy management", "Credit control & alerts", "Deposit reconciliation", "Agent performance reports"],
+    },
+    customize: ["Custom commission models", "Distributor tiers", "Local payment top-ups", "ERP / accounting sync"],
+    faq: [
+      ["Can agents have their own branded site?", "Yes. In the B2B2C model each agent gets a storefront under their own brand."],
+      ["How is credit controlled?", "You set limits per agent, with automatic blocking and alerts as balances run low."],
+      ["Do you support multi-level distribution?", "Yes. B2B2B lets distributors manage sub-agents, with margins at each level."],
+    ],
+    related: ["white-label-travel-booking-software", "travel-management-software", "flight-booking-software"],
+  },
+  "corporate-travel-software": {
+    eyebrow: "Corporate (B2E)",
+    h1: "Business travel,<br />within policy",
+    intro: "A self-booking tool where employees book within policy, managers approve with one tap, and finance sees spend by person, team and cost centre.",
+    meta: "Corporate travel software: policy-based self-booking, approval workflows, cost centres, spend reports and consolidated billing.",
+    who: ["Travel management companies (TMCs)", "Companies managing their own travel", "Agencies serving corporate clients"],
+    modules: [
+      ["Travel policies", "Rules for class, fare limits, advance booking and preferred suppliers."],
+      ["Approval workflows", "Multi-level approvals by department, grade or trip value."],
+      ["Self-booking", "Flights, hotels, cars and transfers in one corporate interface."],
+      ["Cost centres", "Bookings tagged to projects, departments and clients."],
+      ["Consolidated billing", "Monthly invoices and reconciliation instead of card-by-card."],
+      ["Duty of care", "See who is travelling where, with trip notifications."],
+    ],
+    features: {
+      Traveler: ["Policy-aware search results", "Out-of-policy reasons", "Saved travel preferences", "Mobile approvals and itineraries"],
+      Agent: ["TMC multi-company management", "Offline request handling", "Corporate fares"],
+      Admin: ["Spend dashboards", "Policy compliance reports", "Employee & grade management", "SSO and HRMS integration (custom)"],
+    },
+    customize: ["Company-specific policies", "ERP / HRMS integration", "SSO sign-in", "Custom approval chains"],
+    faq: [
+      ["Can each company have its own policy?", "Yes. TMCs can manage many companies, each with its own policies and approvers."],
+      ["Do you integrate with HR or ERP systems?", "Yes, as custom integrations, for employee data, cost centres and invoices."],
+      ["Can employees book on mobile?", "Yes. The corporate interface is responsive, and apps can be added."],
+    ],
+    related: ["travel-management-software", "flight-booking-software", "hotel-booking-software"],
+  },
+  "travel-management-software": {
+    eyebrow: "Back-office",
+    h1: "Everything after<br />the booking",
+    intro: "The operational core of a travel business, covering bookings, amendments, refunds, invoices, supplier payments and reports. Use it with our platforms or on its own.",
+    meta: "Travel management and back-office software for bookings, amendments, invoicing, supplier management, accounting and reports.",
+    who: ["Agencies with offline and online sales", "OTAs scaling operations", "TMCs", "Tour operators"],
+    modules: [
+      ["Booking management", "Online and offline bookings in one ledger."],
+      ["Amendments & refunds", "Cancellations, reissues and refunds with full audit trail."],
+      ["Invoicing", "Customer and agent invoices, credit notes and tax fields."],
+      ["Supplier management", "Supplier accounts, payables and reconciliation."],
+      ["CRM", "Customer profiles, enquiries and follow-ups."],
+      ["Reports & analytics", "Sales, margins, receivables and supplier performance."],
+    ],
+    features: {
+      Traveler: ["Consistent invoices & documents", "Faster refunds"],
+      Agent: ["Statements & outstanding balances", "Commission reports"],
+      Admin: ["Role-based staff access", "Accounting export / integration", "Audit logs", "Custom report builder"],
+    },
+    customize: ["Accounting software integration", "Custom document templates", "Workflow automation", "Data migration from old systems"],
+    faq: [
+      ["Can I use the back-office without your booking engine?", "Yes. It can work standalone, with bookings entered offline or imported."],
+      ["Do you integrate with accounting software?", "Yes. Exports are standard, and direct integrations are built on request."],
+      ["Can you migrate data from our current system?", "Yes. We plan data migration as part of the project."],
+    ],
+    related: ["b2b-travel-portal", "corporate-travel-software", "white-label-travel-booking-software"],
+  },
+};
+
+/* ======================= CUSTOM DEVELOPMENT ======================= */
+export const servicePages: Record<string, ServiceContent> = {
+  "custom-travel-website-development": {
+    eyebrow: "Custom websites", h1: "A travel website<br />built around your brand",
+    intro: "Designed from your brand outward, fast on every device, and connected to the booking engines and suppliers you choose.",
+    meta: "Custom travel website development: brand-first design, fast mobile performance, SEO and integrated booking.",
+    need: "Your brand deserves more than a template, and your customers need booking to feel effortless. Most travel websites fail on one or the other.",
+    build: [["Brand-led design", "A design system created for your brand, not a theme."], ["Booking integration", "Search and checkout from our engines or your existing systems."], ["Content & SEO", "CMS, destination pages, blogs and structured data."], ["Performance", "Fast loads and strong Core Web Vitals."], ["Accessibility", "Inclusive by default, tested against WCAG."], ["Analytics", "Conversion tracking from search to booking."]],
+    stack: ["Next.js / React", "Node.js", "Headless CMS", "Tailwind / CSS", "PostgreSQL", "Cloud hosting"],
+    deliverables: ["UX research & sitemap", "UI design system", "Responsive website", "CMS & training", "SEO setup", "Launch & support"],
+    faq: [["Can you redesign our existing site?", "Yes. We can keep your current booking systems and rebuild the front end around them."], ["Will we be able to edit content?", "Yes. Pages, banners, blogs and SEO fields are managed in a CMS."]],
+  },
+  "booking-engine-development": {
+    eyebrow: "Booking engines", h1: "A booking engine<br />for what you sell",
+    intro: "When your product, pricing or inventory doesn't fit an off-the-shelf engine, we design and build one that does.",
+    meta: "Custom booking engine development for flights, hotels, packages, activities and unique travel inventory.",
+    need: "Unusual inventory, complex pricing or a new business model often breaks standard engines. A purpose-built engine removes the workarounds.",
+    build: [["Search & availability", "Fast search across your own and supplier inventory."], ["Pricing logic", "Dynamic pricing, bundles, fees and rules."], ["Reservations", "Holds, confirmations, payments and documents."], ["Post-booking", "Changes, cancellations and refunds."], ["APIs", "Your engine exposed to partners and apps."], ["Admin", "Tools to manage inventory and rules."]],
+    stack: ["Node.js / Java / .NET", "PostgreSQL / Redis", "Message queues", "REST / GraphQL APIs", "Cloud infrastructure", "Automated testing"],
+    deliverables: ["Architecture & data model", "Engine & APIs", "Admin console", "Supplier integrations", "Load testing", "Documentation"],
+    faq: [["Can the engine serve other partners?", "Yes. We can expose it as an API for agents, affiliates or your own apps."], ["How do you handle scale?", "We design for caching, queues and horizontal scaling from the start, and load-test before launch."]],
+  },
+  "travel-mobile-app-development": {
+    eyebrow: "Mobile apps", h1: "Travel apps that<br />feel native",
+    intro: "Android and iOS apps for travellers and agents, connected to the same engine, suppliers and payments as your website.",
+    meta: "Travel mobile app development for Android and iOS: booking apps for travellers and agents with live fares and secure payments.",
+    need: "Travellers book, check in and change plans on their phones. A responsive website gets you part of the way there. An app keeps customers coming back.",
+    build: [["Booking flows", "Flights, hotels, holidays and more, designed for touch."], ["Accounts & wallets", "Saved travellers, cards and wallets."], ["Trips", "Tickets, vouchers and itineraries available offline."], ["Notifications", "Trip updates, reminders and offers."], ["Agent apps", "Booking and wallet tools for your network."], ["Store release", "Submission, updates and monitoring."]],
+    stack: ["Flutter / React Native", "Swift / Kotlin", "Firebase", "Push notifications", "Analytics & crash reporting", "CI/CD"],
+    deliverables: ["App UX & UI", "Android & iOS apps", "API integration", "Store listings", "Release & monitoring", "Ongoing updates"],
+    faq: [["Native or cross-platform?", "We recommend based on your needs. Cross-platform suits most booking apps, and native suits heavy device features."], ["Do you publish to the stores?", "Yes. We handle submission and updates in your developer accounts."]],
+  },
+  "custom-travel-portal-development": {
+    eyebrow: "Custom portals", h1: "A portal shaped<br />by your business model",
+    intro: "B2B, B2C, B2B2C or something new. We build portals around how you actually sell, distribute and service travel.",
+    meta: "Custom travel portal development for B2B, B2C, B2B2C and hybrid business models.",
+    need: "When your distribution model, commercial rules or workflows are your advantage, a generic portal flattens them. A custom portal keeps them.",
+    build: [["User journeys", "Separate flows for travellers, agents and staff."], ["Commercial rules", "Your markups, commissions and credit models."], ["Integrations", "Suppliers, payments, CRM and accounting."], ["Branding", "White-label storefronts for partners."], ["Admin", "Operations and reporting tools."], ["Security", "Role-based access and audit trails."]],
+    stack: ["React / Next.js", "Node.js / Java", "PostgreSQL", "Redis", "Cloud hosting", "Monitoring"],
+    deliverables: ["Business analysis", "UX & UI design", "Portal & admin", "Integrations", "Testing", "Launch & support"],
+    faq: [["Can you start from your white-label and customize it?", "Often, yes. It's usually the fastest route, and we'll tell you honestly when custom is better."], ["Who owns the code?", "Ownership terms are agreed in the contract. Custom builds can include full code ownership."]],
+  },
+  "crm-back-office-development": {
+    eyebrow: "CRM & back-office", h1: "Operations tools<br />your team will use",
+    intro: "CRMs, back-office systems and dashboards built for how travel teams handle enquiries, bookings, finance and service.",
+    meta: "Custom travel CRM and back-office development: enquiries, bookings, finance, supplier management and dashboards.",
+    need: "Spreadsheets and disconnected tools slow teams down and hide problems. One connected system shows the whole business.",
+    build: [["Enquiry CRM", "Leads, quotes, follow-ups and conversion tracking."], ["Booking operations", "Online and offline bookings in one place."], ["Finance", "Invoices, receivables, payables and reconciliation."], ["Supplier management", "Contracts, rates and performance."], ["Dashboards", "Real-time views for every role."], ["Automation", "Reminders, approvals and notifications."]],
+    stack: ["React", "Node.js / Python", "PostgreSQL", "BI dashboards", "Email / SMS / WhatsApp APIs", "Cloud hosting"],
+    deliverables: ["Process mapping", "System design", "Web application", "Data migration", "Training", "Support"],
+    faq: [["Can you connect it to our booking platform?", "Yes. Data flows in automatically from our platforms, and from others through their APIs."], ["Do you migrate existing data?", "Yes. Migration is planned and tested as part of the project."]],
+  },
+  "custom-software-integrations": {
+    eyebrow: "Integrations", h1: "Make your systems<br />talk to each other",
+    intro: "Connect booking platforms, suppliers, payment gateways, CRMs, accounting and HR systems, so data moves once and correctly.",
+    meta: "Custom travel software integrations: suppliers, payments, CRM, accounting, ERP and HR systems.",
+    need: "Re-typing bookings between systems wastes hours and causes errors. Integrations remove the double entry.",
+    build: [["Supplier APIs", "New suppliers added to your existing platform."], ["Payments", "Gateways, wallets and reconciliation."], ["Accounting & ERP", "Invoices and ledgers synced automatically."], ["CRM & marketing", "Customer and booking data where your team needs it."], ["HR & SSO", "Employee data and single sign-on for corporate tools."], ["Webhooks & APIs", "Events and APIs for your partners."]],
+    stack: ["REST / SOAP / XML", "Webhooks & queues", "Node.js / Java", "API gateways", "Monitoring & alerting", "Automated tests"],
+    deliverables: ["Integration design", "Connectors", "Error handling & retries", "Monitoring", "Documentation", "Support"],
+    faq: [["Can you integrate with a platform you didn't build?", "Usually, yes, as long as it offers an API or data export."], ["What happens when an API changes?", "Our support plans cover monitoring and updates to keep integrations running."]],
+  },
+};
+
+/* ======================= API INTEGRATIONS ======================= */
+const apiProcess: Pair[] = [
+  ["Access & credentials", "You sign up with the supplier, and we help you request test credentials."],
+  ["Integration build", "We connect search, pricing, booking and post-booking functions."],
+  ["Certification", "Many suppliers certify the integration before go-live. We prepare and run it."],
+  ["Testing", "End-to-end tests of search, pricing, booking, payment and cancellation."],
+  ["Go-live & monitoring", "Production credentials, launch and ongoing monitoring."],
+];
+export const apiPages: Record<string, ApiContent> = {
+  "flight-gds-api": {
+    eyebrow: "Flights", h1: "Flight & GDS<br />API integration",
+    intro: "Connect GDS, low-cost carrier, NDC and consolidator content to your platform, with fare rules, ancillaries and ticketing.",
+    meta: "Flight and GDS API integration: Amadeus, Sabre, Travelport, low-cost carriers, NDC and consolidators.",
+    enables: ["Live availability and fares", "Branded fares and fare rules", "Seats, meals and baggage", "Ticketing and PNR management", "Cancellations, reissues and refunds"],
+    covers: [["GDS", "Amadeus, Sabre and Travelport"], ["Low-cost carriers", "Direct airline connections"], ["NDC", "Airline NDC content where available"], ["Consolidators", "Aggregated fares from flight wholesalers"]],
+    timeline: "Typically a few weeks per source, depending on supplier certification.",
+    faq: [["Do I need my own GDS contract?", "Usually yes. GDS access is contracted by your business, and we handle the technical integration."], ["Can you combine several flight sources?", "Yes. Results are merged and de-duplicated, with supplier priority rules applied."]],
+  },
+  "hotel-api": {
+    eyebrow: "Hotels", h1: "Hotel API<br />integration",
+    intro: "Connect hotel wholesalers, aggregators and channel managers, with room mapping that turns many feeds into one clean listing.",
+    meta: "Hotel API integration with wholesalers, aggregators and channel managers, including room mapping and de-duplication.",
+    enables: ["Live rates and availability", "Rich content: photos, amenities, maps", "Room and property mapping", "Booking, vouchers and cancellations", "Mixing with contracted inventory"],
+    covers: [["Wholesalers", "Global and regional bed banks"], ["Aggregators", "Multi-source hotel APIs"], ["Channel managers", "Direct hotel connectivity"], ["GDS hotel content", "Where your GDS contract includes it"]],
+    timeline: "Typically two to four weeks per supplier, plus mapping.",
+    faq: [["How do you handle duplicates across suppliers?", "Mapping merges identical properties so travellers see one listing with the best available rates."], ["Can I add my own contracted hotels?", "Yes, through the hotel extranet."]],
+  },
+  "car-rental-api": {
+    eyebrow: "Car rental", h1: "Car rental API<br />integration",
+    intro: "Add rental cars by pick-up location and dates, with vehicle classes, inclusions and clear rental terms.",
+    meta: "Car rental API integration: search vehicles by location and date, show inclusions, and manage bookings.",
+    enables: ["Search by location and dates", "Vehicle class and inclusion details", "Insurance and extras", "Booking and cancellation", "Vouchers and notifications"],
+    covers: [["Rental brands", "Direct rental company APIs"], ["Aggregators", "Multi-brand rental APIs"], ["GDS car content", "Where available on your GDS contract"]],
+    timeline: "Typically two to three weeks per supplier.",
+    faq: [["Can cars be added to flight bookings?", "Yes. Cars can be offered as an add-on during or after a flight booking."], ["Do you support one-way rentals?", "Where the supplier supports them, yes."]],
+  },
+  "bus-api": {
+    eyebrow: "Buses", h1: "Bus API<br />integration",
+    intro: "Sell bus tickets with live seat layouts, boarding and drop points, and instant e-tickets.",
+    meta: "Bus API integration: live seat layouts, routes, boarding points and instant ticketing.",
+    enables: ["Route and operator search", "Live seat layouts", "Boarding and drop points", "Instant e-tickets", "Cancellations and refunds"],
+    covers: [["Bus aggregators", "Multi-operator inventory"], ["Operator systems", "Direct operator connections"], ["Your own fleet", "Via the bus extranet"]],
+    timeline: "Typically two to three weeks per supplier.",
+    faq: [["Can I sell my own buses?", "Yes. Load routes, schedules and seats in the bus extranet."], ["Are seat maps live?", "Yes, where the supplier provides real-time layouts."]],
+  },
+  "transfers-activities-api": {
+    eyebrow: "Transfers & activities", h1: "Transfers & activities<br />API integration",
+    intro: "Add airport and city transfers, tours, attractions and experiences, sold on their own or added to a trip.",
+    meta: "Transfers and activities API integration: airport transfers, tours, tickets and experiences.",
+    enables: ["Point-to-point transfers", "Tours and attraction tickets", "Date and time slot selection", "Vouchers and confirmations", "Cross-sell during checkout"],
+    covers: [["Transfer providers", "Private and shared transfers"], ["Activity platforms", "Tours, tickets and experiences"], ["Travel insurance", "Trip protection at checkout"], ["Your own products", "Via the CMS and extranet"]],
+    timeline: "Typically two to three weeks per supplier.",
+    faq: [["Can activities be added to packages?", "Yes. They can be bundled into holidays or offered as add-ons."], ["Can you add travel insurance?", "Yes, with an insurance provider you contract with."]],
+  },
+  "payment-gateway-integration": {
+    eyebrow: "Payments", h1: "Payment gateway<br />integration",
+    intro: "Accept cards, wallets, UPI and bank payments in multiple currencies, through your own gateway accounts, with refunds and reconciliation built in.",
+    meta: "Payment gateway integration for travel platforms: cards, wallets, UPI, multi-currency, refunds and reconciliation.",
+    enables: ["Cards, wallets, UPI and net banking", "Multi-currency checkout", "Refunds and partial refunds", "Agent wallet top-ups", "Reconciliation reports"],
+    covers: [["International gateways", "Global card acquiring"], ["Local gateways", "Regional payment methods"], ["Wallets", "Popular digital wallets"], ["Bank transfers", "Offline payment recording"]],
+    timeline: "Typically one to two weeks per gateway.",
+    faq: [["Whose gateway account is used?", "Yours. Payments go straight to your business. Elyra is the software provider and never holds your funds."], ["Can I use more than one gateway?", "Yes. Route payments by currency, method or amount."]],
+  },
+};
+export const apiProcessSteps = apiProcess;
+
+/* ======================= INDUSTRIES ======================= */
+export const industries = [
+  { id: "agencies", name: "Travel agencies", challenge: "Selling online without losing the personal service customers come back for.", bundle: ["B2C portal", "Flight & hotel booking", "Back-office"], features: ["Branded website", "Offline + online bookings in one ledger", "Customer accounts"] },
+  { id: "otas", name: "Online travel agencies", challenge: "Competing on price, speed and choice across many products and markets.", bundle: ["White-label platform", "Multiple supplier APIs", "Mobile apps"], features: ["Supplier priority & fare switching", "Multi-currency & language", "Campaigns & coupons"] },
+  { id: "tour-operators", name: "Tour operators", challenge: "Selling packages online while keeping control of departures and costing.", bundle: ["Holiday package software", "B2B portal", "Hotel extranet"], features: ["Itinerary builder", "Seasonal pricing", "Agent distribution"] },
+  { id: "dmcs", name: "DMCs", challenge: "Distributing contracted inventory to agents worldwide, accurately and fast.", bundle: ["B2B portal", "Hotel & activity extranet", "Back-office"], features: ["Contract management", "Net rates & agent markups", "Vouchers & operations"] },
+  { id: "corporate", name: "Corporate travel & TMCs", challenge: "Controlling spend and policy without slowing travellers down.", bundle: ["Corporate travel software", "Back-office", "Integrations"], features: ["Policies & approvals", "Cost centres", "Consolidated billing"] },
+  { id: "startups", name: "Travel startups", challenge: "Launching quickly and testing a model before investing in custom builds.", bundle: ["White-label platform", "Custom modules", "Mobile apps"], features: ["Fast launch", "Modular growth", "Room to customize later"] },
+  { id: "wholesalers", name: "Consolidators & wholesalers", challenge: "Serving a large agent network with credit, fares and reliable service.", bundle: ["B2B / B2B2B portal", "Flight extranet", "Back-office"], features: ["Credit control", "Series & private fares", "Multi-level distribution"] },
+];
+
+/* ======================= RESOURCES ======================= */
+export const generalFaq: Pair[] = [
+  ["What is the difference between white-label and custom?", "White-label is our ready-made platform, configured with your branding, modules and suppliers, so it launches faster and costs less. Custom is built around your own workflows when off-the-shelf software won't fit."],
+  ["How long does a launch take?", "That depends on the modules and supplier integrations you choose. White-label projects usually take weeks. Custom projects are planned in milestones over months. You get a timeline with your proposal."],
+  ["Do I need my own supplier contracts?", "Usually, yes. GDS, airline, hotel and other suppliers contract directly with your business. We handle the technical integration, certification and testing once you have access."],
+  ["Who owns the bookings and payments?", "You do. Elyra is the software provider. Bookings, payments, refunds and customer support stay with your business, through your own payment gateway."],
+  ["Can you build mobile apps too?", "Yes. We build Android and iOS booking apps for travellers and agents. They connect to the same platform as your website."],
+  ["What happens after launch?", "We offer maintenance and support plans, plus optional hosting and cloud management, so your platform stays secure and up to date."],
+  ["Can I sell my own fares and hotels?", "Yes. The extranet lets you load series fares, private fares, contracted hotels and packages, and sell them alongside supplier inventory."],
+  ["Do you offer dedicated developers?", "Yes. You can hire web, mobile or cross-platform developers who work as part of your team, managed by us."],
+];
+
+export const processSteps: Pair[] = [
+  ["Understand your business model", "Who you sell to and how you earn"],
+  ["Gather requirements", "Modules, suppliers, markets"],
+  ["Recommend white-label or custom", "An honest recommendation"],
+  ["Plan journeys & architecture", "Traveler, agent and admin flows"],
+  ["UI / UX design", "Your brand, mobile-first"],
+  ["Build website & backend", "In milestones you can review"],
+  ["Integrate suppliers & payments", "The suppliers you have approved"],
+  ["Test end to end", "Search, pricing, booking, payment, admin"],
+  ["Deploy", "Your domain, your hosting or ours"],
+  ["Maintain & support", "At the support level we agree"],
+];

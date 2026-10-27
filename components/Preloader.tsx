@@ -2,8 +2,8 @@ import { LogoMark } from "./Brand";
 
 /**
  * Page-load preloader, about 5s of kinetic type, then a shutter reveal:
- *   0.2–1.9s  the services flash through in huge type: Hotels, Apartments, Cars, MICE, Relocation
- *   1.9–3.0s  "You Travel. We Accommodate."
+ *   0.2–1.9s  the products flash through in huge type: Flights, Hotels, Holidays, Transfers, Payments
+ *   1.9–3.0s  "One platform. Your brand."
  *   3.0–3.8s  the Elyra mark and wordmark
  *   3.85–5s   the screen splits into six shutters that lift one after another onto the page
  * Corners carry the brand, a label, "Loading" and a 0–100 counter over a filling hairline.
@@ -18,7 +18,7 @@ import { LogoMark } from "./Brand";
 const OPEN_MS = 4050;
 const DONE_MS = 5000;
 
-const products = ["Hotels", "Apartments", "Cars", "MICE", "Relocation"];
+const products = ["Flights", "Hotels", "Holidays", "Transfers", "Payments"];
 const SHUTTERS = 6;
 
 export const preloaderScript = `(function(){var d=document.documentElement;d.classList.add("js");try{if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;d.classList.add("pl-on","pl-hold");setTimeout(function(){d.classList.remove("pl-hold")},${OPEN_MS});setTimeout(function(){d.classList.remove("pl-on");dispatchEvent(new Event("elyra:preloaded"))},${DONE_MS})}catch(e){}})()`;
@@ -35,7 +35,7 @@ export function Preloader() {
         <span className="pl-glow" />
         <div className="pl-corners mono">
           <span>Elyra</span>
-          <span>Corporate travel management</span>
+          <span>Travel booking software</span>
           <span className="pl-loading">Loading<i>.</i><i>.</i><i>.</i></span>
           <span className="pl-count" />
           <span className="pl-line" />
@@ -45,8 +45,8 @@ export function Preloader() {
             {products.map((w, i) => <span key={w} style={vars({ "--i": i })}>{w}.</span>)}
           </p>
           <p className="pl-pitch">
-            <span className="pl-l"><span>You Travel.</span></span>
-            <span className="pl-l"><em>We Accommodate.</em></span>
+            <span className="pl-l"><span>One platform.</span></span>
+            <span className="pl-l"><em>Your brand.</em></span>
           </p>
           <p className="pl-brand">
             <span className="pl-mark"><LogoMark inner="#06201d" /></span>
