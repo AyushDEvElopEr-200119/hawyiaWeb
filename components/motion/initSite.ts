@@ -128,7 +128,7 @@ export function initSite(): () => void {
     }
 
     /* ---------- header state over dark media ---------- */
-    const darkZones = $$(".hero, .bleed, .vista-frame");
+    const darkZones = $$(".hero, .bleed");
     const updateHeader = () => {
       if (!header) return;
       const probe = 50;
@@ -187,72 +187,10 @@ export function initSite(): () => void {
       });
     }
 
-    /* ---------- kinetic headings, lined eyebrows, logo walls: CSS transitions do the motion
-       (staggered by each child's --i); ScrollTrigger only says when they arrive ---------- */
-    const arrive = (sel: string, start = "top 88%", cls = "in") => {
-      if (reduced) return $$(sel).forEach((el) => el.classList.add(cls));
-      ScrollTrigger.batch(sel, { start, once: true, onEnter: (batch) => (batch as El[]).forEach((el, i) => {
-        el.style.setProperty("--d", `${i * 0.09}s`);
-        el.classList.add(cls);
-      }) });
-    };
-    arrive(".kinetic");
-    arrive(".eyebrow-serif.lined");
-    arrive("[data-stagger]", "top 85%");
-    arrive(".why-item", "top 90%", "drawn");   // its top hairline draws across
-
-    /* ---------- figures count up as they arrive; the final value stays rendered underneath,
-       holding the width, so the row never reflows while the digits run ---------- */
+    /* ---------- statements: words brighten as you scroll ---------- */
     if (!reduced) {
-      $$("[data-count]").forEach((el) => {
-        const slot = $(".cnt", el);
-        const m = $(".cnt-final", el)?.textContent?.match(/^(\D*)([\d,]*\.?\d+)(.*)$/);
-        if (!slot || !m) return;
-        const [, pre, num, post] = m;
-        const target = parseFloat(num.replace(/,/g, ""));
-        const digits = num.split(".")[1]?.length ?? 0;
-        const fmt = (v: number) => pre + v.toLocaleString("en-US", { minimumFractionDigits: digits, maximumFractionDigits: digits, useGrouping: num.includes(",") }) + post;
-        const state = { v: 0 };
-        slot.textContent = fmt(0);
-        el.classList.add("counting");
-        gsap.to(state, {
-          v: target, duration: 2.4, ease: "expo.out",
-          onUpdate: () => { slot.textContent = fmt(state.v); },
-          onComplete: () => el.classList.remove("counting"),
-          scrollTrigger: { trigger: el, start: "top 92%", once: true },
-        });
-      });
-    }
-
-    /* ---------- taglines take turns in one line: the current one lifts away as the next
-       rises in (CSS transitions; paused while off screen or in a background tab) ---------- */
-    if (!reduced) {
-      $$("[data-rotate]").forEach((box) => {
-        const lines = $$(":scope > span", box);
-        if (lines.length < 2) return;
-        let i = 0, visible = false;
-        lines[0].classList.add("on");
-        const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; });
-        io.observe(box);
-        observers.push(io);
-        const tick = () => {
-          if (visible && !document.hidden) {
-            lines.forEach((l) => l.classList.remove("out"));
-            lines[i].classList.replace("on", "out");
-            i = (i + 1) % lines.length;
-            lines[i].classList.add("on");
-          }
-          later(tick, 3400);
-        };
-        later(tick, 3400);
-      });
-    }
-
-    /* ---------- statements (and brightening body copy): words brighten as you scroll ---------- */
-    if (!reduced) {
-      $$(".statement-text, [data-brighten]").forEach((el) => {
-        // body copy keeps a readable floor if the reader stops mid-scroll
-        gsap.fromTo($$(".sw", el), { opacity: el.hasAttribute("data-brighten") ? 0.35 : 0.18 }, {
+      $$(".statement-text").forEach((el) => {
+        gsap.fromTo($$(".sw", el), { opacity: 0.18 }, {
           opacity: 1, ease: "none", stagger: 0.05,
           scrollTrigger: { trigger: el, start: "top 85%", end: "bottom 45%", scrub: true },
         });
@@ -276,7 +214,7 @@ export function initSite(): () => void {
       const drift = (sel: string, trigger: string | null, from: number, to: number) => $$(sel).forEach((el) =>
         gsap.fromTo(el, { yPercent: from }, { yPercent: to, ease: "none",
           scrollTrigger: { trigger: trigger ? el.closest(trigger) : el, start: "top bottom", end: "bottom top", scrub: true } }));
-      drift(".ph-bg, [data-ph-media] .bg-video", "[data-ph-media]", -4, 6);
+      drift(".ph-bg", "[data-ph-media]", -4, 6);
       drift(".bleed-media .media-bg", ".bleed", -6, 6);
       drift(".post-media img, .ind-img", null, -3, 3);
       $$(".b-photo .b-img").forEach((im) =>
@@ -286,12 +224,12 @@ export function initSite(): () => void {
     /* ---------- media unveil: a frame opens from an inset window while its photo settles
        from a slight zoom, tied to scroll so it tracks the reader 1:1 and reverses on the way up ---------- */
     if (!reduced) {
-      $$(".feature-media, .post-media, .cws-split-media, .cws-card-media, .cws-genie-media").forEach((frame) => {
+      $$(".feature-media, .post-media").forEach((frame) => {
         const r = getComputedStyle(frame).borderTopLeftRadius;
         gsap.fromTo(frame, { clipPath: `inset(7% 7% 7% 7% round ${r})` }, { clipPath: `inset(0% 0% 0% 0% round ${r})`, ease: "none",
           scrollTrigger: { trigger: frame, start: "top bottom", end: "top 55%", scrub: 0.4 } });
       });
-      $$(".feature-media .media-bg, .post-media img, .b-photo .b-img, .cws-split-media img, .cws-genie-media img").forEach((img) =>
+      $$(".feature-media .media-bg, .post-media img, .b-photo .b-img").forEach((img) =>
         gsap.fromTo(img, { scale: 1.16 }, { scale: 1, ease: "none",
           scrollTrigger: { trigger: img.parentElement, start: "top bottom", end: "top 40%", scrub: 0.4 } }));
     }
@@ -299,7 +237,6 @@ export function initSite(): () => void {
     /* ---------- home hero: headline sharpens, media collapses into a band on scroll ---------- */
     const hero = $(".hero");
     const heroMedia = $("#heroMedia");
-    const heroZoom = $("#heroZoom");
     if (hero && heroMedia) {
       const spans = $$("#heroTitle span");
       // the headline's entrance is CSS (it paints with the HTML); this only scrubs the exit
@@ -314,10 +251,6 @@ export function initSite(): () => void {
         const collapse = clamp((state.p - 0.35) / 0.65);
         heroMedia.style.setProperty("--clip", `${collapse * 88}%`);
         heroMedia.style.setProperty("--r", `${collapse * 60}px`);
-        // the film pushes in and dims as it gives way; the scroll cue leaves first
-        heroMedia.style.setProperty("--dim", String(collapse * 0.4));
-        hero.style.setProperty("--cue", String(1 - clamp(state.p / 0.12)));
-        if (!reduced) heroZoom?.style.setProperty("--zoom", String(1 + state.p * 0.12));
       };
       ScrollTrigger.create({ trigger: hero, start: "top top", end: "bottom bottom", onUpdate: (st) => { state.p = st.progress; paint(); } });
       paint();
@@ -341,62 +274,6 @@ export function initSite(): () => void {
     };
     mm.add("(prefers-reduced-motion: no-preference)", () => { $$("[data-expand]").forEach(expand); });
     mm.add("(min-width: 861px) and (prefers-reduced-motion: no-preference)", () => { $$(".product-row").forEach(expand); });
-
-    /* ---------- services reel: pinned on desktop, scroll carries the strip sideways while each
-       photo drifts the other way inside its frame (depth); phones keep a native swipe ---------- */
-    $$(".reel-stage").forEach((stage) => {
-      const scroller = $(".reel-scroller", stage)!;
-      const track = $(".reel-track", stage)!;
-      const bar = $(".reel-progress i", stage);
-      mm.add("(min-width: 861px) and (prefers-reduced-motion: no-preference)", () => {
-        assertPinnable(stage);
-        stage.classList.add("is-driven");
-        const dist = () => Math.max(0, track.scrollWidth - scroller.clientWidth);
-        const move = gsap.to(track, {
-          x: () => -dist(), ease: "none",
-          scrollTrigger: {
-            trigger: stage, start: "top top", end: () => "+=" + dist(), pin: true, scrub: 0.8,
-            anticipatePin: 1, invalidateOnRefresh: true,
-            onUpdate: (st) => bar && gsap.set(bar, { scaleX: st.progress }),
-          },
-        });
-        $$(".reel-media > *", track).forEach((m) => gsap.fromTo(m, { xPercent: -7 }, {
-          xPercent: 7, ease: "none",
-          scrollTrigger: { trigger: m.closest(".reel-item"), containerAnimation: move, start: "left right", end: "right left", scrub: true },
-        }));
-        return () => stage.classList.remove("is-driven");
-      });
-      // phones: the progress line follows the native swipe
-      if (bar) on(scroller, "scroll", () => {
-        if (stage.classList.contains("is-driven")) return;
-        const max = scroller.scrollWidth - scroller.clientWidth;
-        gsap.set(bar, { scaleX: max > 0 ? scroller.scrollLeft / max : 0 });
-      }, { passive: true });
-    });
-
-    /* ---------- depth: floating photos drift at their own speed (data-speed), and arrive
-       by scaling up into place (CSS, via .in) ---------- */
-    arrive(".float-ph", "top 80%");
-    if (!reduced) {
-      $$("[data-speed]").forEach((el) => {
-        const k = Number(el.dataset.speed) || 1;
-        gsap.fromTo(el, { y: 70 * k }, { y: -70 * k, ease: "none",
-          scrollTrigger: { trigger: el.parentElement, start: "top bottom", end: "bottom top", scrub: true } });
-      });
-    }
-
-    /* ---------- vista: the frame opens from an inset window to the full width while its photo
-       settles, then the line rises in ---------- */
-    if (!reduced) {
-      $$(".vista-frame").forEach((frame) => {
-        gsap.fromTo(frame, { clipPath: "inset(10% 9% 10% 9% round 48px)" }, { clipPath: "inset(0% 0% 0% 0% round 32px)", ease: "none",
-          scrollTrigger: { trigger: frame, start: "top bottom", end: "top 15%", scrub: 0.5 } });
-        const img = $(".vista-img", frame);
-        if (img) gsap.fromTo(img, { scale: 1.25, yPercent: -6 }, { scale: 1, yPercent: 6, ease: "none",
-          scrollTrigger: { trigger: frame, start: "top bottom", end: "bottom top", scrub: true } });
-      });
-    }
-    arrive(".vista-copy", "top 70%");
 
     /* ---------- custom development, the Elyra Effect and the footer ring ---------- */
     if (!reduced) {
@@ -615,7 +492,7 @@ export function initSite(): () => void {
 
     /* Cards: gentle 3D tilt + a specular highlight that follows the pointer */
     if (finePointer && !reduced) {
-      $$(".sol, .engine, .dir-item, .tier, .post, .mini-card, .opt, .b-card, .mv, .hero-stats li, .cws-stats-grid li, .cws-quote").forEach((el) => {
+      $$(".sol, .engine, .dir-item, .tier, .post, .mini-card, .opt, .b-card, .mv").forEach((el) => {
         el.classList.add("tilt");
         const max = 3.5;   // degrees: enough to feel physical, not enough to distract
         gsap.set(el, { transformPerspective: 900 });
@@ -786,7 +663,6 @@ export function initSite(): () => void {
     document.body.style.overflow = "";
     header?.classList.remove("on-dark", "scrolled");
     $$(".tilt").forEach((el) => el.classList.remove("tilt", "is-hover"));
-    $$(".counting").forEach((el) => el.classList.remove("counting"));
     ctx.revert();
     gsap.ticker.remove(raf);
     removeEventListener("elyra:preloaded", resumeScroll);

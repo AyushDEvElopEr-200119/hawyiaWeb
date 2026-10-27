@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Chev } from "@/components/Brand";
 import { Photo } from "@/components/Photo";
-import { Brighten, Count, CtaBand, CwsAnchor, FaqBlock, Kinetic, PageHero, ProcessTable, Statement } from "@/components/sections";
+import { CtaBand, CwsAnchor, FaqBlock, PageHero, ProcessTable, Statement } from "@/components/sections";
 import type { Card, Img, Pair, Quote, Section } from "@/lib/cws";
 import type { Crumb } from "@/lib/seo";
 
@@ -12,7 +12,7 @@ function Head({ s, center = false }: { s: Section; center?: boolean }) {
     <div className={center ? "cws-head center" : "split-head"}>
       <div>
         {s.eyebrow && <p className="eyebrow reveal">{s.eyebrow}</p>}
-        {s.title && <h2 className="h2 kinetic"><Kinetic text={s.title} /></h2>}
+        {s.title && <h2 className="h2 reveal">{s.title}</h2>}
       </div>
       {(s.text?.length || s.links?.length) ? (
         <div className="reveal">
@@ -25,7 +25,7 @@ function Head({ s, center = false }: { s: Section; center?: boolean }) {
 }
 
 /* ---------- hero ---------- */
-export function CwsHero({ s, trail, video }: { s: Section; trail: Crumb[]; video?: string }) {
+export function CwsHero({ s, trail }: { s: Section; trail: Crumb[] }) {
   const img = s.images?.[0];
   const highlights = (s.stats ?? []).filter((x) => x.length === 2).slice(0, 4) as Pair[];
   return (
@@ -37,28 +37,18 @@ export function CwsHero({ s, trail, video }: { s: Section; trail: Crumb[]; video
       links={s.links}
       image={img?.src}
       alt={img?.alt}
-      video={video}
       highlights={highlights}
     />
   );
 }
 
 /* ---------- copy blocks ---------- */
-/** `photos` float beside the copy on wide screens, each drifting at its own depth (data-speed). */
-export function Answer({ s, photos }: { s: Section; photos?: string[] }) {
+function Answer({ s }: { s: Section }) {
   return (
     <section className="statement inner cws-answer">
-      <span className="aurora" aria-hidden="true" />
-      {photos && (
-        <div className="float-ph" aria-hidden="true">
-          {photos.map((p, i) => (
-            <span className="fp" key={p} data-speed={[0.6, 1.2, 0.9, 0.5][i % 4]} style={{ "--i": i } as React.CSSProperties}><Photo name={p} /></span>
-          ))}
-        </div>
-      )}
       {s.eyebrow && <p className="eyebrow-serif">{s.eyebrow}</p>}
-      {s.title && <h2 className="h2 center kinetic"><Kinetic text={s.title} /></h2>}
-      <div className="cws-answer-body reveal">{s.text?.map((t) => <Brighten key={t} text={t} />)}</div>
+      {s.title && <h2 className="h2 center reveal">{s.title}</h2>}
+      <div className="cws-answer-body reveal">{s.text?.map((t) => <p key={t}>{t}</p>)}</div>
     </section>
   );
 }
@@ -83,7 +73,7 @@ function Split({ s }: { s: Section }) {
       )}
       <div className="cws-split-copy">
         {s.eyebrow && <p className="eyebrow reveal">{s.eyebrow}</p>}
-        {s.title && <h2 className="h2 kinetic"><Kinetic text={s.title} /></h2>}
+        {s.title && <h2 className="h2 reveal">{s.title}</h2>}
         {s.text?.map((t) => <p className="reveal" key={t}>{t}</p>)}
         {s.bullets && s.bullets.length > 0 && (
           <ul className="cws-bullets reveal">
@@ -163,7 +153,7 @@ function Places({ s }: { s: Section }) {
       {img && <div className="cws-split-media reveal"><Photo name={img.src} alt={img.alt} sizes="(min-width: 861px) 50vw, 92vw" /></div>}
       <div className="cws-split-copy">
         {s.eyebrow && <p className="eyebrow reveal">{s.eyebrow}</p>}
-        <h2 className="h2 kinetic"><Kinetic text={s.title ?? ""} /></h2>
+        <h2 className="h2 reveal">{s.title}</h2>
         <ul className="cws-places reveal">
           {items.map((c) => <li key={c.title}><b>{c.title}</b>{c.kicker && <small>{c.kicker}</small>}</li>)}
         </ul>
@@ -184,9 +174,9 @@ export function Stats({ s }: { s: Section }) {
   const items = s.items as string[][];
   return (
     <section className="cws-stats container">
-      {s.title && <p className="eyebrow-serif lined">{s.title}</p>}
+      {s.title && <p className="eyebrow-serif">{s.title}</p>}
       <ul className="cws-stats-grid">
-        {items.map(([v, l]) => <li className="reveal" key={l}><b data-count><Count value={v} /></b><span>{l}</span></li>)}
+        {items.map(([v, l]) => <li className="reveal" key={l}><b>{v}</b><span>{l}</span></li>)}
       </ul>
     </section>
   );
@@ -256,8 +246,8 @@ export function Logos({ s, marquee = false }: { s: Section; marquee?: boolean })
           ))}
         </div>
       ) : (
-        <ul className="cws-logo-grid" data-stagger>
-          {items.map((l, i) => <li key={l.src} style={{ "--i": i } as React.CSSProperties}><Photo name={l.src} alt={l.alt} /></li>)}
+        <ul className="cws-logo-grid">
+          {items.map((l) => <li className="reveal" key={l.src}><Photo name={l.src} alt={l.alt} /></li>)}
         </ul>
       )}
     </section>
@@ -270,7 +260,7 @@ export function Founder({ s }: { s: Section }) {
       {s.image && <div className="cws-split-media reveal"><Photo name={s.image.src} alt={s.image.alt} sizes="(min-width: 861px) 40vw, 92vw" /></div>}
       <div className="cws-split-copy">
         {s.eyebrow && <p className="eyebrow reveal">{s.eyebrow}</p>}
-        <h2 className="h2 kinetic"><Kinetic text={s.title ?? ""} /></h2>
+        <h2 className="h2 reveal">{s.title}</h2>
         {s.role && <p className="cws-role reveal">{s.role}</p>}
         {s.lead && <p className="cws-lead reveal">{s.lead}</p>}
         {s.text?.map((t) => <p className="reveal" key={t}>{t}</p>)}

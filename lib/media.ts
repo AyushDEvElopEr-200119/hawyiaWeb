@@ -72,10 +72,4 @@ export const videos: Record<string, { pexels: string; files: Record<number, stri
   // chosen because no airline branding is visible
   hero:   { pexels: "https://www.pexels.com/video/18936530/", files: { 1920: "https://videos.pexels.com/video-files/18936530/18936530-hd_1920_1080_30fps.mp4", 1280: "https://videos.pexels.com/video-files/18936530/18936530-hd_1280_720_30fps.mp4" }, alt: "Sunrise above the clouds from an aircraft" },
   effect: { pexels: "https://www.pexels.com/video/26341148/", files: { 1280: "https://videos.pexels.com/video-files/26341148/11948541_1280_720_30fps.mp4" }, alt: "Aerial view of the ocean and coral reef" },
-  // services reel, vista band and inner-page heroes (each has a -poster.jpg frame beside it)
-  // hotel: only a 4K original is offered; it was re-encoded to 1280px (ffmpeg, crf 26) after download
-  hotel:     { pexels: "https://www.pexels.com/video/6474637/", files: { 1280: "https://videos.pexels.com/video-files/6474637/6474637-uhd_4096_2160_25fps.mp4" }, alt: "Guests walking through an elegant hotel lobby" },
-  chauffeur: { pexels: "https://www.pexels.com/video/8344927/", files: { 1280: "https://videos.pexels.com/video-files/8344927/8344927-hd_1280_720_25fps.mp4" }, alt: "Chauffeur opening the rear door of a black sedan" },
-  events:    { pexels: "https://www.pexels.com/video/8716444/", files: { 1280: "https://videos.pexels.com/video-files/8716444/8716444-hd_1280_720_25fps.mp4" }, alt: "Speaker presenting at a business conference" },
-  city:      { pexels: "https://www.pexels.com/video/37898716/", files: { 1280: "https://videos.pexels.com/video-files/37898716/16079846_1280_720_30fps.mp4" }, alt: "Aerial view of city skyscrapers at night" },
 };

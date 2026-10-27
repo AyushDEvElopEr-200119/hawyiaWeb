@@ -4,7 +4,7 @@ import { company } from "@/lib/site";
 import type { CwsLink, Pair } from "@/lib/cws";
 import type { Crumb } from "@/lib/seo";
 import { Chev } from "./Brand";
-import { BgVideo, Photo } from "./Photo";
+import { Photo } from "./Photo";
 
 /* ---------------- structured data ---------------- */
 export function JsonLd({ data }: { data: object | object[] }) {
@@ -48,34 +48,6 @@ export function Statement({ text, className = "" }: { text: string; className?: 
   );
 }
 
-/** Heading words, each rising out of its own mask when the heading scrolls in (.kinetic). */
-export function Kinetic({ text }: { text: string }) {
-  return (
-    <>
-      {text.split(/\s+/).map((w, i) => (
-        <Fragment key={i}>{i > 0 && " "}<span className="kw" style={{ "--i": i } as React.CSSProperties}><span>{w}</span></span></Fragment>
-      ))}
-    </>
-  );
-}
-
-/** Body copy whose words brighten as it scrolls past, like a Statement but at reading size. */
-export function Brighten({ text }: { text: string }) {
-  return (
-    <p data-brighten>
-      {text.split(/\s+/).map((w, i) => (
-        <Fragment key={i}>{i > 0 && " "}<span className="sw">{w}</span></Fragment>
-      ))}
-    </p>
-  );
-}
-
-/** A figure that counts up when it scrolls in. The final value is always rendered (and holds the
-    width, so nothing reflows); the motion script writes the running count into the empty slot. */
-export function Count({ value }: { value: string }) {
-  return <><span className="cnt" aria-hidden="true" /><span className="cnt-final">{value}</span></>;
-}
-
 /* ---------------- navigation aids ---------------- */
 export function Breadcrumbs({ trail }: { trail: Crumb[] }) {
   return (
@@ -94,10 +66,9 @@ export function Breadcrumbs({ trail }: { trail: Crumb[] }) {
 /* ---------------- page hero ---------------- */
 /** Inner-page hero: serif title and intro, then a full photo band (it expands to fill the
     screen as you scroll) with a glass strip of three real highlights for the page. */
-export function PageHero({ trail, eyebrow, title, intro, ctas = true, links, image, alt, video, highlights = [] }: {
+export function PageHero({ trail, eyebrow, title, intro, ctas = true, links, image, alt, highlights = [] }: {
   trail: Crumb[]; eyebrow?: string; title: string; intro: string | string[]; ctas?: boolean; links?: CwsLink[];
-  /** a film (lib/media.ts) that plays over the photo once it can */
-  image?: string; alt?: string; video?: string; highlights?: Pair[];
+  image?: string; alt?: string; highlights?: Pair[];
 }) {
   const paras = Array.isArray(intro) ? intro : [intro];
   return (
@@ -129,7 +100,6 @@ export function PageHero({ trail, eyebrow, title, intro, ctas = true, links, ima
       <div className="xp ph-stage" data-expand>
         <div className="ph-media xp-frame" data-ph-media>
           {image && <Photo name={image} alt={alt} className="ph-bg" priority />}
-          {video && <BgVideo name={video} poster={`/assets/media/${video}-poster.jpg`} eager />}
           {highlights.length > 0 && (
             <ul className="ph-highlights" data-ph-hl>
               {highlights.map(([t, d], i) => (
@@ -147,7 +117,7 @@ export function PageHero({ trail, eyebrow, title, intro, ctas = true, links, ima
 export function FaqBlock({ faq, title = "Questions, answered", id = "faq" }: { faq: Pair[]; title?: string; id?: string }) {
   return (
     <section className="faq container" id={id}>
-      <h2 className="h2 center kinetic"><Kinetic text={title} /></h2>
+      <h2 className="h2 center reveal">{title}</h2>
       <div className="faq-list">
         {faq.map(([q, a]) => (
           <details className="reveal" key={q}><summary>{q}</summary>{a.split(/\n\n+/).map((x) => <p key={x}>{x}</p>)}</details>
@@ -160,7 +130,7 @@ export function FaqBlock({ faq, title = "Questions, answered", id = "faq" }: { f
 export function ProcessTable({ steps, title = "How we work", id = "process" }: { steps: Pair[]; title?: string; id?: string }) {
   return (
     <section className="process container" id={id}>
-      <h2 className="h2 center kinetic"><Kinetic text={title} /></h2>
+      <h2 className="h2 center reveal">{title}</h2>
       <div className="table">
         {steps.map(([b, m], i) => (
           <div className="tr reveal" key={b}><span className="mono">{String(i + 1).padStart(2, "0")}</span><b>{b}</b><span className="muted">{m}</span></div>
@@ -264,7 +234,7 @@ export function CtaBand({ eyebrow = "Talk to us", title = "Tell us where your pe
       <div className="cta-band-inner">
         <div className="cta-band-copy reveal">
           {eyebrow && <p className="eyebrow">{eyebrow}</p>}
-          <h2 className="h2 kinetic"><Kinetic text={title} /></h2>
+          <h2 className="h2">{title}</h2>
           {paras.map((p) => <p key={p}>{p}</p>)}
           <ul className="cta-contact">
             <li><small>Call</small><a href={`tel:${company.phone.replace(/\s/g, "")}`}>{company.phone}</a></li>
