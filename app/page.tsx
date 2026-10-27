@@ -1,9 +1,11 @@
 import Link from "next/link";
+import { Fragment } from "react";
 import { preload } from "react-dom";
 import { Chev } from "@/components/Brand";
 import { BgVideo, Photo } from "@/components/Photo";
-import { Block, Logos, Pay, Quotes, Stats } from "@/components/cws/Blocks";
-import { CtaBand, CwsAnchor, JsonLd, Statement } from "@/components/sections";
+import { Answer, Logos, Pay, Quotes, Stats } from "@/components/cws/Blocks";
+import { Reel, Vista } from "@/components/cws/Cinematic";
+import { Count, CtaBand, CwsAnchor, JsonLd, Kinetic, Statement } from "@/components/sections";
 import { cwsPage, type Card, type Section } from "@/lib/cws";
 import { company } from "@/lib/site";
 import { pageMeta } from "@/lib/seo";
@@ -15,6 +17,13 @@ const find = (kind: Section["kind"], variant?: string) =>
 export const metadata = pageMeta({ description: home.meta, path: "/" });
 
 const pad = (i: number) => String(i + 1).padStart(2, "0");
+
+const floatPhotos = [
+  "/assets/cws/2026-02-Hotel.webp",
+  "/assets/cws/2025-12-freepik__a-professional-photograph-of-a-uniformed-chauffeur__55654.webp",
+  "/assets/cws/2026-02-Sample-4.1.webp",
+  "/assets/cws/2026-02-Service-Apartment-1.webp",
+];
 
 export default function HomePage() {
   // the hero poster is the first big paint: fetch it alongside the HTML, before the video
@@ -36,31 +45,39 @@ export default function HomePage() {
       <section className="hero" id="hero">
         <div className="hero-sticky">
           <div className="hero-media" id="heroMedia">
-            <BgVideo name="hero" poster="/assets/media/hero-poster.jpg" wide eager />
+            <div className="hero-zoom" id="heroZoom"><BgVideo name="hero" poster="/assets/media/hero-poster.jpg" wide eager /></div>
             <div className="hero-grain" />
+            <div className="hero-vignette" />
           </div>
           <h1 className="hero-title" id="heroTitle">
             <span style={{ "--i": 0 } as React.CSSProperties}>{line1},</span>
             <span style={{ "--i": 1 } as React.CSSProperties}>{line2}</span>
           </h1>
+          <span className="hero-cue" aria-hidden="true"><span className="mono">Scroll</span><i /></span>
         </div>
       </section>
 
       {/* ============ STATEMENT ============ */}
       <section className="statement">
-        <p className="eyebrow-serif">{hero.eyebrow}</p>
-        <p className="taglines reveal">{rotating.join(" · ")}</p>
+        <span className="aurora" aria-hidden="true" />
+        <p className="eyebrow-serif lined">{hero.eyebrow}</p>
+        {/* with motion the taglines take turns in one line; without it they read as one run */}
+        <p className="taglines reveal" data-rotate>
+          {rotating.map((t, i) => <Fragment key={t}>{i > 0 && <i className="tl-sep"> · </i>}<span>{t}</span></Fragment>)}
+        </p>
         <Statement text={intro} />
         <div className="cta-row reveal">
           {hero.links?.map((l, i) => <CwsAnchor key={l.href} link={l} className={i === 0 ? "btn-pill press" : "link"} />)}
         </div>
         <ul className="hero-stats reveal">
-          {heroStats.map(([v, l]) => <li key={l}><b>{v}</b><span>{l}</span></li>)}
+          {heroStats.map(([v, l]) => <li key={l}><b data-count><Count value={v} /></b><span>{l}</span></li>)}
         </ul>
       </section>
 
-      <Block s={find("answer")} />
+      <Answer s={find("answer")} photos={floatPhotos} />
       <Logos s={find("logos", "group")} />
+
+      <Reel />
       <Stats s={{ kind: "stats", title: "Elyra by the numbers", items: [["150+", "Corporate Clients"], ["185+", "Countries"], ["30,000+", "Bookings"], ["1.5M+", "Room Nights Booked"]] }} />
 
       {/* ============ SOLUTIONS: tiles grow to full screen as you scroll ============ */}
@@ -68,7 +85,7 @@ export default function HomePage() {
         <div className="products-head container">
           <div>
             <p className="eyebrow reveal">{solutions.eyebrow}</p>
-            <h2 className="h2 reveal">{solutions.title}</h2>
+            <h2 className="h2 kinetic"><Kinetic text={solutions.title ?? ""} /></h2>
           </div>
           <div className="products-intro reveal">
             {solutions.text?.map((t) => <p key={t}>{t}</p>)}
@@ -129,7 +146,7 @@ export default function HomePage() {
       <section className="why container" id="whyus">
         <div className="cws-head">
           <p className="eyebrow reveal">{why.eyebrow}</p>
-          <h2 className="h2 reveal">{why.title}</h2>
+          <h2 className="h2 kinetic"><Kinetic text={why.title ?? ""} /></h2>
           {why.text?.map((t) => <p className="reveal" key={t}>{t}</p>)}
           {why.links?.map((l) => <CwsAnchor key={l.href} link={l} />)}
         </div>
@@ -179,6 +196,8 @@ export default function HomePage() {
       </section>
 
       <Pay s={find("pay")} />
+
+      <Vista line={rotating.at(-2) ?? ""} />
       <Logos s={find("logos", "clients")} marquee />
       <Logos s={find("logos", "network")} />
       <Quotes s={find("quotes")} />
