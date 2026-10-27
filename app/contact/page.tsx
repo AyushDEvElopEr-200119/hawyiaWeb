@@ -1,4 +1,5 @@
 import { Block } from "@/components/cws/Blocks";
+import { extrasFor } from "@/components/cws/Premium";
 import { Breadcrumbs, JsonLd, LeadForm, SplitTitle } from "@/components/sections";
 import { cwsPage } from "@/lib/cws";
 import { company } from "@/lib/site";
@@ -9,6 +10,7 @@ const trail = [{ label: "Contact" }];
 const page = cwsPage("contact");
 const hero = page.sections[0];
 const places = page.sections.filter((s) => s.kind === "cards");
+const extras = extrasFor("contact", places);
 
 const mapQuery = encodeURIComponent("A-904/5/6, Kailas Business Park, Hiranandani Link Road, Vikhroli (West), Mumbai 400079");
 
@@ -69,7 +71,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {places.map((s, i) => <Block s={s} key={i} />)}
+      {places.map((s, i) => [...(extras.get(i) ?? []), <Block s={s} key={i} />])}
 
       <section className="container cws-map">
         <div className="split-head">

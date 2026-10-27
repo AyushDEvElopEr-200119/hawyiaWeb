@@ -3,7 +3,8 @@
 // Videos: Pexels License (free for commercial use, no attribution required) — pexels.com/license
 // `id` is the Unsplash image id; run `npm run media` to (re)download into src/assets/media.
 
-export type PhotoEntry = { id: string; alt: string };
+/** `hd` photos are also cut at 2400px for full-bleed use; `crop` adds imgix crop params (e.g. portraits). */
+export type PhotoEntry = { id: string; alt: string; hd?: boolean; crop?: string };
 
 export const photos: Record<string, PhotoEntry> = {
   // home
@@ -66,6 +67,47 @@ export const photos: Record<string, PhotoEntry> = {
   "i-corporate":         { id: "photo-1604938386170-d95a264576fa", alt: "People walking through a terminal" },
   "i-startups":          { id: "photo-1522071901873-411886a10004", alt: "Two founders working on a laptop" },
   "i-wholesalers":       { id: "photo-1697455621994-3940b23f9018", alt: "Jetliner on an airport tarmac" },
+
+  // home: full-width service tiles, floating photos and film-strip stills (high resolution)
+  "h-travgenie":    { id: "photo-1768793096346-6d84e93e4195", alt: "Business traveller working on a laptop by an airport window at sunrise", hd: true },
+  "h-accommodation":{ id: "photo-1771775529138-a7a20ba7e032", alt: "Hotel room with a city view at dusk", hd: true },
+  "h-car":          { id: "photo-1485291571150-772bcfc10da5", alt: "Black executive sedan in soft studio light", hd: true },
+  "h-leisure":      { id: "photo-1762254794468-1fb6fa893f73", alt: "Infinity pool at dusk with palm trees and the ocean", hd: true },
+  "h-relocation":   { id: "photo-1758523671165-967ec4af0d76", alt: "Couple planning their move surrounded by boxes", hd: true },
+  "h-umrah":        { id: "photo-1579305796288-c534f6cf17ab", alt: "The Kaaba at Masjid al-Haram, Makkah", hd: true },
+  "h-lobby":        { id: "photo-1742844552193-2fd3425cd26d", alt: "Grand hotel lobby filled with sunlight", hd: true },
+  "h-jet":          { id: "photo-1474302770737-173ee21bab63", alt: "Private jet on the tarmac at golden hour", hd: true },
+  "h-meeting":      { id: "photo-1769740333462-9a63bfa914bc", alt: "Business meeting around a conference table", hd: true },
+  "h-lounge":       { id: "photo-1775866914767-7e4646f2481a", alt: "Lounge with a city view through a large window", hd: true },
+  "h-apartment":    { id: "photo-1688933758128-83d40ab10b4e", alt: "Apartment living room overlooking the city", hd: true },
+  "h-movein":       { id: "photo-1758523670969-dd1b1254062d", alt: "Couple carrying boxes into a new home", hd: true },
+  "h-resort":       { id: "photo-1561501900-3701fa6a0864", alt: "Seaside resort with an infinity pool at sunset", hd: true },
+
+  // about: life at Elyra gallery, and team-page tiles (stock stand-ins)
+  "g-01": { id: "photo-1515169067868-5387ec356754", alt: "Colleagues talking over drinks at an evening reception" },
+  "g-02": { id: "photo-1531058020387-3be344556be6", alt: "Audience at a conference in a grand hall" },
+  "g-03": { id: "photo-1544531586-fde5298cdd40", alt: "Speaker addressing a packed conference" },
+  "g-04": { id: "photo-1563461661026-49631dd5d68e", alt: "People mingling at a bright networking event" },
+  "g-05": { id: "photo-1572021335469-31706a17aaef", alt: "Colleagues smiling around a laptop" },
+  "g-06": { id: "photo-1576267423048-15c0040fec78", alt: "Team celebrating a win at the office" },
+  "g-07": { id: "photo-1681949287382-052ea3954a51", alt: "Team meeting in a sunlit office" },
+  "g-08": { id: "photo-1758518727707-b023e285b709", alt: "Professionals meeting in a modern lounge" },
+  "g-09": { id: "photo-1758518729685-f88df7890776", alt: "Business meeting around a table" },
+  "g-10": { id: "photo-1758691737124-05c5bffe46f0", alt: "Team collaborating around a laptop" },
+  "g-11": { id: "photo-1758691737387-a89bb8adf768", alt: "Colleagues taking a selfie in the office" },
+  "g-12": { id: "photo-1758691737584-a8f17fb34475", alt: "Colleagues celebrating success in the office" },
+  "g-13": { id: "photo-1775163560631-6ff15eb2fa1f", alt: "Guests mingling at an evening event" },
+  "t-team": { id: "photo-1758691737492-48e8fdd336f7", alt: "Team celebrating together in the office" },
+  "t-event": { id: "photo-1561489413-985b06da5bee", alt: "Guests talking at an event table" },
+  "t-party": { id: "photo-1758691737538-220c1902b1ca", alt: "Team throwing papers in celebration" },
+  "t-desk": { id: "photo-1556761175-b413da4baf72", alt: "Colleagues working together at their desks" },
+
+  // team: placeholder portraits (stand-ins until real team photos are supplied)
+  "t-aarav-mehta":    { id: "photo-1771244670407-42e9585ab333", alt: "Aarav Mehta, Founder and CEO", crop: "ar=4:5&fit=crop&crop=faces" },
+  "t-rohan-kapoor":   { id: "photo-1584554376766-ac0f2c65e949", alt: "Rohan Kapoor, Head of Operations", crop: "ar=4:5&fit=crop&crop=faces" },
+  "t-kabir-malhotra": { id: "photo-1728234167039-dba3cf55b479", alt: "Kabir Malhotra, Head of Leisure", crop: "ar=4:5&fit=crop&crop=faces" },
+  "t-meera-iyer":     { id: "photo-1762341124796-530c0085f7d8", alt: "Meera Iyer, General Manager", crop: "ar=4:5&fit=crop&crop=faces" },
+  "t-vikram-rao":     { id: "photo-1640531005390-38bd92755d6a", alt: "Vikram Rao, Finance Lead", crop: "ar=4:5&fit=crop&crop=faces" },
 };
 
 export const videos: Record<string, { pexels: string; files: Record<number, string>; alt: string }> = {
@@ -77,5 +119,18 @@ export const videos: Record<string, { pexels: string; files: Record<number, stri
   hotel:     { pexels: "https://www.pexels.com/video/6474637/", files: { 1280: "https://videos.pexels.com/video-files/6474637/6474637-uhd_4096_2160_25fps.mp4" }, alt: "Guests walking through an elegant hotel lobby" },
   chauffeur: { pexels: "https://www.pexels.com/video/8344927/", files: { 1280: "https://videos.pexels.com/video-files/8344927/8344927-hd_1280_720_25fps.mp4" }, alt: "Chauffeur opening the rear door of a black sedan" },
   events:    { pexels: "https://www.pexels.com/video/8716444/", files: { 1280: "https://videos.pexels.com/video-files/8716444/8716444-hd_1280_720_25fps.mp4" }, alt: "Speaker presenting at a business conference" },
+  apartment: { pexels: "https://www.pexels.com/video/7533207/", files: { 1280: "https://videos.pexels.com/video-files/7533207/7533207-hd_1280_720_60fps.mp4" }, alt: "Bright, modern apartment living room" },
   city:      { pexels: "https://www.pexels.com/video/37898716/", files: { 1280: "https://videos.pexels.com/video-files/37898716/16079846_1280_720_30fps.mp4" }, alt: "Aerial view of city skyscrapers at night" },
+  // inner-page films: each was trimmed to 12s, muted and re-encoded at 1280px (ffmpeg, crf 27) after download
+  relocation:   { pexels: "https://www.pexels.com/video/8961044/", files: { 1280: "https://videos.pexels.com/video-files/8961044/8961044-hd_1280_720_25fps.mp4" }, alt: "Mover carrying packed boxes into an apartment" },
+  umrah:        { pexels: "https://www.pexels.com/video/34444591/", files: { 1280: "https://videos.pexels.com/video-files/34444591/14594903_1280_720_30fps.mp4" }, alt: "Pilgrims walking through a corridor of the Grand Mosque" },
+  terminal:     { pexels: "https://www.pexels.com/video/13606922/", files: { 1280: "https://videos.pexels.com/video-files/13606922/13606922-hd_1280_720_24fps.mp4" }, alt: "Travellers on a moving walkway in an airport" },
+  workspace:    { pexels: "https://www.pexels.com/video/6183192/", files: { 1280: "https://videos.pexels.com/video-files/6183192/6183192-hd_1280_720_25fps.mp4" }, alt: "Hands typing on a laptop" },
+  housekeeping: { pexels: "https://www.pexels.com/video/9472830/", files: { 1280: "https://videos.pexels.com/video-files/9472830/9472830-hd_1280_720_24fps.mp4" }, alt: "Housekeepers making up a hotel bed" },
+  handshake:    { pexels: "https://www.pexels.com/video/8426047/", files: { 1280: "https://videos.pexels.com/video-files/8426047/8426047-hd_1280_720_25fps.mp4" }, alt: "Business partners shaking hands across a desk" },
+  skyline:      { pexels: "https://www.pexels.com/video/39648416/", files: { 1280: "https://videos.pexels.com/video-files/39648416/16902672_1280_720_30fps.mp4" }, alt: "The Mumbai skyline across the water" },
+  suite:        { pexels: "https://www.pexels.com/video/34402448/", files: { 1280: "https://videos.pexels.com/video-files/34402448/14574367_1280_720_60fps.mp4" }, alt: "Guest relaxing in a hotel room" },
+  arrivals:     { pexels: "https://www.pexels.com/video/19959357/", files: { 1280: "https://videos.pexels.com/video-files/19959357/19959357-hd_1280_720_24fps.mp4" }, alt: "Travellers walking through an airport terminal with luggage" },
+  boxes:        { pexels: "https://www.pexels.com/video/7347884/", files: { 1280: "https://videos.pexels.com/video-files/7347884/7347884-hd_1280_720_25fps.mp4" }, alt: "Person carrying a packed box down the stairs" },
+  resort:       { pexels: "https://www.pexels.com/video/4022224/", files: { 1280: "https://videos.pexels.com/video-files/4022224/4022224-hd_1280_720_50fps.mp4" }, alt: "Aerial view of a beach resort over turquoise water" },
 };

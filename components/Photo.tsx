@@ -27,8 +27,8 @@ export function Photo({ name, sizes = "100vw", className, priority = false, alt 
     // eslint-disable-next-line @next/next/no-img-element
     <img
       className={className}
-      src={`${base}-1600.webp`}
-      srcSet={`${base}-800.webp 800w, ${base}-1600.webp 1600w`}
+      src={`${base}-${p.hd ? 2400 : 1600}.webp`}
+      srcSet={`${base}-800.webp 800w, ${base}-1600.webp 1600w${p.hd ? `, ${base}-2400.webp 2400w` : ""}`}
       sizes={sizes}
       alt={p.alt}
       loading={priority ? "eager" : "lazy"}
@@ -40,9 +40,13 @@ export function Photo({ name, sizes = "100vw", className, priority = false, alt 
 
 /** Muted background loop. The motion controller plays it only while visible, so only the
     first-screen video (`eager`) fetches anything before it is needed. */
-export function BgVideo({ name, poster, wide = false, eager = false }: { name: string; poster?: string; wide?: boolean; eager?: boolean }) {
+export function BgVideo({ name, poster, wide = false, eager = false, manual = false }: {
+  name: string; poster?: string; wide?: boolean; eager?: boolean;
+  /** played by its own section (e.g. only while its chapter is on screen) rather than by visibility */
+  manual?: boolean;
+}) {
   return (
-    <video className="bg-video" data-autoplay muted loop playsInline preload={eager ? "metadata" : "none"} poster={poster} aria-hidden="true">
+    <video className="bg-video" data-autoplay={manual ? undefined : ""} muted loop playsInline preload={eager ? "metadata" : "none"} poster={poster ?? `/assets/media/${name}-poster.jpg`} aria-hidden="true">
       {wide && <source src={`/assets/media/${name}-1920.mp4`} type="video/mp4" media="(min-width: 1100px)" />}
       <source src={`/assets/media/${name}-1280.mp4`} type="video/mp4" />
     </video>

@@ -218,8 +218,10 @@ export function Quotes({ s }: { s: Section }) {
     const q = items[0];
     return (
       <section className="cws-pull container">
+        <span className="aurora" aria-hidden="true" />
+        <span className="pull-mark" aria-hidden="true">&ldquo;</span>
         <blockquote className="reveal">
-          <p>&ldquo;{q.quote}&rdquo;</p>
+          <Brighten text={`“${q.quote}”`} />
           <footer><b>{q.name ?? q.by}</b>{q.org && <span>{q.org}</span>}</footer>
         </blockquote>
         {s.links?.map((l) => <CwsAnchor key={l.href} link={l} />)}
@@ -242,7 +244,30 @@ export function Quotes({ s }: { s: Section }) {
   );
 }
 
+/** Credentials as matching typographic cards: the mark, then what it stands for (from the alt). */
+function Credentials({ s }: { s: Section }) {
+  const items = s.items as Img[];
+  return (
+    <section className="cws-logos container cws-creds">
+      <Head s={s} center />
+      <ul className="creds-grid" data-stagger>
+        {items.map((l, i) => {
+          const [mark, full] = l.alt.split(/\s+—\s+/);
+          return (
+            <li key={l.src} style={{ "--i": i } as React.CSSProperties}>
+              <span className="creds-seal" aria-hidden="true"><i /></span>
+              <b>{mark.replace(/ certified$/i, "")}</b>
+              <small>{full ?? "Certified"}</small>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+  );
+}
+
 export function Logos({ s, marquee = false }: { s: Section; marquee?: boolean }) {
+  if (s.variant === "creds") return <Credentials s={s} />;
   const items = s.items as Img[];
   return (
     <section className={`cws-logos container cws-logos-${s.variant}`}>
@@ -285,7 +310,7 @@ function Timeline({ s }: { s: Section }) {
   return (
     <section className="cws-cards-sec container cws-timeline">
       <Head s={s} />
-      <ol className="cws-cards">
+      <ol className="cws-cards" data-line>
         {items.map((c) => (
           <li className="cws-card reveal" key={c.title}>
             {c.img && <div className="cws-card-media"><Photo name={c.img.src} alt={c.img.alt} sizes="(min-width: 861px) 33vw, 92vw" /></div>}
@@ -316,7 +341,7 @@ export function Genie({ s }: { s: Section }) {
       <article className="ext-card reveal">
         <div className="ext-copy">
           {s.eyebrow && <span className="tag">{s.eyebrow}</span>}
-          <h2 className="h2">{s.title}</h2>
+          <h2 className="h2 kinetic"><Kinetic text={s.title ?? ""} /></h2>
           {s.text?.map((t) => <p key={t}>{t}</p>)}
           <div className="cta-row left">
             {s.links?.map((l, i) => <CwsAnchor key={l.href + l.text} link={l} className={i === 0 ? "btn-pill press" : "link"} />)}
