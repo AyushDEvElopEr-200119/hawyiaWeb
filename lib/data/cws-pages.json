@@ -167,17 +167,22 @@
    {
     "kind": "founder",
     "eyebrow": "Founder",
-    "title": "Aarav Mehta",
+    "title": "Azim Dhunna",
     "role": "Founder & CEO",
-    "lead": "Aarav isn't just a founder — he's a builder of journeys, systems and relationships that last.",
+    "lead": "Azim isn't just a founder — he's a builder of journeys, systems and relationships that last.",
     "text": [
-     "With over 18 years of global hospitality experience, Aarav is the driving force behind Elyra. His vision of \"intelligent travel with uncompromising service\" laid the foundation for an ecosystem that blends technology, integrity and operational excellence. Under his leadership Elyra expanded into multiple service verticals, redefined client-centric travel, and launched the Travgenie platform that is changing how corporates book."
+     "With over 18 years of global hospitality experience, Azim is the driving force behind Elyra. His vision of \"intelligent travel with uncompromising service\" laid the foundation for an ecosystem that blends technology, integrity and operational excellence. Under his leadership Elyra expanded into multiple service verticals, redefined client-centric travel, and launched the Travgenie platform that is changing how corporates book."
     ],
     "image": {
-     "src": "t-aarav-mehta",
-     "alt": "Aarav Mehta, Founder and CEO of Elyra"
+     "src": "/assets/cws/2026-01-Untitled-design-5.webp",
+     "alt": "Azim Dhunna, Founder and CEO of Elyra"
     },
-    "links": []
+    "links": [
+     {
+      "href": "https://www.linkedin.com/in/azimdhunna",
+      "text": "Connect on LinkedIn"
+     }
+    ]
    },
    {
     "kind": "cards",
@@ -186,57 +191,57 @@
     "variant": "team",
     "items": [
      {
-      "title": "Rohan Kapoor",
+      "title": "Farhan Shaikh",
       "text": [
-       "When things move fast at Elyra, it's because Rohan has already made sure they're ready to."
+       "When things move fast at Elyra, it's because Farhan has already made sure they're ready to."
       ],
-      "href": "/team/rohan-kapoor/",
+      "href": "/team/farhan-shaikh/",
       "kicker": "Head — Operations",
       "img": {
-       "src": "t-rohan-kapoor",
+       "src": "/assets/cws/2026-08-cws-team-farhan-shaikh.webp",
        "alt": ""
       }
      },
      {
-      "title": "Kabir Malhotra",
+      "title": "Sufiyan Mojawala",
       "text": [
        "He doesn't just book trips — he crafts memories and delivers movement that matters."
       ],
-      "href": "/team/kabir-malhotra/",
+      "href": "/team/sufiyan-mojawala/",
       "kicker": "Head — Leisure",
       "img": {
-       "src": "t-kabir-malhotra",
+       "src": "/assets/cws/2026-08-cws-team-sufiyan-mojawala.webp",
        "alt": ""
       }
      },
      {
-      "title": "Meera Iyer",
+      "title": "Anita Chavan",
       "text": [
-       "At Elyra, efficiency isn't a goal — it's a rhythm. Meera is the one keeping the beat."
+       "At Elyra, efficiency isn't a goal — it's a rhythm. Anita is the one keeping the beat."
       ],
-      "href": "/team/meera-iyer/",
+      "href": "/team/anita-chavan/",
       "kicker": "General Manager",
       "img": {
-       "src": "t-meera-iyer",
+       "src": "/assets/cws/2026-08-cws-team-anita-chavan.webp",
        "alt": ""
       }
      },
      {
-      "title": "Vikram Rao",
+      "title": "Arun Mestri",
       "text": [
-       "Vikram speaks the language of numbers — but thinks in terms of relationships."
+       "Arun speaks the language of numbers — but thinks in terms of relationships."
       ],
       "kicker": "Finance Lead",
       "img": {
-       "src": "t-vikram-rao",
+       "src": "/assets/cws/2026-08-cws-team-arun-mestri.webp",
        "alt": ""
       },
-      "href": "/team/vikram-rao/"
+      "href": "/team/arun-mestri/"
      }
     ],
     "images": [
      {
-      "src": "t-rohan-kapoor",
+      "src": "/assets/cws/2026-08-cws-team-farhan-shaikh.webp",
       "alt": ""
      }
     ],
@@ -319,48 +324,60 @@
     "eyebrow": "Life at Elyra",
     "title": "The team, on the road and at home",
     "text": [
-     "Conferences, client evenings and everyday life in the office."
+     "Trade shows, client events and the office itself — photographed by the people who were there."
     ],
     "items": [
      {
-      "src": "g-01",
-      "alt": "Colleagues talking over drinks at an evening reception"
+      "src": "/assets/cws/2026-08-cws-gallery-01.webp",
+      "alt": "A Elyra colleague writing at an exhibition desk beside a laptop and giveaways"
      },
      {
-      "src": "g-02",
-      "alt": "Audience at a conference in a grand hall"
+      "src": "/assets/cws/2026-08-cws-gallery-02.webp",
+      "alt": "The Elyra Holidays exhibition stand under a red and blue canopy, two colleagues standing beside the banners"
      },
      {
-      "src": "g-03",
-      "alt": "Speaker addressing a packed conference"
+      "src": "/assets/cws/2026-08-cws-gallery-03.webp",
+      "alt": "Visitors talking to Elyra staff at a stand hung with destination banners"
      },
      {
-      "src": "g-04",
-      "alt": "People mingling at a bright networking event"
+      "src": "/assets/cws/2026-08-cws-gallery-04.webp",
+      "alt": "A colleague working at a laptop at the stand desk against an orange wall"
      },
      {
-      "src": "g-05",
-      "alt": "Colleagues smiling around a laptop"
+      "src": "/assets/cws/2026-08-cws-gallery-05.webp",
+      "alt": "Two colleagues in conversation in front of the Elyra Holidays banner wall"
      },
      {
-      "src": "g-06",
-      "alt": "Team celebrating a win at the office"
+      "src": "/assets/cws/2026-08-cws-gallery-06.webp",
+      "alt": "Visitors gathered around a Elyra Holidays banner at an exhibition"
      },
      {
-      "src": "g-07",
-      "alt": "Team meeting in a sunlit office"
+      "src": "/assets/cws/2026-08-cws-gallery-07.webp",
+      "alt": "Staff and visitors around a high table at the Elyra exhibition stand"
      },
      {
-      "src": "g-08",
-      "alt": "Professionals meeting in a modern lounge"
+      "src": "/assets/cws/2026-08-cws-gallery-08.webp",
+      "alt": "A colleague standing beside a Elyra Holidays destination banner at the stand"
      },
      {
-      "src": "g-09",
-      "alt": "Business meeting around a table"
+      "src": "/assets/cws/2026-08-cws-gallery-09.webp",
+      "alt": "The Elyra team gathered for an Independence Day celebration under tricolour balloons"
      },
      {
-      "src": "g-10",
-      "alt": "Team collaborating around a laptop"
+      "src": "/assets/cws/2026-08-cws-gallery-10.webp",
+      "alt": "The team assembled under gold and black balloons for a company celebration"
+     },
+     {
+      "src": "/assets/cws/2026-08-cws-gallery-11.webp",
+      "alt": "Colleagues in front of a Elyra anniversary backdrop"
+     },
+     {
+      "src": "/assets/cws/2026-08-cws-gallery-12.webp",
+      "alt": "A colleague being felicitated with a shawl by two teammates"
+     },
+     {
+      "src": "/assets/cws/2026-08-cws-gallery-13.webp",
+      "alt": "The full Elyra team photographed together in the office"
      }
     ]
    },
@@ -371,7 +388,7 @@
     "items": [
      {
       "src": "/assets/cws/2026-02-iso-c-r4vg2akqnxu4kijh0hr9q6rzxewkcuog19mimp41og.webp",
-      "alt": "ISO — ISO 9001 and ISO 27001 certified"
+      "alt": "ISO certified"
      },
      {
       "src": "/assets/cws/2026-02-Untitled-design.webp",
@@ -1346,7 +1363,7 @@
       ],
       "cta": "Visit travgenie.com",
       "img": {
-       "src": "h-travgenie",
+       "src": "/assets/cws/2026-08-cws-card-travgenie.webp",
        "alt": ""
       },
       "href": "https://travgenie.com/"
@@ -1359,7 +1376,7 @@
       ],
       "cta": "Explore",
       "img": {
-       "src": "h-accommodation",
+       "src": "/assets/cws/2026-08-cws-card-accommodation.webp",
        "alt": ""
       },
       "href": "/hotel/"
@@ -1372,7 +1389,7 @@
       ],
       "cta": "Explore",
       "img": {
-       "src": "h-car",
+       "src": "/assets/cws/2026-08-cws-card-carrentals.webp",
        "alt": ""
       },
       "href": "/car-rentals-ground-transport/"
@@ -1385,7 +1402,7 @@
       ],
       "cta": "Explore",
       "img": {
-       "src": "h-leisure",
+       "src": "/assets/cws/2026-08-cws-card-leisure.webp",
        "alt": ""
       },
       "href": "/holidays/"
@@ -1398,7 +1415,7 @@
       ],
       "cta": "Explore",
       "img": {
-       "src": "h-relocation",
+       "src": "/assets/cws/2026-08-cws-card-relocation.webp",
        "alt": ""
       },
       "href": "/relocation-logistics/"
@@ -1411,7 +1428,7 @@
       ],
       "cta": "Explore",
       "img": {
-       "src": "h-umrah",
+       "src": "/assets/cws/2026-08-cws-card-umrah.webp",
        "alt": ""
       },
       "href": "/umrah-tourism/"
@@ -3722,17 +3739,22 @@
    {
     "kind": "founder",
     "eyebrow": "Founder",
-    "title": "Aarav Mehta",
+    "title": "Azim Dhunna",
     "role": "Founder & CEO",
-    "lead": "Aarav isn't just a founder — he's a builder of journeys, systems and relationships that last.",
+    "lead": "Azim isn't just a founder — he's a builder of journeys, systems and relationships that last.",
     "text": [
-     "With over 18 years of global hospitality experience, Aarav is the driving force behind Elyra. His vision of \"intelligent travel with uncompromising service\" laid the foundation for an ecosystem that blends technology, integrity and operational excellence. Under his leadership Elyra expanded into multiple service verticals, redefined client-centric travel, and launched the Travgenie platform that is changing how corporates book."
+     "With over 18 years of global hospitality experience, Azim is the driving force behind Elyra. His vision of \"intelligent travel with uncompromising service\" laid the foundation for an ecosystem that blends technology, integrity and operational excellence. Under his leadership Elyra expanded into multiple service verticals, redefined client-centric travel, and launched the Travgenie platform that is changing how corporates book."
     ],
     "image": {
-     "src": "t-aarav-mehta",
-     "alt": "Aarav Mehta, Founder and CEO of Elyra"
+     "src": "/assets/cws/2026-01-Untitled-design-5.webp",
+     "alt": "Azim Dhunna, Founder and CEO of Elyra"
     },
-    "links": []
+    "links": [
+     {
+      "href": "https://www.linkedin.com/in/azimdhunna",
+      "text": "Azim Dhunna on LinkedIn"
+     }
+    ]
    },
    {
     "kind": "cards",
@@ -3741,57 +3763,57 @@
     "variant": "team",
     "items": [
      {
-      "title": "Rohan Kapoor",
+      "title": "Farhan Shaikh",
       "text": [
-       "When things move fast at Elyra, it's because Rohan has already made sure they're ready to."
+       "When things move fast at Elyra, it's because Farhan has already made sure they're ready to."
       ],
-      "href": "/team/rohan-kapoor/",
+      "href": "/team/farhan-shaikh/",
       "kicker": "Head — Operations",
       "img": {
-       "src": "t-rohan-kapoor",
+       "src": "/assets/cws/2026-08-cws-team-farhan-shaikh.webp",
        "alt": ""
       }
      },
      {
-      "title": "Kabir Malhotra",
+      "title": "Sufiyan Mojawala",
       "text": [
        "He doesn't just book trips — he crafts memories and delivers movement that matters."
       ],
-      "href": "/team/kabir-malhotra/",
+      "href": "/team/sufiyan-mojawala/",
       "kicker": "Head — Leisure",
       "img": {
-       "src": "t-kabir-malhotra",
+       "src": "/assets/cws/2026-08-cws-team-sufiyan-mojawala.webp",
        "alt": ""
       }
      },
      {
-      "title": "Meera Iyer",
+      "title": "Anita Chavan",
       "text": [
-       "At Elyra, efficiency isn't a goal — it's a rhythm. Meera is the one keeping the beat."
+       "At Elyra, efficiency isn't a goal — it's a rhythm. Anita is the one keeping the beat."
       ],
-      "href": "/team/meera-iyer/",
+      "href": "/team/anita-chavan/",
       "kicker": "General Manager",
       "img": {
-       "src": "t-meera-iyer",
+       "src": "/assets/cws/2026-08-cws-team-anita-chavan.webp",
        "alt": ""
       }
      },
      {
-      "title": "Vikram Rao",
+      "title": "Arun Mestri",
       "text": [
-       "Vikram speaks the language of numbers — but thinks in terms of relationships."
+       "Arun speaks the language of numbers — but thinks in terms of relationships."
       ],
       "kicker": "Finance Lead",
       "img": {
-       "src": "t-vikram-rao",
+       "src": "/assets/cws/2026-08-cws-team-arun-mestri.webp",
        "alt": ""
       },
-      "href": "/team/vikram-rao/"
+      "href": "/team/arun-mestri/"
      }
     ],
     "images": [
      {
-      "src": "t-rohan-kapoor",
+      "src": "/assets/cws/2026-08-cws-team-farhan-shaikh.webp",
       "alt": ""
      }
     ]
@@ -3817,9 +3839,9 @@
    }
   ]
  },
- "team__meera-iyer": {
-  "title": "Meera Iyer — General Manager",
-  "meta": "Meera Iyer, General Manager at Elyra. At Elyra, efficiency isn't a goal — it's a rhythm. Meera is the one keeping the beat.",
+ "team__anita-chavan": {
+  "title": "Anita Chavan — General Manager",
+  "meta": "Anita Chavan, General Manager at Elyra. At Elyra, efficiency isn't a goal — it's a rhythm. Anita is the one keeping the beat.",
   "sections": [
    {
     "kind": "cards",
@@ -3827,29 +3849,29 @@
     "variant": "team-compact",
     "items": [
      {
-      "href": "/team/rohan-kapoor/",
-      "title": "Rohan Kapoor",
+      "href": "/team/farhan-shaikh/",
+      "title": "Farhan Shaikh",
       "img": {
-       "src": "t-rohan-kapoor",
-       "alt": "Rohan Kapoor"
+       "src": "/assets/cws/2026-08-cws-team-farhan-shaikh.webp",
+       "alt": "Farhan Shaikh"
       },
       "kicker": "Head — Operations"
      },
      {
-      "href": "/team/kabir-malhotra/",
-      "title": "Kabir Malhotra",
+      "href": "/team/sufiyan-mojawala/",
+      "title": "Sufiyan Mojawala",
       "img": {
-       "src": "t-kabir-malhotra",
-       "alt": "Kabir Malhotra"
+       "src": "/assets/cws/2026-08-cws-team-sufiyan-mojawala.webp",
+       "alt": "Sufiyan Mojawala"
       },
       "kicker": "Head — Leisure"
      },
      {
-      "href": "/team/vikram-rao/",
-      "title": "Vikram Rao",
+      "href": "/team/arun-mestri/",
+      "title": "Arun Mestri",
       "img": {
-       "src": "t-vikram-rao",
-       "alt": "Vikram Rao"
+       "src": "/assets/cws/2026-08-cws-team-arun-mestri.webp",
+       "alt": "Arun Mestri"
       },
       "kicker": "Finance Lead"
      }
@@ -3857,21 +3879,22 @@
    }
   ],
   "member": {
-   "name": "Meera Iyer",
+   "name": "Anita Chavan",
    "role": "General Manager",
-   "lead": "At Elyra, efficiency isn't a goal — it's a rhythm. Meera is the one keeping the beat.",
+   "lead": "At Elyra, efficiency isn't a goal — it's a rhythm. Anita is the one keeping the beat.",
    "text": [
-    "Meera is the operational engine behind Elyra's promise of fast, flexible execution. Coordinating across verticals to an unwavering standard, she brings strategic finesse and team-oriented leadership to a round-the-clock service model. Her client-first approach holds reliability and responsiveness together even under high-pressure travel timelines, and her process insight anchors daily operations."
+    "Anita is the operational engine behind Elyra's promise of fast, flexible execution. Coordinating across verticals to an unwavering standard, she brings strategic finesse and team-oriented leadership to a round-the-clock service model. Her client-first approach holds reliability and responsiveness together even under high-pressure travel timelines, and her process insight anchors daily operations."
    ],
    "image": {
-    "src": "t-meera-iyer",
-    "alt": "Meera Iyer, General Manager at Elyra"
-   }
+    "src": "/assets/cws/2026-08-cws-team-anita-chavan.webp",
+    "alt": "Anita Chavan, General Manager at Elyra"
+   },
+   "linkedin": "https://www.linkedin.com/in/anita-chavan-935b79162"
   }
  },
- "team__vikram-rao": {
-  "title": "Vikram Rao — Finance Lead",
-  "meta": "Vikram Rao, Finance Lead at Elyra. Vikram speaks the language of numbers — but thinks in terms of relationships.",
+ "team__arun-mestri": {
+  "title": "Arun Mestri — Finance Lead",
+  "meta": "Arun Mestri, Finance Lead at Elyra. Arun speaks the language of numbers — but thinks in terms of relationships.",
   "sections": [
    {
     "kind": "cards",
@@ -3879,29 +3902,29 @@
     "variant": "team-compact",
     "items": [
      {
-      "href": "/team/rohan-kapoor/",
-      "title": "Rohan Kapoor",
+      "href": "/team/farhan-shaikh/",
+      "title": "Farhan Shaikh",
       "img": {
-       "src": "t-rohan-kapoor",
-       "alt": "Rohan Kapoor"
+       "src": "/assets/cws/2026-08-cws-team-farhan-shaikh.webp",
+       "alt": "Farhan Shaikh"
       },
       "kicker": "Head — Operations"
      },
      {
-      "href": "/team/kabir-malhotra/",
-      "title": "Kabir Malhotra",
+      "href": "/team/sufiyan-mojawala/",
+      "title": "Sufiyan Mojawala",
       "img": {
-       "src": "t-kabir-malhotra",
-       "alt": "Kabir Malhotra"
+       "src": "/assets/cws/2026-08-cws-team-sufiyan-mojawala.webp",
+       "alt": "Sufiyan Mojawala"
       },
       "kicker": "Head — Leisure"
      },
      {
-      "href": "/team/meera-iyer/",
-      "title": "Meera Iyer",
+      "href": "/team/anita-chavan/",
+      "title": "Anita Chavan",
       "img": {
-       "src": "t-meera-iyer",
-       "alt": "Meera Iyer"
+       "src": "/assets/cws/2026-08-cws-team-anita-chavan.webp",
+       "alt": "Anita Chavan"
       },
       "kicker": "General Manager"
      }
@@ -3909,21 +3932,22 @@
    }
   ],
   "member": {
-   "name": "Vikram Rao",
+   "name": "Arun Mestri",
    "role": "Finance Lead",
-   "lead": "Vikram speaks the language of numbers — but thinks in terms of relationships.",
+   "lead": "Arun speaks the language of numbers — but thinks in terms of relationships.",
    "text": [
-    "Vikram is the steward of Elyra's financial integrity and cross-border billing structure. With command of multi-currency setups, GST reconciliation and vendor frameworks, he keeps financial operations smooth while supporting scale. His insight helps partners and clients navigate the technical landscape with clarity and trust."
+    "Arun is the steward of Elyra's financial integrity and cross-border billing structure. With command of multi-currency setups, GST reconciliation and vendor frameworks, he keeps financial operations smooth while supporting scale. His insight helps partners and clients navigate the technical landscape with clarity and trust."
    ],
    "image": {
-    "src": "t-vikram-rao",
-    "alt": "Vikram Rao, Finance Lead at Elyra"
-   }
+    "src": "/assets/cws/2026-08-cws-team-arun-mestri.webp",
+    "alt": "Arun Mestri, Finance Lead at Elyra"
+   },
+   "linkedin": "https://www.linkedin.com/in/arun-mestri-b36130a8"
   }
  },
- "team__rohan-kapoor": {
-  "title": "Rohan Kapoor — Head — Operations",
-  "meta": "Rohan Kapoor, Head — Operations at Elyra. When things move fast at Elyra, it's because Rohan has already made sure they're ready to.",
+ "team__farhan-shaikh": {
+  "title": "Farhan Shaikh — Head — Operations",
+  "meta": "Farhan Shaikh, Head — Operations at Elyra. When things move fast at Elyra, it's because Farhan has already made sure they're ready to.",
   "sections": [
    {
     "kind": "cards",
@@ -3931,29 +3955,29 @@
     "variant": "team-compact",
     "items": [
      {
-      "href": "/team/kabir-malhotra/",
-      "title": "Kabir Malhotra",
+      "href": "/team/sufiyan-mojawala/",
+      "title": "Sufiyan Mojawala",
       "img": {
-       "src": "t-kabir-malhotra",
-       "alt": "Kabir Malhotra"
+       "src": "/assets/cws/2026-08-cws-team-sufiyan-mojawala.webp",
+       "alt": "Sufiyan Mojawala"
       },
       "kicker": "Head — Leisure"
      },
      {
-      "href": "/team/meera-iyer/",
-      "title": "Meera Iyer",
+      "href": "/team/anita-chavan/",
+      "title": "Anita Chavan",
       "img": {
-       "src": "t-meera-iyer",
-       "alt": "Meera Iyer"
+       "src": "/assets/cws/2026-08-cws-team-anita-chavan.webp",
+       "alt": "Anita Chavan"
       },
       "kicker": "General Manager"
      },
      {
-      "href": "/team/vikram-rao/",
-      "title": "Vikram Rao",
+      "href": "/team/arun-mestri/",
+      "title": "Arun Mestri",
       "img": {
-       "src": "t-vikram-rao",
-       "alt": "Vikram Rao"
+       "src": "/assets/cws/2026-08-cws-team-arun-mestri.webp",
+       "alt": "Arun Mestri"
       },
       "kicker": "Finance Lead"
      }
@@ -3961,21 +3985,22 @@
    }
   ],
   "member": {
-   "name": "Rohan Kapoor",
+   "name": "Farhan Shaikh",
    "role": "Head — Operations",
-   "lead": "When things move fast at Elyra, it's because Rohan has already made sure they're ready to.",
+   "lead": "When things move fast at Elyra, it's because Farhan has already made sure they're ready to.",
    "text": [
-    "Rohan is the quiet powerhouse behind Elyra's administrative operations. With an unwavering focus on precision and timeliness, he makes sure every workflow — from bookings to backend systems — runs smoothly. His command of internal coordination, vendor alignment and service dispatch keeps the organisation responsive, structured and ahead of schedule."
+    "Farhan is the quiet powerhouse behind Elyra's administrative operations. With an unwavering focus on precision and timeliness, he makes sure every workflow — from bookings to backend systems — runs smoothly. His command of internal coordination, vendor alignment and service dispatch keeps the organisation responsive, structured and ahead of schedule."
    ],
    "image": {
-    "src": "t-rohan-kapoor",
-    "alt": "Rohan Kapoor, Head — Operations at Elyra"
-   }
+    "src": "/assets/cws/2026-08-cws-team-farhan-shaikh.webp",
+    "alt": "Farhan Shaikh, Head — Operations at Elyra"
+   },
+   "linkedin": "https://www.linkedin.com/in/farhan-ahmed-shaikh-88b946141"
   }
  },
- "team__kabir-malhotra": {
-  "title": "Kabir Malhotra — Head — Leisure",
-  "meta": "Kabir Malhotra, Head — Leisure at Elyra. He doesn't just book trips — he crafts memories and delivers movement that matters.",
+ "team__sufiyan-mojawala": {
+  "title": "Sufiyan Mojawala — Head — Leisure",
+  "meta": "Sufiyan Mojawala, Head — Leisure at Elyra. He doesn't just book trips — he crafts memories and delivers movement that matters.",
   "sections": [
    {
     "kind": "cards",
@@ -3983,29 +4008,29 @@
     "variant": "team-compact",
     "items": [
      {
-      "href": "/team/rohan-kapoor/",
-      "title": "Rohan Kapoor",
+      "href": "/team/farhan-shaikh/",
+      "title": "Farhan Shaikh",
       "img": {
-       "src": "t-rohan-kapoor",
-       "alt": "Rohan Kapoor"
+       "src": "/assets/cws/2026-08-cws-team-farhan-shaikh.webp",
+       "alt": "Farhan Shaikh"
       },
       "kicker": "Head — Operations"
      },
      {
-      "href": "/team/meera-iyer/",
-      "title": "Meera Iyer",
+      "href": "/team/anita-chavan/",
+      "title": "Anita Chavan",
       "img": {
-       "src": "t-meera-iyer",
-       "alt": "Meera Iyer"
+       "src": "/assets/cws/2026-08-cws-team-anita-chavan.webp",
+       "alt": "Anita Chavan"
       },
       "kicker": "General Manager"
      },
      {
-      "href": "/team/vikram-rao/",
-      "title": "Vikram Rao",
+      "href": "/team/arun-mestri/",
+      "title": "Arun Mestri",
       "img": {
-       "src": "t-vikram-rao",
-       "alt": "Vikram Rao"
+       "src": "/assets/cws/2026-08-cws-team-arun-mestri.webp",
+       "alt": "Arun Mestri"
       },
       "kicker": "Finance Lead"
      }
@@ -4013,16 +4038,17 @@
    }
   ],
   "member": {
-   "name": "Kabir Malhotra",
+   "name": "Sufiyan Mojawala",
    "role": "Head — Leisure",
    "lead": "He doesn't just book trips — he crafts memories and delivers movement that matters.",
    "text": [
-    "With a deep understanding of travel psychology and mobility patterns, Kabir curates experiences that go beyond the transaction. From executive vacations to fleet strategies, he merges creativity with control — curated holidays, reliable car bookings and seamless transitions for clients and their teams."
+    "With a deep understanding of travel psychology and mobility patterns, Sufiyan curates experiences that go beyond the transaction. From executive vacations to fleet strategies, he merges creativity with control — curated holidays, reliable car bookings and seamless transitions for clients and their teams."
    ],
    "image": {
-    "src": "t-kabir-malhotra",
-    "alt": "Kabir Malhotra, Head — Leisure at Elyra"
-   }
+    "src": "/assets/cws/2026-08-cws-team-sufiyan-mojawala.webp",
+    "alt": "Sufiyan Mojawala, Head — Leisure at Elyra"
+   },
+   "linkedin": "https://www.linkedin.com/company/corporateworldwidestay/"
   }
  },
  "testimonial": {

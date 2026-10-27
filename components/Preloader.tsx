@@ -10,8 +10,7 @@ import { LogoMark } from "./Brand";
  * Everything moves with transform and opacity only, so it stays smooth on phones.
  *
  * It is pure CSS, so it never waits on a script. The inline script in app/layout.tsx shows it
- * only when the home page itself is loaded or refreshed — never on inner pages, and never on
- * in-site navigation (the layout stays mounted), never
+ * on every full page load (not on in-site navigation, where the layout stays mounted), never
  * with reduced motion: "pl-on" shows it and locks scrolling, "pl-hold" keeps the page's own
  * entrances paused until the shutters lift (resuming, not delaying, so nothing jumps).
  * Without that script it never shows. The timings match the keyframes in globals.css ("PRELOADER").
@@ -22,7 +21,7 @@ const DONE_MS = 5000;
 const products = ["Hotels", "Apartments", "Cars", "MICE", "Relocation"];
 const SHUTTERS = 6;
 
-export const preloaderScript = `(function(){var d=document.documentElement;d.classList.add("js");try{if(location.pathname!=="/")return;if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;d.classList.add("pl-on","pl-hold");setTimeout(function(){d.classList.remove("pl-hold")},${OPEN_MS});setTimeout(function(){d.classList.remove("pl-on");dispatchEvent(new Event("elyra:preloaded"))},${DONE_MS})}catch(e){}})()`;
+export const preloaderScript = `(function(){var d=document.documentElement;d.classList.add("js");try{if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;d.classList.add("pl-on","pl-hold");setTimeout(function(){d.classList.remove("pl-hold")},${OPEN_MS});setTimeout(function(){d.classList.remove("pl-on");dispatchEvent(new Event("elyra:preloaded"))},${DONE_MS})}catch(e){}})()`;
 
 const vars = (v: Record<string, number>) => v as React.CSSProperties;
 

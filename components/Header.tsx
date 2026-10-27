@@ -67,7 +67,7 @@ export function Header() {
             )}
           </ul>
         </nav>
-        <Link href="/contact/#enquire" className="btn-nav press">Book Now</Link>
+        <Link href="/request-demo/" className="btn-nav press">Request a Demo</Link>
         <button className="menu-btn press" id="menuBtn" aria-expanded="false" aria-controls="mobileMenu">Menu</button>
       </header>
 
@@ -86,7 +86,7 @@ export function Header() {
             </details>
           );
         })}
-        <Link href="/contact/#enquire" className="btn-pill press">Book Now <Chev /></Link>
+        <Link href="/request-demo/" className="btn-pill press">Request a Demo <Chev /></Link>
       </div>
     </>
   );

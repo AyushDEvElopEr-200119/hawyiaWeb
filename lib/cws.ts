@@ -64,4 +64,4 @@ export const topPages: { slug: string; label: string }[] = [
   { slug: "partner-with-us", label: "Partner with Elyra" },
 ];
 
-export const team = ["rohan-kapoor", "kabir-malhotra", "meera-iyer", "vikram-rao"];
+export const team = ["farhan-shaikh", "sufiyan-mojawala", "anita-chavan", "arun-mestri"];

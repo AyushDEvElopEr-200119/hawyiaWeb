@@ -128,7 +128,7 @@ export function initSite(): () => void {
     }
 
     /* ---------- header state over dark media ---------- */
-    const darkZones = $$(".hero, .bleed, .vista-frame, .fx");
+    const darkZones = $$(".hero, .bleed, .vista-frame");
     const updateHeader = () => {
       if (!header) return;
       const probe = 50;
@@ -200,78 +200,6 @@ export function initSite(): () => void {
     arrive(".eyebrow-serif.lined");
     arrive("[data-stagger]", "top 85%");
     arrive(".why-item", "top 90%", "drawn");   // its top hairline draws across
-    arrive("[data-line]", "top 80%");           // the timeline's thread draws across
-    arrive(".pull-mark", "top 85%");
-
-    /* ---------- steps: a mint rail fills down the table as you read it, and the row
-       you're on comes forward while the others wait ---------- */
-    $$("[data-steps]").forEach((table) => {
-      const rows = $$(".tr", table);
-      if (reduced) return rows.forEach((r) => r.classList.add("on"));
-      const fill = $(".table-rail i", table);
-      if (fill) gsap.fromTo(fill, { scaleY: 0 }, { scaleY: 1, ease: "none",
-        scrollTrigger: { trigger: table, start: "top 62%", end: "bottom 62%", scrub: 0.4 } });
-      // rows stay lit once read, and dim again if you scroll back above them
-      rows.forEach((r) => ScrollTrigger.create({ trigger: r, start: "top 62%",
-        onEnter: () => r.classList.add("on"), onLeaveBack: () => r.classList.remove("on") }));
-    });
-
-    /* ---------- chapters: the sticky stage shows whichever chapter is crossing the middle of
-       the screen; its bar fills with your progress through that chapter. Only the shown
-       layer's film plays, and only while the stage is on screen and actually drawn. ---------- */
-    $$("[data-chapters]").forEach((sec) => {
-      const steps = $$(".ch-step", sec);
-      const layers = $$(".ch-layer", sec);
-      const caps = $$(".ch-caption span", sec);
-      const bars = $$(".ch-bars i", sec);
-      const stage = $(".ch-stage", sec);
-      let cur = -1, inView = false;
-      const sync = () => layers.forEach((l, j) => {
-        const v = $<HTMLVideoElement>("video", l);
-        if (!v) return;
-        if (j === cur && inView && !reduced && stage?.offsetParent) { v.muted = true; v.play().catch(() => {}); }
-        else v.pause();
-      });
-      const set = (i: number) => {
-        if (i === cur) return;
-        cur = i;
-        steps.forEach((x, j) => x.classList.toggle("on", j === i));
-        layers.forEach((x, j) => x.classList.toggle("on", j === i));
-        caps.forEach((x, j) => x.classList.toggle("on", j === i));
-        // chapters already read stay full; the ones ahead stay empty
-        bars.forEach((b, j) => { if (j !== i) gsap.set(b, { scaleX: j < i ? 1 : 0 }); });
-        sync();
-      };
-      steps.forEach((step, i) => ScrollTrigger.create({
-        trigger: step, start: "top 55%", end: "bottom 55%",
-        onToggle: (st) => { if (st.isActive) set(i); },
-        onUpdate: (st) => { if (i === cur && bars[i]) gsap.set(bars[i], { scaleX: st.progress }); },
-      }));
-      const io = new IntersectionObserver(([e]) => { inView = e.isIntersecting; sync(); }, { threshold: 0.05 });
-      io.observe(stage ?? sec);
-      observers.push(io);
-      set(0);
-    });
-
-    /* ---------- ribbon: the two rows slide apart with scroll, and the words lean into the
-       scroll's speed, then settle back upright once it stops ---------- */
-    if (!reduced) {
-      $$(".ribbon").forEach((rib) => {
-        const lean = $(".ribbon-lean", rib)!;
-        const skew = follow(lean, "skewX", { duration: 0.7 });
-        let settle = 0;
-        $$(".ribbon-row", rib).forEach((row, r) => gsap.fromTo(row, { xPercent: r ? -12 : 0 }, { xPercent: r ? 0 : -12, ease: "none",
-          scrollTrigger: { trigger: rib, start: "top bottom", end: "bottom top", scrub: true } }));
-        ScrollTrigger.create({
-          trigger: rib, start: "top bottom", end: "bottom top",
-          onUpdate: (st) => {
-            skew(clamp(st.getVelocity() / -300, -7, 7));
-            clearTimeout(settle);
-            settle = later(() => skew(0), 140);
-          },
-        });
-      });
-    }
 
     /* ---------- figures count up as they arrive; the final value stays rendered underneath,
        holding the width, so the row never reflows while the digits run ---------- */
@@ -351,7 +279,6 @@ export function initSite(): () => void {
       drift(".ph-bg, [data-ph-media] .bg-video", "[data-ph-media]", -4, 6);
       drift(".bleed-media .media-bg", ".bleed", -6, 6);
       drift(".post-media img, .ind-img", null, -3, 3);
-      drift(".cws-gallery-grid img", null, -7, 7);
       $$(".b-photo .b-img").forEach((im) =>
         gsap.fromTo(im, { yPercent: -4 }, { yPercent: 4, ease: "none", scrollTrigger: { trigger: im.closest(".b-card"), start: "top bottom", end: "bottom top", scrub: true } }));
     }
@@ -359,12 +286,12 @@ export function initSite(): () => void {
     /* ---------- media unveil: a frame opens from an inset window while its photo settles
        from a slight zoom, tied to scroll so it tracks the reader 1:1 and reverses on the way up ---------- */
     if (!reduced) {
-      $$(".feature-media, .post-media, .cws-split-media, .cws-card-media, .cws-genie-media, .ch-inline, .bt-film, .bt-photo").forEach((frame) => {
+      $$(".feature-media, .post-media, .cws-split-media, .cws-card-media, .cws-genie-media").forEach((frame) => {
         const r = getComputedStyle(frame).borderTopLeftRadius;
         gsap.fromTo(frame, { clipPath: `inset(7% 7% 7% 7% round ${r})` }, { clipPath: `inset(0% 0% 0% 0% round ${r})`, ease: "none",
           scrollTrigger: { trigger: frame, start: "top bottom", end: "top 55%", scrub: 0.4 } });
       });
-      $$(".feature-media .media-bg, .post-media img, .b-photo .b-img, .cws-split-media img, .cws-genie-media img, .bt-media").forEach((img) =>
+      $$(".feature-media .media-bg, .post-media img, .b-photo .b-img, .cws-split-media img, .cws-genie-media img").forEach((img) =>
         gsap.fromTo(img, { scale: 1.16 }, { scale: 1, ease: "none",
           scrollTrigger: { trigger: img.parentElement, start: "top bottom", end: "top 40%", scrub: 0.4 } }));
     }
@@ -487,11 +414,12 @@ export function initSite(): () => void {
         gsap.to(arcs, { strokeDashoffset: 0, duration: 2.4, stagger: 0.15, ease: "power2.inOut", scrollTrigger: { trigger: effect, start: "top 70%" } });
         gsap.from(".effect-title", { yPercent: 20, opacity: 0, duration: 1.6, scrollTrigger: { trigger: effect, start: "top 70%" } });
       }
-      const word = $(".fx-word span");
-      if (word) {
-        // scrubbed to the last screen of the page: the wordmark rises out of the panel's bottom edge
-        gsap.fromTo(word, { yPercent: 55, opacity: 0.2, filter: "blur(10px)" }, { yPercent: 0, opacity: 1, filter: "blur(0px)", ease: "none",
-          scrollTrigger: { trigger: ".fx-word", start: "top bottom", end: "bottom bottom", scrub: 0.8 } });
+      const ring = $(".footer .ring");
+      if (ring) {
+        // scrubbed to the last screen of the page, so it lands exactly as you reach the bottom
+        gsap.timeline({ scrollTrigger: { trigger: ".footer-mark", start: "top bottom", end: "bottom bottom", scrub: 0.8 } })
+          .fromTo(ring, { yPercent: 22, scale: 0.88, rotation: -16, transformOrigin: "50% 50%" }, { yPercent: 0, scale: 1, rotation: 0, ease: "none" })
+          .fromTo(".fm-logo", { y: 40, opacity: 0, filter: "blur(8px)" }, { y: 0, opacity: 1, filter: "blur(0px)", ease: "none" }, 0.35);
       }
     }
 
@@ -687,7 +615,7 @@ export function initSite(): () => void {
 
     /* Cards: gentle 3D tilt + a specular highlight that follows the pointer */
     if (finePointer && !reduced) {
-      $$(".sol, .engine, .dir-item, .tier, .post, .mini-card, .opt, .b-card, .mv, .hero-stats li, .cws-stats-grid li, .cws-quote, .cws-card, .bt-stat, .bt-note, .bt-list").forEach((el) => {
+      $$(".sol, .engine, .dir-item, .tier, .post, .mini-card, .opt, .b-card, .mv, .hero-stats li, .cws-stats-grid li, .cws-quote").forEach((el) => {
         el.classList.add("tilt");
         const max = 3.5;   // degrees: enough to feel physical, not enough to distract
         gsap.set(el, { transformPerspective: 900 });

@@ -161,8 +161,7 @@ export function ProcessTable({ steps, title = "How we work", id = "process" }: {
   return (
     <section className="process container" id={id}>
       <h2 className="h2 center kinetic"><Kinetic text={title} /></h2>
-      <div className="table" data-steps>
-        <span className="table-rail" aria-hidden="true"><i /></span>
+      <div className="table">
         {steps.map(([b, m], i) => (
           <div className="tr reveal" key={b}><span className="mono">{String(i + 1).padStart(2, "0")}</span><b>{b}</b><span className="muted">{m}</span></div>
         ))}

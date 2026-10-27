@@ -18,7 +18,12 @@ export const metadata = pageMeta({ description: home.meta, path: "/" });
 
 const pad = (i: number) => String(i + 1).padStart(2, "0");
 
-const floatPhotos = ["h-lobby", "h-jet", "h-meeting", "h-lounge"];
+const floatPhotos = [
+  "/assets/cws/2026-02-Hotel.webp",
+  "/assets/cws/2025-12-freepik__a-professional-photograph-of-a-uniformed-chauffeur__55654.webp",
+  "/assets/cws/2026-02-Sample-4.1.webp",
+  "/assets/cws/2026-02-Service-Apartment-1.webp",
+];
 
 export default function HomePage() {
   // the hero poster is the first big paint: fetch it alongside the HTML, before the video

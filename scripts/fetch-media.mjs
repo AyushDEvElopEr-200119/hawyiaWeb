@@ -18,8 +18,8 @@ const save = async (url, file) => {
 
 const jobs = [];
 for (const [key, p] of Object.entries(photos)) {
-  for (const w of p.hd ? [800, 1600, 2400] : [800, 1600]) {
-    const url = `https://images.unsplash.com/${p.id}?w=${w}&q=${p.hd ? 82 : 72}&fm=webp&${p.crop ?? "fit=max"}`;
+  for (const w of [800, 1600]) {
+    const url = `https://images.unsplash.com/${p.id}?w=${w}&q=72&fm=webp&fit=max`;
     jobs.push([url, join(dir, `${key}-${w}.webp`)]);
   }
 }

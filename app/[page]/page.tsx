@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import { Block, CwsHero } from "@/components/cws/Blocks";
 import { Reel, Vista } from "@/components/cws/Cinematic";
-import { extrasFor } from "@/components/cws/Premium";
 import { CtaBand, JsonLd } from "@/components/sections";
 import { cwsPage, topPages, type Pair } from "@/lib/cws";
 import { breadcrumbSchema, faqSchema, pageMeta, serviceSchema } from "@/lib/seo";
@@ -26,15 +25,10 @@ const desk: Record<string, string> = {
 // a short film over the hero photo, where one fits the page
 const heroFilm: Record<string, string> = {
   hotel: "hotel",
-  "service-apartments": "apartment",
   "car-rentals-ground-transport": "chauffeur",
   mice: "events",
-  holidays: "resort",
-  "relocation-logistics": "relocation",
-  travgenie: "workspace",
-  testimonial: "handshake",
-  "partner-with-us": "housekeeping",
-  "about-us": "skyline",
+  holidays: "effect",
+  "about-us": "city",
   services: "city",
 };
 
@@ -62,21 +56,18 @@ export default async function CwsTopPage({ params }: Props) {
     : [{ label: entry.label }];
   const [hero, ...rest] = c.sections;
   const faq = rest.find((s) => s.kind === "faq")?.items as Pair[] | undefined;
-  // chapters, bento and ribbon blocks written for this page (lib/inner.ts)
-  const extras = extrasFor(page, rest);
 
   return (
     <>
       <CwsHero s={hero} trail={trail} video={heroFilm[page]} />
       {rest.map((s, i) => {
-        const before = extras.get(i) ?? [];
         // service pages show their sister services as the film strip, not a card grid
-        if (s.kind === "cards" && s.variant === "siblings") return [...before, <Reel key={i} exclude={path} eyebrow={s.eyebrow ?? "More from Elyra"} title={s.title ?? "One team for the rest of the trip."} />];
+        if (s.kind === "cards" && s.variant === "siblings") return <Reel key={i} exclude={path} eyebrow={s.eyebrow ?? "More from Elyra"} title={s.title ?? "One team for the rest of the trip."} />;
         const block = <Block s={s} key={i} preset={desk[page]} />;
         // the services hub opens on the film strip; the city film plays just before the enquiry form
-        if (page === "services" && s.kind === "answer") return [...before, block, <Reel key={`r${i}`} />];
-        if (s.kind === "cta") return [...before, <Vista key={`v${i}`} line="We don’t just move people, We move possibilities." />, block];
-        return [...before, block];
+        if (page === "services" && s.kind === "answer") return [block, <Reel key={`r${i}`} />];
+        if (s.kind === "cta") return [<Vista key={`v${i}`} line="We don’t just move people, We move possibilities." />, block];
+        return block;
       })}
       {/* the partner page ends on its own enquiry form */}
       {page === "partner-with-us" && (
