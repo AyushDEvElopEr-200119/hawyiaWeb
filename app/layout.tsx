@@ -5,6 +5,7 @@ import { Header } from "@/components/Header";
 import { Footer, PageChrome } from "@/components/Footer";
 import { JsonLd } from "@/components/sections";
 import { SiteMotion } from "@/components/motion/SiteMotion";
+import { Preloader, preloaderScript } from "@/components/Preloader";
 import { company, indexable } from "@/lib/site";
 import { organizationSchema, siteDescription, websiteSchema } from "@/lib/seo";
 
@@ -30,12 +31,14 @@ export const viewport: Viewport = { themeColor: "#0f3e39" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    // before paint: "js" makes reveal-on-scroll content start hidden only when scripts run
+    // before paint: "js" makes reveal-on-scroll content start hidden only when scripts run,
+    // and "pl-on" shows the page-load preloader (see components/Preloader.tsx)
     <html lang="en" className={`${serif.variable} ${sans.variable} ${mono.variable}`} suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: `document.documentElement.classList.add("js")` }} />
+        <script dangerouslySetInnerHTML={{ __html: preloaderScript }} />
       </head>
       <body>
+        <Preloader />
         <Header />
         <main id="main" tabIndex={-1}>{children}</main>
         <Footer />

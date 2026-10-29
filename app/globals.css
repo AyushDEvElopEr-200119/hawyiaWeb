@@ -75,7 +75,8 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .mono { font-family: var(--mono); font-size: .8125rem; letter-spacing: .01em; }
 
 /* ---------- press feedback: instant on pointer-down ---------- */
-.press { transition: box-shadow .3s var(--ease), background .3s; }
+.press { transition: transform 450ms var(--ease-out), box-shadow .5s var(--ease), background .3s; }
+.press:active { transform: scale(.97); transition-duration: var(--press); transition-timing-function: ease-out; }
 
 /* ---------- chevron ---------- */
 .chev {
@@ -472,8 +473,11 @@ html:not(.js) .nav-link:hover { background: rgb(255 255 255 / .85); }
   flex-shrink: 0;
   gap: 3.5rem;
   padding-right: 3.5rem;
+  animation: marquee 45s linear infinite;
 }
 .marquee-track span { white-space: nowrap; font-size: 1.125rem; font-weight: 700; letter-spacing: -0.015em; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+@keyframes marquee { to { transform: translateX(-100%); } }
 .api-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 4rem; background: var(--line); border-radius: 28px; overflow: hidden; }
 .api { background: #fff; padding: 1.6rem 1.5rem; display: grid; gap: .4rem; }
 .api h3 { font-family: var(--serif); font-size: 1.3rem; letter-spacing: -0.02em; }
@@ -627,8 +631,10 @@ html:not(.js) .nav-link:hover { background: rgb(255 255 255 / .85); }
   background: var(--line);
   border-radius: 28px;
   overflow: hidden;
+  animation: panelIn .45s var(--ease) both;
 }
 .panel[hidden] { display: none; }
+@keyframes panelIn { from { opacity: 0; transform: translateY(6px); filter: blur(4px); } }
 .feat { background: #fff; padding: 1.6rem 1.5rem; display: grid; gap: .45rem; align-content: start; }
 .feat h3 { font-weight: 600; font-size: 1rem; letter-spacing: -0.01em; }
 .feat p { color: var(--muted); font-size: .875rem; }
@@ -806,6 +812,208 @@ html:not(.js) .nav-link:hover { background: rgb(255 255 255 / .85); }
 .form-status { font-size: .875rem; color: var(--mint-900); }
 
 
+/* ============ REVEAL (a gentle rise and fade) ============ */
+/* hidden only when JS runs; initSite adds .in as each block enters the screen. Neighbours
+   that enter together stagger slightly through --rd (set by initSite). */
+.js .reveal { transition: opacity .7s var(--ease-out), transform .7s var(--ease-out); transition-delay: var(--rd, 0s); }
+.js .reveal:not(.in) { opacity: 0; transform: translateY(18px); }
+
+/* ============ FIRST-SCREEN ENTRANCES (pure CSS) ============
+   The headline, intro and hero band animate with the HTML itself, so the first screen never
+   waits for the motion script to download. Text starts faintly visible (never opacity 0),
+   so it still counts as the page's first meaningful paint. */
+@keyframes rise-in {
+  from { opacity: .08; transform: translateY(.45em); filter: blur(8px); }
+}
+@keyframes fade-up {
+  from { opacity: .08; transform: translateY(18px); }
+}
+@keyframes band-open {
+  from { clip-path: inset(14% 10% 0% 10% round 60px); }
+  to { clip-path: inset(0% 0% 0% 0% round 40px); }
+}
+@keyframes settle { from { scale: 1.14; } }
+@keyframes materialize {
+  from { opacity: 0; transform: translateY(40px); filter: blur(10px); }
+}
+.hero-title span { animation: rise-in 1.5s var(--ease-out) backwards; animation-delay: calc(.25s + var(--i, 0) * .16s); }
+.ph-title .w { animation: rise-in 1.2s var(--ease-out) backwards; animation-delay: calc(.08s + var(--i, 0) * .05s); }
+.crumbs, .ph-intro > *, .contact-copy > :not(h1) { animation: fade-up 1s var(--ease-out) .3s backwards; }
+.ph-intro > :nth-child(2), .contact-copy > :nth-child(3) { animation-delay: .38s; }
+.ph-media { animation: band-open 1.6s cubic-bezier(.87, 0, .13, 1) .15s backwards; }
+.ph-media .ph-bg { animation: settle 2.2s var(--ease-out) .15s backwards; }
+.ph-highlights { animation: materialize 1.2s var(--ease-out) .7s backwards; }
+.ph-highlights li { animation: fade-up 1s var(--ease-out) .9s backwards; }
+.ph-highlights li:nth-child(2) { animation-delay: .98s; }
+.ph-highlights li:nth-child(3) { animation-delay: 1.06s; }
+
+/* ============ PRELOADER (components/Preloader.tsx) ============
+   About 7.6s, transform and opacity only (smooth on phones). Shown on every full page load:
+   0.25–3.75s products, one at a time: each word slides up, holds long enough to read, slides out
+              just as the next arrives (0.9s each, every 0.65s)
+   3.75–5.1s  "One platform. / Your brand."
+   5.1–6.1s   the Elyra mark and wordmark
+   6.15s      the type lifts away; six shutters rise one after another onto the page;
+              6.41s the page's own entrances resume underneath
+   7.6s       the script removes .pl-on and the preloader is gone */
+@property --pl-n { syntax: "<integer>"; inherits: false; initial-value: 0; }
+.preloader { display: none; }
+.pl-on, .pl-on body { overflow: hidden; }
+.pl-hold main *, .pl-hold main *::before, .pl-hold main *::after { animation-play-state: paused; }
+.pl-on .preloader {
+  --pl-bg: #06201d;
+  --pl-in: cubic-bezier(.16, 1, .3, 1);
+  --pl-cut: cubic-bezier(.76, 0, .24, 1);
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: block;
+  color: #fff;
+  pointer-events: none;
+}
+.pl-on body { pointer-events: none; }
+
+/* the screen itself: six columns that lift in turn, each with a rounded leading edge */
+/* the columns hang 40px below the screen so their rounded edges stay hidden until they lift,
+   and a solid backing hides the seams between them until that moment */
+.pl-shutters {
+  position: absolute;
+  inset: 0 0 -40px;
+  display: flex;
+  background: var(--pl-bg);
+  animation: pl-unback 0s linear 6.225s forwards;
+}
+.pl-shutters span {
+  flex: 1;
+  margin-right: -1px;
+  background: var(--pl-bg);
+  border-radius: 0 0 28px 28px;
+  animation: pl-shutter 1.064s var(--pl-cut) calc(6.225s + var(--i) * 0.075s) forwards;
+  will-change: transform;
+}
+
+/* the type layer, lifted away as one before the shutters go */
+.pl-ui {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  animation: pl-ui-out 0.689s var(--pl-cut) 6.036s forwards;
+}
+/* soft mint light drifting behind the type (a gradient, so no filter cost) */
+.pl-glow {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 90vmax;
+  height: 90vmax;
+  margin: -45vmax 0 0 -45vmax;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(var(--mint) / .22), rgb(var(--mint) / .06) 55%, transparent);
+  animation: pl-drift 6.4s ease-in-out both;
+  will-change: transform;
+}
+
+/* corners: an editorial frame, with the progress hairline across the bottom */
+.pl-corners {
+  position: absolute;
+  inset: 0;
+  padding: 1.6rem var(--gutter) clamp(1.4rem, 4vh, 2.4rem);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto 1fr auto auto;
+  font-size: .75rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / .62);
+  animation: fade-up 1s var(--pl-in) backwards;
+}
+.pl-corners > :nth-child(2) { justify-self: end; }
+.pl-loading { grid-row: 3; align-self: end; }
+.pl-loading i { font-style: normal; animation: pl-blink 1.2s steps(1) infinite; }
+.pl-loading i:nth-child(2) { animation-delay: .2s; }
+.pl-loading i:nth-child(3) { animation-delay: .4s; }
+.pl-count {
+  grid-row: 3;
+  justify-self: end;
+  align-self: end;
+  font-size: 1.25rem;
+  letter-spacing: .02em;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+  counter-reset: pl var(--pl-n);
+  animation: pl-count 5.725s cubic-bezier(.45, 0, .3, 1) 0.189s forwards;
+}
+.pl-count::after { content: counter(pl) "%"; }
+.pl-line { grid-row: 4; grid-column: 1 / -1; height: 1px; margin-top: .9rem; background: rgb(255 255 255 / .14); position: relative; overflow: hidden; }
+.pl-line::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgb(var(--mint));
+  transform-origin: left;
+  animation: pl-fill 5.725s cubic-bezier(.45, 0, .3, 1) 0.189s both;
+}
+
+/* the centre: three beats stacked in one spot */
+.pl-center { position: absolute; inset: 0; display: grid; place-items: center; }
+.pl-center > * { grid-area: 1 / 1; margin: 0; text-align: center; }
+
+/* beat 1: kinetic product words, each masked, sliding up through */
+.pl-words {
+  display: grid;
+  overflow: hidden;
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: clamp(3.4rem, 13vw, 11rem);
+  line-height: 1.05;
+  letter-spacing: -0.055em;
+  padding: 0 .06em .06em;
+}
+.pl-words span {
+  grid-area: 1 / 1;
+  translate: 0 110%;
+  animation: pl-flash 0.9s linear calc(0.25s + var(--i) * 0.65s) forwards;
+}
+.pl-words span:last-child { color: rgb(var(--mint)); }
+
+/* beats 2 and 3: lines rise out of their masks, then leave together */
+.pl-pitch, .pl-brand { font-family: var(--serif); letter-spacing: -0.035em; line-height: 1; }
+.pl-pitch { display: grid; font-size: clamp(2.8rem, 8vw, 6.5rem); animation: pl-beat-out 0.564s var(--pl-cut) 4.789s forwards; }
+.pl-pitch em { font-style: italic; color: rgb(var(--mint)); }
+.pl-l { display: block; overflow: hidden; padding: 0 .04em .1em; }
+.pl-l > * { display: block; translate: 0 135%; animation: pl-line-in 1s var(--pl-in) forwards; }
+.pl-pitch .pl-l > * { animation-delay: 3.725s; }
+.pl-pitch .pl-l + .pl-l > * { animation-delay: 3.875s; }
+.pl-brand { display: flex; align-items: center; gap: clamp(12px, 1.6vw, 20px); font-size: clamp(3.4rem, 9vw, 7rem); }
+.pl-brand .pl-l > * { animation-delay: 5.225s; }
+.pl-mark { width: .72em; color: #fff; scale: 0; animation: pl-pop 0.875s cubic-bezier(.34, 1.45, .64, 1) 5.125s forwards; }
+.pl-mark .logo-mark { width: 100%; height: auto; }
+
+@keyframes pl-shutter { to { transform: translateY(-101%); } }
+@keyframes pl-unback { to { background: transparent; } }
+@keyframes pl-ui-out { to { opacity: 0; transform: translateY(-6vh); } }
+@keyframes pl-drift {
+  0% { transform: translate(-6%, 4%) scale(.85); }
+  50% { transform: translate(5%, -3%) scale(1); }
+  100% { transform: translate(-2%, 2%) scale(1.08); }
+}
+@keyframes pl-blink { 50% { opacity: .2; } }
+@keyframes pl-count { to { --pl-n: 100; } }
+@keyframes pl-fill { from { transform: scaleX(0); } }
+@keyframes pl-flash {
+  0% { translate: 0 110%; animation-timing-function: cubic-bezier(.2, .9, .3, 1); }
+  38%, 72% { translate: 0 0; animation-timing-function: cubic-bezier(.7, 0, .8, .3); }
+  100% { translate: 0 -110%; }
+}
+@keyframes pl-line-in { to { translate: 0 0; } }
+@keyframes pl-beat-out { to { opacity: 0; transform: translateY(-.35em); } }
+@keyframes pl-pop { to { scale: 1; } }
+@media (max-width: 640px) {
+  .pl-shutters span { border-radius: 0 0 18px 18px; }
+  .pl-corners > :nth-child(2) { max-width: 9rem; text-align: right; }
+}
+
+.press.reveal.in:active { transform: scale(.97); }
 .statement-text .sw { display: inline; }
 
 /* ============ MICRO-INTERACTIONS ============ */
@@ -877,7 +1085,9 @@ img { transition: opacity .6s var(--ease); }
   border-left: 2px solid var(--mint-600);
   border-bottom: 2px solid var(--mint-600);
   transform: translateY(-3px) rotate(-45deg);
+  animation: tick .35s var(--ease) both;
 }
+@keyframes tick { from { opacity: 0; transform: translateY(-3px) rotate(-45deg) scale(.4); } }
 .lead [type=submit] { position: relative; transition: background .3s, color .3s, box-shadow .4s var(--ease); }
 .lead [type=submit].is-sent { box-shadow: inset 0 0 0 2px rgb(var(--mint)), inset 0 0 40px 0 rgb(var(--mint)); }
 .lead [type=submit][disabled] { opacity: .7; cursor: progress; }
@@ -1438,6 +1648,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline-offset: 4
 .jgrid-sec { padding-bottom: 4rem; }
 .jgrid-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 1.5rem; margin-bottom: 2.5rem; }
 .jgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem 24px; }
+.jgrid-sec .jgrid-item { animation: jcard-in .7s var(--ease-out) backwards; animation-delay: calc(var(--i, 0) * 70ms); }
+@keyframes jcard-in { from { opacity: 0; transform: translateY(24px) scale(.98); } }
 .segmented {
   --pad: 4px;
   position: relative;
@@ -1483,10 +1695,10 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline-offset: 4
 @keyframes read-grow { to { transform: scaleX(1); } }
 .article-head { width: min(860px, 100% - var(--gutter) * 2); margin: 0 auto; padding-top: 8.5rem; display: grid; justify-items: center; text-align: center; }
 .article-head .crumbs { justify-content: center; }
-.article-kicker { display: flex; align-items: center; gap: .75rem; margin-bottom: 1.4rem; font-size: .8125rem; color: var(--muted); }
+.article-kicker { display: flex; align-items: center; gap: .75rem; margin-bottom: 1.4rem; font-size: .8125rem; color: var(--muted); animation: fade-up 1s var(--ease-out) .2s backwards; }
 .article-title { font-size: clamp(2.5rem, 5.6vw, 4.5rem); line-height: 1.02; text-wrap: balance; }
-.article-dek { max-width: 40rem; margin-top: 1.5rem; font-size: clamp(1.0625rem, 1.6vw, 1.3rem); line-height: 1.5; color: var(--muted); text-wrap: pretty; }
-.article-byline { display: flex; align-items: center; gap: .8rem; margin-top: 2rem; padding: 6px; border-radius: 99px; background: #f3f6f5; }
+.article-dek { max-width: 40rem; margin-top: 1.5rem; font-size: clamp(1.0625rem, 1.6vw, 1.3rem); line-height: 1.5; color: var(--muted); text-wrap: pretty; animation: fade-up 1s var(--ease-out) .35s backwards; }
+.article-byline { display: flex; align-items: center; gap: .8rem; margin-top: 2rem; padding: 6px; border-radius: 99px; background: #f3f6f5; animation: fade-up 1s var(--ease-out) .45s backwards; }
 .byline-avatar { flex: none; width: 36px; color: var(--ink); }
 .byline-avatar .logo-mark { width: 100%; height: auto; }
 .byline-who { display: grid; padding-right: .5rem; text-align: left; line-height: 1.3; }
@@ -1506,8 +1718,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline-offset: 4
 }
 .share svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 .share.done { background: rgb(var(--mint)); }
-.article-hero { width: min(1160px, 100% - var(--gutter) * 2); aspect-ratio: 2 / 1; margin: 3.5rem auto 0; overflow: hidden; border-radius: 32px; background: var(--mint-50); }
-.article-hero img { width: 100%; height: 100%; object-fit: cover; }
+.article-hero { width: min(1160px, 100% - var(--gutter) * 2); aspect-ratio: 2 / 1; margin: 3.5rem auto 0; overflow: hidden; border-radius: 32px; background: var(--mint-50); animation: band-open 1.6s cubic-bezier(.87, 0, .13, 1) .2s backwards; }
+.article-hero img { width: 100%; height: 100%; object-fit: cover; animation: settle 2.2s var(--ease-out) .2s backwards; }
 
 .article-layout { width: min(1160px, 100% - var(--gutter) * 2); margin: 4.5rem auto 6rem; display: grid; grid-template-columns: 1fr minmax(0, 680px) 1fr; column-gap: 3rem; }
 .toc { grid-column: 1; position: sticky; top: 7.5rem; align-self: start; max-width: 220px; }
@@ -1555,39 +1767,33 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline-offset: 4
   .article-byline { flex-wrap: wrap; justify-content: center; border-radius: 24px; }
 }
 
-/* ============ MINIMAL MOTION ============
-   The site keeps movement to a minimum: no keyframe animation, no scroll- or pointer-driven
-   effects (components/motion/initSite.ts only toggles classes). What remains is short fades
-   and colour changes on hover. Expanding stages sit as cards (--p stays 0). */
-*, *::before, *::after { animation: none !important; }
-@supports (animation-timeline: scroll()) {
-  .read-progress { animation: read-grow linear both !important; animation-timeline: scroll(root); }
-}
-.js .reveal { transition: opacity .5s var(--ease); }
-.js .reveal:not(.in) { opacity: 0; }
-.mega { transition: opacity .15s ease, visibility 0s linear .15s; }
-.mega.open { opacity: 1; transition: opacity .15s ease, visibility 0s; }
-.car-track { transition: transform .4s var(--ease); }
-.to-top, .toast { transition: opacity .2s ease, visibility 0s linear .2s; }
-.to-top { opacity: 0; visibility: hidden; }
-.to-top.is-shown, .toast.is-shown { opacity: 1; visibility: visible; transition: opacity .2s ease, visibility 0s; }
+/* ============ LIGHT MOTION ============
+   No scroll-pinned or pointer-driven effects: components/motion/initSite.ts only toggles
+   classes, and CSS does the moving. What remains is the preloader, first-screen entrances,
+   reveals, the marquee and short hover / open transitions. Expanding stages sit as cards. */
+.mega { transition: opacity .2s ease, translate .25s var(--ease), visibility 0s linear .2s; translate: -50% -6px; }
+.mega.open { opacity: 1; translate: -50% 0; transition: opacity .2s ease, translate .25s var(--ease), visibility 0s; }
+.car-track { transition: transform .6s var(--ease); }
+.to-top, .toast { transition: opacity .25s ease, scale .25s var(--ease), visibility 0s linear .25s; }
+.to-top { opacity: 0; visibility: hidden; scale: .85; }
+.toast { scale: .96; }
+.to-top.is-shown, .toast.is-shown { opacity: 1; visibility: visible; scale: 1; transition: opacity .25s ease, scale .35s var(--ease), visibility 0s; }
 .nav-hover { display: none; }
-.mobile-menu, .mobile-menu.open { transform: none; filter: none; transition: opacity .2s ease, visibility 0s; }
 .js .nav-link:hover { background: rgb(255 255 255 / .85); }
 .hero { height: 100vh; height: 100svh; }
 .statement { margin-top: 0; padding-top: 7rem; }
-.marquee { flex-wrap: wrap; justify-content: center; mask-image: none; -webkit-mask-image: none; }
-.marquee-track { flex-shrink: 1; flex-wrap: wrap; justify-content: center; gap: .8rem 2.5rem; padding: 0 var(--gutter); }
-.marquee-track + .marquee-track { display: none; }
-.bento .engine:hover, .ext-tiles li:hover, .rail-card:hover, .ts-card:hover { translate: none; }
-.post:hover .post-media img, .b-photo:hover .b-img, .jcard:hover .jcard-media img { transform: none; }
-.poster:hover .poster-img, .f-cta:hover .f-cta-img, .ts-card:hover .ts-card-img { scale: none; }
-.to-top:active { transform: none; }
 @media (min-width: 861px) {
   .product-row { height: auto; min-height: 440px; }
 }
 
 /* ============ ACCESSIBILITY PREFERENCES ============ */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; }
+  .reveal { opacity: 1; transform: none; filter: none; transition: none; }
+  .mega, .mega.open { translate: -50% 0; }
+  .mobile-menu, .mobile-menu.open { transform: none; filter: none; transition: opacity .2s ease, visibility 0s; }
+}
 @media (prefers-reduced-transparency: reduce) {
   .tile-hl { background: rgb(8 40 36 / .94); backdrop-filter: none; -webkit-backdrop-filter: none; }
   .ph-highlights { background: rgb(8 40 36 / .94); backdrop-filter: none; -webkit-backdrop-filter: none; }
@@ -1687,6 +1893,9 @@ main:focus { outline: none; }
   .engine-grid.bento { grid-template-columns: 1fr; }
   .eng-hero, .bento .engine:last-child { grid-column: auto; }
   .ext-tiles { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bento .engine:hover, .ext-tiles li:hover, .sg-row:hover .chev { translate: none; }
 }
 
 /* ============ SOLUTION PAGES: cinematic sections (components/cinematic.tsx) ============ */
@@ -1797,6 +2006,9 @@ main:focus { outline: none; }
   .stepline { --n: 1 !important; }
   .duo-num { font-size: 4rem; }
 }
+@media (prefers-reduced-motion: reduce) {
+  .rail-card:hover { translate: none; }
+}
 
 /* ============ INNER PAGES: posters, photo split, choices ============ */
 .posters-sec { padding-bottom: 7rem; display: grid; gap: 5rem; }
@@ -1864,6 +2076,9 @@ main:focus { outline: none; }
   .posters > *, .posters[data-cols] > * { grid-column: auto !important; }
   .poster { min-height: 20rem; }
   .ps-panel, .psplit.flip .ps-panel { margin: -3rem .5rem 0; padding: 1.8rem 1.4rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .poster:hover .poster-img { scale: none; }
 }
 
 /* ============ FOOTER (components/Footer.tsx) ============
@@ -1949,6 +2164,10 @@ main:focus { outline: none; }
   .f-cta-glass { padding: 1.4rem; }
   .f-btn { flex: 1 1 auto; justify-content: center; }
 }
+@media (prefers-reduced-motion: reduce) {
+  .f-cta:hover .f-cta-img { scale: none; }
+  .f-acc summary i { transition: none; }
+}
 @media (prefers-reduced-transparency: reduce) {
   .f-cta-glass { background: rgb(8 30 28 / .94); backdrop-filter: none; -webkit-backdrop-filter: none; }
   .f-btn-glass { background: rgb(255 255 255 / .2); backdrop-filter: none; -webkit-backdrop-filter: none; }
@@ -2012,6 +2231,9 @@ main:focus { outline: none; }
 @media (max-width: 560px) {
   .ts-grid { grid-template-columns: 1fr; }
   .ts-feature-glass { padding: 1.4rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ts-card:hover, .ts-card:hover .ts-card-img { translate: none; scale: none; }
 }
 @media (prefers-reduced-transparency: reduce) {
   .ts-feature-glass, .ts-cat { background: rgb(8 30 28 / .94); backdrop-filter: none; -webkit-backdrop-filter: none; }

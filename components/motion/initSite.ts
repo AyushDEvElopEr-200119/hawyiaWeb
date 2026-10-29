@@ -1,6 +1,6 @@
-/* Elyra — site interactions, kept deliberately minimal: no smooth-scroll library, no scroll-
-   driven or pointer-driven motion. The only movement is short CSS fades and hover states
-   (see "MINIMAL MOTION" in globals.css); this script just wires behaviour.
+/* Elyra — site interactions, kept deliberately light: no smooth-scroll library, no scroll-
+   driven or pointer-driven motion. The movement itself is CSS: reveals, hovers and fades
+   (see "LIGHT MOTION" in globals.css); this script just wires behaviour.
 
    initSite() runs after every route change and returns a cleanup that removes every listener
    (one AbortSignal) and disconnects observers. React renders all the markup; this only toggles
@@ -132,14 +132,22 @@ export function initSite(): () => void {
     $$("a", menu).forEach((a) => on(a, "click", () => setMenu(false)));
   }
 
-  /* ---------- reveals: a short fade the first time each block enters the screen ---------- */
-  const reveal = new IntersectionObserver((entries) => entries.forEach((e) => {
-    if (!e.isIntersecting) return;
-    e.target.classList.add("in");
-    reveal.unobserve(e.target);
-  }), { rootMargin: "0px 0px -8% 0px" });
-  $$(".reveal").forEach((el) => reveal.observe(el));
+  /* ---------- reveals: a gentle rise the first time each block enters the screen;
+     blocks that enter together stagger a little ---------- */
+  const reveal = new IntersectionObserver((entries) => {
+    let n = 0;
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      (e.target as El).style.setProperty("--rd", `${Math.min(n++, 6) * 0.07}s`);
+      e.target.classList.add("in");
+      reveal.unobserve(e.target);
+    });
+  }, { rootMargin: "0px 0px -8% 0px" });
   observers.push(reveal);
+  // wait for the page-load preloader to lift (components/Preloader.tsx) so the first reveals are seen
+  const startReveals = () => { if (!ac.signal.aborted) $$(".reveal").forEach((el) => reveal.observe(el)); };
+  if (document.documentElement.classList.contains("pl-on")) addEventListener("elyra:preloaded", startReveals, { once: true, signal: ac.signal });
+  else startReveals();
 
   /* ---------- background videos: play only while visible ---------- */
   $$<HTMLVideoElement>("video[data-autoplay]").forEach((v) => {
