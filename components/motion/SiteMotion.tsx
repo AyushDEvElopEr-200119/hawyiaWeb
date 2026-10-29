@@ -3,13 +3,13 @@
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
-// GSAP, ScrollTrigger, Flip and Lenis load in their own chunk, after the page has painted
-// and hydrated, so they never hold up the first screen. Started once, reused per page.
+// The interaction script loads in its own chunk, after the page has painted and hydrated,
+// so it never holds up the first screen. Started once, reused per page.
 let motion: Promise<typeof import("./initSite")> | undefined;
 const loadMotion = () => (motion ??= import("./initSite"));
 
 /**
- * Runs the site's motion and interactions for the current page, and tears them down
+ * Runs the site's interactions for the current page, and tears them down
  * before the next one: every route change (and React's dev double-run) gets a clean start.
  */
 export function SiteMotion() {
