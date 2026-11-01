@@ -50,16 +50,19 @@ export function ModuleCinema({ title, intro, image, modules }: { title: string; 
   );
 }
 
-const roleIcon: Record<string, string> = { Traveler: "✈", Agent: "⌘", Admin: "◎" };
-const roleLabel: Record<string, string> = { Traveler: "For travellers", Agent: "For agents", Admin: "For your team" };
+const roleIcon: Record<string, string> = { Traveler: "✈", Agent: "⌘", Admin: "◎", Employee: "✦", Manager: "⌘", HR: "◎", Finance: "◎", Operations: "⌘", Leadership: "◎" };
+const roleLabel: Record<string, string> = {
+  Traveler: "For travellers", Agent: "For agents", Admin: "For your team",
+  Employee: "For employees", Manager: "For managers", HR: "For HR", Finance: "For finance", Operations: "For operations", Leadership: "For leadership",
+};
 
 /** One card per user type, side by side, instead of hiding two of them behind tabs. */
-export function Personas({ groups }: { groups: Record<string, string[]> }) {
+export function Personas({ groups, sub = "What travellers, agents and your own team get out of the box." }: { groups: Record<string, string[]>; sub?: string }) {
   const keys = Object.keys(groups);
   return (
     <section className="personas container">
       <h2 className="h2 center reveal">Features for every user</h2>
-      <p className="sub reveal">What travellers, agents and your own team get out of the box.</p>
+      <p className="sub reveal">{sub}</p>
       <div className="pers-grid">
         {keys.map((k, i) => (
           <article className={`pers reveal${i === 1 ? " pers-dark" : ""}`} key={k}>
@@ -75,7 +78,7 @@ export function Personas({ groups }: { groups: Record<string, string[]> }) {
 }
 
 const tones: [string, string][] = [
-  ["#0f3b36", "#5fb3a5"], ["#14303f", "#6aa9c4"], ["#2e2a40", "#b6a6e0"], ["#3a2a1f", "#e0b48a"], ["#23352a", "#9cc79a"],
+  ["#0a2463", "#4f7fe0"], ["#14303f", "#6aa9c4"], ["#2e2a40", "#b6a6e0"], ["#3a2a1f", "#e0b48a"], ["#23352a", "#9cc79a"],
 ];
 
 export type ExtraStyle = "rail" | "duo" | "bento" | "steps";

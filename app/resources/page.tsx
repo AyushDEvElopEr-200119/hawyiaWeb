@@ -40,7 +40,7 @@ export default function ResourcesPage() {
             </article>
           ))}
         </div>
-        <p className="fineprint">Every article lives in <Link className="link" href="/blog/">the Elyra Journal <Chev /></Link></p>
+        <p className="fineprint">Every article lives in <Link className="link" href="/blog/">the Hawyia Journal <Chev /></Link></p>
       </section>
 
       <FaqBlock faq={generalFaq} title="Frequently asked questions" />

@@ -1,4 +1,4 @@
-// Page content. All copy is original to Elyra.
+// Page content. All copy is original to Hawyia.
 // Keep claims honest: no invented clients, stats, certifications or partners.
 
 /* ======================= SOLUTIONS ======================= */
@@ -572,7 +572,7 @@ export const apiPages: Record<string, ApiContent> = {
     enables: ["Cards, wallets, UPI and net banking", "Multi-currency checkout", "Refunds and partial refunds", "Agent wallet top-ups", "Reconciliation reports"],
     covers: [["India", "Razorpay, PayU, CCAvenue, Cashfree, Paytm, PhonePe, Easebuzz, Atom, HDFC, AgreePay and Traknpay"], ["International", "Stripe, PayPal and Lyra"], ["Middle East & Asia", "Telr, Dragonpay, Khalti and aamarPay"], ["Bank transfers", "Offline payment recording and agent deposits"]],
     timeline: "Typically one to two weeks per gateway.",
-    faq: [["Whose gateway account is used?", "Yours. Payments go straight to your business. Elyra is the software provider and never holds your funds."], ["Can I use more than one gateway?", "Yes. Route payments by currency, method or amount."]],
+    faq: [["Whose gateway account is used?", "Yours. Payments go straight to your business. Hawyia is the software provider and never holds your funds."], ["Can I use more than one gateway?", "Yes. Route payments by currency, method or amount."]],
   },
   "travel-insurance-api": {
     eyebrow: "Insurance", h1: "Travel insurance<br />API integration",
@@ -612,13 +612,13 @@ export const generalFaq: Pair[] = [
   ["What is the difference between white-label and custom?", "White-label is our ready-made platform, configured with your branding, modules and suppliers, so it launches faster and costs less. Custom is built around your own workflows when off-the-shelf software won't fit."],
   ["How long does a launch take?", "That depends on the modules and supplier integrations you choose. White-label projects usually take weeks. Custom projects are planned in milestones over months. You get a timeline with your proposal."],
   ["Do I need my own supplier contracts?", "Usually, yes. GDS, airline, hotel and other suppliers contract directly with your business. We handle the technical integration, certification and testing once you have access."],
-  ["Who owns the bookings and payments?", "You do. Elyra is the software provider. Bookings, payments, refunds and customer support stay with your business, through your own payment gateway."],
+  ["Who owns the bookings and payments?", "You do. Hawyia is the software provider. Bookings, payments, refunds and customer support stay with your business, through your own payment gateway."],
   ["Can you build mobile apps too?", "Yes. We build Android and iOS booking apps for travellers and agents. They connect to the same platform as your website."],
   ["What happens after launch?", "We offer maintenance and support plans, plus optional hosting and cloud management, so your platform stays secure and up to date."],
   ["Can I sell my own fares and hotels?", "Yes. The extranet lets you load series fares, private fares, contracted hotels and packages, and sell them alongside supplier inventory."],
   ["Do you offer dedicated developers?", "Yes. You can hire web, mobile or cross-platform developers who work as part of your team, managed by us."],
-  ["Is Elyra a travel agency?", "No. We build and run the technology. Your business sells the travel, holds the supplier accounts and serves the customers."],
-  ["Does Elyra give out agent IDs or sell travel on commission?", "No. We don't run an agent network of our own. Your B2B portal lets you create agent accounts and set their commission and credit."],
+  ["Is Hawyia a travel agency?", "No. We build and run the technology. Your business sells the travel, holds the supplier accounts and serves the customers."],
+  ["Does Hawyia give out agent IDs or sell travel on commission?", "No. We don't run an agent network of our own. Your B2B portal lets you create agent accounts and set their commission and credit."],
   ["How does a supplier API integration work?", "You get approved access and documentation from the supplier. We then map their data to the platform, build and test in their sandbox, pass their certification and switch to live."],
   ["Can I connect several suppliers at once?", "Yes. Each supplier runs on your own account, and rules decide which source is shown first for each search."],
   ["Is pricing in a search result guaranteed?", "No. Suppliers can change fares and rates until booking, so the platform re-checks the price before taking payment."],
@@ -638,3 +638,158 @@ export const processSteps: Pair[] = [
   ["Deploy", "Your domain, your hosting or ours"],
   ["Maintain & support", "At the support level we agree"],
 ];
+
+/* ======================= BUSINESS SOFTWARE ======================= */
+export const productPages: Record<string, SolutionContent> = {
+  "hrms-software": {
+    eyebrow: "HRMS",
+    h1: "Your people,<br />managed in one place",
+    intro: "An HR system that keeps employee records, attendance, leave, payroll and performance together, so HR spends less time on spreadsheets and employees get answers without waiting.",
+    meta: "HRMS software for employee records, attendance, leave, payroll, onboarding and performance reviews, with self-service for employees and managers.",
+    who: ["Growing companies moving off spreadsheets", "Multi-branch businesses", "Travel and service companies with shift teams", "HR teams that run payroll in-house"],
+    modules: [
+      ["Employee records", "One profile per person with documents, job history, reporting lines and custom fields."],
+      ["Attendance & shifts", "Web, mobile and biometric check-ins, shift rosters, overtime and late-mark rules."],
+      ["Leave management", "Leave types, accrual policies, holiday calendars by location and approval chains."],
+      ["Payroll", "Salary structures, deductions, reimbursements and payslips, run monthly from attendance and leave."],
+      ["Onboarding & exit", "Offer letters, joining checklists, asset handover and full-and-final settlement."],
+      ["Performance", "Goals, review cycles, manager and peer feedback, and appraisal history."],
+    ],
+    features: {
+      Employee: ["Self-service profile and documents", "Apply for leave and check balances", "Download payslips and tax forms", "Mobile check-in and attendance history", "Company policies and announcements"],
+      Manager: ["Approve leave, overtime and regularisation", "Team attendance and availability", "Set goals and write reviews", "Shift planning for the team"],
+      HR: ["Policies by location, grade or department", "Payroll runs with audit trail", "Statutory and custom reports", "Role-based access to sensitive data", "Bulk imports and letter templates"],
+    },
+    customize: ["Your own leave and attendance rules", "Payroll components for your country", "Custom approval workflows", "Integration with your ERP or accounting", "Branded employee app"],
+    faq: [
+      ["Can it handle more than one office or country?", "Yes. Holiday calendars, leave policies, shifts and payroll components can be set per location, and reports can be filtered or combined."],
+      ["Do you connect biometric devices?", "We integrate common biometric and access-control devices that offer an API or data export. We'll confirm compatibility for your devices during discovery."],
+      ["Can we move our existing employee data?", "Yes. We import employee records, balances and salary history from spreadsheets or your current system as part of setup."],
+    ],
+    related: ["erp-software", "expense-management-software"],
+    extras: [
+      {
+        title: "The employee lifecycle, end to end", style: "steps",
+        intro: "Every stage has its own checklist, owner and documents, so nothing depends on someone remembering.",
+        items: [
+          ["1. Hire", "Offer letters, document collection and pre-joining tasks."],
+          ["2. Onboard", "Accounts, assets, policies and a first-week plan."],
+          ["3. Grow", "Goals, reviews, promotions and salary revisions."],
+          ["4. Exit", "Resignation, handover, asset return and final settlement."],
+        ],
+      },
+      {
+        title: "Details HR teams ask for", style: "bento",
+        intro: "The small things that save hours every month, available module by module.",
+        items: [
+          ["Geo-fenced check-in", "Mobile attendance limited to approved locations, with optional selfie capture."],
+          ["Attendance regularisation", "Employees request corrections and managers approve them in one tap."],
+          ["Leave encashment", "Encash or carry forward leave by your policy at year end."],
+          ["Payslip publishing", "Payslips emailed and available in the employee app on payday."],
+          ["Letter templates", "Offer, appointment, experience and relieving letters generated from records."],
+          ["Org chart", "Reporting lines drawn automatically from employee records."],
+        ],
+      },
+    ],
+  },
+  "erp-software": {
+    eyebrow: "ERP",
+    h1: "Run the whole business<br />from one system",
+    intro: "An ERP that connects accounting, purchase, inventory, sales and projects, so every department works from the same numbers and month-end stops being a scramble.",
+    meta: "ERP software with accounting, purchase, inventory, sales, projects and reporting in one system, configured to your processes.",
+    who: ["Businesses outgrowing standalone accounting", "Distributors and traders", "Service companies running projects", "Multi-entity groups"],
+    modules: [
+      ["Accounting & finance", "Ledgers, journals, receivables, payables, bank reconciliation and financial statements."],
+      ["Purchase", "Requisitions, quotes, purchase orders, goods receipt and supplier bills."],
+      ["Inventory", "Stock by warehouse, batches and serials, transfers, reorder levels and valuation."],
+      ["Sales & invoicing", "Quotes, sales orders, delivery, invoices and collections."],
+      ["Projects & costing", "Budgets, tasks, timesheets and cost tracking per project or job."],
+      ["Reports & dashboards", "Profit and loss by branch, cash flow, ageing and stock reports in real time."],
+    ],
+    features: {
+      Operations: ["Purchase requests and approvals", "Stock movements and transfers", "Delivery and dispatch tracking", "Supplier and customer records"],
+      Finance: ["Multi-currency accounting", "Tax setup for your country", "Bank reconciliation", "Period close and audit trail", "Budgets versus actuals"],
+      Leadership: ["Live dashboards by branch or entity", "Margin and cash-flow views", "Approval limits by role", "Consolidated group reports"],
+    },
+    customize: ["Modules switched on by department", "Your chart of accounts and tax rules", "Custom approval limits", "Industry-specific workflows", "Integration with your booking platform or HRMS"],
+    faq: [
+      ["Do we have to switch on every module at once?", "No. Most clients start with accounting and one operational module, then add purchase, inventory or projects in phases."],
+      ["Can it handle several companies or branches?", "Yes. Each entity keeps its own books, and you can see consolidated reports across the group."],
+      ["Can it connect to our travel booking platform?", "Yes. Bookings, invoices and supplier payments can flow into ERP accounting automatically, so finance doesn't re-key them."],
+    ],
+    related: ["hrms-software", "expense-management-software"],
+    extras: [
+      {
+        title: "From purchase to payment", style: "rail",
+        intro: "Documents flow from one step to the next, so each team picks up where the last one left off.",
+        items: [
+          ["Request", "A department raises a purchase request with budget checked automatically."],
+          ["Order", "Approved requests become purchase orders sent to suppliers."],
+          ["Receive", "Goods or services are received against the order and stock updates."],
+          ["Pay", "Supplier bills are matched to the order and receipt, then scheduled for payment."],
+        ],
+      },
+      {
+        title: "Built to grow with you", style: "duo",
+        intro: "Start with what you need now, and extend it without starting again.",
+        items: [
+          ["Phased rollout", "Go live department by department, with training for each team."],
+          ["Data migration", "Opening balances, masters and open documents brought over from your current system."],
+          ["Open APIs", "Connect e-commerce, banking, payment gateways and your own tools."],
+          ["Custom modules", "When a workflow is unique to you, our team builds it on the same platform."],
+        ],
+      },
+    ],
+  },
+  "expense-management-software": {
+    eyebrow: "Expense management",
+    h1: "Expenses, claimed<br />and settled faster",
+    intro: "Employees snap a receipt, managers approve on their phone, and finance reimburses and books it, with policy checks running automatically in between.",
+    meta: "Expense management software for receipts, claims, approvals, travel advances, corporate cards and reimbursements, with policy checks and accounting export.",
+    who: ["Companies with field and sales teams", "Businesses with frequent business travel", "Finance teams chasing paper receipts", "Organisations with corporate cards"],
+    modules: [
+      ["Receipt capture", "Photograph or forward receipts, with amounts, dates and merchants read automatically."],
+      ["Expense claims", "Group expenses into reports by trip, project or month and submit in a few taps."],
+      ["Policy engine", "Limits by category, grade, city or project, with violations flagged before submission."],
+      ["Approvals", "Multi-level approval chains by amount, department or cost centre."],
+      ["Advances & cards", "Travel advances, corporate card feeds and automatic matching to claims."],
+      ["Reimbursement & export", "Batch payouts and journal entries exported to your accounting or ERP."],
+    ],
+    features: {
+      Employee: ["Mobile receipt capture", "Mileage and per-diem claims", "Request travel advances", "Track claim status and payouts", "Multi-currency expenses"],
+      Manager: ["Approve or query on mobile", "Policy violations highlighted", "Team spend by category", "Delegate approvals when away"],
+      Finance: ["Audit queue with receipt images", "Card statement matching", "Cost-centre and project allocation", "Tax and GST capture", "Export to accounting or ERP"],
+    },
+    customize: ["Your expense categories and limits", "Approval chains by department", "Per-diem rates by city", "Integration with your corporate travel portal", "Custom spend reports"],
+    faq: [
+      ["Does it work with our corporate travel bookings?", "Yes. Bookings made through our corporate travel software can flow straight into expense reports, so travellers don't claim them twice."],
+      ["Can employees claim in other currencies?", "Yes. Expenses can be recorded in any currency and converted at the rate you choose for reimbursement."],
+      ["Which accounting systems can it export to?", "We export journal entries to common accounting systems and connect directly to our ERP. Other systems can be integrated through their APIs."],
+    ],
+    related: ["erp-software", "hrms-software"],
+    extras: [
+      {
+        title: "From receipt to reimbursement", style: "steps",
+        intro: "Four steps, each with a clear owner, and no paper in between.",
+        items: [
+          ["1. Capture", "Employee photographs the receipt; details are filled in automatically."],
+          ["2. Submit", "Expenses are grouped into a report and checked against policy."],
+          ["3. Approve", "Managers approve or query, with violations clearly flagged."],
+          ["4. Reimburse", "Finance audits, pays out in a batch and posts it to the books."],
+        ],
+      },
+      {
+        title: "Control without slowing people down", style: "bento",
+        intro: "Rules run in the background, so finance only looks at the exceptions.",
+        items: [
+          ["Duplicate detection", "The same receipt or amount claimed twice is flagged automatically."],
+          ["Pre-trip approvals", "Request approval and an advance before the trip starts."],
+          ["Mileage by map", "Distance calculated from start and end points at your per-km rate."],
+          ["Budget alerts", "Department and project budgets with alerts as spend approaches the limit."],
+          ["Card reconciliation", "Corporate card transactions matched to receipts, with missing ones chased."],
+          ["Spend analytics", "Spend by employee, category, merchant and project over time."],
+        ],
+      },
+    ],
+  },
+};

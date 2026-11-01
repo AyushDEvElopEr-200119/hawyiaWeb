@@ -14,11 +14,11 @@ const siteUrl =
 export const indexable = process.env.SITE_INDEXABLE === "true";
 
 export const company = {
-  name: "Elyra",
-  legal: "ELYRA",
+  name: "Hawyia",
+  legal: "HAWYIA",
   url: siteUrl.replace(/\/$/, ""),
-  email: "hello@example.com",
-  phone: "",          // e.g. "+91 00000 00000"
+  email: "info@hawyiapremium.com",
+  phone: "+968 9705 7071",
   whatsapp: "",       // e.g. "910000000000" (digits only, used for wa.me)
   address: "",        // office address
   tagline: "White-label & custom travel booking software",
@@ -39,6 +39,12 @@ export const solutions = [
   { slug: "travel-management-software", name: "Travel Management Software", short: "Back-office, accounting and reports", group: "office" },
   { slug: "travel-extranet-software", name: "Travel Extranet Software", short: "Sell your own fares, hotels and packages", group: "office" },
   { slug: "travel-crm-software", name: "Travel CRM Software", short: "Enquiries, quotes and follow-ups", group: "office" },
+];
+
+export const products = [
+  { slug: "hrms-software", name: "HRMS Software", short: "People, attendance, leave and payroll" },
+  { slug: "erp-software", name: "ERP Software", short: "Finance, inventory, purchase and sales in one system" },
+  { slug: "expense-management-software", name: "Expense Management Software", short: "Claims, approvals, cards and reimbursements" },
 ];
 
 export const services = [
@@ -118,13 +124,26 @@ export const nav: NavItem[] = [
       },
     },
   },
+  {
+    label: "Business Software",
+    mega: {
+      columns: [
+        { title: "Run your business", links: products.map((p) => ({ href: `/business-software/${p.slug}/`, label: p.name, desc: p.short })) },
+      ],
+      aside: {
+        title: "One login for the back office",
+        text: "Use each product on its own, or connect them so people, money and stock share the same records.",
+        links: [{ href: "/business-software/", label: "All business software" }, { href: "/request-demo/", label: "Request a demo" }],
+      },
+    },
+  },
   { label: "Industries", href: "/industries/" },
   {
     label: "Company",
     mega: {
       columns: [
         { title: "Company", links: [
-          { href: "/about/", label: "About Elyra", desc: "Who we are and what we build" },
+          { href: "/about/", label: "About Hawyia", desc: "Who we are and what we build" },
           { href: "/about/#mission", label: "Mission & Vision", desc: "Why we do it" },
           { href: "/about/#process", label: "How We Work", desc: "Our 10-step delivery process" },
           { href: "/about/#technologies", label: "Technologies", desc: "The stack behind our platforms" },
@@ -132,7 +151,7 @@ export const nav: NavItem[] = [
           { href: "/contact/", label: "Contact", desc: "Talk to a specialist" },
         ] },
         { title: "Resources", links: [
-          { href: "/blog/", label: "Blog", desc: "The Elyra Journal: guides and insights" },
+          { href: "/blog/", label: "Blog", desc: "The Hawyia Journal: guides and insights" },
           { href: "/resources/", label: "Resources", desc: "Travel tech, explained plainly" },
           { href: "/resources/#faq", label: "FAQ", desc: "Answers before you ask" },
           { href: "/pricing/", label: "Pricing", desc: "Starting-from tiers" },

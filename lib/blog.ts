@@ -1,5 +1,5 @@
-// The Elyra Journal: articles for /blog/ and /blog/[slug]/.
-// Draft copy written from what the site says Elyra does. Review the wording and the
+// The Hawyia Journal: articles for /blog/ and /blog/[slug]/.
+// Draft copy written from what the site says Hawyia does. Review the wording and the
 // publish dates before launch; add a post by adding an entry here (newest first).
 
 export type Block =
@@ -79,7 +79,7 @@ export const posts: Post[] = [
       { quote: "The integration is software. The access is a relationship. You need both before your first live booking." },
       { h2: "Choosing a starting mix" },
       { p: "Most agencies don't start with every source at once. A sensible first launch connects the content your customers actually buy, often one GDS or consolidator plus the low-cost carriers on your key routes. Add NDC and further carriers as volume grows and as airlines move more of their best offers there." },
-      { note: { title: "Where Elyra fits", text: "We integrate GDS, LCC, NDC and consolidator content once you have access, take the build through each supplier's certification, and test search, pricing and booking end to end before launch." } },
+      { note: { title: "Where Hawyia fits", text: "We integrate GDS, LCC, NDC and consolidator content once you have access, take the build through each supplier's certification, and test search, pricing and booking end to end before launch." } },
     ],
   },
   {

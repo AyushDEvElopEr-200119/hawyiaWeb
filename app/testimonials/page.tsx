@@ -11,7 +11,7 @@ const trail = [{ label: "Client Stories" }];
 export const metadata = {
   ...pageMeta({
     title: "Client Stories",
-    description: "How travel agencies, tour operators, wholesalers, corporate travel teams and bus operators run their business on Elyra.",
+    description: "How travel agencies, tour operators, wholesalers, corporate travel teams and bus operators run their business on Hawyia.",
     path,
   }),
   // sample stories are placeholders: keep the page out of search results until real ones replace them

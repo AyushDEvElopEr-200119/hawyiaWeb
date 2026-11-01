@@ -8,7 +8,7 @@ const trail = [{ label: "About" }];
 
 export const metadata = pageMeta({
   title: "About Us",
-  description: "About Elyra, a travel technology company building white-label and custom travel booking software, integrations and apps.",
+  description: "About Hawyia, a travel technology company building white-label and custom travel booking software, integrations and apps.",
   path,
 });
 
@@ -37,9 +37,9 @@ export default function AboutPage() {
     <>
       <PageHero
         trail={trail}
-        eyebrow="About Elyra"
+        eyebrow="About Hawyia"
         title="We build the technology<br />behind travel businesses"
-        intro="Elyra is a travel technology and software development company. We help agencies, tour operators, OTAs and corporate travel providers launch and scale their own booking platforms."
+        intro="Hawyia is a travel technology and software development company. We help agencies, tour operators, OTAs and corporate travel providers launch and scale their own booking platforms."
         ctas={false}
         image="p-about"
         highlights={[["Ready-made platforms", "White-label, configured for you"], ["Custom development", "Built around your business"], ["API integrations", "Suppliers and payments"]]}

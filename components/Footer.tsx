@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { apis, company, services, solutions, type NavLink } from "@/lib/site";
-import { Chev, LogoMark } from "./Brand";
+import { apis, company, products, services, solutions, type NavLink } from "@/lib/site";
+import { Chev, Logo } from "./Brand";
 import { Photo } from "./Photo";
 
 const byGroup = (g: string): NavLink[] =>
@@ -11,10 +11,11 @@ const columns: { title: string; links: NavLink[] }[] = [
   { title: "Booking platforms", links: byGroup("platform") },
   { title: "Portals", links: byGroup("portal") },
   { title: "Back-office & inventory", links: [...byGroup("office"), { href: "/pricing/", label: "Pricing" }] },
+  { title: "Business software", links: [...products.map((p) => ({ href: `/business-software/${p.slug}/`, label: p.name })), { href: "/business-software/", label: "All business software" }] },
   { title: "Custom development", links: [...services.map((s) => ({ href: `/custom-development/${s.slug}/`, label: s.name })), { href: "/hire-developers/", label: "Hire Developers" }] },
   { title: "API integrations", links: [...apis.map((a) => ({ href: `/api-integrations/${a.slug}/`, label: a.name })), { href: "/api-integrations/", label: "Integration directory" }] },
   { title: "Company", links: [
-    { href: "/about/", label: "About Elyra" }, { href: "/testimonials/", label: "Client Stories" }, { href: "/industries/", label: "Industries" },
+    { href: "/about/", label: "About Hawyia" }, { href: "/testimonials/", label: "Client Stories" }, { href: "/industries/", label: "Industries" },
     { href: "/blog/", label: "Blog" }, { href: "/resources/", label: "Resources" }, { href: "/resources/#faq", label: "FAQ" },
     { href: "/contact/", label: "Contact" }, { href: "/request-demo/", label: "Request a Demo" },
   ] },
@@ -55,7 +56,7 @@ export function Footer() {
       <div className="f-body">
         <div className="f-top container">
           <Link href="/" className="f-brand" aria-label={`${company.name} home`}>
-            <LogoMark inner="#f5f5f7" /><span>elyra</span>
+            <Logo />
           </Link>
           <p className="f-tagline">White-label and custom travel booking software, supplier integrations and apps, for travel businesses that want to own their brand.</p>
           {contact.length > 0 && (
@@ -84,7 +85,7 @@ export function Footer() {
 
         <div className="f-legal container">
           <p className="f-fine">
-            Elyra is a software provider. Bookings, payments and supplier contracts stay with your business.
+            Hawyia is a software provider. Bookings, payments and supplier contracts stay with your business.
             Feature availability depends on the chosen product, supplier contracts, integrations and requirements.
           </p>
           <div className="f-legal-row">

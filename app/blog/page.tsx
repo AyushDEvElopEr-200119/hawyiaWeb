@@ -11,7 +11,7 @@ const trail = [{ label: "Blog" }];
 
 export const metadata = pageMeta({
   title: "Blog",
-  description: "The Elyra Journal: practical guides and insights on travel booking software, supplier APIs, payments and running a travel platform.",
+  description: "The Hawyia Journal: practical guides and insights on travel booking software, supplier APIs, payments and running a travel platform.",
   path,
 });
 
@@ -24,7 +24,7 @@ export default function BlogPage() {
         <Breadcrumbs trail={trail} />
         <div className="journal-head">
           <div>
-            <p className="eyebrow">The Elyra Journal</p>
+            <p className="eyebrow">The Hawyia Journal</p>
             <h1 className="ph-title" data-split><SplitTitle text="Notes on building<br />travel technology" /></h1>
           </div>
           <div className="ph-intro">

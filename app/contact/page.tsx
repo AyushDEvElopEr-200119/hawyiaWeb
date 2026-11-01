@@ -8,7 +8,7 @@ const trail = [{ label: "Contact" }];
 
 export const metadata = pageMeta({
   title: "Contact",
-  description: "Contact Elyra: request a demo, get a quote or book a consultation about travel booking software.",
+  description: "Contact Hawyia: request a demo, get a quote or book a consultation about travel booking software.",
   path,
 });
 

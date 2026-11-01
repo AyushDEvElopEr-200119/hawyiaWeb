@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { company, nav, type MegaMenu } from "@/lib/site";
-import { Chev, LogoMark } from "./Brand";
+import { Chev, Logo } from "./Brand";
 
 function MegaPanel({ mega, id, label }: { mega: MegaMenu; id: string; label: string }) {
   return (
@@ -44,8 +44,7 @@ export function Header() {
       <a className="skip" href="#main">Skip to content</a>
       <header className="header" id="header">
         <Link href="/" className="logo" aria-label={`${company.name} home`}>
-          <LogoMark />
-          <span>elyra</span>
+          <Logo />
         </Link>
         <nav className="nav" aria-label="Primary">
           <ul>

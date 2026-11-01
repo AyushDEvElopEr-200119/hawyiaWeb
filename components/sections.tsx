@@ -194,7 +194,7 @@ export const footnote = <p className="fineprint container">Feature availability 
 
 /* ---------------- forms ---------------- */
 const businessTypes = ["Travel agency", "OTA", "Tour operator", "DMC", "Corporate travel / TMC", "Consolidator / wholesaler", "Travel startup", "Other"];
-const needs = ["White-label platform", "Custom development", "API integration", "Extranet / CMS", "Mobile app", "Hire developers", "Not sure yet"];
+const needs = ["White-label platform", "Custom development", "API integration", "Extranet / CMS", "Mobile app", "Business software", "Hire developers", "Not sure yet"];
 const timelines = ["As soon as possible", "1–3 months", "3–6 months", "6+ months", "Just exploring"];
 
 /** Enquiry form. Validation and sending are wired by the motion controller. Set `endpoint`

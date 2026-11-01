@@ -9,7 +9,7 @@ const trail = [{ label: "Pricing" }];
 
 export const metadata = pageMeta({
   title: "Pricing",
-  description: "Starting-from pricing for Elyra travel software by product: booking websites, custom platforms, supplier APIs, holiday sites, hotel extranet, itinerary builder and CRM.",
+  description: "Starting-from pricing for Hawyia travel software by product: booking websites, custom platforms, supplier APIs, holiday sites, hotel extranet, itinerary builder and CRM.",
   path,
 });
 

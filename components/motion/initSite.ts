@@ -1,4 +1,4 @@
-/* Elyra — site interactions, kept deliberately light: no smooth-scroll library, no scroll-
+/* Hawyia — site interactions, kept deliberately light: no smooth-scroll library, no scroll-
    driven or pointer-driven motion. The movement itself is CSS: reveals, hovers and fades
    (see "LIGHT MOTION" in globals.css); this script just wires behaviour.
 

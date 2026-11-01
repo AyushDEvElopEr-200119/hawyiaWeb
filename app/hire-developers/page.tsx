@@ -21,7 +21,7 @@ const roles = [
 
 const faq: Pair[] = [
   ["How quickly can developers start?", "We'll confirm availability after understanding your needs. Typically we share profiles soon after the first call."],
-  ["Who manages the developers?", "They work in your processes and tools, with Elyra handling HR, replacements and quality."],
+  ["Who manages the developers?", "They work in your processes and tools, with Hawyia handling HR, replacements and quality."],
   ["Can I scale the team up or down?", "Yes, with notice periods agreed in the contract."],
 ];
 

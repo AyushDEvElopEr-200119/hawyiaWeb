@@ -53,7 +53,7 @@ export default async function ArticlePage({ params }: Props) {
           <h1 className="ph-title article-title" data-split><SplitTitle text={post.title} /></h1>
           <p className="article-dek">{post.excerpt}</p>
           <div className="article-byline">
-            <span className="byline-avatar"><LogoMark inner="#fff" /></span>
+            <span className="byline-avatar"><LogoMark /></span>
             <span className="byline-who"><b>{company.name} Team</b><small>{readMinutes(post)} min read</small></span>
             <ShareLink title={post.title} />
           </div>
@@ -68,7 +68,7 @@ export default async function ArticlePage({ params }: Props) {
           <div className="article-body">
             {post.body.map((b, i) => <BodyBlock key={i} block={b} />)}
             <footer className="article-end">
-              <span className="byline-avatar"><LogoMark inner="#fff" /></span>
+              <span className="byline-avatar"><LogoMark /></span>
               <p><b>Written by the {company.name} Team.</b> We build white-label and custom booking platforms for travel businesses, and write here about what we learn along the way.</p>
             </footer>
           </div>

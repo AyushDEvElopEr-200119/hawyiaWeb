@@ -88,6 +88,13 @@ export const photos: Record<string, PhotoEntry> = {
   "d-custom-travel-portal-development": { id: "photo-1758873271857-c42a7ef7d692", alt: "Team working in a modern office" },
   "d-crm-back-office-development": { id: "photo-1626863905121-3b0c0ed7b94c", alt: "Two support agents wearing headsets" },
   "d-custom-software-integrations": { id: "photo-1558494949-ef010cbdcc31", alt: "Network cables connected to a switch" },
+  "p-business-software": { id: "photo-1522071820081-009f0129c71c", alt: "Product team working together on laptops" },
+  "s-hrms-software": { id: "photo-1572021335469-31706a17aaef", alt: "Four coworkers smiling around a laptop" },
+  "d-hrms-software": { id: "photo-1543269865-0a740d43b90c", alt: "Two people working together on a laptop" },
+  "s-erp-software": { id: "photo-1686061592689-312bbfb5c055", alt: "Bar chart on a computer screen" },
+  "d-erp-software": { id: "photo-1551288049-bebda4e38f71", alt: "Performance analytics on a laptop screen" },
+  "s-expense-management-software": { id: "photo-1733503747506-773e56e4078f", alt: "Person with a laptop and a credit card" },
+  "d-expense-management-software": { id: "photo-1748609160056-7b95f30041f0", alt: "Financial reports on a tablet" },
   "r-web": { id: "photo-1498050108023-c5249f4df085", alt: "Laptop with code on a busy desk" },
   "r-mobile": { id: "photo-1614741118887-7a4ee193a5fa", alt: "Monitor and laptop showing Swift code" },
   "r-cross-platform": { id: "photo-1551650975-87deedd944c3", alt: "Smartphone showing a dashboard app" },
@@ -113,7 +120,7 @@ export const photos: Record<string, PhotoEntry> = {
 };
 
 export const videos: Record<string, { pexels: string; files: Record<number, string>; alt: string }> = {
-  // chosen because no airline branding is visible
-  hero:   { pexels: "https://www.pexels.com/video/18936530/", files: { 1920: "https://videos.pexels.com/video-files/18936530/18936530-hd_1920_1080_30fps.mp4", 1280: "https://videos.pexels.com/video-files/18936530/18936530-hd_1280_720_30fps.mp4" }, alt: "Sunrise above the clouds from an aircraft" },
+  // hero: a plain white jet overhead with contrails on blue sky (4K source, no airline markings)
+  jet:    { pexels: "https://www.pexels.com/video/34954882/", files: { 1920: "https://videos.pexels.com/video-files/34954882/14806798_3840_2160_30fps.mp4", 1280: "https://videos.pexels.com/video-files/34954882/14806798_3840_2160_30fps.mp4" }, alt: "A white passenger jet passing overhead with contrails against a blue sky" },
   effect: { pexels: "https://www.pexels.com/video/26341148/", files: { 1280: "https://videos.pexels.com/video-files/26341148/11948541_1280_720_30fps.mp4" }, alt: "Aerial view of the ocean and coral reef" },
 };

@@ -4,7 +4,7 @@ import { LogoMark } from "./Brand";
  * Page-load preloader, about 7.6s of kinetic type (paced so every word can be read), then a shutter reveal:
  *   0.25–3.75s the products, one at a time, in huge type: Flights, Hotels, Holidays, Transfers, Payments
  *   3.75–5.1s  "One platform. Your brand."
- *   5.1–6.1s   the Elyra mark and wordmark
+ *   5.1–6.1s   the Hawyia mark and wordmark
  *   6.15–7.6s  the screen splits into six shutters that lift one after another onto the page
  * Corners carry the brand, a label, "Loading" and a 0–100 counter over a filling hairline.
  * Everything moves with transform and opacity only, so it stays smooth on phones.
@@ -34,7 +34,7 @@ export function Preloader() {
       <div className="pl-ui">
         <span className="pl-glow" />
         <div className="pl-corners mono">
-          <span>Elyra</span>
+          <span>Hawyia</span>
           <span>Travel booking software</span>
           <span className="pl-loading">Loading<i>.</i><i>.</i><i>.</i></span>
           <span className="pl-count" />
@@ -49,8 +49,8 @@ export function Preloader() {
             <span className="pl-l"><em>Your brand.</em></span>
           </p>
           <p className="pl-brand">
-            <span className="pl-mark"><LogoMark inner="#06201d" /></span>
-            <span className="pl-l"><span>elyra</span></span>
+            <span className="pl-mark"><LogoMark /></span>
+            <span className="pl-l"><span>Hawyia</span></span>
           </p>
         </div>
       </div>

@@ -5,7 +5,7 @@ import type { Pair } from "./content";
 export type Crumb = { label: string; href?: string };
 
 export const siteDescription =
-  "Elyra helps travel businesses launch, customize and scale their own online booking platforms with white-label solutions, custom development and travel API integrations.";
+  "Hawyia helps travel businesses launch, customize and scale their own online booking platforms with white-label solutions, custom development and travel API integrations.";
 
 // the share card drawn by app/og.png/route.tsx
 const shareImage = { url: "/og.png", width: 1200, height: 630, alt: `${company.name} — ${company.tagline}` };

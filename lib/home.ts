@@ -1,24 +1,24 @@
-// Homepage content. Original Elyra copy; edit here rather than in app/page.tsx.
+// Homepage content. Original Hawyia copy; edit here rather than in app/page.tsx.
 import type { Pair } from "./content";
 
-export const productRows: { title: string; photo: string; desc: string; points: Pair[] }[] = [
+export const productRows: { title: string; photo: string; href: string; desc: string; points: Pair[] }[] = [
   {
-    title: "White-label booking platform", photo: "tileWL",
+    title: "White-label booking platform", photo: "tileWL", href: "/solutions/white-label-travel-booking-software/",
     desc: "Flights, hotels, buses and holidays in one portal under your brand. Choose the modules and suppliers, set your markups, and go live on web and mobile without building from scratch.",
     points: [["Your brand", "Logo, colours and domain"], ["Every product", "Flights, hotels, holidays & more"], ["Your pricing", "Markups and offers you control"]],
   },
   {
-    title: "B2B travel agent portal", photo: "tileB2B",
+    title: "B2B travel agent portal", photo: "tileB2B", href: "/solutions/b2b-travel-portal/",
     desc: "Onboard sub-agents and distributors with their own logins, credit limits, wallets and commission rules. Works for B2B2C and multi-level B2B2B networks.",
     points: [["Agent onboarding", "Logins, documents, approval"], ["Credit & wallets", "Limits, top-ups, statements"], ["Commissions", "By agent, product or route"]],
   },
   {
-    title: "Corporate travel software", photo: "tileCorp",
+    title: "Corporate travel software", photo: "tileCorp", href: "/solutions/corporate-travel-software/",
     desc: "A B2E portal where employees book within policy, managers approve requests, and finance sees one view of spend with consolidated billing.",
     points: [["Travel policies", "Class, fare limits, preferred suppliers"], ["One-tap approvals", "By team, grade or trip value"], ["Spend visibility", "Cost centres and one invoice"]],
   },
   {
-    title: "Travel management back-office", photo: "tileAdmin",
+    title: "Travel management back-office", photo: "tileAdmin", href: "/solutions/travel-management-software/",
     desc: "Bookings, amendments, cancellations, refunds, invoices, markups and reports in one admin, covering everything that happens after the customer clicks “book”.",
     points: [["One ledger", "Online and offline bookings"], ["After-sales", "Changes, refunds, invoices"], ["Reports", "Sales, margins, suppliers"]],
   },
@@ -60,7 +60,7 @@ export const engines: [icon: string, title: string, text: string][] = [
 ];
 
 export const businessModels: { tag: string; title: string; text: string; photo: string; g1: string; g2: string }[] = [
-  { tag: "B2C", title: "A booking site your travellers will actually use", text: "Your own brand and domain, with self-service booking, accounts and payments.", photo: "carB2C", g1: "#0f3b36", g2: "#5fb3a5" },
+  { tag: "B2C", title: "A booking site your travellers will actually use", text: "Your own brand and domain, with self-service booking, accounts and payments.", photo: "carB2C", g1: "#0a2463", g2: "#4f7fe0" },
   { tag: "B2B", title: "An agent network with credit, commissions and control", text: "Agent onboarding, credit limits, wallets and agent-wise markups.", photo: "carB2B", g1: "#14303f", g2: "#6aa9c4" },
   { tag: "B2B2C", title: "Your agents sell to their own customers on your engine", text: "Each agent gets a branded storefront powered by your inventory.", photo: "carB2B2C", g1: "#23352a", g2: "#9cc79a" },
   { tag: "B2B2B", title: "Multi-level distribution, from distributor to sub-agent", text: "Distributors manage their own agents, with margins set at every level.", photo: "carB2B2B", g1: "#2e2a40", g2: "#b6a6e0" },

@@ -2,15 +2,34 @@
   "version": "0.0.1",
   "configurations": [
     {
+      "name": "hawyia",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "next",
+        "dev",
+        "-p",
+        "5180"
+      ],
+      "port": 5180
+    },
+    {
       "name": "elyra",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
       "port": 5178
     },
     {
       "name": "elyra-prod",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["next", "start", "-p", "5179"],
+      "runtimeArgs": [
+        "next",
+        "start",
+        "-p",
+        "5179"
+      ],
       "port": 5179
     }
   ]

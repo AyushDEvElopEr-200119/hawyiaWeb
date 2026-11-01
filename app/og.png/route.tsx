@@ -12,20 +12,22 @@ export function GET() {
         style={{
           width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between",
           padding: 72, color: "#fff",
-          background: "radial-gradient(120% 90% at 70% 30%, #2d8f83 0%, #0f3e39 45%, #061a18 100%)",
+          background: "radial-gradient(120% 90% at 70% 30%, #1546b0 0%, #0a2463 45%, #041030 100%)",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-          <svg width="64" height="64" viewBox="0 0 32 32">
-            <circle cx="16" cy="16" r="14" fill="#fff" />
-            <path d="M4 18 Q16 8 28 14" stroke="#0f3e39" strokeWidth="2.4" fill="none" strokeLinecap="round" />
-            <circle cx="24" cy="12.6" r="2.4" fill="#0f3e39" />
+          <svg width="64" height="64" viewBox="290 52 556 556">
+            <g strokeLinejoin="round" strokeWidth="16">
+            <path fill="#ffffff" stroke="#ffffff" d="M306 214 L466 70 L468 222 L624 224 L522 322 L468 322 L468 462 L308 596 Z" />
+            <path fill="#ffffff" stroke="#ffffff" d="M528 368 L662 250 L662 488 L528 596 Z" />
+            <path fill="#fbb31c" stroke="#fbb31c" d="M518 186 L632 68 L826 68 L826 268 L702 374 L700 188 Z" />
+          </g>
           </svg>
           <span style={{ fontSize: 44, letterSpacing: -1 }}>{company.name}</span>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
           <span style={{ fontSize: 84, lineHeight: 1.02, letterSpacing: -3.5, maxWidth: 980 }}>Build the future of online travel.</span>
-          <span style={{ fontSize: 30, color: "#aeeae0" }}>{company.tagline}</span>
+          <span style={{ fontSize: 30, color: "#fcd77a" }}>{company.tagline}</span>
         </div>
       </div>
     ),

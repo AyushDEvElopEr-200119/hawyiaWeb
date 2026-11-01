@@ -28,7 +28,7 @@ const homeFaq = generalFaq.slice(0, 7);
 
 export default function HomePage() {
   // the hero poster is the first big paint: fetch it alongside the HTML, before the video
-  preload("/assets/media/hero-poster.jpg", { as: "image", fetchPriority: "high" });
+  preload("/assets/media/jet-poster.jpg", { as: "image", fetchPriority: "high" });
   const tabKeys = Object.keys(featureTabs);
   return (
     <>
@@ -36,7 +36,7 @@ export default function HomePage() {
       <section className="hero" id="hero">
         <div className="hero-sticky">
           <div className="hero-media" id="heroMedia">
-            <BgVideo name="hero" poster="/assets/media/hero-poster.jpg" wide eager />
+            <BgVideo name="jet" poster="/assets/media/jet-poster.jpg" wide eager />
             <div className="hero-grain" />
           </div>
           <h1 className="hero-title" id="heroTitle">
@@ -48,14 +48,14 @@ export default function HomePage() {
 
       {/* ============ STATEMENT ============ */}
       <section className="statement">
-        <Statement text="Elyra builds the booking technology behind travel businesses. We help agencies, tour operators and OTAs launch, customize and scale their own platforms, under their own brand." />
+        <Statement text="Hawyia builds the booking technology behind travel businesses. We help agencies, tour operators and OTAs launch, customize and scale their own platforms, under their own brand." />
         <div className="cta-row reveal">
           <a href="#solutions" className="btn-pill press">Explore Solutions <Chev /></a>
           <Link href="/contact/" className="link">Discuss your project <Chev /></Link>
         </div>
       </section>
 
-      {/* ============ SOLUTIONS: tiles grow to full screen as you scroll ============ */}
+      {/* ============ SOLUTIONS: one split card per flagship platform ============ */}
       <section className="products" id="solutions">
         <div className="products-head container">
           <h2 className="h2 reveal">Ready-made platforms,<br />launched as your own</h2>
@@ -65,18 +65,21 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="product-rows">
-          {productRows.map((row) => (
-            <article className="product-row" key={row.title}>
-              <h3 className="product-title">{row.title}</h3>
-              <div className="product-tile">
-                <Photo name={row.photo} sizes="(min-width: 861px) 100vw, 92vw" className="tile-bg" />
-                <p className="tile-cap" aria-hidden="true">{row.title}</p>
+        <div className="product-rows container">
+          {productRows.map((row, i) => (
+            <article className="prow reveal" key={row.title}>
+              <Link href={row.href} className="prow-media press" aria-label={row.title}>
+                <Photo name={row.photo} sizes="(min-width: 861px) 56vw, 92vw" className="tile-bg" />
                 <ul className="tile-hl">
-                  {row.points.map(([t, d], i) => <li key={t}><span className="mono">{pad(i)}</span><b>{t}</b><p>{d}</p></li>)}
+                  {row.points.map(([t, d], j) => <li key={t}><span className="mono">{pad(j)}</span><b>{t}</b><p>{d}</p></li>)}
                 </ul>
+              </Link>
+              <div className="prow-copy">
+                <span className="prow-num mono">{pad(i)}</span>
+                <h3 className="prow-title">{row.title}</h3>
+                <p>{row.desc}</p>
+                <Link href={row.href} className="link">Explore {row.title} <Chev /></Link>
               </div>
-              <p className="product-desc">{row.desc}</p>
             </article>
           ))}
         </div>
@@ -307,7 +310,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ============ THE ELYRA EFFECT ============ */}
+      {/* ============ THE HAWYIA EFFECT ============ */}
       <section className="effect-sec">
       <div className="effect xp" data-expand>
         <div className="effect-media xp-frame" id="effectMedia">
@@ -315,36 +318,36 @@ export default function HomePage() {
           <svg className="routes" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
             <defs>
               <radialGradient id="rg" cx="50%" cy="55%" r="60%">
-                <stop offset="0" stopColor="#2f8f84" />
-                <stop offset="1" stopColor="#0a2724" />
+                <stop offset="0" stopColor="#1546b0" />
+                <stop offset="1" stopColor="#071a4d" />
               </radialGradient>
             </defs>
             <rect width="1200" height="700" fill="url(#rg)" opacity=".55" />
-            <g className="rings" fill="none" stroke="rgba(170,235,224,.18)">
+            <g className="rings" fill="none" stroke="rgba(252,215,122,.18)">
               <circle cx="600" cy="400" r="120" /><circle cx="600" cy="400" r="210" /><circle cx="600" cy="400" r="310" /><circle cx="600" cy="400" r="420" />
             </g>
-            <g className="arcs" fill="none" stroke="rgba(200,250,240,.7)" strokeWidth="1.4">
+            <g className="arcs" fill="none" stroke="rgba(253,226,160,.7)" strokeWidth="1.4">
               <path d="M120 520 Q 360 120 600 400" /><path d="M600 400 Q 860 80 1080 300" />
               <path d="M220 200 Q 420 300 600 400" /><path d="M600 400 Q 820 620 1040 560" />
               <path d="M600 400 Q 640 120 760 90" />
             </g>
-            <g fill="#d8f2ee">
+            <g fill="#e8eefb">
               <circle cx="120" cy="520" r="5" /><circle cx="1080" cy="300" r="5" /><circle cx="220" cy="200" r="5" />
               <circle cx="1040" cy="560" r="5" /><circle cx="760" cy="90" r="5" /><circle cx="600" cy="400" r="8" />
             </g>
           </svg>
-          <h2 className="effect-title">The<br />Elyra<br />Effect</h2>
+          <h2 className="effect-title">The<br />Hawyia<br />Effect</h2>
           <div className="effect-copy">
             <p>Good travel technology goes unnoticed. Searches return fast, prices are correct, bookings confirm, and the admin still makes sense a year later. That is the standard we build to. It covers HTTPS everywhere, role-based access, careful data handling, tested releases and support after launch.</p>
-            <a href="#why" className="link light">Why Elyra <Chev /></a>
+            <a href="#why" className="link light">Why Hawyia <Chev /></a>
           </div>
         </div>
       </div>
       </section>
 
-      {/* ============ WHY ELYRA ============ */}
+      {/* ============ WHY HAWYIA ============ */}
       <section className="why container" id="why">
-        <h2 className="h2 center reveal">Why travel businesses<br />build with Elyra</h2>
+        <h2 className="h2 center reveal">Why travel businesses<br />build with Hawyia</h2>
         <div className="why-grid">
           {whyItems.map(([t, d], i) => (
             <article className="why-item reveal" key={t}><span className="mono">{pad(i)}</span><h3>{t}</h3><p>{d}</p></article>
