@@ -15,7 +15,7 @@ const columns: { title: string; links: NavLink[] }[] = [
   { title: "Custom development", links: [...services.map((s) => ({ href: `/custom-development/${s.slug}/`, label: s.name })), { href: "/hire-developers/", label: "Hire Developers" }] },
   { title: "API integrations", links: [...apis.map((a) => ({ href: `/api-integrations/${a.slug}/`, label: a.name })), { href: "/api-integrations/", label: "Integration directory" }] },
   { title: "Company", links: [
-    { href: "/about/", label: "About Hawyia" }, { href: "/testimonials/", label: "Client Stories" }, { href: "/industries/", label: "Industries" },
+    { href: "/automation/", label: "Automation" }, { href: "/about/", label: "About Hawyia" }, { href: "/testimonials/", label: "Client Stories" }, { href: "/industries/", label: "Industries" },
     { href: "/blog/", label: "Blog" }, { href: "/resources/", label: "Resources" }, { href: "/resources/#faq", label: "FAQ" },
     { href: "/contact/", label: "Contact" }, { href: "/request-demo/", label: "Request a Demo" },
   ] },
@@ -41,14 +41,14 @@ export function Footer() {
   return (
     <footer className="footer">
       <section className="f-cta container reveal" aria-labelledby="f-cta-title">
-        <Photo name="f-cta" className="f-cta-img" sizes="(min-width: 1200px) 1160px, 94vw" />
+        <Photo name="p-custom-development" className="f-cta-img" sizes="(min-width: 1200px) 1160px, 94vw" />
         <div className="f-cta-glass">
-          <p className="f-eyebrow">Start your platform</p>
-          <h2 id="f-cta-title" className="f-cta-title">Ready to launch<br />your own brand of travel?</h2>
-          <p className="f-cta-text">Tell us what you sell and who you sell to. We&apos;ll recommend white-label or custom and send a clear timeline.</p>
+          <p className="f-eyebrow">Build better. Work smarter. Grow faster.</p>
+          <h2 id="f-cta-title" className="f-cta-title">Ready to<br />automate?</h2>
+          <p className="f-cta-text">Bring us a process to simplify, an idea to develop or an operation to transform. We&apos;ll help you find a smarter way to do it.</p>
           <div className="f-cta-row">
-            <Link href="/request-demo/" className="f-btn f-btn-solid press">Request a Demo <Chev /></Link>
-            <Link href="/contact/" className="f-btn f-btn-glass press">Discuss your project</Link>
+            <Link href="/contact/" className="f-btn f-btn-solid press">Let&apos;s talk about your project <Chev /></Link>
+            <Link href="/request-demo/" className="f-btn f-btn-glass press">Request a Demo</Link>
           </div>
         </div>
       </section>
@@ -58,7 +58,7 @@ export function Footer() {
           <Link href="/" className="f-brand" aria-label={`${company.name} home`}>
             <Logo />
           </Link>
-          <p className="f-tagline">White-label and custom travel booking software, supplier integrations and apps, for travel businesses that want to own their brand.</p>
+          <p className="f-tagline">Software development, automation and AI solutions, for businesses that want simpler operations and more time for the work that matters.</p>
           {contact.length > 0 && (
             <ul className="f-contact">{contact.map((c) => <li key={c.href}><a href={c.href}>{c.label}</a></li>)}</ul>
           )}
@@ -85,8 +85,8 @@ export function Footer() {
 
         <div className="f-legal container">
           <p className="f-fine">
-            Hawyia is a software provider. Bookings, payments and supplier contracts stay with your business.
-            Feature availability depends on the chosen product, supplier contracts, integrations and requirements.
+            Feature availability depends on the chosen product, integrations and requirements.
+            On our travel platforms, Hawyia is the software provider: bookings, payments and supplier contracts stay with your business.
           </p>
           <div className="f-legal-row">
             <p>Copyright © {new Date().getFullYear()} {company.legal}. All rights reserved.</p>

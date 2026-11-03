@@ -5,7 +5,7 @@ import type { Pair } from "./content";
 export type Crumb = { label: string; href?: string };
 
 export const siteDescription =
-  "Hawyia helps travel businesses launch, customize and scale their own online booking platforms with white-label solutions, custom development and travel API integrations.";
+  "Hawyia Premium helps businesses simplify their operations through custom software, business automation, AI and system integration, with ready-made platforms for business management and travel.";
 
 // the share card drawn by app/og.png/route.tsx
 const shareImage = { url: "/og.png", width: 1200, height: 630, alt: `${company.name} — ${company.tagline}` };

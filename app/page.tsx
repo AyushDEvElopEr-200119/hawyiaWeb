@@ -1,16 +1,12 @@
 import Link from "next/link";
-import { preload } from "react-dom";
 import { Chev } from "@/components/Brand";
-import { BgVideo, Photo } from "@/components/Photo";
+import { Photo } from "@/components/Photo";
 import { FaqBlock, JsonLd, ProcessTable, Statement } from "@/components/sections";
-import { generalFaq, processSteps } from "@/lib/content";
-import { posts } from "@/lib/blog";
 import {
-  apiCategories, appFeatures, businessModels, devServices, engines, extranetItems,
-  featureTabs, marqueeItems, miniCards, productRows, whyItems,
+  aiCapabilities, apiCategories, automationTabs, devServices, expertise, homeFaq, homeSteps,
+  industries, marqueeItems, productRows, whyItems,
 } from "@/lib/home";
 import { faqSchema, pageMeta, siteDescription } from "@/lib/seo";
-import { solutions } from "@/lib/site";
 
 export const metadata = pageMeta({
   description: siteDescription,
@@ -19,49 +15,51 @@ export const metadata = pageMeta({
 
 const pad = (i: number) => String(i + 1).padStart(2, "0");
 
-const solutionGroups = [
-  { id: "platform", title: "Booking platforms", text: "Engines for each product, or all of them in one OTA." },
-  { id: "portal", title: "Portals by business model", text: "The same engine, shaped around who you sell to." },
-  { id: "office", title: "Back-office & inventory", text: "Everything that happens before and after the booking." },
-];
-const homeFaq = generalFaq.slice(0, 7);
-
 export default function HomePage() {
-  // the hero poster is the first big paint: fetch it alongside the HTML, before the video
-  preload("/assets/media/jet-poster.jpg", { as: "image", fetchPriority: "high" });
-  const tabKeys = Object.keys(featureTabs);
+  const tabKeys = Object.keys(automationTabs);
   return (
     <>
       {/* ============ HERO ============ */}
       <section className="hero" id="hero">
         <div className="hero-sticky">
           <div className="hero-media" id="heroMedia">
-            <BgVideo name="jet" poster="/assets/media/jet-poster.jpg" wide eager />
+            <Photo name="d-booking-engine-development" className="media-bg" priority />
             <div className="hero-grain" />
           </div>
           <h1 className="hero-title" id="heroTitle">
-            <span style={{ "--i": 0 } as React.CSSProperties}>Build the future</span>
-            <span style={{ "--i": 1 } as React.CSSProperties}>of online travel.</span>
+            <span style={{ "--i": 0 } as React.CSSProperties}>We help you automate</span>
+            <span style={{ "--i": 1 } as React.CSSProperties}>your business.</span>
           </h1>
         </div>
       </section>
 
       {/* ============ STATEMENT ============ */}
       <section className="statement">
-        <Statement text="Hawyia builds the booking technology behind travel businesses. We help agencies, tour operators and OTAs launch, customize and scale their own platforms, under their own brand." />
+        <Statement text="Every business loses time to work that technology could handle. We bring software, automation and AI together to make your work simpler, faster and smarter, whether that means automating one task or building a complete system." />
         <div className="cta-row reveal">
-          <a href="#solutions" className="btn-pill press">Explore Solutions <Chev /></a>
-          <Link href="/contact/" className="link">Discuss your project <Chev /></Link>
+          <Link href="/contact/" className="btn-pill press">Let&apos;s talk <Chev /></Link>
+          <a href="#expertise" className="link">Explore what we do <Chev /></a>
         </div>
       </section>
 
-      {/* ============ SOLUTIONS: one split card per flagship platform ============ */}
+      {/* ============ EXPERTISE ============ */}
+      <section className="expertise container" id="expertise">
+        <div className="split-head">
+          <h2 className="h2 reveal">We build. We connect.<br />We automate.</h2>
+          <p className="reveal">Most projects need more than one of these. We handle all four, so you don&apos;t have to coordinate separate suppliers.</p>
+        </div>
+        <div className="api-grid two">
+          {expertise.map(([t, d]) => <article className="api reveal" key={t}><h3>{t}</h3><p>{d}</p></article>)}
+        </div>
+      </section>
+
+      {/* ============ READY-TO-USE SOLUTIONS: one split card per area ============ */}
       <section className="products" id="solutions">
         <div className="products-head container">
-          <h2 className="h2 reveal">Ready-made platforms,<br />launched as your own</h2>
+          <h2 className="h2 reveal">You may not need to<br />start from scratch</h2>
           <div className="products-intro reveal">
-            <p>You keep your brand, your domain and your customers. We supply the engine underneath it. Configurable modules and one admin panel, ready to launch.</p>
-            <Link href="/solutions/" className="link">View all solutions <Chev /></Link>
+            <p>Ready-to-deploy platforms get you moving sooner, and we can tailor them to the way you work.</p>
+            <Link href="/contact/" className="link">Find the right fit <Chev /></Link>
           </div>
         </div>
 
@@ -78,45 +76,10 @@ export default function HomePage() {
                 <span className="prow-num mono">{pad(i)}</span>
                 <h3 className="prow-title">{row.title}</h3>
                 <p>{row.desc}</p>
-                <Link href={row.href} className="link">Explore {row.title} <Chev /></Link>
+                <Link href={row.href} className="link">Explore {row.title.toLowerCase()} <Chev /></Link>
               </div>
             </article>
           ))}
-        </div>
-
-        <div className="container" id="all-solutions">
-          <p className="eyebrow-serif">Every solution</p>
-          <div className="sol-groups">
-            {solutionGroups.map((g) => {
-              const items = solutions.filter((s) => s.group === g.id);
-              return (
-                <div className={`sol-group sg-${g.id} reveal`} key={g.id}>
-                  <div className="sg-head">
-                    <p className="sg-title">{g.title}<span>{pad(items.length - 1)}</span></p>
-                    <p className="sg-text">{g.text}</p>
-                  </div>
-                  <ul>
-                    {items.map((s) => (
-                      <li key={s.slug}>
-                        <Link href={`/solutions/${s.slug}/`} className="sg-row press">
-                          <b>{s.name}</b><span>{s.short}</span><Chev />
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                  {g.id === "office" && (
-                    <div className="sg-cta">
-                      <p>Not sure which fits? Compare all {solutions.length} side by side, or see plans by product.</p>
-                      <div className="cta-row">
-                        <Link href="/solutions/" className="btn-pill press">All solutions <Chev /></Link>
-                        <Link href="/pricing/" className="link">Pricing <Chev /></Link>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
         </div>
       </section>
 
@@ -129,10 +92,10 @@ export default function HomePage() {
           <div className="bleed-media"><Photo name="bleed" className="media-bg" /></div>
           <div className="cd-layout">
             <div className="cd-head">
-              <p className="eyebrow light">Custom development</p>
-              <h2 className="bleed-title">From brief<br />to booking</h2>
-              <p className="cd-text">Some businesses need to launch this quarter. Others need something nobody sells yet. We tell you honestly which one you are, then configure a ready-made platform or build yours from scratch.</p>
-              <Link href="/custom-development/" className="btn-pill press cd-cta">Explore custom development <Chev /></Link>
+              <p className="eyebrow light">Custom software</p>
+              <h2 className="bleed-title">Have an idea?<br />Let&apos;s build it.</h2>
+              <p className="cd-text">When existing software doesn&apos;t fit the way you operate, we&apos;ll build what does. We stay with you from planning and design through development and deployment.</p>
+              <Link href="/contact/" className="btn-pill press cd-cta">Build your software with us <Chev /></Link>
             </div>
             <ul className="cd-grid">
               {devServices.map(([href, title, sub], i) => (
@@ -146,10 +109,50 @@ export default function HomePage() {
       </div>
       </section>
 
-      {/* ============ INTEGRATIONS ============ */}
+      {/* ============ AUTOMATION ============ */}
+      <section className="features container" id="automation">
+        <h2 className="h2 center reveal">Stop repeating.<br />Start automating.</h2>
+        <p className="sub reveal">If a task follows the same steps every time, it&apos;s worth asking whether a person still needs to do it. Choose an area to see where automation can give you time back.</p>
+        <div className="tabs reveal" role="tablist" data-tabs>
+          <span className="tab-ind" aria-hidden="true" />
+          {tabKeys.map((k, i) => (
+            <button key={k} role="tab" id={`ft-${i}`} aria-controls={`fp-${i}`} aria-selected={i === 0} tabIndex={i === 0 ? 0 : -1}>{k}</button>
+          ))}
+        </div>
+        <div className="panels">
+          {tabKeys.map((k, i) => (
+            <div key={k} className={`panel${i === 0 ? " is-on" : ""}`} role="tabpanel" id={`fp-${i}`} aria-labelledby={`ft-${i}`} hidden={i !== 0}>
+              {automationTabs[k].map(([t, d]) => <div className="feat" key={t}><h3>{t}</h3><p>{d}</p></div>)}
+            </div>
+          ))}
+        </div>
+        <p className="fineprint"><Link className="link" href="/automation/">See how automation works <Chev /></Link></p>
+      </section>
+
+      {/* ============ ARTIFICIAL INTELLIGENCE ============ */}
+      <section className="engines container" id="ai">
+        <div className="split-head">
+          <h2 className="h2 reveal">AI that does real work<br />in your business</h2>
+          <p className="reveal">AI is already a practical tool. We add it to the systems you have and the applications you&apos;re building, where it makes a real difference.</p>
+        </div>
+        <div className="engine-grid bento">
+          {aiCapabilities.map(([icon, t, d], i) => (
+            <article className={`engine press reveal${i === 0 ? " eng-hero" : ""}`} key={t}>
+              <span className="eng-ico">{icon}</span>
+              <h3>{t}</h3><p>{d}</p>
+              {i === 0 && <Link href="/contact/" className="link">Explore AI possibilities <Chev /></Link>}
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* ============ INTEGRATION ============ */}
       <section className="marquee-sec" id="integrations">
-        <p className="eyebrow-serif">Connects with</p>
-        <div className="marquee" aria-label="Integration categories">
+        <div className="split-head container">
+          <h2 className="h2 reveal">Your systems should<br />work together</h2>
+          <p className="reveal">Problems start when your applications don&apos;t talk to each other. We connect them into one working environment, with fewer complications along the way.</p>
+        </div>
+        <div className="marquee" aria-label="What we connect">
           {[0, 1].map((copy) => (
             <div className="marquee-track" aria-hidden={copy === 1 || undefined} key={copy}>
               {marqueeItems.map((m) => <span key={m}>{m}</span>)}
@@ -160,41 +163,19 @@ export default function HomePage() {
           {apiCategories.map(([t, d]) => <article className="api reveal" key={t}><h3>{t}</h3><p>{d}</p></article>)}
         </div>
         <p className="fineprint">
-          <Link className="link" href="/api-integrations/">Browse the integration directory <Chev /></Link><br />
-          Integrations are subject to supplier access and agreements. We list suppliers by name only for integrations we have delivered.
+          <Link className="link" href="/contact/">Tell us what you need to connect <Chev /></Link><br />
+          Some integrations depend on access and agreements with the third-party provider.
         </p>
       </section>
 
-      {/* ============ BOOKING ENGINES ============ */}
-      <section className="engines container" id="engines">
-        <div className="split-head">
-          <h2 className="h2 reveal">A booking engine<br />for every journey</h2>
-          <p className="reveal">Each engine covers the whole trip: search, pricing, booking, payment, and the changes that come after. Launch with one engine and add more as you grow.</p>
-        </div>
-        <div className="engine-grid bento">
-          {engines.map(([icon, t, d], i) => (
-            <article className={`engine press reveal${i === 0 ? " eng-hero" : ""}`} key={t}>
-              <span className="eng-ico">{icon}</span>
-              <h3>{t}</h3><p>{d}</p>
-              {i === 0 && (
-                <ul className="eng-chips">
-                  {["GDS · LCC · NDC", "Fare calendar", "Seats & baggage", "Reissues & refunds"].map((c) => <li key={c}>{c}</li>)}
-                </ul>
-              )}
-              {i === 0 && <Link href="/solutions/flight-booking-software/" className="link">Flight booking software <Chev /></Link>}
-            </article>
-          ))}
-        </div>
-      </section>
-
-      {/* ============ BUSINESS MODELS: pinned gallery ============ */}
-      <section className="carousel-sec" id="platforms">
-        <p className="eyebrow-serif">Business models we power</p>
+      {/* ============ INDUSTRIES: pinned gallery ============ */}
+      <section className="carousel-sec" id="industries">
+        <p className="eyebrow-serif">Industries we help work smarter</p>
         <div className="carousel xp" data-hscroll>
           <button className="car-arrow prev press" aria-label="Previous">‹</button>
           <div className="car-viewport xp-frame">
             <div className="car-track">
-              {businessModels.map((m) => (
+              {industries.map((m) => (
                 <article className="car-slide" style={{ "--g1": m.g1, "--g2": m.g2 } as React.CSSProperties} key={m.tag}>
                   <div className="car-art"><Photo name={m.photo} sizes="100vw" /></div>
                   <div className="car-glass"><small>{m.tag}</small><h3>{m.title}</h3><p>{m.text}</p></div>
@@ -203,118 +184,29 @@ export default function HomePage() {
             </div>
           </div>
           <button className="car-arrow next press" aria-label="Next">›</button>
-          <div className="car-dots" role="tablist" aria-label="Choose a business model">
-            {businessModels.map((m, i) => (
-              <button key={m.tag} role="tab" aria-label={`${m.tag} (${i + 1} of ${businessModels.length})`} aria-selected={i === 0} tabIndex={i === 0 ? 0 : -1} />
+          <div className="car-dots" role="tablist" aria-label="Choose an industry">
+            {industries.map((m, i) => (
+              <button key={m.tag} role="tab" aria-label={`${m.tag} (${i + 1} of ${industries.length})`} aria-selected={i === 0} tabIndex={i === 0 ? 0 : -1} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* ============ FEATURES ============ */}
-      <section className="features container" id="features">
-        <h2 className="h2 center reveal">Everything from search<br />to post-booking</h2>
-        <p className="sub reveal">Choose a product to see what comes built in.</p>
-        <div className="tabs reveal" role="tablist" data-tabs>
-          <span className="tab-ind" aria-hidden="true" />
-          {tabKeys.map((k, i) => (
-            <button key={k} role="tab" id={`ft-${i}`} aria-controls={`fp-${i}`} aria-selected={i === 0} tabIndex={i === 0 ? 0 : -1}>{k}</button>
-          ))}
-        </div>
-        <div className="panels">
-          {tabKeys.map((k, i) => (
-            <div key={k} className={`panel${i === 0 ? " is-on" : ""}`} role="tabpanel" id={`fp-${i}`} aria-labelledby={`ft-${i}`} hidden={i !== 0}>
-              {featureTabs[k].map(([t, d]) => <div className="feat" key={t}><h3>{t}</h3><p>{d}</p></div>)}
-            </div>
+      {/* ============ WHY HAWYIA ============ */}
+      <section className="why container" id="why">
+        <h2 className="h2 center reveal">We understand technology.<br />We understand business.</h2>
+        <div className="why-grid">
+          {whyItems.map(([t, d], i) => (
+            <article className="why-item reveal" key={t}><span className="mono">{pad(i)}</span><h3>{t}</h3><p>{d}</p></article>
           ))}
         </div>
       </section>
 
-      {/* ============ EXTRANET & CMS ============ */}
-      <section className="extranet container" id="extranet">
-        <article className="ext-card reveal">
-          <div className="ext-copy">
-            <span className="tag">Extranet &amp; CMS</span>
-            <h2 className="h2">Your inventory.<br />Your rules.</h2>
-            <p>Sell more than supplier content. Load your own series fares, contracted hotels and packages, control availability in real time, and book them on the same platform as everything else.</p>
-            <div className="cta-row">
-              <Link href="/solutions/travel-extranet-software/" className="btn-pill press">Explore the extranet <Chev /></Link>
-              <Link href="/contact/" className="link">Ask a question <Chev /></Link>
-            </div>
-          </div>
-          <ul className="ext-tiles">
-            {extranetItems.map(([b, s], i) => <li key={b}><small>{pad(i)}</small><b>{b}</b><span>{s}</span></li>)}
-          </ul>
-        </article>
-      </section>
-
-      {/* ============ TWO WAYS ============ */}
-      <section className="ways container">
-        <p className="eyebrow-serif">Two ways to build</p>
-        <article className="feature-card reveal">
-          <div className="feature-media">
-            <Photo name="ways" sizes="(min-width: 861px) 389px, 92vw" className="media-bg" />
-            <div className="fm-compare">
-              <div className="fm-col"><small>White-label</small><b>Weeks</b><span>to launch</span></div>
-              <div className="fm-div" />
-              <div className="fm-col"><small>Custom</small><b>Months</b><span>to launch</span></div>
-            </div>
-          </div>
-          <div className="feature-body">
-            <span className="tag">Compare</span>
-            <h3>White-label or custom: which one fits?</h3>
-            <p>White-label is the faster and cheaper route, built on proven modules. Custom gives you full flexibility for a business model nobody else sells. Plenty of clients start with one and add the other later.</p>
-            <a href="#faq" className="link">Learn more <Chev /></a>
-          </div>
-        </article>
-        <div className="mini-grid">
-          {miniCards.map(([photo, title, href]) => (
-            <article className="mini-card press reveal" key={title}>
-              <div className="mini-media"><Photo name={photo} sizes="90px" /></div>
-              <div><h3>{title}</h3><Link href={href} className="link">Read more <Chev /></Link></div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      {/* ============ MOBILE APPS: bento ============ */}
-      <section className="apps container" id="apps">
-        <div className="split-head">
-          <h2 className="h2 reveal">Your booking engine,<br />in their pocket</h2>
-          <p className="reveal">Android and iOS apps for travellers and agents, connected to the same engine, suppliers and payment gateway as your website. One inventory, one admin, one set of reports.</p>
-        </div>
-        <div className="bento">
-          <article className="b-card b-photo b-lg reveal">
-            <Photo name="c-travel-mobile-app-development" sizes="(min-width: 861px) 50vw, 92vw" className="b-img" />
-            <div className="b-cap">
-              <p className="eyebrow light">Mobile apps</p>
-              <h3>Apps that feel native</h3>
-              <p>Designed for touch and fast on every network, with booking, payments and trips in one place.</p>
-              <Link href="/custom-development/travel-mobile-app-development/" className="link light">Mobile app development <Chev /></Link>
-            </div>
-          </article>
-          {appFeatures.map((f) => (
-            <article className={`b-card${f.tone ? ` b-${f.tone}` : ""} reveal`} key={f.title}>
-              <svg className="b-ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" dangerouslySetInnerHTML={{ __html: f.icon }} />
-              <h3>{f.title}</h3>
-              <p>{f.text}</p>
-            </article>
-          ))}
-          <article className="b-card b-photo b-wide reveal">
-            <Photo name="miniApp" sizes="(min-width: 861px) 50vw, 92vw" className="b-img" />
-            <div className="b-cap">
-              <h3>The whole trip, in one app</h3>
-              <p>Search, book, pay, check details and change plans.</p>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      {/* ============ THE HAWYIA EFFECT ============ */}
+      {/* ============ THE HAWYIA DIFFERENCE ============ */}
       <section className="effect-sec">
       <div className="effect xp" data-expand>
         <div className="effect-media xp-frame" id="effectMedia">
-          <BgVideo name="effect" />
+          <Photo name="d-custom-software-integrations" className="media-bg" />
           <svg className="routes" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
             <defs>
               <radialGradient id="rg" cx="50%" cy="55%" r="60%">
@@ -336,42 +228,16 @@ export default function HomePage() {
               <circle cx="1040" cy="560" r="5" /><circle cx="760" cy="90" r="5" /><circle cx="600" cy="400" r="8" />
             </g>
           </svg>
-          <h2 className="effect-title">The<br />Hawyia<br />Effect</h2>
+          <h2 className="effect-title">Simple<br />by<br />design</h2>
           <div className="effect-copy">
-            <p>Good travel technology goes unnoticed. Searches return fast, prices are correct, bookings confirm, and the admin still makes sense a year later. That is the standard we build to. It covers HTTPS everywhere, role-based access, careful data handling, tested releases and support after launch.</p>
-            <a href="#why" className="link light">Why Hawyia <Chev /></a>
+            <p>You don&apos;t always need a new system. Sometimes it&apos;s a matter of connecting what you already have, or automating a single process. Sometimes a new application is the right answer. We help you choose the right approach, without technology for its own sake.</p>
+            <Link href="/contact/" className="link light">Talk it through with us <Chev /></Link>
           </div>
         </div>
       </div>
       </section>
 
-      {/* ============ WHY HAWYIA ============ */}
-      <section className="why container" id="why">
-        <h2 className="h2 center reveal">Why travel businesses<br />build with Hawyia</h2>
-        <div className="why-grid">
-          {whyItems.map(([t, d], i) => (
-            <article className="why-item reveal" key={t}><span className="mono">{pad(i)}</span><h3>{t}</h3><p>{d}</p></article>
-          ))}
-        </div>
-      </section>
-
-      {/* ============ RESOURCES ============ */}
-      <section className="edit container" id="resources">
-        <h2 className="h2 center reveal">The Travel Tech Edit</h2>
-        <div className="edit-grid">
-          {posts.slice(0, 3).map((g) => (
-            <article className="post press reveal" key={g.slug}>
-              <div className="post-media"><Photo name={g.photo} sizes="(min-width: 861px) 320px, 92vw" /></div>
-              <small>{g.tag}</small>
-              <h3>{g.title}</h3>
-              <p>{g.excerpt}</p>
-              <Link href={`/blog/${g.slug}/`} className="link">Read article <Chev /></Link>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <ProcessTable steps={processSteps} />
+      <ProcessTable steps={homeSteps} title="How ideas become solutions" />
       <FaqBlock faq={homeFaq} />
       <JsonLd data={faqSchema(homeFaq)} />
     </>

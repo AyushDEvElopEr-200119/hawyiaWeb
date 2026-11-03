@@ -26,8 +26,8 @@ export function GET() {
           <span style={{ fontSize: 44, letterSpacing: -1 }}>{company.name}</span>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-          <span style={{ fontSize: 84, lineHeight: 1.02, letterSpacing: -3.5, maxWidth: 980 }}>Build the future of online travel.</span>
-          <span style={{ fontSize: 30, color: "#fcd77a" }}>{company.tagline}</span>
+          <span style={{ fontSize: 84, lineHeight: 1.02, letterSpacing: -3.5, maxWidth: 980 }}>{company.tagline}.</span>
+          <span style={{ fontSize: 30, color: "#fcd77a" }}>Software development · Automation · AI</span>
         </div>
       </div>
     ),

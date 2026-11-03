@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     entry("/", 1, "weekly"),
     entry("/solutions/", 0.9), ...solutions.map((s) => entry(`/solutions/${s.slug}/`, 0.8)),
     entry("/business-software/", 0.9), ...products.map((p) => entry(`/business-software/${p.slug}/`, 0.8)),
+    entry("/automation/", 0.9),
     entry("/custom-development/", 0.9), ...services.map((s) => entry(`/custom-development/${s.slug}/`, 0.8)),
     entry("/api-integrations/", 0.9), ...apis.map((a) => entry(`/api-integrations/${a.slug}/`, 0.8)),
     ...["/industries/", "/pricing/", "/hire-developers/", "/about/", "/resources/", "/contact/", "/request-demo/"].map((p) => entry(p, 0.7)),

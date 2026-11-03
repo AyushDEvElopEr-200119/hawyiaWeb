@@ -21,7 +21,7 @@ export const company = {
   phone: "+968 9705 7071",
   whatsapp: "",       // e.g. "910000000000" (digits only, used for wa.me)
   address: "",        // office address
-  tagline: "White-label & custom travel booking software",
+  tagline: "We help you automate your business",
 };
 
 export const solutions = [
@@ -111,6 +111,7 @@ export const nav: NavItem[] = [
       },
     },
   },
+  { label: "Automation", href: "/automation/" },
   {
     label: "API Integrations",
     mega: {
