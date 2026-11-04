@@ -8,6 +8,22 @@
 
 type El = HTMLElement;
 
+// Text this script writes into the page, for languages other than English.
+const arabic: Record<string, string> = {
+  "Close": "إغلاق",
+  "Menu": "القائمة",
+  "Please enter your name.": "يرجى إدخال اسمك.",
+  "Please enter a valid business email.": "يرجى إدخال بريد إلكتروني صحيح للعمل.",
+  "Sending…": "جارٍ الإرسال…",
+  "Thanks. We'll be in touch within one business day.": "شكرًا لك. سنتواصل معك خلال يوم عمل واحد.",
+  "Something went wrong. Please try again, or email us directly.": "حدث خطأ ما. يرجى المحاولة مرة أخرى أو مراسلتنا عبر البريد الإلكتروني مباشرة.",
+  "Website enquiry": "استفسار من الموقع الإلكتروني",
+  "Your email app should open with the details filled in.": "سيُفتح تطبيق البريد الإلكتروني وفيه التفاصيل التي أدخلتها.",
+  "Email address copied": "تم نسخ عنوان البريد الإلكتروني",
+};
+const say = (text: string) => (document.documentElement.lang === "ar" ? arabic[text] ?? text : text);
+const isRtl = () => document.documentElement.dir === "rtl";
+
 const clamp = (v: number, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 const $ = <T extends Element = El>(s: string, el: ParentNode = document) => el.querySelector<T>(s);
 const $$ = <T extends Element = El>(s: string, el: ParentNode = document) => [...el.querySelectorAll<T>(s)];
@@ -35,7 +51,7 @@ export function initSite(): () => void {
     menu.classList.toggle("open", open);
     menu.setAttribute("aria-hidden", String(!open));
     menuBtn.setAttribute("aria-expanded", String(open));
-    menuBtn.textContent = open ? "Close" : "Menu";
+    menuBtn.textContent = open ? say("Close") : say("Menu");
     document.body.style.overflow = open ? "hidden" : "";
   }
 
@@ -172,7 +188,7 @@ export function initSite(): () => void {
       if (i === idx) return;
       idx = i;
       dots.forEach((d, j) => { d.setAttribute("aria-selected", String(j === i)); d.tabIndex = j === i ? 0 : -1; });
-      track.style.transform = `translateX(${-100 * i}%)`;
+      track.style.transform = `translateX(${(isRtl() ? 100 : -100) * i}%)`;
     };
     dots.forEach((d, i) => on(d, "click", () => goTo(i)));
     const prev = $(".car-arrow.prev", stage), next = $(".car-arrow.next", stage);
@@ -181,7 +197,7 @@ export function initSite(): () => void {
     if (dotsWrap) on(dotsWrap, "keydown", (e: KeyboardEvent) => {
       if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
       e.preventDefault();
-      goTo(idx + (e.key === "ArrowRight" ? 1 : -1));
+      goTo(idx + ((e.key === "ArrowRight") !== isRtl() ? 1 : -1));
       dots[idx].focus();
     });
     goTo(0);
@@ -205,7 +221,7 @@ export function initSite(): () => void {
     tabs.forEach((t, i) => {
       on(t, "click", () => select(t));
       on(t, "keydown", (e: KeyboardEvent) => {
-        const d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+        const d = (e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0) * (isRtl() ? -1 : 1);
         if (!d) return;
         const n = tabs[(i + d + tabs.length) % tabs.length]; select(n); n.focus();
       });
@@ -232,8 +248,8 @@ export function initSite(): () => void {
   $$<HTMLFormElement>("form.lead").forEach((form) => {
     const status = $(".form-status", form);
     const rules: Record<string, (v: string) => string> = {
-      name: (v) => (v.trim() ? "" : "Please enter your name."),
-      email: (v) => (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) ? "" : "Please enter a valid business email."),
+      name: (v) => (v.trim() ? "" : say("Please enter your name.")),
+      email: (v) => (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) ? "" : say("Please enter a valid business email.")),
     };
     const field = (n: string) => form.elements.namedItem(n) as HTMLInputElement;
     const check = (input: HTMLInputElement) => {
@@ -263,21 +279,21 @@ export function initSite(): () => void {
       data.page = location.pathname;
       if (form.dataset.endpoint) {
         btn.disabled = true;
-        if (status) status.textContent = "Sending…";
+        if (status) status.textContent = say("Sending…");
         try {
           const res = await fetch(form.dataset.endpoint, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
           if (!res.ok) throw new Error(String(res.status));
           form.reset();
-          if (status) status.textContent = "Thanks. We'll be in touch within one business day.";
+          if (status) status.textContent = say("Thanks. We'll be in touch within one business day.");
         } catch {
-          if (status) status.textContent = "Something went wrong. Please try again, or email us directly.";
+          if (status) status.textContent = say("Something went wrong. Please try again, or email us directly.");
         } finally { btn.disabled = false; }
         return;
       }
       // no handler configured yet: open a pre-filled email draft instead
       const body = Object.entries(data).filter(([, v]) => v).map(([k, v]) => `${k}: ${v}`).join("\n");
-      location.href = `mailto:${form.dataset.mailto}?subject=${encodeURIComponent("Website enquiry")}&body=${encodeURIComponent(body)}`;
-      if (status) status.textContent = "Your email app should open with the details filled in.";
+      location.href = `mailto:${form.dataset.mailto}?subject=${encodeURIComponent(say("Website enquiry"))}&body=${encodeURIComponent(body)}`;
+      if (status) status.textContent = say("Your email app should open with the details filled in.");
     });
   });
 
@@ -306,7 +322,7 @@ export function initSite(): () => void {
         if (!navigator.clipboard) return;            // fall back to the mail app
         e.preventDefault();
         navigator.clipboard.writeText(a.href.replace("mailto:", "")).then(
-          () => showToast("Email address copied"),
+          () => showToast(say("Email address copied")),
           () => { location.href = a.href; });
       });
     });

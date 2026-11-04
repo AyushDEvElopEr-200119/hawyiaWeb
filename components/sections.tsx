@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Fragment } from "react";
+import { localize, t } from "@/lib/i18n";
 import { company } from "@/lib/site";
 import type { Pair } from "@/lib/content";
 import type { Crumb } from "@/lib/seo";
@@ -9,7 +10,7 @@ import { ChoiceCards } from "./cinematic";
 
 /* ---------------- structured data ---------------- */
 export function JsonLd({ data }: { data: object | object[] }) {
-  const list = Array.isArray(data) ? data : [data];
+  const list = localize(Array.isArray(data) ? data : [data], undefined, company.url);
   return (
     <>
       {list.map((d, i) => (
@@ -22,7 +23,7 @@ export function JsonLd({ data }: { data: object | object[] }) {
 /* ---------------- text helpers ---------------- */
 /** Title text where "<br />" marks a line break; each word becomes a span the hero animates. */
 export function SplitTitle({ text }: { text: string }) {
-  const lines = text.split(/<br\s*\/?>/);
+  const lines = t(text).split(/<br\s*\/?>/);
   let n = 0;   // word index across lines, so CSS can stagger the rise (--i)
   return (
     <>
@@ -38,11 +39,16 @@ export function SplitTitle({ text }: { text: string }) {
   );
 }
 
+/** A heading with fixed line breaks, translated whole so the wording can change between lines. */
+export function Lines({ text }: { text: string }) {
+  return <>{t(text).split(/<br\s*\/?>/).map((line, i) => <Fragment key={i}>{i > 0 && <br />}{line}</Fragment>)}</>;
+}
+
 /** A large statement whose words brighten one by one as it scrolls past. */
 export function Statement({ text, className = "" }: { text: string; className?: string }) {
   return (
     <h2 className={`statement-text reveal ${className}`}>
-      {text.split(/\s+/).map((w, i) => (
+      {t(text).split(/\s+/).map((w, i) => (
         <Fragment key={i}>{i > 0 && " "}<span className="sw">{w}</span></Fragment>
       ))}
     </h2>
@@ -208,11 +214,11 @@ export function LeadForm({ id = "leadForm", submit = "Request a Demo", preset = 
       <div className="f"><label htmlFor={`${id}-country`}>Country</label><input id={`${id}-country`} name="country" autoComplete="country-name" /></div>
       <div className="f"><label htmlFor={`${id}-phone`}>Phone or WhatsApp</label><input id={`${id}-phone`} name="phone" type="tel" autoComplete="tel" /></div>
       <div className="f"><label htmlFor={`${id}-type`}>Type of travel business</label>
-        <select id={`${id}-type`} name="business" defaultValue=""><option value="">Select…</option>{businessTypes.map((o) => <option key={o}>{o}</option>)}</select></div>
+        <select id={`${id}-type`} name="business" defaultValue=""><option value="">Select…</option>{businessTypes.map((o) => <option key={o} value={o}>{o}</option>)}</select></div>
       <div className="f"><label htmlFor={`${id}-need`}>What do you need?</label>
-        <select id={`${id}-need`} name="need" defaultValue={preset}><option value="">Select…</option>{needs.map((o) => <option key={o}>{o}</option>)}</select></div>
+        <select id={`${id}-need`} name="need" defaultValue={preset}><option value="">Select…</option>{needs.map((o) => <option key={o} value={o}>{o}</option>)}</select></div>
       <div className="f"><label htmlFor={`${id}-timeline`}>Estimated timeline</label>
-        <select id={`${id}-timeline`} name="timeline" defaultValue=""><option value="">Select…</option>{timelines.map((o) => <option key={o}>{o}</option>)}</select></div>
+        <select id={`${id}-timeline`} name="timeline" defaultValue=""><option value="">Select…</option>{timelines.map((o) => <option key={o} value={o}>{o}</option>)}</select></div>
       <div className="f full"><label htmlFor={`${id}-msg`}>Project requirements</label><textarea id={`${id}-msg`} name="message" rows={4} placeholder="Products, markets, suppliers, integrations…" /></div>
       <div className="f full actions">
         <button type="submit" className="btn-pill press">{submit} <Chev /></button>

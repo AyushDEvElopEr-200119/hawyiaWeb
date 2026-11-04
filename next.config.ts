@@ -5,6 +5,23 @@ const nextConfig: NextConfig = {
   trailingSlash: true,
   reactStrictMode: true,
   poweredByHeader: false,
+  // English keeps its bare URLs: every path that isn't already /ar/ is served from the /en/ tree.
+  async redirects() {
+    return [
+      { source: "/en", destination: "/", permanent: true },
+      { source: "/en/:path*", destination: "/:path*", permanent: true },
+    ];
+  },
+  async rewrites() {
+    return {
+      beforeFiles: [
+        { source: "/", destination: "/en/" },
+        { source: "/:path((?!ar(?:/|$)|en(?:/|$)|_next(?:/|$)|assets(?:/|$)|apple-icon(?:/|$)|.*\\.[a-z0-9]+$).+)", destination: "/en/:path" },
+      ],
+      afterFiles: [],
+      fallback: [],
+    };
+  },
   async headers() {
     return [
       {

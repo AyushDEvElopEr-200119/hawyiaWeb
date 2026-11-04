@@ -1,5 +1,7 @@
 import Link from "next/link";
+import { getLang } from "@/lib/i18n";
 import { company, nav, type MegaMenu } from "@/lib/site";
+import { LangSwitch } from "./LangSwitch";
 import { Chev, Logo } from "./Brand";
 
 function MegaPanel({ mega, id, label }: { mega: MegaMenu; id: string; label: string }) {
@@ -39,6 +41,7 @@ function MegaPanel({ mega, id, label }: { mega: MegaMenu; id: string; label: str
 
 /** Header and mobile menu. Open/close, hover and scroll behaviour live in the motion controller. */
 export function Header() {
+  const other = getLang() === "ar" ? { to: "en" as const, label: "English" } : { to: "ar" as const, label: "العربية" };
   return (
     <>
       <a className="skip" href="#main">Skip to content</a>
@@ -66,6 +69,7 @@ export function Header() {
             )}
           </ul>
         </nav>
+        <LangSwitch {...other} className="lang-switch press" />
         <Link href="/request-demo/" className="btn-nav press">Request a Demo</Link>
         <button className="menu-btn press" id="menuBtn" aria-expanded="false" aria-controls="mobileMenu">Menu</button>
       </header>

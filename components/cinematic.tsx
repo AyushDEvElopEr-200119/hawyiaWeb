@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import type { Pair } from "@/lib/content";
+import { getLang, t, tr } from "@/lib/i18n";
 import { Chev } from "./Brand";
 import { Photo } from "./Photo";
 
@@ -10,15 +11,16 @@ const pad = (i: number) => String(i + 1).padStart(2, "0");
 
 /** "Built for" set as one large sentence, each audience a pill inside the line. */
 export function WhoLine({ who }: { who: string[] }) {
+  const ar = getLang() === "ar";
   return (
     <section className="who-line container">
       <p className="eyebrow reveal">Who it&apos;s for</p>
       <p className="wl-text reveal">
-        Built for{" "}
+        {t("Built for")}{" "}
         {who.map((w, i) => (
           <span key={w}>
-            <em>{/^[A-Z][a-z]/.test(w) ? w[0].toLowerCase() + w.slice(1) : w}</em>
-            {i < who.length - 2 ? ", " : i === who.length - 2 ? " and " : "."}
+            <em>{!ar && /^[A-Z][a-z]/.test(w) ? w[0].toLowerCase() + w.slice(1) : w}</em>
+            {i < who.length - 2 ? (ar ? "، " : ", ") : i === who.length - 2 ? (ar ? " و" : " and ") : "."}
           </span>
         ))}
       </p>
@@ -97,7 +99,7 @@ export function ExtraSection({ title, intro, items, style = "bento" }: { title: 
             const [g1, g2] = tones[i % tones.length];
             return (
               <article className="rail-card reveal" style={{ "--g1": g1, "--g2": g2 } as CSSProperties} key={t}>
-                <span className="rail-big" aria-hidden="true">{t.split(/[ /]/)[0]}</span>
+                <span className="rail-big" aria-hidden="true">{tr(getLang(), t).split(/[ /]/)[0]}</span>
                 <div className="rail-glass"><small>{pad(i)}</small><h3>{t}</h3><p>{d}</p></div>
               </article>
             );

@@ -1,6 +1,6 @@
-# Elyra — company website
+# Hawyia — company website
 
-Marketing site for Elyra, a B2B travel technology company (white-label and custom travel booking software, travel API integrations). Built with Next.js (App Router), React and TypeScript, with GSAP and Lenis for motion.
+Marketing site for Hawyia, a software, automation and AI company with ready-made business and travel platforms, in English and Arabic. Built with Next.js (App Router), React and TypeScript, with GSAP and Lenis for motion.
 
 ## Run it
 
@@ -40,3 +40,12 @@ Photos and videos are committed in `public/assets/media`. To re-download them (o
 - Markup is rendered by React; `initSite` only animates and wires behaviour, so it never creates or replaces React-owned DOM.
 
 See `docs/website-plan.md` for the business model, sitemap and content plan.
+
+## Languages
+
+English lives at bare URLs (`/about/`) and Arabic under `/ar/` (`/ar/about/`). Pages are written in English under `app/[lang]/`; `next.config.ts` rewrites bare URLs to `/en/...`, and `/en/...` redirects back to the bare URL.
+
+- `lib/i18n/ar.json` maps each English string to its Arabic translation. A string with no entry shows in English.
+- A custom JSX runtime (`lib/i18n/jsx`) swaps text and internal links on Arabic pages, so components stay in English. Client components don't get translations from it, so pass them translated text as props.
+- `npm run i18n:missing` builds the site and lists every string the Arabic pages render without a translation. Brand and technology names are expected there.
+- The stylesheet uses logical properties (`margin-inline-start`, not `margin-left`) so the layout mirrors by itself. Keep new rules logical; what doesn't mirror on its own is at the end of `app/globals.css`.

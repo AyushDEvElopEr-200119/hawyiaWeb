@@ -1,12 +1,12 @@
 import { Breadcrumbs, JsonLd } from "./sections";
 import { legalDocs } from "@/lib/legal";
-import { breadcrumbSchema, pageMeta } from "@/lib/seo";
+import { breadcrumbSchema, metaFor } from "@/lib/seo";
 import { company } from "@/lib/site";
 
 type Key = keyof typeof legalDocs;
 
-export const legalMeta = (key: Key) =>
-  pageMeta({ title: legalDocs[key].title, description: `${legalDocs[key].title} for ${company.name}.`, path: `/${key}/` });
+export const legalMetaFor = (key: Key) =>
+  metaFor({ title: legalDocs[key].title, description: `${legalDocs[key].title} for ${company.name}.`, path: `/${key}/` });
 
 export function LegalPage({ doc }: { doc: Key }) {
   const d = legalDocs[doc];

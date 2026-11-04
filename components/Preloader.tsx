@@ -21,7 +21,7 @@ const DONE_MS = 7600;
 const products = ["Flights", "Hotels", "Holidays", "Transfers", "Payments"];
 const SHUTTERS = 6;
 
-export const preloaderScript = `(function(){var d=document.documentElement;d.classList.add("js");try{if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;d.classList.add("pl-on","pl-hold");setTimeout(function(){d.classList.remove("pl-hold")},${OPEN_MS});setTimeout(function(){d.classList.remove("pl-on");dispatchEvent(new Event("elyra:preloaded"))},${DONE_MS})}catch(e){}})()`;
+export const preloaderScript = `(function(){var d=document.documentElement;d.classList.add("js");try{if(sessionStorage.getItem("skip-preloader")){sessionStorage.removeItem("skip-preloader");return}if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;d.classList.add("pl-on","pl-hold");setTimeout(function(){d.classList.remove("pl-hold")},${OPEN_MS});setTimeout(function(){d.classList.remove("pl-on");dispatchEvent(new Event("elyra:preloaded"))},${DONE_MS})}catch(e){}})()`;
 
 const vars = (v: Record<string, number>) => v as React.CSSProperties;
 

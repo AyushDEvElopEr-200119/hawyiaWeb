@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 /** "On this page": the article's sections, with the one being read highlighted. */
-export function ArticleToc({ items }: { items: { id: string; text: string }[] }) {
+export function ArticleToc({ items, title }: { items: { id: string; text: string }[]; title: string }) {
   const [active, setActive] = useState(items[0]?.id);
 
   useEffect(() => {
@@ -22,8 +22,8 @@ export function ArticleToc({ items }: { items: { id: string; text: string }[] })
   }, [items]);
 
   return (
-    <nav className="toc" aria-label="On this page">
-      <p className="toc-title mono">On this page</p>
+    <nav className="toc" aria-label={title}>
+      <p className="toc-title mono">{title}</p>
       <ol>
         {items.map((it) => (
           <li key={it.id}>

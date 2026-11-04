@@ -12,6 +12,7 @@
     "build": "next build",
     "start": "next start -p 5178",
     "typecheck": "tsc --noEmit",
+    "i18n:missing": "I18N_COLLECT=$PWD/.i18n-missing.txt next build && sort -u .i18n-missing.txt; rm -f .i18n-missing.txt",
     "media": "node scripts/fetch-media.mjs"
   },
   "devDependencies": {

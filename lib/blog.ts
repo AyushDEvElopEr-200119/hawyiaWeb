@@ -1,3 +1,4 @@
+import { getLang, localePath, t } from "./i18n";
 // The Hawyia Journal: articles for /blog/ and /blog/[slug]/.
 // Draft copy written from what the site says Hawyia does. Review the wording and the
 // publish dates before launch; add a post by adding an entry here (newest first).
@@ -206,7 +207,7 @@ export const postBySlug = (slug: string) => posts.find((p) => p.slug === slug);
 
 /** "October 21, 2026", fixed to UTC so server and browser always agree. */
 export const formatDate = (iso: string) =>
-  new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" });
+  new Date(`${iso}T00:00:00Z`).toLocaleDateString(getLang() === "ar" ? "ar-OM-u-nu-latn" : "en-US", { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" });
 
 const words = (b: Block) =>
   "p" in b ? b.p : "h2" in b ? b.h2 : "quote" in b ? b.quote : "list" in b ? b.list.join(" ") : `${b.note.title} ${b.note.text}`;
@@ -220,7 +221,14 @@ export const anchor = (text: string) =>
   text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 
 /** The card-sized view of a post, safe to pass to client components. */
-export type PostCardData = Pick<Post, "slug" | "tag" | "title" | "excerpt" | "photo"> & { date: string; minutes: number };
-export const toCard = (p: Post): PostCardData => ({
-  slug: p.slug, tag: p.tag, title: p.title, excerpt: p.excerpt, photo: p.photo, date: formatDate(p.date), minutes: readMinutes(p),
-});
+export type PostCardData = Pick<Post, "slug" | "tag" | "title" | "excerpt" | "photo"> & {
+  href: string; tagLabel: string; date: string; minutes: string; read: string;
+};
+export const toCard = (p: Post): PostCardData => {
+  const lang = getLang();
+  return {
+    slug: p.slug, tag: p.tag, tagLabel: t(p.tag), title: t(p.title), excerpt: t(p.excerpt), photo: p.photo,
+    href: localePath(lang, `/blog/${p.slug}/`), date: formatDate(p.date),
+    minutes: lang === "ar" ? `${readMinutes(p)} ${t("min read")}` : `${readMinutes(p)} min read`, read: t("Read"),
+  };
+};
