@@ -6,6 +6,7 @@ import { company } from "@/lib/site";
 import type { Pair } from "@/lib/content";
 import type { Crumb } from "@/lib/seo";
 import { Chev } from "./Brand";
+import { DemoScheduler, type SchedulerLabels } from "./DemoScheduler";
 import { Photo } from "./Photo";
 import { ChoiceCards } from "./cinematic";
 
@@ -204,11 +205,26 @@ const businessTypes = ["Travel agency", "OTA", "Tour operator", "DMC", "Corporat
 const needs = ["White-label platform", "Custom development", "API integration", "Extranet / CMS", "Mobile app", "Business software", "Hire developers", "Not sure yet"];
 const timelines = ["As soon as possible", "1–3 months", "3–6 months", "6+ months", "Just exploring"];
 
+const schedulerLabels: SchedulerLabels = {
+  choose: "Choose a date and time",
+  loading: "Loading available times…",
+  zone: "Times are shown in your time zone:",
+  previous: "Previous month",
+  next: "Next month",
+  pickDay: "Pick a date to see the available times.",
+  unavailable: "Online booking isn't available right now. Send your request and we'll suggest a time.",
+  booked: "Your demo is booked",
+  join: "Join with Google Meet",
+  emailed: "We've sent the meeting details to",
+  notEmailed: "We couldn't email your meeting details, so please save this link.",
+};
+
 /** Enquiry form. Validation and sending are wired by the motion controller. Set `endpoint`
-    to your form handler (CRM, email service); without it the form opens a pre-filled email. */
-export function LeadForm({ id = "leadForm", submit = "Request a Demo", preset = "", endpoint = "" }: { id?: string; submit?: string; preset?: string; endpoint?: string }) {
+    to your form handler (CRM, email service); without it the form opens a pre-filled email.
+    `booking` adds the date and time picker and books the meeting through /api/demo/book/. */
+export function LeadForm({ id = "leadForm", submit = "Request a Demo", preset = "", endpoint = "", booking = false }: { id?: string; submit?: string; preset?: string; endpoint?: string; booking?: boolean }) {
   return (
-    <form className="lead reveal" id={id} noValidate data-endpoint={endpoint} data-mailto={company.email}>
+    <form className="lead reveal" id={id} noValidate data-endpoint={booking ? "/api/demo/book/" : endpoint} data-mailto={company.email}>
       <div className="f"><label htmlFor={`${id}-name`}>Full name</label><input id={`${id}-name`} name="name" autoComplete="name" required /><small className="err" aria-live="polite" /></div>
       <div className="f"><label htmlFor={`${id}-email`}>Business email</label><input id={`${id}-email`} name="email" type="email" autoComplete="email" required /><small className="err" aria-live="polite" /></div>
       <div className="f"><label htmlFor={`${id}-company`}>Company</label><input id={`${id}-company`} name="company" autoComplete="organization" /></div>
@@ -221,6 +237,7 @@ export function LeadForm({ id = "leadForm", submit = "Request a Demo", preset = 
         <select id={`${id}-need`} name="need" defaultValue={preset}><option value="">Select…</option>{needs.map((o) => <option key={o} value={o}>{o}</option>)}</select></div>
       <div className="f"><label htmlFor={`${id}-timeline`}>Estimated timeline</label>
         <select id={`${id}-timeline`} name="timeline" defaultValue=""><option value="">Select…</option>{timelines.map((o) => <option key={o} value={o}>{o}</option>)}</select></div>
+      {booking && <DemoScheduler id={id} lang={getLang()} labels={localize(schedulerLabels)} />}
       <div className="f full"><label htmlFor={`${id}-msg`}>Project requirements</label><textarea id={`${id}-msg`} name="message" rows={4} placeholder="Products, markets, suppliers, integrations…" /></div>
       <div className="f full actions">
         <button type="submit" className="btn-pill press">{submit} <Chev /></button>

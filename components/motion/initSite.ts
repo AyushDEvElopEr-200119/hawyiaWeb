@@ -14,6 +14,7 @@ const arabic: Record<string, string> = {
   "Menu": "القائمة",
   "Please enter your name.": "يرجى إدخال اسمك.",
   "Please enter a valid business email.": "يرجى إدخال بريد إلكتروني صحيح للعمل.",
+  "Please choose a date and time.": "يرجى اختيار التاريخ والوقت.",
   "Sending…": "جارٍ الإرسال…",
   "Thanks. We'll be in touch within one business day.": "شكرًا لك. سنتواصل معك خلال يوم عمل واحد.",
   "Something went wrong. Please try again, or email us directly.": "حدث خطأ ما. يرجى المحاولة مرة أخرى أو مراسلتنا عبر البريد الإلكتروني مباشرة.",
@@ -264,6 +265,8 @@ export function initSite(): () => void {
       email: (v) => (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) ? "" : say("Please enter a valid business email.")),
     };
     const field = (n: string) => form.elements.namedItem(n) as HTMLInputElement;
+    // the demo form's date and time, needed only while booking is on (see DemoScheduler)
+    if (field("slot")) rules.slot = (v) => (v || !form.dataset.endpoint ? "" : say("Please choose a date and time."));
     const check = (input: HTMLInputElement) => {
       const msg = rules[input.name](input.value);
       const f = input.closest(".f")!;
@@ -283,18 +286,27 @@ export function initSite(): () => void {
       e.preventDefault();
       const ok = Object.keys(rules).map((n) => check(field(n))).every(Boolean);
       if (!ok) {
-        form.querySelector<HTMLElement>("[aria-invalid=true]")?.focus();
+        const first = form.querySelector<HTMLElement>("[aria-invalid=true]");
+        first?.focus();
+        // the date and time field is hidden, so it can only be scrolled to
+        if (first?.getAttribute("type") === "hidden") first.closest(".f")?.scrollIntoView({ block: "center" });
         return;
       }
       const btn = form.querySelector<HTMLButtonElement>("[type=submit]")!;
       const data: Record<string, string> = Object.fromEntries(new FormData(form) as any);
       data.page = location.pathname;
+      data.lang = document.documentElement.lang;
       if (form.dataset.endpoint) {
         btn.disabled = true;
         if (status) status.textContent = say("Sending…");
         try {
           const res = await fetch(form.dataset.endpoint, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
-          if (!res.ok) throw new Error(String(res.status));
+          const reply = await res.json().catch(() => ({}));
+          form.dispatchEvent(new CustomEvent("lead:reply", { detail: { ...reply, ok: res.ok, status: res.status } }));
+          if (!res.ok) {
+            if (status) status.textContent = reply.message ?? say("Something went wrong. Please try again, or email us directly.");
+            return;
+          }
           form.reset();
           if (status) status.textContent = say("Thanks. We'll be in touch within one business day.");
         } catch {

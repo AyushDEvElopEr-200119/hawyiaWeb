@@ -831,6 +831,37 @@ html:not(.js) .nav-link:hover { background: rgb(255 255 255 / .85); }
 .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; margin-top: .5rem; }
 .form-status { font-size: .875rem; color: var(--mint-900); }
 
+/* demo date and time picker (components/DemoScheduler.tsx) */
+.sched-label { font-size: .8125rem; letter-spacing: .005em; color: var(--mint-900); }
+.sched-trap { position: absolute; width: 1px !important; height: 1px; padding: 0 !important; opacity: 0; pointer-events: none; }
+.sched-body { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 1rem; padding: 1rem; border-radius: 14px; background: #fff; box-shadow: inset 0 0 0 1px var(--line); }
+.sched-head { display: flex; align-items: center; justify-content: space-between; gap: .5rem; margin-bottom: .5rem; font-size: .9375rem; }
+.sched-nav, .sched-day, .sched-time { padding: 0; border: 0; background: none; }
+.sched-nav { width: 40px; height: 40px; border-radius: 50%; font-size: 1.25rem; line-height: 1; color: var(--ink); }
+.sched-nav:not(:disabled):hover { background: var(--card-soft); }
+.sched-nav:disabled { opacity: .25; }
+[dir="rtl"] .sched-nav span { display: inline-block; scale: -1 1; }
+.sched-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 2px; text-align: center; }
+.sched-dow { padding-block: .35rem; font-size: .75rem; color: var(--muted); }
+.sched-day { aspect-ratio: 1; min-height: 36px; border-radius: 50%; font-size: .875rem; font-weight: 600; color: var(--ink); transition: background .15s, color .15s; }
+.sched-day:disabled { font-weight: 400; color: var(--muted); opacity: .45; }
+.sched-day:not(:disabled):hover { background: var(--card-soft); }
+.sched-day[aria-pressed="true"], .sched-time[aria-pressed="true"] { background: rgb(var(--mint)); color: var(--ink); }
+.sched-times { min-width: 0; }
+.sched-time-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 6px; max-height: 290px; overflow-y: auto; padding: 2px; }
+.sched-time { min-height: 40px; border-radius: 10px; font-size: .875rem; color: var(--ink); box-shadow: inset 0 0 0 1px var(--line); transition: background .15s; }
+.sched-time:hover { background: var(--card-soft); }
+.sched-note { padding: .85rem 1rem; border-radius: 14px; background: #fff; box-shadow: inset 0 0 0 1px var(--line); font-size: .875rem; color: var(--muted); }
+.sched-times .sched-note { padding: 0; background: none; box-shadow: none; }
+.sched-zone { grid-column: 1 / -1; font-size: .75rem; color: var(--muted); }
+.scheduler .err:empty { display: none; }
+.lead.is-booked > :not(.scheduler) { display: none; }
+.sched-done { display: grid; gap: .6rem; justify-items: start; padding: .5rem; }
+.sched-done h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.8rem, 3vw, 2.5rem); line-height: 1.1; letter-spacing: -0.03em; }
+.sched-when { font-size: 1.0625rem; font-weight: 600; }
+.sched-done .btn-pill { margin-block: .5rem; }
+@media (max-width: 860px) { .sched-body { grid-template-columns: minmax(0, 1fr); } }
+
 
 /* ============ REVEAL (a gentle rise and fade) ============ */
 /* hidden only when JS runs; initSite adds .in as each block enters the screen. Neighbours

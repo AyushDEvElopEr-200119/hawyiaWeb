@@ -31,8 +31,35 @@ Photos and videos are committed in `public/assets/media`. To re-download them (o
 
 - Fill in real contact details and the domain in `lib/site.ts`.
 - Add "starting from" prices in `app/pricing/page.tsx`.
-- Connect the enquiry forms: pass an `endpoint` to `<LeadForm>` (CRM or email service). Without one, forms open a pre-filled email.
+- Set up demo booking (see "Demo booking" below).
+- Connect the other enquiry forms: pass an `endpoint` to `<LeadForm>` (CRM or email service). Without one, forms open a pre-filled email.
 - Have the legal pages reviewed.
+
+## Demo booking
+
+On `/request-demo/`, customers pick a free time. The site then creates a Google Calendar event with a Meet link and emails the details to the customer and the team. Until the keys below are set, or if times can't be loaded, the form opens a pre-filled email draft instead.
+
+Booking rules (Sunday to Thursday, 9:00 to 17:00 Oman time, 30-minute slots, 4 hours' notice, 30 days ahead) are in `lib/demo/slots.ts`. Anything on the calendar blocks the slots it overlaps. Cancelling a meeting frees its slot.
+
+**1. Google Workspace** (needs a Workspace admin)
+
+1. In [Google Cloud](https://console.cloud.google.com), create a project and enable the **Google Calendar API**.
+2. Create a **service account** and download a JSON key. Its `client_email` and `private_key` are `GOOGLE_SERVICE_ACCOUNT_EMAIL` and `GOOGLE_PRIVATE_KEY`.
+3. In the [Workspace admin console](https://admin.google.com), go to Security > Access and data control > API controls > **Domain-wide delegation**. Add the service account's client ID with these scopes:
+   `https://www.googleapis.com/auth/calendar.events,https://www.googleapis.com/auth/calendar.freebusy`
+4. Set `GOOGLE_CALENDAR_USER` to the real Workspace user whose calendar holds the demos. A group address won't work.
+
+**2. Resend**
+
+1. In the Vercel project that hosts the site, add **Resend** from the Marketplace and connect it to the project. This sets `RESEND_API_KEY`.
+2. In Resend, verify the sending domain by adding the DNS records it lists.
+3. Set `DEMO_EMAIL_FROM` to an address on that domain, such as `Hawyia <demos@hawyiapremium.com>`.
+
+**3. Team**
+
+Set `DEMO_TEAM_EMAILS` to a comma-separated list of the people to invite, or leave it empty to use the company email in `lib/site.ts`. The address has to be able to receive mail.
+
+Add the variables to the Vercel project (see `.env.example`) and redeploy. For local work, put them in `.env.local`.
 
 ## Notes for developers
 

@@ -33,7 +33,7 @@ export default async function RequestDemoPage({ params }: LangParams) {
             ))}
           </ul>
         </div>
-        <div><LeadForm id="demoForm" submit="Request a Demo" preset="White-label platform" /></div>
+        <div><LeadForm id="demoForm" submit="Request a Demo" preset="White-label platform" booking /></div>
       </div>
       <JsonLd data={breadcrumbSchema(trail, path)} />
     </section>
