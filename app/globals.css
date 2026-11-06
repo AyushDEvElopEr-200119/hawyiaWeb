@@ -190,7 +190,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .brand-words em { font-style: normal; font-weight: 500; font-size: .86em; color: rgb(var(--mint)); }
 .logo .brand { font-size: 1.05rem; }
 /* on dark grounds the mark's uprights lift to a brighter blue */
-.pl-mark { --logo-blue: #4f86ec; --logo-navy: #1d55c4; }
+.pl-mark, .pl-lockup { --logo-blue: #4f86ec; --logo-navy: #1d55c4; }
 
 .nav > ul {
   display: flex;
@@ -233,9 +233,9 @@ html:not(.js) .nav-link:hover { background: rgb(255 255 255 / .85); }
   position: absolute;
   top: calc(100% + 14px);
   left: 50%;
-  translate: -50% 0;
+  translate: calc(-50% + var(--mega-shift, 0px)) 0;   /* --mega-shift keeps it on screen, see fitMega */
   width: max-content;
-  max-width: min(860px, 92vw);
+  max-width: min(860px, 100vw - 32px);
   visibility: hidden;
   opacity: 0;
   pointer-events: none;
@@ -249,10 +249,11 @@ html:not(.js) .nav-link:hover { background: rgb(255 255 255 / .85); }
   gap: 8px;
   padding: 10px;
   border-radius: 26px;
-  background: rgb(255 255 255 / .95);   /* heavy material: stays legible over big type */
-  backdrop-filter: blur(30px) saturate(180%);
-  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  background: #fff;   /* solid: page text must not show through the links */
   box-shadow: 0 30px 60px -25px rgb(8 30 84 / .35), 0 0 0 1px rgb(0 0 0 / .05), inset 0 1px 0 #fff;
+  max-height: calc(100dvh - 96px);   /* short windows scroll inside the panel */
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 .mega-col { padding: 12px 8px 8px; }
 .mega-title { font-family: var(--mono); font-size: .6875rem; letter-spacing: .04em; text-transform: uppercase; color: var(--mint-600); padding: 0 10px 8px; }
@@ -946,7 +947,21 @@ html:not(.js) .nav-link:hover { background: rgb(255 255 255 / .85); }
   color: rgb(255 255 255 / .62);
   animation: fade-up 1s var(--pl-in) backwards;
 }
-.pl-corners > :nth-child(2) { justify-self: end; }
+.pl-corners > :nth-child(2) { justify-self: end; align-self: center; }
+/* top-left brand: a small version of the mark and serif wordmark from the final reveal */
+.pl-lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: .4em;
+  justify-self: start;
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  line-height: 1;
+  letter-spacing: -0.025em;
+  text-transform: none;
+  color: #fff;
+}
+.pl-lockup .logo-mark { width: 1.1em; height: auto; flex: none; }
 .pl-loading { grid-row: 3; align-self: end; }
 .pl-loading i { font-style: normal; animation: pl-blink 1.2s steps(1) infinite; }
 .pl-loading i:nth-child(2) { animation-delay: .2s; }
@@ -1318,7 +1333,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline-offset: 4
 .ind-head { display: grid; gap: .6rem; align-content: start; }
 .ind-head .mono { color: var(--mint-600); }
 .ind-head h2 { font-family: var(--serif); font-size: clamp(1.8rem, 3vw, 2.5rem); line-height: 1.05; letter-spacing: -0.03em; }
-.ind-body { display: grid; gap: 1.4rem; justify-items: start; }
+.ind-body { display: grid; gap: 1.4rem; justify-items: start; align-content: start; }   /* align-content: a tall photo beside it must not stretch the chips */
 .ind-body > p { color: var(--muted); }
 .ind-challenge b { color: var(--ink); }
 .ind-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; width: 100%; }
@@ -1763,8 +1778,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline-offset: 4
    No scroll-pinned or pointer-driven effects: components/motion/initSite.ts only toggles
    classes, and CSS does the moving. What remains is the preloader, first-screen entrances,
    reveals, the marquee and short hover / open transitions. Expanding stages sit as cards. */
-.mega { transition: opacity .2s ease, translate .25s var(--ease), visibility 0s linear .2s; translate: -50% -6px; }
-.mega.open { opacity: 1; translate: -50% 0; transition: opacity .2s ease, translate .25s var(--ease), visibility 0s; }
+.mega { transition: opacity .2s ease, translate .25s var(--ease), visibility 0s linear .2s; translate: calc(-50% + var(--mega-shift, 0px)) -6px; }
+.mega.open { opacity: 1; translate: calc(-50% + var(--mega-shift, 0px)) 0; transition: opacity .2s ease, translate .25s var(--ease), visibility 0s; }
 .car-track { transition: transform .6s var(--ease); }
 .to-top, .toast { transition: opacity .25s ease, scale .25s var(--ease), visibility 0s linear .25s; }
 .to-top { opacity: 0; visibility: hidden; scale: .85; }
@@ -1780,7 +1795,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline-offset: 4
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; }
   .reveal { opacity: 1; transform: none; filter: none; transition: none; }
-  .mega, .mega.open { translate: -50% 0; }
+  .mega, .mega.open { translate: calc(-50% + var(--mega-shift, 0px)) 0; }
   .mobile-menu, .mobile-menu.open { transform: none; filter: none; transition: opacity .2s ease, visibility 0s; }
 }
 @media (prefers-reduced-transparency: reduce) {

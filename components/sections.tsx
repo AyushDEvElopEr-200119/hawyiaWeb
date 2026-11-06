@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Fragment } from "react";
-import { localize, t } from "@/lib/i18n";
+import { countries } from "@/lib/countries";
+import { getLang, localize, t } from "@/lib/i18n";
 import { company } from "@/lib/site";
 import type { Pair } from "@/lib/content";
 import type { Crumb } from "@/lib/seo";
@@ -211,7 +212,8 @@ export function LeadForm({ id = "leadForm", submit = "Request a Demo", preset = 
       <div className="f"><label htmlFor={`${id}-name`}>Full name</label><input id={`${id}-name`} name="name" autoComplete="name" required /><small className="err" aria-live="polite" /></div>
       <div className="f"><label htmlFor={`${id}-email`}>Business email</label><input id={`${id}-email`} name="email" type="email" autoComplete="email" required /><small className="err" aria-live="polite" /></div>
       <div className="f"><label htmlFor={`${id}-company`}>Company</label><input id={`${id}-company`} name="company" autoComplete="organization" /></div>
-      <div className="f"><label htmlFor={`${id}-country`}>Country</label><input id={`${id}-country`} name="country" autoComplete="country-name" /></div>
+      <div className="f"><label htmlFor={`${id}-country`}>Country</label>
+        <select id={`${id}-country`} name="country" autoComplete="country-name" defaultValue=""><option value="">Select…</option>{countries(getLang()).map((c) => <option key={c.value} value={c.value}>{c.label}</option>)}</select></div>
       <div className="f"><label htmlFor={`${id}-phone`}>Phone or WhatsApp</label><input id={`${id}-phone`} name="phone" type="tel" autoComplete="tel" /></div>
       <div className="f"><label htmlFor={`${id}-type`}>Type of travel business</label>
         <select id={`${id}-type`} name="business" defaultValue=""><option value="">Select…</option>{businessTypes.map((o) => <option key={o} value={o}>{o}</option>)}</select></div>

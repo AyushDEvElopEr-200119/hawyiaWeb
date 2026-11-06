@@ -55,11 +55,22 @@ export function initSite(): () => void {
     document.body.style.overflow = open ? "hidden" : "";
   }
 
+  // Panels centre under their trigger; slide one sideways only as far as it takes to stay on screen.
+  function fitMega(li: El) {
+    const panel = $(".mega", li)!;
+    const edge = 16;
+    const box = li.getBoundingClientRect();
+    const left = box.left + box.width / 2 - panel.offsetWidth / 2;
+    const overRight = document.documentElement.clientWidth - edge - (left + panel.offsetWidth);
+    panel.style.setProperty("--mega-shift", `${Math.max(edge - left, Math.min(0, overRight))}px`);
+  }
+
   let closeTimer = 0;
   function openMega(li: El) {
     megaItems.forEach((x) => x !== li && closeMega(x));
     const btn = $(".nav-link", li)!;
     if (btn.getAttribute("aria-expanded") === "true") return;
+    fitMega(li);
     li.dataset.openedAt = String(performance.now());
     btn.setAttribute("aria-expanded", "true");
     $(".mega", li)!.classList.add("open");
@@ -141,6 +152,7 @@ export function initSite(): () => void {
     setMenu(false);
   });
   on(document, "pointerdown", (e: PointerEvent) => { if (!(e.target as Element).closest(".has-mega")) closeAllMega(); });
+  on(window, "resize", () => megaItems.filter((li) => $(".nav-link", li)!.getAttribute("aria-expanded") === "true").forEach(fitMega));
 
   /* ---------- mobile menu ---------- */
   if (menu && menuBtn) {
