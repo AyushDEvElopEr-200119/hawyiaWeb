@@ -1,7 +1,9 @@
-import { setLang, type LangParams } from "@/lib/i18n";
+import { setLang, t, type LangParams } from "@/lib/i18n";
 import Link from "next/link";
 import { Chev } from "@/components/Brand";
-import { BgVideo, Photo } from "@/components/Photo";
+import { Photo } from "@/components/Photo";
+import { HeroWave } from "@/components/HeroWave";
+import { VideoDialog } from "@/components/VideoDialog";
 import { FaqBlock, JsonLd, ProcessTable, Statement, Lines } from "@/components/sections";
 import {
   aiCapabilities, apiCategories, automationTabs, devServices, expertise, homeFaq, homeSteps,
@@ -16,48 +18,31 @@ export const generateMetadata = metaFor({
 
 const pad = (i: number) => String(i + 1).padStart(2, "0");
 
-const heroServices: [string, string][] = [
-  ["Custom development", "/custom-development/"],
-  ["Automation", "/automation/"],
-  ["API integrations", "/api-integrations/"],
-  ["Business software", "/business-software/"],
-];
 export default async function HomePage({ params }: LangParams) {
   setLang((await params).lang);
   const tabKeys = Object.keys(automationTabs);
   return (
     <>
       {/* ============ HERO ============ */}
-      <section className="hero hero-video" id="hero">
-        <div className="hero-sticky">
-          <div className="hero-media" id="heroMedia">
-            <BgVideo name="team" poster="/assets/media/team-poster.jpg" eager />
-            <div className="hero-grain" />
+      <section className="hero hw" id="hero">
+        <div className="hw-bg" aria-hidden="true" />
+        <HeroWave />
+        <VideoDialog
+          className="hw-watch press"
+          closeLabel={t("Close")}
+          label={<><span className="hw-play" aria-hidden="true" />Watch Video</>}
+        />
+        <div className="hw-content">
+          <p className="hw-badge"><span className="hw-gear" aria-hidden="true">⚙</span>Business Automation Platform</p>
+          <h1 className="hw-title">
+            <span className="hl" style={{ "--i": 0 } as React.CSSProperties}><span>Automate Your Business Workflows —</span></span>
+            <span className="hl" style={{ "--i": 1 } as React.CSSProperties}><span>From <em>Operations to Growth</em> on One Platform</span></span>
+          </h1>
+          <p className="hw-lead">Hawyia Premium brings your business operations, apps, data and teams together in a single, powerful platform — to automate, integrate and scale with confidence.</p>
+          <div className="hw-ctas">
+            <Link href="/request-demo/" className="hw-btn hw-btn-primary press">Request a Demo <span className="hw-arrow" aria-hidden="true">↗</span></Link>
+            <Link href="/automation/" className="hw-btn hw-btn-ghost press"><span className="hw-play" aria-hidden="true" />See How It Works</Link>
           </div>
-          <div className="hero-content">
-            <div className="hero-copy">
-            <h1 className="hero-title" id="heroTitle">
-              <span className="hl" style={{ "--i": 0 } as React.CSSProperties}><span>We help you automate</span></span>
-              <span className="hl" style={{ "--i": 1 } as React.CSSProperties}><span><em>your business.</em></span></span>
-            </h1>
-            <div className="hero-side">
-              <p className="hero-lead">We design, build and connect the software that runs your business, so the repetitive work takes care of itself and your team can focus on growth.</p>
-              <div className="hero-ctas">
-                <Link href="/request-demo/" className="hero-btn hero-btn-primary press">Request a demo <Chev /></Link>
-                <a href="#expertise" className="hero-btn hero-btn-ghost press">Explore what we do <Chev /></a>
-              </div>
-            </div>
-            </div>
-          </div>
-          <nav className="hero-strip" aria-label="What we do">
-            {heroServices.map(([label, href], i) => (
-              <Link href={href} key={href} style={{ "--i": i } as React.CSSProperties}>
-                <span className="mono">{pad(i)}</span>
-                <b>{label}</b>
-                <Chev />
-              </Link>
-            ))}
-          </nav>
         </div>
       </section>
 
@@ -74,7 +59,7 @@ export default async function HomePage({ params }: LangParams) {
       <section className="expertise container" id="expertise">
         <div className="split-head">
           <h2 className="h2 reveal">We build. We connect.<br />We automate.</h2>
-          <p className="reveal">Most projects need more than one of these. We handle all four, so you don&apos;t have to coordinate separate suppliers.</p>
+          <p className="reveal">Most projects need more than one of these. We handle all four, so you don&apos;t have to coordinate separate vendors.</p>
         </div>
         <div className="api-grid two">
           {expertise.map(([t, d]) => <article className="api reveal" key={t}><h3>{t}</h3><p>{d}</p></article>)}

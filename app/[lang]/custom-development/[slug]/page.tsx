@@ -85,7 +85,7 @@ export default async function ServicePage({ params }: Props) {
       <CtaBand title="Discuss your project" text="Share your idea and we'll come back with a recommended approach, a rough timeline and next steps." preset="Custom development" />
       <JsonLd data={[
         breadcrumbSchema(trail, path),
-        serviceSchema({ name: meta.name, description: c.meta, path, type: "Travel software development" }),
+        serviceSchema({ name: meta.name, description: c.meta, path, type: "Custom software development" }),
         faqSchema(c.faq),
       ]} />
     </>

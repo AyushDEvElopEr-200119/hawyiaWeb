@@ -8,12 +8,12 @@ const byGroup = (g: string): NavLink[] =>
 
 // Directory columns, in the order a visitor scans them: what we sell, how we build, who we are.
 const columns: { title: string; links: NavLink[] }[] = [
-  { title: "Booking platforms", links: byGroup("platform") },
-  { title: "Portals", links: byGroup("portal") },
-  { title: "Back-office & inventory", links: [...byGroup("office"), { href: "/pricing/", label: "Pricing" }] },
+  { title: "Automate by area", links: byGroup("area") },
+  { title: "Automate by team", links: byGroup("team") },
+  { title: "AI & data", links: [...byGroup("ai"), { href: "/solutions/", label: "All solutions" }, { href: "/pricing/", label: "Pricing" }] },
   { title: "Business software", links: [...products.map((p) => ({ href: `/business-software/${p.slug}/`, label: p.name })), { href: "/business-software/", label: "All business software" }] },
   { title: "Custom development", links: [...services.map((s) => ({ href: `/custom-development/${s.slug}/`, label: s.name })), { href: "/hire-developers/", label: "Hire Developers" }] },
-  { title: "API integrations", links: [...apis.map((a) => ({ href: `/api-integrations/${a.slug}/`, label: a.name })), { href: "/api-integrations/", label: "Integration directory" }] },
+  { title: "Integrations", links: [...apis.map((a) => ({ href: `/api-integrations/${a.slug}/`, label: a.name })), { href: "/api-integrations/", label: "Integration directory" }] },
   { title: "Company", links: [
     { href: "/automation/", label: "Automation" }, { href: "/about/", label: "About Hawyia" }, { href: "/testimonials/", label: "Client Stories" }, { href: "/industries/", label: "Industries" },
     { href: "/blog/", label: "Blog" }, { href: "/resources/", label: "Resources" }, { href: "/resources/#faq", label: "FAQ" },
@@ -86,7 +86,7 @@ export function Footer() {
         <div className="f-legal container">
           <p className="f-fine">
             Feature availability depends on the chosen product, integrations and requirements.
-            On our travel platforms, Hawyia is the software provider: bookings, payments and supplier contracts stay with your business.
+            Hawyia is the software provider: your data, customers, payments and third-party accounts stay with your business.
           </p>
           <div className="f-legal-row">
             <p>Copyright © {new Date().getFullYear()} {company.legal}. All rights reserved.</p>

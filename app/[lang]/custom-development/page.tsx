@@ -9,8 +9,8 @@ const path = "/custom-development/";
 const trail = [{ label: "Custom Development" }];
 
 export const generateMetadata = metaFor({
-  title: "Custom Travel Software Development",
-  description: "Custom travel software development: websites, booking engines, mobile apps, portals, CRM, back-office and integrations.",
+  title: "Custom Software Development",
+  description: "Custom software development: web applications, mobile apps, workflow automation, AI integration, CRM, back-office and integrations.",
   path,
 });
 
@@ -21,10 +21,10 @@ export default async function CustomDevelopmentPage({ params }: LangParams) {
       <PageHero
         trail={trail}
         eyebrow="Custom development"
-        title="Travel software,<br />built for you"
-        intro="When ready-made won't fit, we design and build travel websites, booking engines, portals, apps and back-office systems around your business."
+        title="Software and automation,<br />built for you"
+        intro="When ready-made won't fit, we design and build web apps, mobile apps, automations, AI tools and back-office systems around your business."
         image="p-custom-development"
-        highlights={[["Websites & engines", "Built around your inventory"], ["Apps & portals", "For travellers, agents and staff"], ["Milestones", "Delivered in stages you review"]]}
+        highlights={[["Apps & platforms", "Built around your processes"], ["Automation & AI", "Routine work that runs itself"], ["Milestones", "Delivered in stages you review"]]}
       />
       <section className="container posters-sec">
         <PosterGrid items={services.map((s) => ({ href: `/custom-development/${s.slug}/`, title: s.name, text: s.short, image: `d-${s.slug}` }))} />
@@ -33,7 +33,7 @@ export default async function CustomDevelopmentPage({ params }: LangParams) {
       <section className="impl container" id="process">
         <div className="split-head">
           <h2 className="h2 reveal">How we work</h2>
-          <p className="reveal">Ten steps from understanding your business to supporting the live platform.</p>
+          <p className="reveal">Ten steps from understanding your business to supporting the live system.</p>
         </div>
         <StepLine steps={processSteps} />
       </section>

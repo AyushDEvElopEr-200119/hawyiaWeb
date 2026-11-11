@@ -41,7 +41,7 @@ export default async function SolutionPage({ params }: Props) {
 
       <ModuleCinema
         title="Key modules"
-        intro="Every module is configurable from the admin panel. Switch on what you need today, and add more as you grow."
+        intro="Every part is configurable. Switch on what you need today, and automate more as you grow."
         image={`d-${slug}`}
         modules={c.modules}
       />
@@ -55,7 +55,7 @@ export default async function SolutionPage({ params }: Props) {
           <div className="ext-copy">
             <span className="tag">Make it yours</span>
             <h2 className="h2">Customization<br />options</h2>
-            <p>Start from a proven platform, then shape it around your brand and business model. When you need something truly unique, our custom development team takes over.</p>
+            <p>Start from proven workflows, then shape them around your rules, tools and brand. When you need something truly unique, our custom development team takes over.</p>
             <Link href="/custom-development/" className="link">Custom development <Chev /></Link>
           </div>
           <ul className="ext-tiles">{c.customize.map((x, i) => <li key={x}><small>{String(i + 1).padStart(2, "0")}</small><b>{x}</b></li>)}</ul>
@@ -70,29 +70,29 @@ export default async function SolutionPage({ params }: Props) {
           <p className="reveal">Six stages from first call to go-live, each with a clear owner and checklist.</p>
         </div>
         <StepLine steps={[
-          ["Discovery call", "Your model, markets and must-haves"],
-          ["Configuration plan", "Modules, suppliers, pricing rules"],
-          ["Branding & setup", "Domain, theme, content"],
-          ["Supplier & payment integration", "Your approved accounts"],
-          ["Testing & training", "End-to-end checks, team onboarding"],
-          ["Go-live & support", "Launch, monitoring, updates"],
+          ["Discovery call", "Your processes, tools and must-haves"],
+          ["Automation plan", "What runs alone, what needs a person"],
+          ["Setup & branding", "Rules, templates, notifications"],
+          ["Connect your tools", "Your existing apps and accounts"],
+          ["Testing & training", "Real scenarios, team onboarding"],
+          ["Go-live & support", "Launch, monitoring, improvements"],
         ]} />
       </section>
 
       <section className="price-callout container">
         <div className="pc-inner reveal">
-          <div><p className="eyebrow">Pricing</p><h3>Setup fee plus subscription, priced by the modules and integrations you choose.</h3></div>
+          <div><p className="eyebrow">Pricing</p><h3>Setup fee plus subscription, priced by the workflows and integrations you choose.</h3></div>
           <Link href="/pricing/" className="btn-pill press">See starting-from pricing <Chev /></Link>
         </div>
       </section>
 
       <RelatedCards items={related} base="/solutions/" />
       <FaqBlock faq={c.faq} />
-      <CtaBand title={`Get a demo of ${meta.name}`} preset="White-label platform" />
+      <CtaBand title={`Get a demo of ${meta.name}`} preset="Business automation" />
       {footnote}
       <JsonLd data={[
         breadcrumbSchema(trail, path),
-        serviceSchema({ name: meta.name, description: c.meta, path, type: "Travel booking software" }),
+        serviceSchema({ name: meta.name, description: c.meta, path, type: "Business automation" }),
         faqSchema(c.faq),
       ]} />
     </>

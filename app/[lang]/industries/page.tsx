@@ -11,7 +11,7 @@ const trail = [{ label: "Industries" }];
 
 export const generateMetadata = metaFor({
   title: "Industries We Serve",
-  description: "Travel software for agencies, OTAs, tour operators, DMCs, corporate travel, startups and consolidators.",
+  description: "Business automation and software for retail, professional services, clinics, real estate, education, manufacturing, hospitality and households.",
   path,
 });
 
@@ -22,11 +22,11 @@ export default async function IndustriesPage({ params }: LangParams) {
       <PageHero
         trail={trail}
         eyebrow="Industries we serve"
-        title="Built for every kind<br />of travel business"
-        intro="Different businesses sell travel in different ways. Here's the platform bundle we recommend for each, and why."
+        title="Automation for every<br />kind of business"
+        intro="Every business repeats different work. Here's the bundle of automation and modules we recommend for each, and why."
         ctas={false}
         image="p-industries"
-        highlights={[["7 business types", "From agencies to wholesalers"], ["Matched bundles", "Built around how you sell"], ["One platform", "Add products as you grow"]]}
+        highlights={[[`${industries.length} sectors`, "From shops to households"], ["Matched bundles", "Built around how you work"], ["One partner", "Add modules as you grow"]]}
       />
       <section className="industries container">
         {industries.map((ind, i) => (

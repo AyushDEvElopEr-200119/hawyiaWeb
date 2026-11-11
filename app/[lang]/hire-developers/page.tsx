@@ -9,15 +9,15 @@ const path = "/hire-developers/";
 const trail = [{ label: "Hire Developers" }];
 
 export const generateMetadata = metaFor({
-  title: "Hire Travel Software Developers",
-  description: "Hire dedicated web, mobile and cross-platform developers with travel technology experience.",
+  title: "Hire Software & Automation Developers",
+  description: "Hire dedicated web, mobile, cross-platform and automation developers experienced with business systems, integrations and AI.",
   path,
 });
 
 const roles = [
-  { id: "web", name: "Web Developers", text: "Front-end, back-end and full-stack developers experienced with travel booking flows and supplier APIs.", skills: ["React / Next.js", "Node.js", "Java / .NET", "PostgreSQL", "REST & XML APIs", "Cloud & DevOps"] },
-  { id: "mobile", name: "Mobile Developers", text: "Native Android and iOS developers who build fast, polished booking apps.", skills: ["Swift / SwiftUI", "Kotlin / Jetpack", "Push & deep links", "In-app payments", "App Store & Play releases"] },
-  { id: "cross-platform", name: "Cross-Platform Developers", text: "One codebase for both stores, which suits most booking and agent apps.", skills: ["Flutter", "React Native", "Shared design systems", "Offline storage", "CI/CD"] },
+  { id: "web", name: "Web Developers", text: "Front-end, back-end and full-stack developers experienced with business systems, workflows and integrations.", skills: ["React / Next.js", "Node.js", "Python", "PostgreSQL", "REST & GraphQL APIs", "Cloud & DevOps"] },
+  { id: "mobile", name: "Mobile Developers", text: "Native Android and iOS developers who build fast, polished apps for customers and teams.", skills: ["Swift / SwiftUI", "Kotlin / Jetpack", "Push & deep links", "In-app payments", "App Store & Play releases"] },
+  { id: "cross-platform", name: "Cross-Platform Developers", text: "One codebase for both stores, which suits most business and employee apps.", skills: ["Flutter", "React Native", "Shared design systems", "Offline storage", "CI/CD"] },
 ];
 
 const faq: Pair[] = [
@@ -33,8 +33,8 @@ export default async function HireDevelopersPage({ params }: LangParams) {
       <PageHero
         trail={trail}
         eyebrow="Dedicated developers"
-        title="Extend your team<br />with travel-tech talent"
-        intro="Hire developers who already understand bookings, fares and supplier APIs. They work as part of your team, and we handle the rest."
+        title="Extend your team<br />with automation talent"
+        intro="Hire developers who already understand business systems, integrations and automation. They work as part of your team, and we handle the rest."
         image="p-hire-developers"
         highlights={[["Web", "Front-end, back-end, full-stack"], ["Mobile", "Native Android & iOS"], ["Cross-platform", "Flutter & React Native"]]}
       />

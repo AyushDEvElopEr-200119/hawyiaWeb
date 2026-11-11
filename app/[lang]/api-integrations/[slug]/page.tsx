@@ -28,20 +28,20 @@ export default async function ApiPage({ params }: Props) {
   const c = apiPages[slug];
   if (!meta || !c) notFound();
   const path = `/api-integrations/${slug}/`;
-  const trail = [{ label: "API Integrations", href: "/api-integrations/" }, { label: meta.name }];
+  const trail = [{ label: "Integrations", href: "/api-integrations/" }, { label: meta.name }];
 
   return (
     <>
       <PageHero trail={trail} eyebrow={c.eyebrow} title={c.h1} intro={c.intro} image={`a-${slug}`} highlights={c.covers.slice(0, 3)} />
 
-      <PhotoSplit image={`d-${slug}`} eyebrow="What it enables" title="Everything your travellers and team can do" items={c.enables} />
+      <PhotoSplit image={`d-${slug}`} eyebrow="What it enables" title="Everything your customers and team can do" items={c.enables} />
 
-      <ExtraSection title="What it covers" intro="The supplier types and channels this integration connects, subject to your own access and agreements." items={c.covers} style="duo" />
+      <ExtraSection title="What it covers" intro="The tools and channels this integration connects, subject to your own accounts and each provider's terms." items={c.covers} style="duo" />
 
       <section className="impl container" id="integration-process">
         <div className="split-head">
           <h2 className="h2 reveal">Integration process</h2>
-          <p className="reveal">From supplier access to live bookings, with testing at every step.</p>
+          <p className="reveal">From account access to live data flowing, with testing at every step.</p>
         </div>
         <StepLine steps={apiProcessSteps} />
       </section>
@@ -50,15 +50,15 @@ export default async function ApiPage({ params }: Props) {
         <div className="resp-card reveal">
           <div>
             <p className="eyebrow light">Good to know</p>
-            <h3>Supplier contracts are between you and the supplier.</h3>
+            <h3>Your accounts stay yours.</h3>
           </div>
-          <p>You sign up with each supplier and own those commercial terms. We handle the technical work: integration, certification, testing and monitoring. <b>Typical timeline:</b> {c.timeline}</p>
+          <p>You hold the account with each provider and own those terms. We handle the technical work: integration, testing, approvals and monitoring. <b>Typical timeline:</b> {c.timeline}</p>
         </div>
       </section>
 
       <FaqBlock faq={c.faq} />
-      <CtaBand title="Plan your integration" text="Tell us which suppliers you work with, or want to work with, and we'll map out the integration." preset="API integration" />
-      <JsonLd data={[breadcrumbSchema(trail, path), serviceSchema({ name: meta.name, description: c.meta, path, type: "Travel API integration" }), faqSchema(c.faq)]} />
+      <CtaBand title="Plan your integration" text="Tell us which tools you use, or want to use, and we'll map out the integration." preset="Integration" />
+      <JsonLd data={[breadcrumbSchema(trail, path), serviceSchema({ name: meta.name, description: c.meta, path, type: "Software integration" }), faqSchema(c.faq)]} />
     </>
   );
 }

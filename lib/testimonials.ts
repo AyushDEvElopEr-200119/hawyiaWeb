@@ -6,7 +6,7 @@
 
 export type Story = {
   id: string;
-  cat: "Agencies" | "Tour operators" | "B2B & wholesale" | "Corporate" | "Ground transport";
+  cat: "Business teams" | "Retail" | "Services" | "Healthcare" | "Households";
   quote: string;
   name: string;
   role: string;
@@ -19,59 +19,59 @@ export type Story = {
 
 export const featured: Story = {
   id: "featured",
-  cat: "Agencies",
-  quote: "We went from phone and spreadsheet bookings to our own branded booking site and agent portal, and our team finally works from one screen.",
+  cat: "Business teams",
+  quote: "Approvals, invoices and follow-ups used to live in inboxes and spreadsheets. Now they run on their own, and our team finally works from one screen.",
   name: "Client name",
   role: "Founder",
-  company: "Travel agency",
+  company: "Trading company",
   place: "City, Country",
   photo: "t-partnership",
-  built: ["White-label platform", "B2B agent portal", "Flight & hotel APIs", "Payment gateway"],
+  built: ["Business process automation", "CRM", "ERP", "WhatsApp notifications"],
   sample: true,
 };
 
 export const stories: Story[] = [
   {
-    id: "agency-desk", cat: "Agencies",
-    quote: "Counter sales, phone bookings and online orders now sit in one ledger. Month-end reconciliation went from days to an afternoon.",
-    name: "Client name", role: "Managing Director", company: "Travel agency", place: "City, Country",
-    photo: "d-travel-agency-software", built: ["Travel agency software", "Offline bookings", "Invoices"], sample: true,
+    id: "finance-team", cat: "Business teams",
+    quote: "Invoices go out automatically and bank lines match themselves. Month-end went from days to an afternoon.",
+    name: "Client name", role: "Finance Manager", company: "Distribution company", place: "City, Country",
+    photo: "d-finance-automation", built: ["Finance automation", "ERP", "Accounting integration"], sample: true,
   },
   {
-    id: "tour-operator", cat: "Tour operators",
-    quote: "The itinerary builder lets us quote a tailor-made trip while the customer is still on the call, with seasonal prices already applied.",
-    name: "Client name", role: "Head of Operations", company: "Tour operator", place: "City, Country",
-    photo: "d-tour-operator-software", built: ["Itinerary builder", "Package CMS", "Agent distribution"], sample: true,
+    id: "retail-chain", cat: "Retail",
+    quote: "Stock now syncs between our stores and the website, and loyalty offers go out on their own. Fewer stock-outs, more repeat customers.",
+    name: "Client name", role: "Operations Head", company: "Retail chain", place: "City, Country",
+    photo: "d-inventory-pos-software", built: ["Inventory & POS", "E-commerce integration", "Promotions & loyalty"], sample: true,
   },
   {
-    id: "consolidator", cat: "B2B & wholesale",
-    quote: "Our distributors onboard their own sub-agents now, and every level has its own margin and credit limit. Support calls dropped noticeably.",
-    name: "Client name", role: "Director", company: "Flight consolidator", place: "City, Country",
-    photo: "d-b2b2b-travel-portal", built: ["B2B2B portal", "Flight extranet", "Wallets & credit"], sample: true,
+    id: "agency", cat: "Services",
+    quote: "Every enquiry gets a reply within seconds and a follow-up the next day. We stopped losing leads on busy weeks.",
+    name: "Client name", role: "Director", company: "Marketing agency", place: "City, Country",
+    photo: "d-sales-automation", built: ["Sales automation", "CRM", "WhatsApp integration"], sample: true,
   },
   {
-    id: "corporate", cat: "Corporate",
-    quote: "Employees book inside policy, managers approve from their phone, and finance gets one invoice a month instead of a pile of receipts.",
-    name: "Client name", role: "Travel Manager", company: "Corporate travel company", place: "City, Country",
-    photo: "d-corporate-travel-software", built: ["Corporate travel software", "Approvals", "Consolidated billing"], sample: true,
+    id: "hr-team", cat: "Business teams",
+    quote: "Onboarding checklists, leave approvals and payroll inputs run themselves now. HR spends its time on people instead of paperwork.",
+    name: "Client name", role: "HR Manager", company: "Services company", place: "City, Country",
+    photo: "d-hr-automation", built: ["HRMS", "HR automation", "Biometric integration"], sample: true,
   },
   {
-    id: "bus-operator", cat: "Ground transport",
-    quote: "Live seat maps ended our double bookings, and agents in smaller towns now sell our routes straight from the portal.",
-    name: "Client name", role: "Owner", company: "Bus operator", place: "City, Country",
-    photo: "d-bus-car-booking-software", built: ["Bus booking software", "Bus extranet", "Agent portal"], sample: true,
+    id: "clinic", cat: "Healthcare",
+    quote: "Patients book online and get WhatsApp reminders automatically. Missed appointments dropped and the front desk is calmer.",
+    name: "Client name", role: "Clinic Manager", company: "Medical clinic", place: "City, Country",
+    photo: "i-healthcare", built: ["Appointment automation", "WhatsApp reminders", "Digital forms"], sample: true,
   },
   {
-    id: "hotel-dmc", cat: "B2B & wholesale",
-    quote: "Our contracted hotels appear next to bed-bank content in one clean listing, so agents always see our rates first.",
-    name: "Client name", role: "Contracting Manager", company: "DMC", place: "City, Country",
-    photo: "d-hotel-booking-software", built: ["Hotel extranet", "Hotel API mapping", "B2B portal"], sample: true,
+    id: "support-desk", cat: "Services",
+    quote: "Our AI assistant answers the common questions instantly, and everything else arrives as a ticket with the full conversation.",
+    name: "Client name", role: "Support Lead", company: "Software company", place: "City, Country",
+    photo: "d-customer-support-automation", built: ["AI assistant", "Helpdesk", "Support automation"], sample: true,
   },
   {
-    id: "ota-app", cat: "Agencies",
-    quote: "Launching the app on the same platform as the website meant one set of prices, one set of bookings and no second system to maintain.",
-    name: "Client name", role: "Co-founder", company: "Online travel startup", place: "City, Country",
-    photo: "d-b2c-travel-portal", built: ["B2C portal", "Android & iOS apps", "Promo codes"], sample: true,
+    id: "family", cat: "Households",
+    quote: "Bills, school events and home maintenance are all in one place with reminders. We haven't missed a payment since.",
+    name: "Client name", role: "Parent", company: "Family household", place: "City, Country",
+    photo: "d-household-automation", built: ["Household automation", "Bill reminders", "Smart-home routines"], sample: true,
   },
 ];
 

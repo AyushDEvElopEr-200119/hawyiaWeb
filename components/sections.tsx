@@ -198,11 +198,11 @@ export function Engagement() {
   );
 }
 
-export const footnote = <p className="fineprint container">Feature availability depends on chosen product, supplier contracts, integrations and requirements.</p>;
+export const footnote = <p className="fineprint container">Feature availability depends on the chosen product, third-party accounts, integrations and requirements.</p>;
 
 /* ---------------- forms ---------------- */
-const businessTypes = ["Travel agency", "OTA", "Tour operator", "DMC", "Corporate travel / TMC", "Consolidator / wholesaler", "Travel startup", "Other"];
-const needs = ["White-label platform", "Custom development", "API integration", "Extranet / CMS", "Mobile app", "Business software", "Hire developers", "Not sure yet"];
+const businessTypes = ["Retail & e-commerce", "Professional services", "Clinic & healthcare", "Real estate", "Education", "Manufacturing & distribution", "Restaurant & hospitality", "Startup", "Household / personal", "Other"];
+const needs = ["Business automation", "Ready-made module (CRM, HRMS, ERP…)", "Custom development", "Integration", "AI assistant", "Mobile app", "Hire developers", "Not sure yet"];
 const timelines = ["As soon as possible", "1–3 months", "3–6 months", "6+ months", "Just exploring"];
 
 const schedulerLabels: SchedulerLabels = {
@@ -231,14 +231,14 @@ export function LeadForm({ id = "leadForm", submit = "Request a Demo", preset = 
       <div className="f"><label htmlFor={`${id}-country`}>Country</label>
         <select id={`${id}-country`} name="country" autoComplete="country-name" defaultValue=""><option value="">Select…</option>{countries(getLang()).map((c) => <option key={c.value} value={c.value}>{c.label}</option>)}</select></div>
       <div className="f"><label htmlFor={`${id}-phone`}>Phone or WhatsApp</label><input id={`${id}-phone`} name="phone" type="tel" autoComplete="tel" /></div>
-      <div className="f"><label htmlFor={`${id}-type`}>Type of travel business</label>
+      <div className="f"><label htmlFor={`${id}-type`}>Type of business</label>
         <select id={`${id}-type`} name="business" defaultValue=""><option value="">Select…</option>{businessTypes.map((o) => <option key={o} value={o}>{o}</option>)}</select></div>
       <div className="f"><label htmlFor={`${id}-need`}>What do you need?</label>
         <select id={`${id}-need`} name="need" defaultValue={preset}><option value="">Select…</option>{needs.map((o) => <option key={o} value={o}>{o}</option>)}</select></div>
       <div className="f"><label htmlFor={`${id}-timeline`}>Estimated timeline</label>
         <select id={`${id}-timeline`} name="timeline" defaultValue=""><option value="">Select…</option>{timelines.map((o) => <option key={o} value={o}>{o}</option>)}</select></div>
       {booking && <DemoScheduler id={id} lang={getLang()} labels={localize(schedulerLabels)} />}
-      <div className="f full"><label htmlFor={`${id}-msg`}>Project requirements</label><textarea id={`${id}-msg`} name="message" rows={4} placeholder="Products, markets, suppliers, integrations…" /></div>
+      <div className="f full"><label htmlFor={`${id}-msg`}>Project requirements</label><textarea id={`${id}-msg`} name="message" rows={4} placeholder="Processes to automate, modules, tools you use, integrations…" /></div>
       <div className="f full actions">
         <button type="submit" className="btn-pill press">{submit} <Chev /></button>
         <p className="form-status" role="status" />

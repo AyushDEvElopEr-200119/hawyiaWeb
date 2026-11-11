@@ -86,7 +86,7 @@ export default async function ProductPage({ params }: Props) {
 
       <RelatedCards items={related} base="/business-software/" />
       <FaqBlock faq={c.faq} />
-      <CtaBand title={`Get a demo of ${meta.name}`} preset="Business software" />
+      <CtaBand title={`Get a demo of ${meta.name}`} preset="Ready-made module (CRM, HRMS, ERP…)" />
       <JsonLd data={[
         breadcrumbSchema(trail, path),
         serviceSchema({ name: meta.name, description: c.meta, path, type: "Business software" }),

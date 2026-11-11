@@ -9,7 +9,7 @@ const trail = [{ label: "Contact" }];
 
 export const generateMetadata = metaFor({
   title: "Contact",
-  description: "Contact Hawyia: request a demo, get a quote or book a consultation about travel booking software.",
+  description: "Contact Hawyia: request a demo, get a quote or book a consultation about business automation and software.",
   path,
 });
 
@@ -21,12 +21,12 @@ export default async function ContactPage({ params }: LangParams) {
       <Breadcrumbs trail={trail} />
       <div className="contact-grid">
         <div className="contact-copy">
-          <h1 className="ph-title" data-split><SplitTitle text="Let's build your<br />travel platform" /></h1>
-          <p>Request a demo, ask for a quote, or book a consultation. A travel technology specialist will reply within one business day.</p>
+          <h1 className="ph-title" data-split><SplitTitle text="Let's automate<br />your business" /></h1>
+          <p>Request a demo, ask for a quote, or book a consultation. An automation specialist will reply within one business day.</p>
           <div className="contact-options">
             <Link href="/request-demo/" className="opt press"><b>Request a demo</b><span>See the platform on your use case</span></Link>
             <a href="#enquire" className="opt press"><b>Get a quote</b><span>Itemised by modules and integrations</span></a>
-            <a href="#enquire" className="opt press"><b>Book a consultation</b><span>Talk through white-label vs custom</span></a>
+            <a href="#enquire" className="opt press"><b>Book a consultation</b><span>Talk through ready-made vs custom</span></a>
           </div>
           {hasDetails && (
             <div className="contact-details">

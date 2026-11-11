@@ -66,7 +66,8 @@ export const automationAiUses = ["Reading documents", "Answering common question
 export const automationIndustries: Pair[] = [
   ["Retail & e-commerce", "Order updates, stock levels and payment records that stay in step."],
   ["Real estate", "Enquiries, viewing bookings and follow-ups that don't slip through."],
-  ["Travel & hospitality", "Booking confirmations, customer messages and back-office tasks."],
+  ["Restaurants & hospitality", "Order updates, guest messages, shifts and back-office tasks."],
+  ["Households", "Bills, reminders, family schedules and smart-home routines."],
   ["Education", "Student records, notifications and everyday administration."],
   ["Professional services", "Appointments, documents and client updates."],
   ["Corporate & enterprise", "HR requests, approvals and reporting across teams."],

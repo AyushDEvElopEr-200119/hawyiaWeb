@@ -20,23 +20,23 @@ export const productRows: { title: string; photo: string; href: string; desc: st
     points: [["Workflows", "Tasks that move themselves on"], ["Approvals", "Requests sent to the right person"], ["Communication", "Updates that go out on time"]],
   },
   {
-    title: "Digital platforms", photo: "r-cross-platform", href: "/custom-development/",
-    desc: "Take more of your business online, whether that means selling, taking bookings or giving customers somewhere to help themselves.",
-    points: [["E-commerce", "Online stores and orders"], ["Customer portals", "Self-service accounts"], ["Online booking", "Reservations without the back-and-forth"]],
+    title: "Marketing & promotions", photo: "s-marketing-automation", href: "/solutions/marketing-automation/",
+    desc: "Campaigns, social posts, offers and loyalty rewards that go out on time and reach the right people, without managing every step by hand.",
+    points: [["Campaigns", "Email, WhatsApp and social"], ["Promotions", "Coupons, offers and loyalty"], ["Lead nurturing", "Follow-ups that send themselves"]],
   },
   {
-    title: "Travel technology", photo: "tileCorp", href: "/solutions/",
-    desc: "Launch or grow a travel business on booking technology that's already built, under your own brand.",
-    points: [["White-label booking", "A platform with your name on it"], ["B2B portals", "Tools for your agent network"], ["Booking engines", "Flights, hotels and corporate travel"]],
+    title: "Household duties", photo: "s-household-automation", href: "/solutions/household-automation/",
+    desc: "The everyday admin of running a home, handled for you: bills, reminders, family schedules and smart-home routines.",
+    points: [["Bills & renewals", "Reminders before every due date"], ["Family calendar", "One shared schedule"], ["Smart home", "Routines that run themselves"]],
   },
 ];
 
 export const devServices: [href: string, title: string, sub: string][] = [
-  ["/custom-development/", "Web applications", "Built around how you work"],
-  ["/custom-development/travel-mobile-app-development/", "Mobile apps", "Android & iOS"],
+  ["/custom-development/custom-software-development/", "Web applications", "Built around how you work"],
+  ["/custom-development/mobile-app-development/", "Mobile apps", "Android & iOS"],
   ["/business-software/", "SaaS & enterprise", "Products and internal platforms"],
-  ["/custom-development/custom-travel-portal-development/", "Portals", "For customers and employees"],
-  ["/custom-development/booking-engine-development/", "Booking & e-commerce", "Reservations, stores and orders"],
+  ["/custom-development/workflow-automation-development/", "Workflow automation", "Bots and workflows for routine work"],
+  ["/custom-development/ai-integration-development/", "AI integration", "Assistants, documents and search"],
   ["/custom-development/custom-software-integrations/", "Dashboards & APIs", "Your data, connected and visible"],
 ];
 
@@ -94,12 +94,12 @@ export const apiCategories: Pair[] = [
 ];
 
 export const industries: { tag: string; title: string; text: string; photo: string; g1: string; g2: string }[] = [
-  { tag: "Corporate & enterprise", title: "Bring people, processes and data into one place", text: "ERP, HR management, workflow management and enterprise software.", photo: "d-custom-travel-portal-development", g1: "#14303f", g2: "#6aa9c4" },
+  { tag: "Corporate & enterprise", title: "Bring people, processes and data into one place", text: "ERP, HR management, workflow management and enterprise software.", photo: "d-business-process-automation", g1: "#14303f", g2: "#6aa9c4" },
   { tag: "Retail & e-commerce", title: "Take orders from checkout to fulfilment with less manual work", text: "Online stores, inventory, payment integrations and automated order management.", photo: "miniApi", g1: "#0a2463", g2: "#4f7fe0" },
   { tag: "Real estate", title: "Turn listings and enquiries into organised follow-up", text: "Property management platforms, listing portals and booking automation.", photo: "carB2B2B", g1: "#2e2a40", g2: "#b6a6e0" },
   { tag: "Education", title: "Spend less time on administration and more on learning", text: "Learning platforms, student management and educational administration.", photo: "carB2B2C", g1: "#23352a", g2: "#9cc79a" },
   { tag: "Professional services", title: "Give clients an easier way to work with you", text: "Customer portals, appointments, document management and process automation.", photo: "t-partnership", g1: "#2b2b3d", g2: "#a2a6d9" },
-  { tag: "Travel & hospitality", title: "Sell, book and manage trips and stays online", text: "Booking engines, travel portals, hotel management and corporate travel.", photo: "carOTA", g1: "#0d2d3a", g2: "#62c4d6" },
+  { tag: "Households & families", title: "Let the home run itself", text: "Bill reminders, family schedules, shopping lists and smart-home routines.", photo: "i-households", g1: "#0d2d3a", g2: "#62c4d6" },
   { tag: "Startups & entrepreneurs", title: "Go from an idea to a working product", text: "Custom applications, SaaS products, digital platforms and technology advice.", photo: "i-startups", g1: "#3a2a1f", g2: "#e0b48a" },
 ];
 
@@ -122,12 +122,12 @@ export const homeSteps: Pair[] = [
 ];
 
 export const homeFaq: Pair[] = [
-  ["What does Hawyia Premium do?", "We develop software, automate business processes, add AI to applications and connect systems. We also offer ready-made platforms, including ERP, HR management and travel technology."],
+  ["What does Hawyia Premium do?", "We automate business and household processes, develop software, add AI to applications and connect systems. We also offer ready-made modules, including CRM, HRMS, ERP, project management, helpdesk and POS."],
   ["Do you build custom software?", "Yes. We build web and mobile applications, enterprise systems and digital platforms to your requirements."],
   ["Can you automate the processes we already have?", "Yes. We review how your operations run today, identify the repetitive work and automate it to simplify your workflows."],
   ["Will we have to replace our existing software?", "Not necessarily. Automation can often be added to the applications you already use, through APIs and other integration methods."],
   ["How can AI help my business?", "Common uses include assistants for customers and staff, document processing, smarter search and automated workflows. We'll help you work out where it's useful for you."],
-  ["Do you offer ready-made software?", "Yes. We have ready-to-deploy platforms for business management and travel, among others, and can tailor them to how you work."],
+  ["Do you offer ready-made software?", "Yes. We have ready-to-deploy modules such as CRM, HRMS, ERP, helpdesk, inventory & POS and expense management, and can tailor them to how you work."],
   ["Do you work with startups?", "Yes. We work with businesses and entrepreneurs to turn ideas into working digital products."],
   ["How do we get started?", "Contact us and tell us what you want to build, improve or automate. We'll explore the options with you from there."],
 ];

@@ -12,7 +12,7 @@ const trail = [{ label: "Client Stories" }];
 export const generateMetadata = async ({ params }: LangParams) => ({
   ...pageMeta({
     title: "Client Stories",
-    description: "How travel agencies, tour operators, wholesalers, corporate travel teams and bus operators run their business on Hawyia.",
+    description: "How retailers, service firms, clinics, distributors and households automate their work with Hawyia.",
     path,
   }, asLocale((await params).lang)),
   // sample stories are placeholders: keep the page out of search results until real ones replace them
@@ -42,10 +42,10 @@ export default async function TestimonialsPage({ params }: LangParams) {
       <PageHero
         trail={trail}
         eyebrow="Client stories"
-        title="Travel businesses,<br />in their own words"
-        intro="Agencies, tour operators, wholesalers, corporate travel teams and fleet owners on what changed once their platform went live."
+        title="Our clients,<br />in their own words"
+        intro="Retailers, service firms, clinics, distributors and families on what changed once their routine work started running itself."
         image="p-testimonials"
-        highlights={[["Agencies & OTAs", "Branded sites and agent portals"], ["Operators & DMCs", "Packages, contracts, distribution"], ["Corporate & ground", "Policies, fleets and seats"]]}
+        highlights={[["Business teams", "Sales, finance and HR"], ["Retail & services", "Stores, clinics and agencies"], ["Households", "Bills, schedules and routines"]]}
       />
 
       {/* featured story: one photo, one glass panel, one quote */}
@@ -90,7 +90,7 @@ export default async function TestimonialsPage({ params }: LangParams) {
         <div className="ts-next-inner reveal">
           <p className="eyebrow">Your story next</p>
           <h2 className="h2">Tell us where you want<br />your business to be</h2>
-          <p>We&apos;ll show you how agencies and operators like yours launched, and what it would take for you.</p>
+          <p>We&apos;ll show you how businesses like yours automated their routine work, and what it would take for you.</p>
           <div className="cta-row left">
             <Link href="/request-demo/" className="btn-pill press">Request a Demo <Chev /></Link>
             <Link href="/solutions/" className="link">Explore solutions <Chev /></Link>
@@ -98,7 +98,7 @@ export default async function TestimonialsPage({ params }: LangParams) {
         </div>
       </section>
 
-      <CtaBand title="Start your own story" preset="White-label platform" />
+      <CtaBand title="Start your own story" preset="Business automation" />
       <JsonLd data={breadcrumbSchema(trail, path)} />
     </>
   );

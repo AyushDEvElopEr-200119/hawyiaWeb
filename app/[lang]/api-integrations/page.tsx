@@ -7,27 +7,26 @@ import { apis } from "@/lib/site";
 import { breadcrumbSchema, metaFor } from "@/lib/seo";
 
 const path = "/api-integrations/";
-const trail = [{ label: "API Integrations" }];
+const trail = [{ label: "Integrations" }];
 
 export const generateMetadata = metaFor({
-  title: "Travel API Integrations",
-  description: "Travel API integration directory: flight and GDS, hotel, car rental, bus, transfers, activities, insurance and payment gateways.",
+  title: "Integrations",
+  description: "Integration directory: payment gateways, WhatsApp, SMS and email, accounting software, CRM and marketing tools, e-commerce, Google Workspace, Microsoft 365 and AI models.",
   path,
 });
 
 const directory = [
   ...apis.map((a) => ({ cat: a.cat, name: a.name, desc: a.short, href: `/api-integrations/${a.slug}/` })),
-  { cat: "Flights", name: "Amadeus, Sabre & Galileo", desc: "GDS fares, PNRs and ticketing", href: "/api-integrations/flight-gds-api/" },
-  { cat: "Flights", name: "NDC content", desc: "Airline NDC offers and ancillaries", href: "/api-integrations/flight-gds-api/" },
-  { cat: "Flights", name: "IndiGo, SpiceJet & Akasa Air", desc: "Direct low-cost carrier content", href: "/api-integrations/flight-gds-api/" },
-  { cat: "Flights", name: "Consolidator fares", desc: "TBO, TripJack, Mystifly, Kafila and more", href: "/api-integrations/flight-gds-api/" },
-  { cat: "Hotels", name: "Hotelbeds & GRN Connect", desc: "Global bed-bank inventory", href: "/api-integrations/hotel-api/" },
-  { cat: "Ground", name: "redBus & AbhiBus", desc: "Multi-operator bus inventory", href: "/api-integrations/bus-api/" },
-  { cat: "Hotels", name: "Channel managers", desc: "Direct hotel connectivity", href: "/api-integrations/hotel-api/" },
-  { cat: "Experiences", name: "Cruise", desc: "Sailings and cabins, where supported", href: "/contact/" },
-  { cat: "Business", name: "Accounting & ERP", desc: "Invoices and ledgers synced", href: "/custom-development/custom-software-integrations/" },
-  { cat: "Business", name: "CRM & marketing", desc: "Customer and booking data", href: "/custom-development/custom-software-integrations/" },
-  { cat: "Payments", name: "Wallets & UPI", desc: "Paytm, PhonePe and other UPI methods", href: "/api-integrations/payment-gateway-integration/" },
+  { cat: "Payments", name: "Stripe & PayPal", desc: "International cards and wallets", href: "/api-integrations/payment-gateway-integration/" },
+  { cat: "Payments", name: "Telr, PayTabs & Thawani", desc: "Regional gateways in the Middle East", href: "/api-integrations/payment-gateway-integration/" },
+  { cat: "Messaging", name: "WhatsApp Business Platform", desc: "Notifications and two-way chat", href: "/api-integrations/whatsapp-sms-email-integration/" },
+  { cat: "Finance", name: "QuickBooks, Xero & Zoho Books", desc: "Invoices, bills and payments synced", href: "/api-integrations/accounting-software-integration/" },
+  { cat: "Sales & marketing", name: "Salesforce, HubSpot & Zoho CRM", desc: "Contacts and deals in step", href: "/api-integrations/crm-marketing-integration/" },
+  { cat: "Commerce", name: "Shopify & WooCommerce", desc: "Orders, stock and customers", href: "/api-integrations/ecommerce-integration/" },
+  { cat: "Productivity", name: "Single sign-on", desc: "Google and Microsoft accounts", href: "/api-integrations/google-microsoft-integration/" },
+  { cat: "AI", name: "Large language models", desc: "Assistants grounded in your data", href: "/api-integrations/ai-model-integration/" },
+  { cat: "Business", name: "ERP & HR systems", desc: "People, money and stock in sync", href: "/custom-development/custom-software-integrations/" },
+  { cat: "Business", name: "Smart-home devices", desc: "Routines for household automation", href: "/solutions/household-automation/" },
 ];
 const categories = ["All", ...new Set(directory.map((d) => d.cat))];
 
@@ -37,11 +36,11 @@ export default async function ApiIntegrationsPage({ params }: LangParams) {
     <>
       <PageHero
         trail={trail}
-        eyebrow="Supplier connectivity"
-        title="Travel API<br />integrations"
-        intro="Connect flights, hotels, cars, buses, transfers, activities and payments to your platform. Integrations are subject to supplier access and agreements."
+        eyebrow="Connect your tools"
+        title="Integrations that<br />end the double entry"
+        intro="Connect payments, messaging, accounting, CRM, e-commerce, productivity tools and AI to your systems, so information is entered once and flows everywhere it's needed."
         image="p-api-integrations"
-        highlights={[["Flights", "GDS, LCC, NDC and consolidators"], ["Stays & ground", "Hotels, cars, buses and transfers"], ["Payments", "Gateways, wallets and currencies"]]}
+        highlights={[["Payments & finance", "Gateways and accounting"], ["Messaging", "WhatsApp, SMS and email"], ["Business tools", "CRM, store, Google, Microsoft and AI"]]}
       />
 
       <section className="container posters-sec">
@@ -66,17 +65,17 @@ export default async function ApiIntegrationsPage({ params }: LangParams) {
             </Link>
           ))}
         </div>
-        <p className="fineprint">We list supplier brands by name only for integrations we have delivered. Ask us about a specific supplier.</p>
+        <p className="fineprint">Brand names are listed to show the kinds of tools we connect, through each provider&apos;s public APIs. Ask us about a specific tool.</p>
       </section>
 
       <section className="impl container" id="integration-process">
         <div className="split-head">
           <h2 className="h2 reveal">How integration works</h2>
-          <p className="reveal">From supplier access to live bookings, with testing at every step.</p>
+          <p className="reveal">From account access to live data flowing, with testing at every step.</p>
         </div>
         <StepLine steps={apiProcessSteps} />
       </section>
-      <CtaBand title="Plan your integration" preset="API integration" />
+      <CtaBand title="Plan your integration" preset="Integration" />
       <JsonLd data={breadcrumbSchema(trail, path)} />
     </>
   );

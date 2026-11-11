@@ -8,8 +8,8 @@ const path = "/business-software/";
 const trail = [{ label: "Business Software" }];
 
 export const generateMetadata = metaFor({
-  title: "Business Software: HRMS, ERP & Expense Management",
-  description: "HRMS, ERP and expense management software from Hawyia. Use each on its own or connect them so people, money and stock share the same records.",
+  title: "Business Software: CRM, HRMS, ERP & More",
+  description: "Ready-made business modules from Hawyia: CRM, HRMS, ERP, project management, helpdesk, inventory & POS and expense management, connected and automated.",
   path,
 });
 
@@ -20,16 +20,16 @@ export default async function BusinessSoftwarePage({ params }: LangParams) {
       <PageHero
         trail={trail}
         eyebrow="Business software"
-        title="The back office,<br />finally connected"
-        intro="HR, finance and operations software built by the team behind our travel platforms. Start with the product you need most, and connect the rest when you're ready."
+        title="Every module your<br />business runs on"
+        intro="CRM, HR, finance, projects, support and stock, with automation built in. Start with the module you need most, and connect the rest when you're ready."
         image="p-business-software"
-        highlights={[[`${products.length} products`, "HRMS, ERP and expense management"], ["Works together", "Shared employees, cost centres and ledgers"], ["Configured for you", "Your policies, approvals and reports"]]}
+        highlights={[[`${products.length} modules`, "CRM, HRMS, ERP and more"], ["Works together", "Shared customers, people and ledgers"], ["Automated", "Reminders, approvals and reports built in"]]}
       />
 
       <section className="container posters-sec" id="all">
         <PosterGrid
           title="Pick where to start"
-          text="Each product runs on its own, with its own admin, mobile access and reports."
+          text="Each module runs on its own, with its own admin, mobile access and reports."
           items={products.map((p) => ({ href: `/business-software/${p.slug}/`, title: p.name, text: p.short, image: `d-${p.slug}` }))}
         />
       </section>
@@ -37,12 +37,12 @@ export default async function BusinessSoftwarePage({ params }: LangParams) {
       <ExtraSection
         title="Better together"
         style="duo"
-        intro="Connect the products and the hand-offs between teams happen on their own."
+        intro="Connect the modules and the hand-offs between teams happen on their own."
         items={[
+          ["CRM → ERP", "Accepted quotes become sales orders and invoices without re-keying."],
           ["HRMS → ERP", "Payroll runs post salary journals to accounting automatically, split by department and cost centre."],
-          ["Expenses → ERP", "Approved claims and card spend become journal entries and payouts without re-keying."],
-          ["HRMS → Expenses", "Employees, grades and reporting lines set who can claim what and who approves it."],
-          ["Travel → Expenses", "Trips booked on our corporate travel software appear in expense reports, so nothing is claimed twice."],
+          ["POS → ERP", "Store sales and stock movements flow into accounting and inventory every day."],
+          ["Helpdesk → CRM", "Every support ticket appears on the customer's record, so sales and support see the same history."],
         ]}
       />
 
@@ -61,7 +61,7 @@ export default async function BusinessSoftwarePage({ params }: LangParams) {
         ]} />
       </section>
 
-      <CtaBand title="Let's map your back office" text="Tell us how your teams work today. We'll recommend where to start and send a rollout plan." preset="Business software" />
+      <CtaBand title="Let's map your back office" text="Tell us how your teams work today. We'll recommend where to start and send a rollout plan." preset="Ready-made module (CRM, HRMS, ERP…)" />
       <JsonLd data={breadcrumbSchema(trail, path)} />
     </>
   );

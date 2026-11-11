@@ -10,40 +10,40 @@ const trail = [{ label: "Pricing" }];
 
 export const generateMetadata = metaFor({
   title: "Pricing",
-  description: "Starting-from pricing for Hawyia travel software by product: booking websites, custom platforms, supplier APIs, holiday sites, hotel extranet, itinerary builder and CRM.",
+  description: "Starting-from pricing for Hawyia: automation packages, CRM, HRMS, ERP, helpdesk, inventory & POS, AI assistants, integrations and custom platforms.",
   path,
 });
 
 // One plan per product. Set real "starting from" prices when confirmed; null shows "On request".
 const plans: { name: string; for: string; setup: string | null; yearly: string | null; featured?: boolean; items: string[] }[] = [
-  { name: "Launch Website", for: "A ready-made booking site under your brand", setup: null, yearly: null, items: ["Choose B2C, B2B, B2B2B or corporate", "Flights, hotels, buses, cars, transfers", "Holidays, activities and bill payments", "Admin, markups and reports"] },
-  { name: "Platform Pro", for: "Your own platform, shaped around your workflows", setup: null, yearly: null, featured: true, items: ["Any mix of B2C, B2B, B2B2B and corporate", "The travel products you choose", "Website plus Android and iOS apps", "Custom modules and integrations"] },
-  { name: "Supplier APIs", for: "Connect the supplier accounts you hold", setup: null, yearly: null, items: ["Flight, hotel, bus, car and transfer APIs", "Recharge and bill payment APIs", "Mapping, testing and certification", "Per supplier, priced by scope"] },
-  { name: "Holiday Website", for: "Sell packages online, direct or through agents", setup: null, yearly: null, items: ["B2C or B2B package site", "Itineraries, inclusions and pricing", "Enquiry or instant booking", "Web, Android or iOS"] },
-  { name: "Hotel Extranet", for: "Load and sell your contracted hotels", setup: null, yearly: null, items: ["Properties, rooms and rate plans", "Allotments and stop-sales", "Hotel partner logins", "Web, Android or iOS"] },
-  { name: "Itinerary Builder", for: "Tour CMS for tailor-made and fixed trips", setup: null, yearly: null, items: ["Day-wise itinerary builder", "Seasonal and per-person pricing", "PDF quotes and vouchers", "Web, Android or iOS"] },
-  { name: "Travel CRM", for: "Enquiries, quotes and follow-ups in one place", setup: null, yearly: null, items: ["Lead capture and assignment", "Quote versions and reminders", "Sales reports", "Web, Android or iOS"] },
+  { name: "Automation Starter", for: "Automate your first processes", setup: null, yearly: null, items: ["Up to three automated workflows", "Approvals, invoices or reminders", "Email and WhatsApp notifications", "Connected to the tools you use"] },
+  { name: "Business Suite", for: "Ready-made modules, connected and automated", setup: null, yearly: null, featured: true, items: ["Choose CRM, HRMS, ERP and more", "Automation built into every module", "Web plus Android and iOS apps", "Data migration and training"] },
+  { name: "CRM & Sales", for: "Leads, deals and follow-ups in one place", setup: null, yearly: null, items: ["Lead capture and assignment", "Quotes and follow-up reminders", "WhatsApp and email on each contact", "Sales reports"] },
+  { name: "HRMS & Payroll", for: "People, attendance, leave and payroll", setup: null, yearly: null, items: ["Employee records and self-service", "Attendance, shifts and leave", "Payroll and payslips", "Web, Android or iOS"] },
+  { name: "Inventory & POS", for: "Billing counters and stock across branches", setup: null, yearly: null, items: ["POS billing that works offline", "Stock by branch and warehouse", "Purchase orders and reorder alerts", "Online store sync"] },
+  { name: "AI Assistant", for: "Answers for customers and staff, around the clock", setup: null, yearly: null, items: ["Trained on your content", "Website and WhatsApp channels", "Arabic and English", "Human handover"] },
+  { name: "Household Automation", for: "Bills, schedules and home routines", setup: null, yearly: null, items: ["Bill and renewal reminders", "Shared family calendar", "Smart-home routines", "Mobile app"] },
 ];
 
 const addons: Pair[] = [
-  ["Extra business model", "Add B2B, B2B2B or corporate to a live site."],
-  ["Extra travel product", "Switch on buses, cars, transfers, holidays or activities."],
+  ["Extra workflow", "Automate another process."],
+  ["Extra module", "Add CRM, HRMS, ERP, helpdesk, projects or POS."],
   ["Payment gateway", "Connect another gateway or payment method."],
-  ["Extra supplier API", "Add more flight, hotel or ground suppliers."],
-  ["Mobile apps", "Android & iOS booking apps."],
+  ["Extra integration", "Connect another tool or service."],
+  ["Mobile apps", "Android & iOS apps for customers or staff."],
   ["Hosting & cloud management", "Managed hosting, backups and monitoring."],
-  ["Maintenance & support", "Updates, fixes and supplier changes."],
-  ["Extranet & CMS", "Sell your own inventory."],
+  ["Maintenance & support", "Updates, fixes and improvements."],
+  ["AI features", "Assistants, document reading and smart search."],
   ["Custom development", "Quoted after scoping."],
 ];
 
 const faq: Pair[] = [
-  ["Are supplier fees included?", "No. Supplier, GDS and payment gateway fees are separate and contracted directly by your business."],
-  ["Is custom development included?", "Custom work is quoted separately after scoping, or included in Enterprise as agreed."],
-  ["Can I upgrade later?", "Yes. Add products, business models, apps or integrations as your business grows. Each change is quoted before work starts."],
-  ["What does the yearly fee cover?", "Maintenance, updates and support for the modules you use. It can rise with your number of users or the data the platform handles, and the proposal says exactly how."],
+  ["Are third-party fees included?", "No. Fees for payment gateways, WhatsApp, SMS, AI providers and other services are separate and paid directly by your business."],
+  ["Is custom development included?", "Custom work is quoted separately after scoping, or included as agreed in your proposal."],
+  ["Can I upgrade later?", "Yes. Add workflows, modules, apps or integrations as your business grows. Each change is quoted before work starts."],
+  ["What does the yearly fee cover?", "Maintenance, updates and support for the modules and automations you use. It can rise with your number of users or the data handled, and the proposal says exactly how."],
   ["Are taxes included?", "No. Prices are shown before applicable taxes."],
-  ["Are the prices fixed?", "They are starting points for one product with standard features. Your final quote depends on the products, business models, platforms, integrations and support you choose."],
+  ["Are the prices fixed?", "They are starting points with standard features. Your final quote depends on the modules, workflows, platforms, integrations and support you choose."],
 ];
 
 export default async function PricingPage({ params }: LangParams) {
@@ -57,7 +57,7 @@ export default async function PricingPage({ params }: LangParams) {
         intro="Pick the product you need. Each has a one-time setup fee and a yearly fee for updates and support, and every proposal is itemised."
         ctas={false}
         image="p-pricing"
-        highlights={[["Setup + yearly fee", "Itemised in every proposal"], ["Seven products", "Start with one, add more later"], ["Supplier fees separate", "Contracted directly by you"]]}
+        highlights={[["Setup + yearly fee", "Itemised in every proposal"], ["Seven plans", "Start with one, add more later"], ["Third-party fees separate", "Paid directly by you"]]}
       />
 
       <section className="tiers container">
@@ -81,7 +81,7 @@ export default async function PricingPage({ params }: LangParams) {
         <div className="api-grid">
           {addons.map(([t, d]) => <article className="api reveal" key={t}><h3>{t}</h3><p>{d}</p></article>)}
         </div>
-        <p className="fineprint">Supplier, GDS and payment gateway fees and contracts are separate and agreed directly with each provider.</p>
+        <p className="fineprint">Payment gateway, messaging, AI and other third-party fees are separate and agreed directly with each provider.</p>
       </section>
 
       <FaqBlock faq={faq} />

@@ -10,23 +10,23 @@ const path = "/solutions/";
 const trail = [{ label: "Solutions" }];
 
 export const generateMetadata = metaFor({
-  title: "Travel Booking Software Solutions",
-  description: "White-label travel booking software: OTA platforms, flight, hotel and holiday engines, B2B and B2C portals, corporate travel and back-office.",
+  title: "Business Automation Solutions",
+  description: "Business automation solutions: approvals, invoices, marketing, promotions, household duties, sales, finance, HR, customer support, AI assistants, documents and reports.",
   path,
 });
 
 const comparison: [string, string, string][] = [
-  ["Time to launch", "Weeks", "Months, in milestones"],
+  ["Time to launch", "Days to weeks", "Months, in milestones"],
   ["Cost", "Lower setup + subscription", "Project-based"],
-  ["Flexibility", "Configurable modules", "Anything you can specify"],
+  ["Flexibility", "Configurable workflows", "Anything you can specify"],
   ["Maintenance", "Included in subscription", "Support plan"],
-  ["Best for", "Launching fast on a proven model", "Unique models and workflows"],
+  ["Best for", "Common processes, done fast", "Unique processes and systems"],
 ];
 
 const groups = [
-  { id: "platform", title: "Booking platforms", text: "An engine for each product, or every product in one OTA." },
-  { id: "portal", title: "Portals by business model", text: "The same engine, shaped around who you sell to." },
-  { id: "office", title: "Back-office & inventory", text: "Everything that happens before and after the booking." },
+  { id: "area", title: "Automate by area", text: "Business, home, marketing and promotions: the routine work in each, handled for you." },
+  { id: "team", title: "Automate by team", text: "Sales, finance, HR and support, each with its repetitive steps taken off their plate." },
+  { id: "ai", title: "AI & data", text: "Assistants, document reading and live reports that turn information into action." },
 ];
 
 export default async function SolutionsPage({ params }: LangParams) {
@@ -35,11 +35,11 @@ export default async function SolutionsPage({ params }: LangParams) {
     <>
       <PageHero
         trail={trail}
-        eyebrow="Ready-made software"
-        title="Travel booking software,<br />ready to launch"
-        intro={`${solutions.length} platforms built on one engine. Pick the ones that fit your business, brand them as your own, and add more as you grow.`}
+        eyebrow="Automation solutions"
+        title="Automate everything,<br />one process at a time"
+        intro={`${solutions.length} automation solutions for business, home, marketing and every team. Start with the process that costs you the most time, then add the next.`}
         image="p-solutions"
-        highlights={[[`${solutions.length} platforms`, "One engine, configured for you"], ["White-label", "Your brand, domain and pricing"], ["Grow in steps", "Switch on modules any time"]]}
+        highlights={[[`${solutions.length} solutions`, "For every area and team"], ["Works with your tools", "No need to replace what you use"], ["Grow in steps", "Automate one process at a time"]]}
       />
 
       <section className="container posters-sec" id="all">
@@ -54,10 +54,10 @@ export default async function SolutionsPage({ params }: LangParams) {
       </section>
 
       <section className="compare container">
-        <h2 className="h2 center reveal">White-label or custom?</h2>
+        <h2 className="h2 center reveal">Ready-made or custom?</h2>
         <p className="sub reveal">Both are good choices. Here&apos;s how they differ.</p>
         <div className="cmp reveal" role="table">
-          <div className="cmp-row head" role="row"><span role="columnheader" /><span role="columnheader">White-label</span><span role="columnheader">Custom</span></div>
+          <div className="cmp-row head" role="row"><span role="columnheader" /><span role="columnheader">Ready-made</span><span role="columnheader">Custom</span></div>
           {comparison.map(([a, b, c]) => (
             <div className="cmp-row" role="row" key={a}><b role="rowheader">{a}</b><span role="cell">{b}</span><span role="cell">{c}</span></div>
           ))}
@@ -68,7 +68,7 @@ export default async function SolutionsPage({ params }: LangParams) {
         </div>
       </section>
 
-      <CtaBand preset="White-label platform" />
+      <CtaBand preset="Business automation" />
       <JsonLd data={breadcrumbSchema(trail, path)} />
     </>
   );

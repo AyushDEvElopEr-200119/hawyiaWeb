@@ -52,14 +52,20 @@ export function ModuleCinema({ title, intro, image, modules }: { title: string; 
   );
 }
 
-const roleIcon: Record<string, string> = { Traveler: "✈", Agent: "⌘", Admin: "◎", Employee: "✦", Manager: "⌘", HR: "◎", Finance: "◎", Operations: "⌘", Leadership: "◎" };
+const roleIcon: Record<string, string> = {
+  Owner: "◎", Team: "✦", Admin: "⌘", Customer: "✦", Sales: "⇄", Marketing: "✺", Support: "☏",
+  Employee: "✦", Manager: "⌘", HR: "◎", Finance: "◎", Operations: "⌘", Leadership: "◎",
+  Household: "⌂", Family: "✦", Accountant: "▤", Cashier: "▤", Analyst: "◎",
+};
 const roleLabel: Record<string, string> = {
-  Traveler: "For travellers", Agent: "For agents", Admin: "For your team",
-  Employee: "For employees", Manager: "For managers", HR: "For HR", Finance: "For finance", Operations: "For operations", Leadership: "For leadership",
+  Owner: "For owners", Team: "For your team", Admin: "For admins", Customer: "For customers", Sales: "For sales",
+  Marketing: "For marketing", Support: "For support", Employee: "For employees", Manager: "For managers", HR: "For HR",
+  Finance: "For finance", Operations: "For operations", Leadership: "For leadership", Household: "For your household",
+  Family: "For the family", Accountant: "For accountants", Cashier: "For cashiers", Analyst: "For analysts",
 };
 
 /** One card per user type, side by side, instead of hiding two of them behind tabs. */
-export function Personas({ groups, sub = "What travellers, agents and your own team get out of the box." }: { groups: Record<string, string[]>; sub?: string }) {
+export function Personas({ groups, sub = "What everyone involved gets out of the box." }: { groups: Record<string, string[]>; sub?: string }) {
   const keys = Object.keys(groups);
   return (
     <section className="personas container">
@@ -152,7 +158,7 @@ export function IntegrationReel({ items }: { items: { href: string; label: strin
     <section className="reel">
       <div className="split-head container">
         <h2 className="h2 reveal">Supported integrations</h2>
-        <p className="reveal">Connect the suppliers and payment providers you work with. Integrations are subject to supplier access and agreements.</p>
+        <p className="reveal">Connect the tools and services you already use. Integrations are subject to each provider's access and terms.</p>
       </div>
       <div className="marquee reel-marquee" aria-hidden="true">
         {[0, 1].map((copy) => (

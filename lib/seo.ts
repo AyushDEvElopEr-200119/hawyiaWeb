@@ -6,7 +6,7 @@ import type { Pair } from "./content";
 export type Crumb = { label: string; href?: string };
 
 export const siteDescription =
-  "Hawyia Premium helps businesses simplify their operations through custom software, business automation, AI and system integration, with ready-made platforms for business management and travel.";
+  "Hawyia Premium helps businesses and households automate everything: business processes, marketing, promotions and household duties, with ready-made CRM, HRMS and ERP modules, custom software, AI and integrations.";
 
 // the share card drawn by app/og.png/route.tsx
 const shareImage = { url: "/og.png", width: 1200, height: 630, alt: `${company.name} — ${company.tagline}` };

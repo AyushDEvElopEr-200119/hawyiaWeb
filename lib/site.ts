@@ -24,47 +24,51 @@ export const company = {
   tagline: "We help you automate your business",
 };
 
+/** Automation solutions, grouped by what they automate. */
 export const solutions = [
-  { slug: "white-label-travel-booking-software", name: "White-Label Travel Booking Software", short: "A complete OTA platform under your brand", group: "platform" },
-  { slug: "flight-booking-software", name: "Flight Booking Software", short: "Search, fares, ancillaries and post-booking", group: "platform" },
-  { slug: "hotel-booking-software", name: "Hotel Booking Software", short: "Rooms, rates, mapping and vouchers", group: "platform" },
-  { slug: "holiday-package-booking-software", name: "Holiday Package Booking Software", short: "Itineraries, departures and pricing", group: "platform" },
-  { slug: "bus-car-booking-software", name: "Bus & Car Booking Software", short: "Seat maps, routes and rentals", group: "platform" },
-  { slug: "b2c-travel-portal", name: "B2C Travel Portal", short: "Self-service booking for travellers", group: "portal" },
-  { slug: "b2b-travel-portal", name: "B2B Travel Agent Portal", short: "Credit, markups and agent control", group: "portal" },
-  { slug: "b2b2b-travel-portal", name: "B2B2B Distribution Portal", short: "Distributors, sub-agents and margins per level", group: "portal" },
-  { slug: "corporate-travel-software", name: "Corporate Travel Software", short: "Policies, approvals and spend", group: "portal" },
-  { slug: "travel-agency-software", name: "Travel Agency Software", short: "Online and counter sales in one system", group: "portal" },
-  { slug: "tour-operator-software", name: "Tour Operator Software", short: "Itinerary builder, departures and costing", group: "portal" },
-  { slug: "travel-management-software", name: "Travel Management Software", short: "Back-office, accounting and reports", group: "office" },
-  { slug: "travel-extranet-software", name: "Travel Extranet Software", short: "Sell your own fares, hotels and packages", group: "office" },
-  { slug: "travel-crm-software", name: "Travel CRM Software", short: "Enquiries, quotes and follow-ups", group: "office" },
+  { slug: "business-process-automation", name: "Business Process Automation", short: "Approvals, invoices, reports and routine tasks", group: "area" },
+  { slug: "household-automation", name: "Household Automation", short: "Bills, reminders, schedules and smart homes", group: "area" },
+  { slug: "marketing-automation", name: "Marketing Automation", short: "Campaigns, social posts and lead nurturing", group: "area" },
+  { slug: "promotions-automation", name: "Promotions & Loyalty Automation", short: "Offers, coupons, points and referrals", group: "area" },
+  { slug: "sales-automation", name: "Sales Automation", short: "Leads, follow-ups, quotes and pipeline", group: "team" },
+  { slug: "finance-automation", name: "Finance & Accounting Automation", short: "Invoicing, collections and reconciliation", group: "team" },
+  { slug: "hr-automation", name: "HR Automation", short: "Onboarding, attendance, leave and payroll steps", group: "team" },
+  { slug: "customer-support-automation", name: "Customer Support Automation", short: "Tickets, routing, replies and SLAs", group: "team" },
+  { slug: "ai-assistants-chatbots", name: "AI Assistants & Chatbots", short: "Answers for customers and staff, around the clock", group: "ai" },
+  { slug: "document-automation", name: "Document & Data Entry Automation", short: "Read, extract and file documents automatically", group: "ai" },
+  { slug: "reporting-dashboards", name: "Reports & Dashboards Automation", short: "Live figures, scheduled reports and alerts", group: "ai" },
 ];
 
+/** Ready-made business software modules. */
 export const products = [
+  { slug: "crm-software", name: "CRM Software", short: "Leads, customers, deals and follow-ups" },
   { slug: "hrms-software", name: "HRMS Software", short: "People, attendance, leave and payroll" },
   { slug: "erp-software", name: "ERP Software", short: "Finance, inventory, purchase and sales in one system" },
+  { slug: "project-management-software", name: "Project Management Software", short: "Tasks, timelines, timesheets and budgets" },
+  { slug: "helpdesk-software", name: "Helpdesk & Ticketing Software", short: "Support tickets, SLAs and a knowledge base" },
+  { slug: "inventory-pos-software", name: "Inventory & POS Software", short: "Stock, billing counters and branches" },
   { slug: "expense-management-software", name: "Expense Management Software", short: "Claims, approvals, cards and reimbursements" },
 ];
 
+/** Custom development services. */
 export const services = [
-  { slug: "custom-travel-website-development", name: "Custom Travel Website Development", short: "Brand-first sites that sell trips" },
-  { slug: "booking-engine-development", name: "Booking Engine Development", short: "Engines built around your inventory" },
-  { slug: "travel-mobile-app-development", name: "Travel Mobile App Development", short: "Android & iOS apps for travellers and agents" },
-  { slug: "custom-travel-portal-development", name: "Custom Travel Portal Development", short: "B2B, B2C and hybrid portals" },
+  { slug: "custom-software-development", name: "Custom Software Development", short: "Web apps and platforms built around your work" },
+  { slug: "mobile-app-development", name: "Mobile App Development", short: "Android & iOS apps for customers and teams" },
+  { slug: "workflow-automation-development", name: "Workflow Automation Development", short: "Bots and workflows that run your routine work" },
+  { slug: "ai-integration-development", name: "AI Integration Development", short: "AI added to your apps and processes" },
   { slug: "crm-back-office-development", name: "CRM & Back-Office Development", short: "Operations, finance and customer tools" },
   { slug: "custom-software-integrations", name: "Custom Software Integrations", short: "Connect the systems you already use" },
 ];
 
+/** Integrations with the tools businesses already use (served under /api-integrations/). */
 export const apis = [
-  { slug: "flight-gds-api", name: "Flight & GDS API Integration", short: "GDS, LCC, NDC and consolidators", cat: "Flights" },
-  { slug: "hotel-api", name: "Hotel API Integration", short: "Wholesalers, aggregators and mapping", cat: "Hotels" },
-  { slug: "car-rental-api", name: "Car Rental API Integration", short: "Rental fleets by location and date", cat: "Ground" },
-  { slug: "bus-api", name: "Bus API Integration", short: "Routes, live seats and ticketing", cat: "Ground" },
-  { slug: "transfers-activities-api", name: "Transfers & Activities API", short: "Airport transfers, tours and tickets", cat: "Experiences" },
-  { slug: "travel-insurance-api", name: "Travel Insurance API Integration", short: "Quotes, plans and policies at checkout", cat: "Experiences" },
-  { slug: "payment-gateway-integration", name: "Payment Gateway Integration", short: "Gateways, wallets and multi-currency", cat: "Payments" },
-  { slug: "recharge-utility-api", name: "Recharge & Utility Bill API", short: "Mobile, DTH and bill payments", cat: "Business" },
+  { slug: "payment-gateway-integration", name: "Payment Gateway Integration", short: "Cards, wallets, bank transfers and refunds", cat: "Payments" },
+  { slug: "whatsapp-sms-email-integration", name: "WhatsApp, SMS & Email Integration", short: "Messages and notifications from your systems", cat: "Messaging" },
+  { slug: "accounting-software-integration", name: "Accounting Software Integration", short: "Invoices and ledgers synced to your books", cat: "Finance" },
+  { slug: "crm-marketing-integration", name: "CRM & Marketing Tool Integration", short: "Contacts, deals and campaigns kept in step", cat: "Sales & marketing" },
+  { slug: "ecommerce-integration", name: "E-commerce Integration", short: "Orders, stock and customers from your store", cat: "Commerce" },
+  { slug: "google-microsoft-integration", name: "Google Workspace & Microsoft 365 Integration", short: "Mail, calendars, files and sign-in", cat: "Productivity" },
+  { slug: "ai-model-integration", name: "AI Model Integration", short: "Large language models connected to your data", cat: "AI" },
 ];
 
 export type NavLink = { href: string; label: string; desc?: string };
@@ -83,12 +87,12 @@ export const nav: NavItem[] = [
     label: "Solutions",
     mega: {
       columns: [
-        { title: "Booking platforms", links: solutionLinks("platform") },
-        { title: "Portals by business model", links: solutionLinks("portal") },
-        { title: "Back-office & inventory", links: [
-          ...solutionLinks("office"),
-          { href: "/solutions/", label: "All solutions", desc: "Compare every platform side by side" },
-          { href: "/pricing/", label: "Pricing", desc: "Plans by product, setup plus yearly fee" },
+        { title: "Automate by area", links: solutionLinks("area") },
+        { title: "Automate by team", links: solutionLinks("team") },
+        { title: "AI & data", links: [
+          ...solutionLinks("ai"),
+          { href: "/solutions/", label: "All solutions", desc: "Every automation solution side by side" },
+          { href: "/pricing/", label: "Pricing", desc: "Starting-from plans by product" },
         ] },
       ],
     },
@@ -106,21 +110,21 @@ export const nav: NavItem[] = [
       ],
       aside: {
         title: "Have something unique in mind?",
-        text: "We'll scope it, recommend white-label or custom, and plan it in milestones.",
+        text: "We'll scope it, recommend ready-made or custom, and plan it in milestones.",
         links: [{ href: "/custom-development/", label: "Custom development" }, { href: "/contact/", label: "Discuss your project" }],
       },
     },
   },
   { label: "Automation", href: "/automation/" },
   {
-    label: "API Integrations",
+    label: "Integrations",
     mega: {
       columns: [
-        { title: "Supplier connectivity", links: apis.map((a) => ({ href: `/api-integrations/${a.slug}/`, label: a.name, desc: a.short })) },
+        { title: "Connect your tools", links: apis.map((a) => ({ href: `/api-integrations/${a.slug}/`, label: a.name, desc: a.short })) },
       ],
       aside: {
         title: "Integration directory",
-        text: "Browse every category we connect, filtered by what you sell.",
+        text: "Browse every tool and service we connect, by category.",
         links: [{ href: "/api-integrations/", label: "View directory" }],
       },
     },
@@ -129,11 +133,11 @@ export const nav: NavItem[] = [
     label: "Business Software",
     mega: {
       columns: [
-        { title: "Run your business", links: products.map((p) => ({ href: `/business-software/${p.slug}/`, label: p.name, desc: p.short })) },
+        { title: "Ready-made modules", links: products.map((p) => ({ href: `/business-software/${p.slug}/`, label: p.name, desc: p.short })) },
       ],
       aside: {
-        title: "One login for the back office",
-        text: "Use each product on its own, or connect them so people, money and stock share the same records.",
+        title: "One login for the whole business",
+        text: "Use each module on its own, or connect them so customers, people, money and stock share the same records.",
         links: [{ href: "/business-software/", label: "All business software" }, { href: "/request-demo/", label: "Request a demo" }],
       },
     },
@@ -148,12 +152,12 @@ export const nav: NavItem[] = [
           { href: "/about/#mission", label: "Mission & Vision", desc: "Why we do it" },
           { href: "/about/#process", label: "How We Work", desc: "Our 10-step delivery process" },
           { href: "/about/#technologies", label: "Technologies", desc: "The stack behind our platforms" },
-          { href: "/testimonials/", label: "Client Stories", desc: "Travel businesses in their own words" },
+          { href: "/testimonials/", label: "Client Stories", desc: "Businesses in their own words" },
           { href: "/contact/", label: "Contact", desc: "Talk to a specialist" },
         ] },
         { title: "Resources", links: [
           { href: "/blog/", label: "Blog", desc: "The Hawyia Journal: guides and insights" },
-          { href: "/resources/", label: "Resources", desc: "Travel tech, explained plainly" },
+          { href: "/resources/", label: "Resources", desc: "Automation, explained plainly" },
           { href: "/resources/#faq", label: "FAQ", desc: "Answers before you ask" },
           { href: "/pricing/", label: "Pricing", desc: "Starting-from tiers" },
         ] },

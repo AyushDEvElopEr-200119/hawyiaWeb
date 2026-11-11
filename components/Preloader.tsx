@@ -44,7 +44,7 @@ export function Preloader() {
         <span className="pl-glow" />
         <div className="pl-corners mono">
           <span className="pl-lockup"><LogoMark /><span>Hawyia</span></span>
-          <span>Travel booking software</span>
+          <span>Business automation</span>
           <span className="pl-loading">Loading<i>.</i><i>.</i><i>.</i></span>
           <span className="pl-count" />
           <span className="pl-line" />

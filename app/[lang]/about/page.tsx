@@ -9,14 +9,14 @@ const trail = [{ label: "About" }];
 
 export const generateMetadata = metaFor({
   title: "About Us",
-  description: "About Hawyia, a travel technology company building white-label and custom travel booking software, integrations and apps.",
+  description: "About Hawyia, a business automation and software company: automation, ready-made modules such as CRM, HRMS and ERP, custom development, AI and integrations.",
   path,
 });
 
 const values = [
-  ["Honest advice", "We'll recommend white-label when it's enough, and custom only when it's needed."],
+  ["Honest advice", "We'll recommend a ready-made module when it's enough, and custom only when it's needed."],
   ["Accurate claims", "We promise what we can deliver, and we put it in writing."],
-  ["Clear ownership", "Your brand, your customers, your bookings, your payments."],
+  ["Clear ownership", "Your brand, your customers, your data, your payments."],
   ["Security first", "HTTPS everywhere, role-based access and careful data handling."],
   ["Visible progress", "Milestones, demos and a single point of contact."],
   ["Long-term support", "Maintenance, hosting and updates long after launch."],
@@ -24,14 +24,14 @@ const values = [
 
 // Forward-looking only: no company history is claimed here.
 const roadmap: [string, string][] = [
-  ["Smarter search", "Natural-language and voice search that turns a request like “Goa next weekend under ₹20k” into results."],
-  ["Less manual work", "Automated reissues, refunds, reminders and reconciliations, so teams handle exceptions only."],
-  ["Clearer numbers", "Dashboards that show margin by supplier, route and agent, not just bookings."],
-  ["Practical AI", "Enquiry summaries, reply drafts and support assistants, always with a person in control."],
+  ["Ask in plain words", "Natural-language requests like “send me this month's overdue invoices” turned into results."],
+  ["Less manual work", "More of the routine steps automated across modules, so teams handle exceptions only."],
+  ["Clearer numbers", "Dashboards that show what's working across sales, finance and operations, not just totals."],
+  ["Practical AI", "Summaries, reply drafts and assistants built into every module, always with a person in control."],
 ];
 
 // Confirm this list against the team's real stack before launch.
-const stack = ["Next.js", "React", "TypeScript", "Node.js", "Python", "React Native", "PostgreSQL", "AWS", "REST, SOAP & XML APIs"];
+const stack = ["Next.js", "React", "TypeScript", "Node.js", "Python", "React Native", "Flutter", "PostgreSQL", "AWS", "REST & GraphQL APIs", "Leading AI models"];
 
 export default async function AboutPage({ params }: LangParams) {
   setLang((await params).lang);
@@ -40,28 +40,29 @@ export default async function AboutPage({ params }: LangParams) {
       <PageHero
         trail={trail}
         eyebrow="About Hawyia"
-        title="We build the technology<br />behind travel businesses"
-        intro="Hawyia is a travel technology and software development company. We help agencies, tour operators, OTAs and corporate travel providers launch and scale their own booking platforms."
+        title="We help you<br />automate everything"
+        intro="Hawyia is a business automation and software company. We automate the routine work of businesses and households, provide ready-made modules such as CRM, HRMS and ERP, and build custom software, AI tools and integrations."
         ctas={false}
         image="p-about"
-        highlights={[["Ready-made platforms", "White-label, configured for you"], ["Custom development", "Built around your business"], ["API integrations", "Suppliers and payments"]]}
+        highlights={[["Automation", "Business, home, marketing and promotions"], ["Ready-made modules", "CRM, HRMS, ERP and more"], ["Custom & AI", "Built around how you work"]]}
       />
 
       <section className="statement inner">
-        <Statement text="We believe every travel business should own its brand, its customers and its data. Technology should make that easier, not lock you in." />
+        <Statement text="We believe people should spend their time on work that needs a person. Everything that repeats should run on its own, with you in control." />
       </section>
 
       <section className="container posters-sec">
         <PosterGrid title="What we do" items={[
-          { href: "/solutions/", title: "Ready-made platforms", text: "White-label software for B2C, B2B, corporate and back-office.", image: "p-solutions" },
-          { href: "/custom-development/", title: "Custom development", text: "Websites, engines, portals, apps and CRMs built around you.", image: "p-custom-development" },
-          { href: "/api-integrations/", title: "API integrations", text: "Flights, hotels, ground, experiences and payments.", image: "p-api-integrations" },
+          { href: "/solutions/", title: "Automation solutions", text: "Business, household, marketing, promotions and every team.", image: "p-solutions" },
+          { href: "/business-software/", title: "Ready-made modules", text: "CRM, HRMS, ERP, projects, helpdesk, POS and expenses.", image: "p-business-software" },
+          { href: "/custom-development/", title: "Custom development", text: "Apps, automations, AI tools and back-office systems built around you.", image: "p-custom-development" },
+          { href: "/api-integrations/", title: "Integrations", text: "Payments, messaging, accounting, CRM, e-commerce and AI.", image: "p-api-integrations" },
         ]} />
       </section>
 
       <section className="mission container" id="mission">
-        <div className="mv reveal"><p className="eyebrow">Mission</p><h3>Help travel businesses launch, customize and scale their own booking platforms, quickly and honestly.</h3></div>
-        <div className="mv reveal"><p className="eyebrow">Vision</p><h3>A travel industry where independent businesses compete on equal technology with the largest players.</h3></div>
+        <div className="mv reveal"><p className="eyebrow">Mission</p><h3>Help businesses and households automate their routine work, quickly, safely and honestly.</h3></div>
+        <div className="mv reveal"><p className="eyebrow">Vision</p><h3>A world where every business, whatever its size, runs on the same smart automation as the largest companies.</h3></div>
       </section>
 
       <section className="why container">

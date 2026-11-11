@@ -12,7 +12,7 @@ const trail = [{ label: "Resources" }];
 
 export const generateMetadata = metaFor({
   title: "Resources & FAQ",
-  description: "Travel technology guides, insights and answers to common questions about white-label and custom booking software.",
+  description: "Business automation guides, insights and answers to common questions about automation, ready-made modules and custom software.",
   path,
 });
 
@@ -23,11 +23,11 @@ export default async function ResourcesPage({ params }: LangParams) {
       <PageHero
         trail={trail}
         eyebrow="Resources"
-        title="Travel technology,<br />explained plainly"
-        intro="Guides and insights for travel businesses choosing, launching and growing their booking platforms."
+        title="Automation,<br />explained plainly"
+        intro="Guides and insights for businesses and households choosing what to automate, and how."
         ctas={false}
         image="p-resources"
-        highlights={[["Guides", "Practical and plain-spoken"], ["Insights", "What is changing in travel tech"], ["FAQ", "Answers before you ask"]]}
+        highlights={[["Guides", "Practical and plain-spoken"], ["Insights", "What is changing in automation and AI"], ["FAQ", "Answers before you ask"]]}
       />
 
       <section className="edit container">

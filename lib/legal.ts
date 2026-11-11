@@ -5,7 +5,7 @@ export type LegalDoc = { title: string; sections: [string, string][] };
 
 export const legalDocs: Record<"privacy" | "terms" | "cookies" | "disclaimer", LegalDoc> = {
   privacy: { title: "Privacy Policy", sections: [
-    ["Who we are", `${company.name} is a travel technology and software development company. This policy explains how we handle personal information collected through this website.`],
+    ["Who we are", `${company.name} is a business automation and software development company. This policy explains how we handle personal information collected through this website.`],
     ["What we collect", "Information you submit in our forms (such as name, business email, company, country, phone and project details), and basic analytics about how the site is used."],
     ["How we use it", "To respond to enquiries, prepare demos and proposals, and improve our website. We do not sell your personal information."],
     ["Sharing", "We share information only with service providers that help us operate (for example email or hosting providers), under appropriate safeguards."],
@@ -22,9 +22,9 @@ export const legalDocs: Record<"privacy" | "terms" | "cookies" | "disclaimer", L
     ["Managing cookies", "You can control cookies through your browser settings and our consent banner where applicable."],
   ] },
   disclaimer: { title: "Disclaimer", sections: [
-    ["Software provider", `${company.name} is a software provider. We do not sell travel to the public and are not a party to bookings made on platforms we build.`],
-    ["Bookings, payments and support", "Responsibility for bookings, payments, refunds and end-customer support rests with the business operating the platform."],
-    ["Suppliers", "Supplier integrations are subject to each supplier's access requirements and agreements with the operating business. Supplier names are trademarks of their owners."],
-    ["Feature availability", "Feature availability depends on the chosen product, supplier contracts, integrations and requirements."],
+    ["Software provider", `${company.name} is a software provider. We are not a party to the transactions made by businesses using the software we build.`],
+    ["Transactions, payments and support", "Responsibility for orders, payments, refunds and end-customer support rests with the business operating the software."],
+    ["Third-party services", "Integrations are subject to each provider's access requirements and agreements with the operating business. Product names are trademarks of their owners."],
+    ["Feature availability", "Feature availability depends on the chosen product, third-party accounts, integrations and requirements."],
   ] },
 };

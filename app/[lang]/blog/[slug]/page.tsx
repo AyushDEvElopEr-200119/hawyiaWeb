@@ -71,7 +71,7 @@ export default async function ArticlePage({ params }: Props) {
             {post.body.map((b, i) => <BodyBlock key={i} block={b} />)}
             <footer className="article-end">
               <span className="byline-avatar"><LogoMark /></span>
-              <p><b>{t(`Written by the ${company.name} Team.`)}</b> We build white-label and custom booking platforms for travel businesses, and write here about what we learn along the way.</p>
+              <p><b>{t(`Written by the ${company.name} Team.`)}</b> We automate the routine work of businesses and households, and write here about what we learn along the way.</p>
             </footer>
           </div>
         </div>

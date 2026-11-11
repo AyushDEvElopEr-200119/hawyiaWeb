@@ -7,14 +7,14 @@ const trail = [{ label: "Request a Demo" }];
 
 export const generateMetadata = metaFor({
   title: "Request a Demo",
-  description: "Request a live demo of Hawyia travel booking software, configured around your business.",
+  description: "Request a live demo of Hawyia automation and business software, configured around your business.",
   path,
 });
 
 const steps = [
-  ["Share your requirements", "Products, markets, suppliers and timeline."],
+  ["Share your requirements", "Processes, modules, tools and timeline."],
   ["We prepare your demo", "Configured around your business model."],
-  ["Live walkthrough", "Traveller, agent and admin views, plus your questions."],
+  ["Live walkthrough", "Customer, team and admin views, plus your questions."],
   ["Proposal", "An itemised recommendation and timeline."],
 ];
 
@@ -33,7 +33,7 @@ export default async function RequestDemoPage({ params }: LangParams) {
             ))}
           </ul>
         </div>
-        <div><LeadForm id="demoForm" submit="Request a Demo" preset="White-label platform" booking /></div>
+        <div><LeadForm id="demoForm" submit="Request a Demo" preset="Business automation" booking /></div>
       </div>
       <JsonLd data={breadcrumbSchema(trail, path)} />
     </section>

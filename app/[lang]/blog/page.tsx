@@ -12,7 +12,7 @@ const trail = [{ label: "Blog" }];
 
 export const generateMetadata = metaFor({
   title: "Blog",
-  description: "The Hawyia Journal: practical guides and insights on travel booking software, supplier APIs, payments and running a travel platform.",
+  description: "The Hawyia Journal: practical guides and insights on business automation, CRM, HRMS, ERP, AI and integrations.",
   path,
 });
 
@@ -27,10 +27,10 @@ export default async function BlogPage({ params }: LangParams) {
         <div className="journal-head">
           <div>
             <p className="eyebrow">The Hawyia Journal</p>
-            <h1 className="ph-title" data-split><SplitTitle text="Notes on building<br />travel technology" /></h1>
+            <h1 className="ph-title" data-split><SplitTitle text="Notes on automating<br />everything" /></h1>
           </div>
           <div className="ph-intro">
-            <p>Practical guides and plain-spoken insights for travel businesses choosing, launching and growing their booking platforms.</p>
+            <p>Practical guides and plain-spoken insights for businesses and households ready to automate their routine work.</p>
           </div>
         </div>
       </section>
