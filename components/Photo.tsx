@@ -35,7 +35,7 @@ export function Photo({ name, sizes = "100vw", className, priority = false }: Pr
     first-screen video (`eager`) fetches anything before it is needed. */
 export function BgVideo({ name, poster, wide = false, eager = false }: { name: string; poster?: string; wide?: boolean; eager?: boolean }) {
   return (
-    <video className="bg-video" data-autoplay muted loop playsInline preload={eager ? "metadata" : "none"} poster={poster} aria-hidden="true">
+    <video className="bg-video" data-autoplay muted loop playsInline autoPlay={eager} preload={eager ? "auto" : "none"} poster={poster} aria-hidden="true">
       {wide && <source src={`/assets/media/${name}-1920.mp4`} type="video/mp4" media="(min-width: 1100px)" />}
       <source src={`/assets/media/${name}-1280.mp4`} type="video/mp4" />
     </video>

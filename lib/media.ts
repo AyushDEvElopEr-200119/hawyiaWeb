@@ -84,6 +84,7 @@ export const photos: Record<string, PhotoEntry> = {
   "d-recharge-utility-api": { id: "photo-1783419036401-1c01c1039267", alt: "Hands holding a smartphone with an app open" },
   "d-custom-travel-website-development": { id: "photo-1790861286837-3580e5c91683", alt: "Hand-drawn website wireframes on dot-grid paper" },
   "d-booking-engine-development": { id: "photo-1784652852605-6945598f2af3", alt: "Rows of server cabinets in a data centre" },
+  "h-home": { id: "photo-1451187580459-43490279c0fa", alt: "City lights across the Earth at night, seen from space" },
   "d-travel-mobile-app-development": { id: "photo-1767449441925-737379bc2c4d", alt: "Mobile app interface design with a map" },
   "d-custom-travel-portal-development": { id: "photo-1758873271857-c42a7ef7d692", alt: "Team working in a modern office" },
   "d-crm-back-office-development": { id: "photo-1626863905121-3b0c0ed7b94c", alt: "Two support agents wearing headsets" },
@@ -123,4 +124,6 @@ export const videos: Record<string, { pexels: string; files: Record<number, stri
   // hero: a plain white jet overhead with contrails on blue sky (4K source, no airline markings)
   jet:    { pexels: "https://www.pexels.com/video/34954882/", files: { 1920: "https://videos.pexels.com/video-files/34954882/14806798_3840_2160_30fps.mp4", 1280: "https://videos.pexels.com/video-files/34954882/14806798_3840_2160_30fps.mp4" }, alt: "A white passenger jet passing overhead with contrails against a blue sky" },
   effect: { pexels: "https://www.pexels.com/video/26341148/", files: { 1280: "https://videos.pexels.com/video-files/26341148/11948541_1280_720_30fps.mp4" }, alt: "Aerial view of the ocean and coral reef" },
+  // home hero: a team working around a laptop in a glass office (Mixkit #261, Mixkit Stock Video Free License)
+  team:   { pexels: "https://mixkit.co/free-stock-video/office-meeting-261/", files: { 1280: "https://assets.mixkit.co/videos/261/261-720.mp4" }, alt: "A team working together around a laptop in a modern glass office" },
 };

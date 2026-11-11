@@ -56,21 +56,26 @@ export function Header() {
               item.mega ? (
                 <li className="has-mega" key={item.label}>
                   <button className="nav-link" aria-expanded="false" aria-controls={`mega-${i}`}>
-                    {item.label}
+                    <span className="nl"><span>{item.label}</span></span>
                     <i className="caret" />
                   </button>
                   <MegaPanel mega={item.mega} id={`mega-${i}`} label={item.label} />
                 </li>
               ) : (
                 <li key={item.label}>
-                  <Link href={item.href} className="nav-link">{item.label}</Link>
+                  <Link href={item.href} className="nav-link"><span className="nl"><span>{item.label}</span></span></Link>
                 </li>
               ),
             )}
           </ul>
         </nav>
         <LangSwitch {...other} className="lang-switch press" />
-        <Link href="/request-demo/" className="btn-nav press">Request a Demo</Link>
+        <Link href="/request-demo/" className="btn-nav press">
+          <span className="nl"><span>Request a Demo</span></span>
+          <span className="btn-nav-ico" aria-hidden="true">
+            <svg viewBox="0 0 16 16" width="12" height="12"><path d="M4 12 12 4M5.5 4H12v6.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
+          </span>
+        </Link>
         <button className="menu-btn press" id="menuBtn" aria-expanded="false" aria-controls="mobileMenu">Menu</button>
       </header>
 

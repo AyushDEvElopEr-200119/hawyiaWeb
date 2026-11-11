@@ -5,6 +5,8 @@ import { Header } from "@/components/Header";
 import { Footer, PageChrome } from "@/components/Footer";
 import { JsonLd } from "@/components/sections";
 import { SiteMotion } from "@/components/motion/SiteMotion";
+import { Cursor } from "@/components/Cursor";
+import { Scrollbar } from "@/components/Scrollbar";
 import { Preloader, preloaderScript } from "@/components/Preloader";
 import { asLocale, isRtl, locales, setLang, tr, type LangParams } from "@/lib/i18n";
 import { company, indexable } from "@/lib/site";
@@ -57,6 +59,8 @@ export default async function RootLayout({ children, params }: LangParams & { ch
         <PageChrome />
         <JsonLd data={[organizationSchema, websiteSchema]} />
         <SiteMotion />
+        <Cursor />
+        <Scrollbar />
       </body>
     </html>
   );
