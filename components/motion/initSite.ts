@@ -54,6 +54,7 @@ export function initSite(): () => void {
     menuBtn.setAttribute("aria-expanded", String(open));
     menuBtn.textContent = open ? say("Close") : say("Menu");
     document.body.style.overflow = open ? "hidden" : "";
+    header?.classList.toggle("menu-open", open);   // light header over the white menu sheet
   }
 
   // Panels centre under their trigger; slide one sideways only as far as it takes to stay on screen.

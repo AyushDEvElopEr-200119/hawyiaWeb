@@ -35,7 +35,7 @@ export default async function HomePage({ params }: LangParams) {
         <div className="hw-content">
           <p className="hw-badge"><span className="hw-gear" aria-hidden="true">⚙</span>Business Automation Platform</p>
           <h1 className="hw-title">
-            <span className="hl" style={{ "--i": 0 } as React.CSSProperties}><span>Automate Your Business Workflows —</span></span>
+            <span className="hl" style={{ "--i": 0 } as React.CSSProperties}><span>Automate Your Business Workflows —</span></span>
             <span className="hl" style={{ "--i": 1 } as React.CSSProperties}><span>From <em>Operations to Growth</em> on One Platform</span></span>
           </h1>
           <p className="hw-lead">Hawyia Premium brings your business operations, apps, data and teams together in a single, powerful platform — to automate, integrate and scale with confidence.</p>
