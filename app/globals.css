@@ -3161,3 +3161,6 @@ html.is-scrubbing, html.is-scrubbing * { user-select: none; }
 .header.menu-open .lang-switch { box-shadow: inset 0 0 0 1px rgb(10 36 99 / .14); }
 .header.menu-open .menu-btn { background: rgb(10 36 99 / .06); }
 .header.menu-open::before { opacity: 0; }
+
+/* spam trap: a field people never see (bots fill it in, and the server then ignores the message) */
+.lead .hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }

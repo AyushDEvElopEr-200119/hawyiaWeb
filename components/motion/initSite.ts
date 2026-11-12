@@ -267,7 +267,7 @@ export function initSite(): () => void {
     };
     const field = (n: string) => form.elements.namedItem(n) as HTMLInputElement;
     // the demo form's date and time, needed only while booking is on (see DemoScheduler)
-    if (field("slot")) rules.slot = (v) => (v || !form.dataset.endpoint ? "" : say("Please choose a date and time."));
+    if (field("slot")) rules.slot = (v) => (v || !("booking" in form.dataset) ? "" : say("Please choose a date and time."));
     const check = (input: HTMLInputElement) => {
       const msg = rules[input.name](input.value);
       const f = input.closest(".f")!;

@@ -3,6 +3,7 @@ import { Fragment } from "react";
 import { countries } from "@/lib/countries";
 import { getLang, localize, t } from "@/lib/i18n";
 import { company } from "@/lib/site";
+import { bookingConfigured } from "@/lib/demo/config";
 import type { Pair } from "@/lib/content";
 import type { Crumb } from "@/lib/seo";
 import { Chev } from "./Brand";
@@ -223,8 +224,12 @@ const schedulerLabels: SchedulerLabels = {
     to your form handler (CRM, email service); without it the form opens a pre-filled email.
     `booking` adds the date and time picker and books the meeting through /api/demo/book/. */
 export function LeadForm({ id = "leadForm", submit = "Request a Demo", preset = "", endpoint = "", booking = false }: { id?: string; submit?: string; preset?: string; endpoint?: string; booking?: boolean }) {
+  // Calendar booking when it's set up; otherwise every form is emailed to the company inbox by
+  // /api/contact/ (Microsoft 365, with FormSubmit as the backup).
+  const booked = booking && bookingConfigured();
+  const action = booked ? "/api/demo/book/" : endpoint || "/api/contact/";
   return (
-    <form className="lead reveal" id={id} noValidate data-endpoint={booking ? "/api/demo/book/" : endpoint} data-mailto={company.email}>
+    <form className="lead reveal" id={id} noValidate data-endpoint={action} data-booking={booked ? "" : undefined} data-mailto={company.email}>
       <div className="f"><label htmlFor={`${id}-name`}>Full name</label><input id={`${id}-name`} name="name" autoComplete="name" required /><small className="err" aria-live="polite" /></div>
       <div className="f"><label htmlFor={`${id}-email`}>Business email</label><input id={`${id}-email`} name="email" type="email" autoComplete="email" required /><small className="err" aria-live="polite" /></div>
       <div className="f"><label htmlFor={`${id}-company`}>Company</label><input id={`${id}-company`} name="company" autoComplete="organization" /></div>
@@ -237,7 +242,8 @@ export function LeadForm({ id = "leadForm", submit = "Request a Demo", preset = 
         <select id={`${id}-need`} name="need" defaultValue={preset}><option value="">Select…</option>{needs.map((o) => <option key={o} value={o}>{o}</option>)}</select></div>
       <div className="f"><label htmlFor={`${id}-timeline`}>Estimated timeline</label>
         <select id={`${id}-timeline`} name="timeline" defaultValue=""><option value="">Select…</option>{timelines.map((o) => <option key={o} value={o}>{o}</option>)}</select></div>
-      {booking && <DemoScheduler id={id} lang={getLang()} labels={localize(schedulerLabels)} />}
+      {booked && <DemoScheduler id={id} lang={getLang()} labels={localize(schedulerLabels)} />}
+      <div className="hp" aria-hidden="true"><label htmlFor={`${id}-website`}>Website</label><input id={`${id}-website`} name="website" tabIndex={-1} autoComplete="off" /></div>
       <div className="f full"><label htmlFor={`${id}-msg`}>Project requirements</label><textarea id={`${id}-msg`} name="message" rows={4} placeholder="Processes to automate, modules, tools you use, integrations…" /></div>
       <div className="f full actions">
         <button type="submit" className="btn-pill press">{submit} <Chev /></button>

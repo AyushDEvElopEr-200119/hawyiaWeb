@@ -1,6 +1,8 @@
 // The two confirmation emails, sent through Resend: one for the customer in their language and
 // time zone, one for the team in English and Oman time.
 import { tr, type Locale } from "@/lib/i18n";
+import { mailConfigured } from "@/lib/mail-config";
+import { sendEmail } from "@/lib/server/email";
 import { DEMO, slotEnd } from "./slots";
 
 export type Booking = {
@@ -35,6 +37,16 @@ function calendarFile({ start, meetLink, name }: Booking) {
 }
 
 async function send(message: { to: string[]; replyTo: string; subject: string; html: string; text: string; ics: string }) {
+  // Microsoft 365 (lib/server/email, logged in Email Logs) when it's configured; Resend only on
+  // deployments that have no Microsoft 365 settings at all. Never one as a fallback for the other.
+  if (mailConfigured()) {
+    const result = await sendEmail({
+      to: message.to, replyTo: message.replyTo, subject: message.subject, html: message.html, text: message.text, source: "demo-booking",
+      attachments: [{ filename: "hawyia-demo.ics", content: message.ics, contentType: "text/calendar; charset=utf-8; method=PUBLISH" }],
+    });
+    if (!result.ok) throw new Error(`${result.status}: ${result.error}`);
+    return;
+  }
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, "Content-Type": "application/json" },

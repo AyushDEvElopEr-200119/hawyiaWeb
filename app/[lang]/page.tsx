@@ -1,9 +1,8 @@
-import { setLang, t, type LangParams } from "@/lib/i18n";
+import { setLang, type LangParams } from "@/lib/i18n";
 import Link from "next/link";
 import { Chev } from "@/components/Brand";
 import { Photo } from "@/components/Photo";
 import { HeroWave } from "@/components/HeroWave";
-import { VideoDialog } from "@/components/VideoDialog";
 import { FaqBlock, JsonLd, ProcessTable, Statement, Lines } from "@/components/sections";
 import {
   aiCapabilities, apiCategories, automationTabs, devServices, expertise, homeFaq, homeSteps,
@@ -27,11 +26,6 @@ export default async function HomePage({ params }: LangParams) {
       <section className="hero hw" id="hero">
         <div className="hw-bg" aria-hidden="true" />
         <HeroWave />
-        <VideoDialog
-          className="hw-watch press"
-          closeLabel={t("Close")}
-          label={<><span className="hw-play" aria-hidden="true" />Watch Video</>}
-        />
         <div className="hw-content">
           <p className="hw-badge"><span className="hw-gear" aria-hidden="true">⚙</span>Business Automation Platform</p>
           <h1 className="hw-title">

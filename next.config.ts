@@ -55,7 +55,7 @@ const nextConfig: NextConfig = {
     return {
       beforeFiles: [
         { source: "/", destination: "/en/" },
-        { source: "/:path((?!ar(?:/|$)|en(?:/|$)|api(?:/|$)|_next(?:/|$)|assets(?:/|$)|apple-icon(?:/|$)|.*\\.[a-z0-9]+$).+)", destination: "/en/:path" },
+        { source: "/:path((?!ar(?:/|$)|en(?:/|$)|api(?:/|$)|admin(?:/|$)|_next(?:/|$)|assets(?:/|$)|apple-icon(?:/|$)|.*\\.[a-z0-9]+$).+)", destination: "/en/:path" },
       ],
       afterFiles: [],
       fallback: [],

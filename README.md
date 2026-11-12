@@ -76,3 +76,63 @@ English lives at bare URLs (`/about/`) and Arabic under `/ar/` (`/ar/about/`). P
 - A custom JSX runtime (`lib/i18n/jsx`) swaps text and internal links on Arabic pages, so components stay in English. Client components don't get translations from it, so pass them translated text as props.
 - `npm run i18n:missing` builds the site and lists every string the Arabic pages render without a translation. Brand and technology names are expected there.
 - The stylesheet uses logical properties (`margin-inline-start`, not `margin-left`) so the layout mirrors by itself. Keep new rules logical; what doesn't mirror on its own is at the end of `app/globals.css`.
+
+## Email (Microsoft 365) and the admin dashboard
+
+All site email (contact forms, demo confirmations, tests) goes through one service,
+`sendEmail()` in `lib/server/email`, which sends from `SMTP_USER` via `smtp.office365.com:587` (STARTTLS)
+signing in as an Entra ID app with OAuth 2.0 (XOAUTH2). Every attempt is written to **Email Logs**;
+failures are retried by Vercel Cron (`vercel.json`) and from the dashboard. There is no fallback provider.
+
+```ts
+import { sendEmail } from "@/lib/server/email";
+await sendEmail({ to: "customer@example.com", template: "order_confirmation", variables: { name: "Customer", orderId: "ORD-1001" } });
+```
+
+**Admin dashboard:** `/admin/` → Settings › Communication Settings › Email Configuration, Email Templates and Email Logs.
+Admins sign in with Microsoft 365; only addresses in `ADMIN_EMAILS` get in. Without `MONGODB_URI` the dashboard
+shows the environment settings read-only (Test Connection and Send Test Email still work) and uses the built-in templates.
+
+### One-time setup
+
+1. **MongoDB Atlas:** create a free cluster, allow network access from anywhere (0.0.0.0/0, needed for Vercel),
+   create a database user, and put the connection string in `MONGODB_URI`.
+2. **Entra ID → App registrations → the app → Authentication:** add the *Web* redirect URIs
+   `http://localhost:5178/api/admin/auth/callback/` and `https://<your-domain>/api/admin/auth/callback/`.
+3. **API permissions:** *Office 365 Exchange Online → Application → SMTP.SendAsApp*, then grant admin consent
+   (sign-in uses the default *openid / profile / email* delegated permissions).
+4. **Exchange Online** (an Exchange admin, once). The Object ID here is the *Enterprise application* Object ID:
+
+   ```powershell
+   Install-Module ExchangeOnlineManagement -Scope CurrentUser
+   Connect-ExchangeOnline
+   New-ServicePrincipal -AppId <client-id> -ObjectId <enterprise-app-object-id>
+   Add-MailboxPermission -Identity "Info@hawyiapremium.com" -User <enterprise-app-object-id> -AccessRights FullAccess
+   Set-CASMailbox -Identity "Info@hawyiapremium.com" -SmtpClientAuthenticationDisabled $false
+   Set-TransportConfig -SmtpClientAuthenticationDisabled $false
+   ```
+
+   Until this is done Microsoft answers `535 5.7.3 Authentication unsuccessful` and **Test Connection** shows
+   *Authentication Failed* with these commands.
+5. **Vercel → Settings → Environment Variables:** add every key from `.env.local` (`SMTP_*`, `MS_*`, `MONGODB_URI`,
+   `EMAIL_SECRET_KEY`, `ADMIN_SESSION_SECRET`, `ADMIN_EMAILS`, `CRON_SECRET`), then redeploy.
+   Do **not** copy the Gmail test-mode keys.
+
+### Gmail test mode (before the Exchange step is done)
+
+To see real emails arrive while waiting for step 4, set in `.env.local` and restart `npm run dev`:
+
+```env
+EMAIL_TEST_MODE=gmail
+GMAIL_USER=you@gmail.com
+GMAIL_APP_PASSWORD=abcdabcdabcdabcd   # Google Account → Security → 2-Step Verification → App passwords
+GMAIL_TEST_TO=you@gmail.com           # optional: team notifications come here instead of info@
+```
+
+Every email (contact form, confirmation, demo, dashboard tests) is then sent from that Gmail account, and the
+dashboard shows a **Test mode** banner. Test mode is only on when `EMAIL_TEST_MODE=gmail` is set; remove it to
+go back to Microsoft 365. It is meant for local testing only.
+
+Security: the client secret is encrypted with AES-256-GCM (`EMAIL_SECRET_KEY`, never stored in the database) and
+is never returned by any API or written to logs. All `/api/admin/*` routes require an admin session; test sends and
+sign-in are rate-limited; configuration changes are recorded in the `auditlogs` collection.
