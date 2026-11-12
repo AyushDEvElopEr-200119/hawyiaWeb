@@ -110,11 +110,34 @@ export async function testConnection(cfg: EffectiveConfig): Promise<ConnectionRe
   }
 }
 
-/** Sends one message. Throws DeliveryError with a status and a readable reason. */
+/** SMTP 4xx replies (e.g. Exchange's "430 4.2.0 mailbox logon failure") and dropped connections are temporary. */
+const isTemporary = (error: unknown) => {
+  const e = error as { responseCode?: number; code?: string };
+  return (!!e.responseCode && e.responseCode >= 400 && e.responseCode < 500) || ["ECONNECTION", "ETIMEDOUT", "ESOCKET"].includes(e.code ?? "");
+};
+const pause = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+/**
+ * Sends one message. Temporary failures are retried twice on the spot (after 1.5 s and 4 s), so a
+ * passing Microsoft hiccup never reaches the visitor. Throws DeliveryError with a status and a readable reason.
+ */
 export async function deliver(cfg: EffectiveConfig, m: OutgoingMessage) {
   if (!cfg.enabled) throw new DeliveryError("Service Disabled", "Email sending is switched off in Email Configuration.");
+  const waits = [1500, 4000];
+  for (let attempt = 0; ; attempt++) {
+    try {
+      return await sendOnce(cfg, m);
+    } catch (error) {
+      if (attempt >= waits.length || !isTemporary(error)) throw classify(error, cfg);
+      console.warn(`Email send hit a temporary error, retrying (${attempt + 1}/${waits.length}):`, (error as Error).message?.split(";")[0]);
+      await pause(waits[attempt]);
+    }
+  }
+}
+
+async function sendOnce(cfg: EffectiveConfig, m: OutgoingMessage) {
+  const { t } = await transport(cfg);
   try {
-    const { t } = await transport(cfg);
     const info = await t.sendMail({
       // Gmail only sends as the signed-in account
       from: { name: cfg.testMode ? `${cfg.senderName} (test)` : cfg.senderName, address: cfg.testMode ? cfg.testMode.user : cfg.senderEmail },
@@ -126,9 +149,8 @@ export async function deliver(cfg: EffectiveConfig, m: OutgoingMessage) {
       text: m.text,
       attachments: m.attachments,
     });
-    t.close();
     return { messageId: info.messageId as string };
-  } catch (error) {
-    throw classify(error, cfg);
+  } finally {
+    t.close();
   }
 }
