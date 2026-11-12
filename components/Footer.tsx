@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { apis, company, products, services, solutions, type NavLink } from "@/lib/site";
-import { Chev, Logo } from "./Brand";
-import { Photo } from "./Photo";
+import { Logo } from "./Brand";
 
 const byGroup = (g: string): NavLink[] =>
   solutions.filter((s) => s.group === g).map((s) => ({ href: `/solutions/${s.slug}/`, label: s.name }));
@@ -27,9 +26,8 @@ const legal: NavLink[] = [
 ];
 
 /**
- * Footer in three layers, lightest last:
- * a photo card with a glass panel (the one call to action), a quiet directory of every page,
- * and a single fine-print line. On phones the directory folds into one row per column.
+ * Footer: a quiet directory of every page and a single fine-print line.
+ * On phones the directory folds into one row per column.
  */
 export function Footer() {
   const contact = [
@@ -40,19 +38,6 @@ export function Footer() {
 
   return (
     <footer className="footer">
-      <section className="f-cta container reveal" aria-labelledby="f-cta-title">
-        <Photo name="p-custom-development" className="f-cta-img" sizes="(min-width: 1200px) 1160px, 94vw" />
-        <div className="f-cta-glass">
-          <p className="f-eyebrow">Build better. Work smarter. Grow faster.</p>
-          <h2 id="f-cta-title" className="f-cta-title">Ready to<br />automate?</h2>
-          <p className="f-cta-text">Bring us a process to simplify, an idea to develop or an operation to transform. We&apos;ll help you find a smarter way to do it.</p>
-          <div className="f-cta-row">
-            <Link href="/contact/" className="f-btn f-btn-solid press">Let&apos;s talk about your project <Chev /></Link>
-            <Link href="/request-demo/" className="f-btn f-btn-glass press">Request a Demo</Link>
-          </div>
-        </div>
-      </section>
-
       <div className="f-body">
         <div className="f-top container">
           <Link href="/" className="f-brand" aria-label={`${company.name} home`}>
