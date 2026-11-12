@@ -259,7 +259,9 @@ html:not(.js) .nav-link:hover { background: rgb(255 255 255 / .85); }
 .mega-title { font-family: var(--mono); font-size: .6875rem; letter-spacing: .04em; text-transform: uppercase; color: var(--mint-600); padding: 0 10px 8px; }
 .mega-col ul { list-style: none; margin: 0; padding: 0; display: grid; }
 .mega-link { display: grid; gap: 2px; padding: 9px 10px; border-radius: 12px; transition: background .2s; }
-.mega-link b { font-weight: 600; font-size: .8125rem; letter-spacing: -0.005em; }
+.mega-link b { font-weight: 600; font-size: .8125rem; letter-spacing: -0.005em; color: var(--ink, #0b1020); }
+/* the panel is always light, so it keeps dark text even when the header turns white over a dark hero */
+.header.on-dark .mega-inner { color: var(--ink, #0b1020); }
 .mega-link span { font-size: .75rem; color: var(--muted); letter-spacing: .005em; }
 .mega-link:hover { background: rgb(var(--mint) / .18); }
 .mega-link:active { background: rgb(var(--mint) / .3); }
