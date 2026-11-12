@@ -24,3 +24,6 @@ skills-lock.json
 *.tsbuildinfo
 
 .i18n-missing.txt
+
+# private handover notes (contain secrets)
+deploymentTeam.md
