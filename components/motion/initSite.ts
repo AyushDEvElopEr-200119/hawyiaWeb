@@ -16,7 +16,7 @@ const arabic: Record<string, string> = {
   "Please enter a valid business email.": "يرجى إدخال بريد إلكتروني صحيح للعمل.",
   "Please choose a date and time.": "يرجى اختيار التاريخ والوقت.",
   "Sending…": "جارٍ الإرسال…",
-  "Thanks. We'll be in touch within one business day.": "شكرًا لك. سنتواصل معك خلال يوم عمل واحد.",
+  "Thank you for reaching out! Our team will contact you within the next 3 hours.": "شكرًا لتواصلك معنا! سيتواصل معك فريقنا خلال الساعات الثلاث القادمة.",
   "Something went wrong. Please try again, or email us directly.": "حدث خطأ ما. يرجى المحاولة مرة أخرى أو مراسلتنا عبر البريد الإلكتروني مباشرة.",
   "Website enquiry": "استفسار من الموقع الإلكتروني",
   "Your email app should open with the details filled in.": "سيُفتح تطبيق البريد الإلكتروني وفيه التفاصيل التي أدخلتها.",
@@ -259,7 +259,26 @@ export function initSite(): () => void {
   }
 
   /* ---------- lead forms: inline validation, then send ---------- */
+  // success panel: the form fades back, a check mark draws itself and the thank-you message rises in
+  const showSent = (form: HTMLFormElement) => {
+    const done = $(".lead-done", form);
+    if (!done) return;
+    form.classList.add("is-sent");
+    done.setAttribute("aria-hidden", "false");
+    // keep the panel in view on phones, where the form is taller than the screen
+    const r = form.getBoundingClientRect();
+    if (r.top < 0 || r.bottom > innerHeight) form.scrollIntoView({ block: "center", behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    timers.add(window.setTimeout(() => $(".lead-done-title", form)?.focus({ preventScroll: true }), 450));
+  };
   $$<HTMLFormElement>("form.lead").forEach((form) => {
+    const again = $(".lead-again", form);
+    if (again) on(again, "click", () => {
+      form.classList.remove("is-sent");
+      $(".lead-done", form)?.setAttribute("aria-hidden", "true");
+      const status = $(".form-status", form);
+      if (status) status.textContent = "";
+      form.querySelector<HTMLInputElement>("input[name=name]")?.focus();
+    });
     const status = $(".form-status", form);
     const rules: Record<string, (v: string) => string> = {
       name: (v) => (v.trim() ? "" : say("Please enter your name.")),
@@ -309,7 +328,10 @@ export function initSite(): () => void {
             return;
           }
           form.reset();
-          if (status) status.textContent = say("Thanks. We'll be in touch within one business day.");
+          $$(".f.valid", form).forEach((f) => f.classList.remove("valid"));
+          if (status) status.textContent = say("Thank you for reaching out! Our team will contact you within the next 3 hours.");
+          // demo bookings show their own confirmation (DemoScheduler); every other form shows the success panel
+          if (!reply.meetLink) showSent(form);
         } catch {
           if (status) status.textContent = say("Something went wrong. Please try again, or email us directly.");
         } finally { btn.disabled = false; }

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Fragment } from "react";
+import { Fragment, type CSSProperties } from "react";
 import { countries } from "@/lib/countries";
 import { getLang, localize, t } from "@/lib/i18n";
 import { company } from "@/lib/site";
@@ -248,6 +248,19 @@ export function LeadForm({ id = "leadForm", submit = "Request a Demo", preset = 
       <div className="f full actions">
         <button type="submit" className="btn-pill press">{submit} <Chev /></button>
         <p className="form-status" role="status" />
+      </div>
+      {/* shown by initSite after a successful send (.lead.is-sent) */}
+      <div className="lead-done" aria-hidden="true">
+        <div className="lead-done-mark" aria-hidden="true">
+          <span className="lead-done-burst">{Array.from({ length: 10 }, (_, i) => <i key={i} style={{ "--i": i } as CSSProperties} />)}</span>
+          <svg viewBox="0 0 64 64" width="72" height="72">
+            <circle className="lead-done-ring" cx="32" cy="32" r="29" />
+            <path className="lead-done-tick" d="M20 33.5l8 8 16-17" />
+          </svg>
+        </div>
+        <p className="lead-done-title" tabIndex={-1}>Thank you for reaching out!</p>
+        <p className="lead-done-text">Our team will contact you within the next 3 hours.</p>
+        <button type="button" className="lead-again">Send another request</button>
       </div>
     </form>
   );
