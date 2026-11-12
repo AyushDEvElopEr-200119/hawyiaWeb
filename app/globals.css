@@ -1097,6 +1097,33 @@ html:not(.js) .nav-link:hover { background: rgb(255 255 255 / .85); }
 /* reading progress */
 .progress { position: fixed; inset: 0 0 auto 0; height: 2px; z-index: 60; background: linear-gradient(90deg, rgb(var(--mint)), var(--mint-600)); pointer-events: none; }
 
+/* WhatsApp chat: always visible, sits above the back-to-top button */
+.wa-float {
+  position: fixed;
+  inset-inline-end: max(1rem, env(safe-area-inset-right));
+  bottom: calc(max(1rem, env(safe-area-inset-bottom)) + 58px);
+  z-index: 46;
+  width: 56px; height: 56px;
+  margin-inline-end: -5px;
+  border-radius: 50%;
+  display: grid; place-items: center;
+  color: #fff;
+  background: #25d366;
+  box-shadow: 0 10px 28px -8px rgb(18 140 70 / .55), 0 2px 6px rgb(0 0 0 / .12);
+  transition: scale .3s var(--ease), box-shadow .3s ease;
+}
+.wa-float::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit;
+  border: 2px solid #25d366; opacity: 0;
+  animation: wa-pulse 2.8s ease-out 2s infinite;
+}
+.wa-float:hover { scale: 1.07; box-shadow: 0 14px 32px -8px rgb(18 140 70 / .65), 0 2px 6px rgb(0 0 0 / .12); }
+.wa-float:active { scale: .95; }
+.wa-float:focus-visible { outline: 3px solid rgb(var(--mint)); outline-offset: 3px; }
+@keyframes wa-pulse { 0% { opacity: .7; scale: 1; } 70%, 100% { opacity: 0; scale: 1.45; } }
+@media (prefers-reduced-motion: reduce) { .wa-float::after { animation: none; } }
+html.pl-on .wa-float { visibility: hidden; }
+
 /* back to top: a small glass button */
 .to-top {
   position: fixed;

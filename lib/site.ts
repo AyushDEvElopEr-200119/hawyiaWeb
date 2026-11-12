@@ -19,9 +19,17 @@ export const company = {
   url: siteUrl.replace(/\/$/, ""),
   email: "info@hawyiapremium.com",
   phone: "+968 9705 7071",
-  whatsapp: "",       // e.g. "910000000000" (digits only, used for wa.me)
+  whatsapp: "96897057071", // digits only, used for wa.me links
   address: "",        // office address
   tagline: "We help you automate your business",
+};
+
+/** Opens a WhatsApp chat with the company, with a greeting already typed in the visitor's language. */
+export const whatsappLink = (lang: string = "en") => {
+  const text = lang === "ar"
+    ? "مرحباً هاوية، أود معرفة المزيد عن خدماتكم."
+    : "Hello Hawyia, I'd like to know more about your services.";
+  return `https://wa.me/${company.whatsapp}?text=${encodeURIComponent(text)}`;
 };
 
 /** Automation solutions, grouped by what they automate. */

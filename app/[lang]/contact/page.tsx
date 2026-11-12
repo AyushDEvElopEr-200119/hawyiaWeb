@@ -1,7 +1,7 @@
 import { setLang, type LangParams } from "@/lib/i18n";
 import Link from "next/link";
 import { Breadcrumbs, JsonLd, LeadForm, SplitTitle } from "@/components/sections";
-import { company } from "@/lib/site";
+import { company, whatsappLink } from "@/lib/site";
 import { breadcrumbSchema, metaFor } from "@/lib/seo";
 
 const path = "/contact/";
@@ -14,7 +14,8 @@ export const generateMetadata = metaFor({
 });
 
 export default async function ContactPage({ params }: LangParams) {
-  setLang((await params).lang);
+  const lang = (await params).lang;
+  setLang(lang);
   const hasDetails = company.email || company.phone || company.whatsapp || company.address;
   return (
     <section className="contact-hero container">
@@ -32,7 +33,7 @@ export default async function ContactPage({ params }: LangParams) {
             <div className="contact-details">
               {company.email && <a href={`mailto:${company.email}`} className="cd"><small>Email</small><b>{company.email}</b></a>}
               {company.phone && <a href={`tel:${company.phone.replace(/\s/g, "")}`} className="cd"><small>Phone</small><b>{company.phone}</b></a>}
-              {company.whatsapp && <a href={`https://wa.me/${company.whatsapp}`} className="cd" rel="noopener"><small>WhatsApp</small><b>Chat with us</b></a>}
+              {company.whatsapp && <a href={whatsappLink(lang)} className="cd" target="_blank" rel="noopener"><small>WhatsApp</small><b>Chat with us</b></a>}
               {company.address && <div className="cd"><small>Office</small><b>{company.address}</b></div>}
             </div>
           )}
