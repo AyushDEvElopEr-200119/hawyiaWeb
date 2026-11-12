@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { after, NextResponse } from "next/server";
 import { asLocale, tr } from "@/lib/i18n";
 import { clientIp, rateLimit } from "@/lib/server/rateLimit";
 import { RateLimitError } from "@/lib/server/errors";
@@ -65,13 +65,14 @@ export async function POST(request: Request) {
     return fail("Something went wrong. Please try again, or email us directly.", 502);
   }
 
-  // a courtesy; the enquiry itself has been delivered
-  await sendEmail({
+  // a courtesy; the enquiry itself has been delivered, so the visitor gets their answer now and the
+  // confirmation email goes out right after the response (after() keeps the function alive for it)
+  after(() => sendEmail({
     to: email,
     replyTo: cfg.senderEmail,
     template: lang === "ar" ? "contact_acknowledgement_ar" : "contact_acknowledgement",
     variables: { name },
     source: "form:acknowledgement",
-  });
+  }).then(() => undefined));
   return NextResponse.json({ ok: true });
 }
