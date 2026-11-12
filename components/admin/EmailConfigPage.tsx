@@ -154,7 +154,7 @@ export function EmailConfigPage() {
       )}
       {!config.databaseConnected && (
         <Banner kind="info" title="Showing settings from the environment">
-          <p>The database isn&apos;t connected, so these values come from <code>.env.local</code> / Vercel and can&apos;t be edited here. Test Connection and Send Test Email still work. Add <code>MONGODB_URI</code> to save settings, manage templates and keep email logs.</p>
+          <p>The database isn&apos;t connected, so these values come from <code>.env.local</code> / Vercel and can&apos;t be edited here. Test Connection and Send Test Email still work. Add <code>DATABASE_URL</code> (PostgreSQL) to save settings, manage templates and keep email logs.</p>
         </Banner>
       )}
       {config.databaseConnected && !config.encryptionReady && (

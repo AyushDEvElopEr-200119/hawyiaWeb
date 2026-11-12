@@ -90,13 +90,17 @@ await sendEmail({ to: "customer@example.com", template: "order_confirmation", va
 ```
 
 **Admin dashboard:** `/admin/` → Settings › Communication Settings › Email Configuration, Email Templates and Email Logs.
-Admins sign in with Microsoft 365; only addresses in `ADMIN_EMAILS` get in. Without `MONGODB_URI` the dashboard
+Admins sign in with Microsoft 365; only addresses in `ADMIN_EMAILS` get in. Without `DATABASE_URL` the dashboard
 shows the environment settings read-only (Test Connection and Send Test Email still work) and uses the built-in templates.
+
+**Database:** PostgreSQL 13+ on any host, through the `pg` driver. Set `DATABASE_URL`; the tables are created
+automatically on first use. The same SQL is in [`db/schema.sql`](db/schema.sql) for database admins who prefer to run it themselves.
 
 ### One-time setup
 
-1. **MongoDB Atlas:** create a free cluster, allow network access from anywhere (0.0.0.0/0, needed for Vercel),
-   create a database user, and put the connection string in `MONGODB_URI`.
+1. **PostgreSQL:** create a database on any host (Neon, Supabase, Azure, AWS RDS or your own server), allow
+   connections from the web server, and put the connection string in `DATABASE_URL`,
+   e.g. `postgres://user:password@host:5432/hawyia?sslmode=require`.
 2. **Entra ID → App registrations → the app → Authentication:** add the *Web* redirect URIs
    `http://localhost:5178/api/admin/auth/callback/` and `https://<your-domain>/api/admin/auth/callback/`.
 3. **API permissions:** *Office 365 Exchange Online → Application → SMTP.SendAsApp*, then grant admin consent
@@ -114,7 +118,7 @@ shows the environment settings read-only (Test Connection and Send Test Email st
 
    Until this is done Microsoft answers `535 5.7.3 Authentication unsuccessful` and **Test Connection** shows
    *Authentication Failed* with these commands.
-5. **Vercel → Settings → Environment Variables:** add every key from `.env.local` (`SMTP_*`, `MS_*`, `MONGODB_URI`,
+5. **Vercel → Settings → Environment Variables:** add every key from `.env.local` (`SMTP_*`, `MS_*`, `DATABASE_URL`,
    `EMAIL_SECRET_KEY`, `ADMIN_SESSION_SECRET`, `ADMIN_EMAILS`, `CRON_SECRET`), then redeploy.
    Do **not** copy the Gmail test-mode keys.
 

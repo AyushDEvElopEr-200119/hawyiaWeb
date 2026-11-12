@@ -149,7 +149,7 @@ export function TemplatesPage() {
 
       {!stored && (
         <Banner kind="info" title="Read-only until the database is connected">
-          <p>These are the built-in templates the site uses. Add <code>MONGODB_URI</code> to edit them, create new ones and switch them on or off.</p>
+          <p>These are the built-in templates the site uses. Add <code>DATABASE_URL</code> (PostgreSQL) to edit them, create new ones and switch them on or off.</p>
         </Banner>
       )}
 

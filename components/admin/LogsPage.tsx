@@ -81,7 +81,7 @@ export function LogsPage() {
       </div>
 
       {notConnected ? (
-        <Banner kind="info" title="Email logs need the database"><p>Add <code>MONGODB_URI</code> on the server, then reload. Until then, failed sends are written to the server log.</p></Banner>
+        <Banner kind="info" title="Email logs need the database"><p>Add <code>DATABASE_URL</code> (PostgreSQL) on the server, then reload. Until then, failed sends are written to the server log.</p></Banner>
       ) : error ? (
         <Banner kind="bad" title="Logs couldn't be loaded"><p>{error}</p></Banner>
       ) : null}

@@ -2,9 +2,35 @@ import "server-only";
 import { company } from "@/lib/site";
 import { audit } from "../audit";
 import { seal, unseal } from "../crypto";
-import { db, dbConfigured } from "../db";
+import { dbConfigured, sql } from "../db";
 import { ConfigError, ValidationError } from "../errors";
-import { EmailConfiguration, type EmailConfigurationDoc } from "../models";
+
+/** The stored settings row (table email_configuration), in the code's camelCase. */
+type EmailConfigurationDoc = {
+  key: string; provider: string; host: string; port: number; security: string; username: string; senderEmail: string;
+  senderName: string; notifyEmails: string[]; enabled: boolean; tenantId: string; clientId: string; objectId: string;
+  clientSecretEnc: { iv?: string; tag?: string; data?: string } | null; secretUpdatedAt: Date | null;
+  lastTest: { at?: string; status?: string; message?: string } | null;
+};
+// editable field → column
+const COLUMN: Record<string, string> = {
+  provider: "provider", host: "host", port: "port", security: "security", authType: "auth_type", username: "username",
+  senderEmail: "sender_email", senderName: "sender_name", notifyEmails: "notify_emails", enabled: "enabled",
+  tenantId: "tenant_id", clientId: "client_id", objectId: "object_id",
+};
+const fromRow = (r: Record<string, unknown>): EmailConfigurationDoc => ({
+  key: String(r.key), provider: String(r.provider), host: String(r.host), port: Number(r.port), security: String(r.security),
+  username: String(r.username), senderEmail: String(r.sender_email), senderName: String(r.sender_name),
+  notifyEmails: (r.notify_emails as string[]) ?? [], enabled: !!r.enabled, tenantId: String(r.tenant_id), clientId: String(r.client_id),
+  objectId: String(r.object_id), clientSecretEnc: (r.client_secret_enc as EmailConfigurationDoc["clientSecretEnc"]) ?? null,
+  secretUpdatedAt: (r.secret_updated_at as Date | null) ?? null, lastTest: (r.last_test as EmailConfigurationDoc["lastTest"]) ?? null,
+});
+/** Writes the given camelCase fields to the settings row. */
+async function saveFields(set: Record<string, unknown>, actor: string, extra: Record<string, unknown> = {}) {
+  const cols = Object.entries(set).map(([k, v]) => [COLUMN[k], v] as const).concat(Object.entries(extra));
+  const assignments = cols.map(([c], i) => `${c} = $${i + 2}`).concat(["updated_at = now()"]);
+  await sql(`UPDATE email_configuration SET ${assignments.join(", ")}, updated_by = $1 WHERE key = 'default'`, [actor, ...cols.map(([, v]) => v)]);
+}
 
 /** Everything needed to send, including the decrypted secret. Server-side only, never returned by an API. */
 export type EffectiveConfig = {
@@ -88,21 +114,22 @@ const encryptionReady = () => {
   try { seal("check"); return true; } catch { return false; }
 };
 
-/** The stored configuration document, created from the environment on first use. */
-async function document() {
-  await db();
-  let doc = await EmailConfiguration.findOne({ key: "default" });
-  if (!doc && encryptionReady()) {
+/** The stored settings, created from the environment on first use. */
+async function document(): Promise<EmailConfigurationDoc | null> {
+  let [row] = await sql("SELECT * FROM email_configuration WHERE key = 'default'");
+  if (!row && encryptionReady()) {
     const e = fromEnvironment();
-    doc = await EmailConfiguration.create({
-      key: "default", provider: e.provider, host: e.host, port: e.port, security: e.security, username: e.username,
-      senderEmail: e.senderEmail, senderName: e.senderName, notifyEmails: e.notifyEmails, enabled: e.enabled,
-      tenantId: e.tenantId, clientId: e.clientId, objectId: e.objectId,
-      ...(e.clientSecret ? { clientSecretEnc: seal(e.clientSecret), secretUpdatedAt: new Date() } : {}),
-      updatedBy: "imported from environment",
-    });
+    await sql(
+      `INSERT INTO email_configuration (key, provider, host, port, security, username, sender_email, sender_name, notify_emails, enabled,
+         tenant_id, client_id, object_id, client_secret_enc, secret_updated_at, updated_by)
+       VALUES ('default', $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, 'imported from environment')
+       ON CONFLICT (key) DO NOTHING`,
+      [e.provider, e.host, e.port, e.security, e.username, e.senderEmail, e.senderName, e.notifyEmails, e.enabled,
+        e.tenantId, e.clientId, e.objectId, e.clientSecret ? JSON.stringify(seal(e.clientSecret)) : null, e.clientSecret ? new Date() : null],
+    );
+    [row] = await sql("SELECT * FROM email_configuration WHERE key = 'default'");
   }
-  return doc;
+  return row ? fromRow(row) : null;
 }
 
 /** The configuration used for sending: the database copy when there is one, otherwise the environment. */
@@ -129,7 +156,7 @@ export async function getConfigView(): Promise<ConfigView> {
 
 /* ---------------- updates (need the database) ---------------- */
 async function editable() {
-  if (!dbConfigured()) throw new ConfigError("Saving settings needs the database. Add MONGODB_URI, then reload.");
+  if (!dbConfigured()) throw new ConfigError("Saving settings needs the database. Add DATABASE_URL, then reload.");
   if (!encryptionReady()) throw new ConfigError("EMAIL_SECRET_KEY is missing or invalid, so settings can't be stored safely.");
   const doc = await document();
   if (!doc) throw new ConfigError("The configuration couldn't be created.");
@@ -182,8 +209,8 @@ export async function updateConfig(input: Record<string, unknown>, actor: string
   const doc = await editable();
   const changed = Object.keys(set).filter((k) => JSON.stringify((doc as unknown as Record<string, unknown>)[k]) !== JSON.stringify(set[k]));
   if (changed.length) {
-    await EmailConfiguration.updateOne({ _id: doc._id }, { $set: { ...set, updatedBy: actor } });
-    await audit(actor, "email.config.updated", "EmailConfiguration", changed, ip);
+    await saveFields(Object.fromEntries(changed.map((k) => [k, set[k]])), actor);
+    await audit(actor, "email.config.updated", "email_configuration", changed, ip);
   }
   return changed;
 }
@@ -192,26 +219,25 @@ export async function updateConfig(input: Record<string, unknown>, actor: string
 export async function rotateSecret(secret: unknown, actor: string, ip: string) {
   const value = typeof secret === "string" ? secret.trim() : "";
   if (value.length < 8 || value.length > 256 || /\s/.test(value)) throw new ValidationError("Enter the full client secret value.", { clientSecret: "Enter the secret's Value (not its ID)." });
-  const doc = await editable();
-  await EmailConfiguration.updateOne({ _id: doc._id }, { $set: { clientSecretEnc: seal(value), secretUpdatedAt: new Date(), updatedBy: actor } });
-  await audit(actor, "email.config.secret_rotated", "EmailConfiguration", ["clientSecret"], ip);
+  await editable();
+  await saveFields({}, actor, { client_secret_enc: JSON.stringify(seal(value)), secret_updated_at: new Date() });
+  await audit(actor, "email.config.secret_rotated", "email_configuration", ["clientSecret"], ip);
 }
 
 /** Restores the Microsoft 365 SMTP defaults; Azure IDs and the secret are kept. */
 export async function resetConfig(actor: string, ip: string) {
   const doc = await editable();
   const e = fromEnvironment();
-  await EmailConfiguration.updateOne({ _id: doc._id }, { $set: {
+  await saveFields({
     provider: "microsoft365", host: "smtp.office365.com", port: 587, security: "STARTTLS", authType: "oauth2",
-    username: e.username || doc.username, senderEmail: e.senderEmail || doc.senderEmail, senderName: e.senderName, enabled: true, updatedBy: actor,
-  } });
-  await audit(actor, "email.config.reset", "EmailConfiguration", ["host", "port", "security", "username", "senderEmail", "senderName", "enabled"], ip);
+    username: e.username || doc.username, senderEmail: e.senderEmail || doc.senderEmail, senderName: e.senderName, enabled: true,
+  }, actor);
+  await audit(actor, "email.config.reset", "email_configuration", ["host", "port", "security", "username", "senderEmail", "senderName", "enabled"], ip);
 }
 
 export async function recordTest(status: string, message: string) {
   if (!dbConfigured()) return;
   try {
-    await db();
-    await EmailConfiguration.updateOne({ key: "default" }, { $set: { lastTest: { at: new Date(), status, message } } });
+    await sql("UPDATE email_configuration SET last_test = $1 WHERE key = 'default'", [JSON.stringify({ at: new Date().toISOString(), status, message })]);
   } catch { /* the test result is informational only */ }
 }

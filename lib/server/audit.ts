@@ -1,6 +1,5 @@
 import "server-only";
-import { db, dbConfigured } from "./db";
-import { AuditLog } from "./models";
+import { dbConfigured, sql } from "./db";
 
 /** Records a configuration change: who, what, which fields (never secret values). */
 export async function audit(actor: string, action: string, target = "", fields: string[] = [], ip = "") {
@@ -9,8 +8,7 @@ export async function audit(actor: string, action: string, target = "", fields: 
     return;
   }
   try {
-    await db();
-    await AuditLog.create({ actor, action, target, fields, ip });
+    await sql("INSERT INTO audit_logs (actor, action, target, fields, ip) VALUES ($1, $2, $3, $4, $5)", [actor, action, target, fields, ip]);
   } catch (error) {
     console.error("Audit log failed:", (error as Error).message);
   }

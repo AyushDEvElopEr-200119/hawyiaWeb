@@ -10,7 +10,8 @@ uploaded as static HTML files.
 - HTTPS on the final domain (needed for the admin sign-in cookie)
 - Outbound access to `smtp.office365.com:587` and `login.microsoftonline.com:443`.
   Some hosts block port 587; ask your provider to open it if Test Connection reports *SMTP Connection Failed*.
-- Optional: a MongoDB database (MongoDB Atlas free tier is fine), for email logs and editable settings
+- Optional: a **PostgreSQL 13+** database on any host (Neon, Supabase, Azure, AWS RDS or the same server), for
+  email logs, editable settings and templates. Tables are created automatically; `db/schema.sql` has the same SQL.
 
 ## 2. Build and run
 
@@ -62,8 +63,8 @@ Get the secret values from the developer over a secure channel, not by email or 
 | `ADMIN_SESSION_SECRET` | 64 random characters | Secret. Signs admin sessions |
 | `EMAIL_SECRET_KEY` | 32 random bytes (base64) | Secret. Encrypts stored secrets; **never change it once set** |
 | `CRON_SECRET` | random string | Secret. Protects the email-retry job |
-| `MONGODB_URI` | `mongodb+srv://...` | Optional: email logs, templates and editable settings |
-| `MONGODB_DB` | `hawyia` | Optional |
+| `DATABASE_URL` | `postgres://user:pass@host:5432/hawyia?sslmode=require` | Optional: PostgreSQL for email logs, templates and editable settings |
+| `DATABASE_SSL` | `false` | Optional: only for a database on the same server without TLS |
 
 Generate new random secrets with:
 
@@ -104,7 +105,7 @@ On Vercel this is automatic (`vercel.json`). **On your own server**, add a cron 
 */10 * * * * curl -fsS -H "Authorization: Bearer <CRON_SECRET>" https://<final-domain>/api/cron/email-retry/ > /dev/null
 ```
 
-(Only useful when `MONGODB_URI` is set, because failed emails are stored there.)
+(Only useful when `DATABASE_URL` is set, because failed emails are stored there.)
 
 ## 6. Check after deploying
 
@@ -119,5 +120,5 @@ On Vercel this is automatic (`vercel.json`). **On your own server**, add a cron 
 ## Notes
 
 - `/admin/` and `/api/` are never indexed by search engines.
-- The client secret is never sent to the browser or written to logs. When stored in MongoDB it is encrypted (AES-256-GCM).
-- Azure client secrets expire. When it is renewed, update `MS_CLIENT_SECRET` (or use **Rotate secret** in the dashboard when MongoDB is connected) and restart.
+- The client secret is never sent to the browser or written to logs. When stored in PostgreSQL it is encrypted (AES-256-GCM).
+- Azure client secrets expire. When it is renewed, update `MS_CLIENT_SECRET` (or use **Rotate secret** in the dashboard when the database is connected) and restart.

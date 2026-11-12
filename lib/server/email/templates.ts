@@ -1,8 +1,7 @@
 import "server-only";
 import { audit } from "../audit";
-import { db, dbConfigured } from "../db";
+import { dbConfigured, isId, sql } from "../db";
 import { ConfigError, HttpError, ValidationError } from "../errors";
-import { EmailTemplate } from "../models";
 
 export type TemplateData = {
   key: string; name: string; description: string; subject: string; html: string; text: string;
@@ -93,26 +92,43 @@ export const DEFAULT_TEMPLATES: TemplateData[] = [
 const defaultFor = (key: string) => DEFAULT_TEMPLATES.find((t) => t.key === key);
 
 /* ---------------- storage ---------------- */
-const view = (doc: Record<string, unknown>): TemplateView => ({
-  id: String(doc._id), key: String(doc.key), name: String(doc.name), description: String(doc.description ?? ""),
-  subject: String(doc.subject), html: String(doc.html), text: String(doc.text ?? ""),
-  variables: (doc.variables as string[]) ?? [], enabled: !!doc.enabled, system: !!doc.system,
-  updatedAt: doc.updatedAt ? new Date(doc.updatedAt as Date).toISOString() : null, updatedBy: String(doc.updatedBy ?? ""),
+type DbTemplate = {
+  id: string; key: string; name: string; description: string; subject: string; html: string; text: string;
+  variables: string[]; enabled: boolean; system: boolean; updated_by: string; updated_at: Date | null;
+};
+const view = (d: DbTemplate): TemplateView => ({
+  id: String(d.id), key: d.key, name: d.name, description: d.description ?? "", subject: d.subject, html: d.html, text: d.text ?? "",
+  variables: d.variables ?? [], enabled: !!d.enabled, system: !!d.system,
+  updatedAt: d.updated_at ? new Date(d.updated_at).toISOString() : null, updatedBy: d.updated_by ?? "",
 });
 
-/** Adds any missing built-in templates (never overwrites edits). */
+const insertTemplate = (t: TemplateData, actor: string) => sql<DbTemplate>(
+  `INSERT INTO email_templates (key, name, description, subject, html, text, variables, enabled, system, updated_by)
+   VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) ON CONFLICT (key) DO NOTHING RETURNING *`,
+  [t.key, t.name, t.description, t.subject, t.html, t.text, t.variables, t.enabled, t.system, actor],
+);
+
+/** Adds any missing built-in templates (never overwrites edits). Runs once per server instance. */
+const seeded = globalThis as unknown as { __hawyiaSeeded?: Promise<void> };
 async function seed() {
-  await db();
-  const existing = new Set((await EmailTemplate.find({}, { key: 1 }).lean()).map((t) => t.key));
-  const missing = DEFAULT_TEMPLATES.filter((t) => !existing.has(t.key));
-  if (missing.length) await EmailTemplate.insertMany(missing.map((t) => ({ ...t, updatedBy: "built-in" })), { ordered: false }).catch(() => {});
+  seeded.__hawyiaSeeded ??= (async () => {
+    const existing = new Set((await sql<{ key: string }>("SELECT key FROM email_templates")).map((t) => t.key));
+    for (const t of DEFAULT_TEMPLATES.filter((t) => !existing.has(t.key))) await insertTemplate(t, "built-in");
+  })().catch((error) => { seeded.__hawyiaSeeded = undefined; throw error; });
+  await seeded.__hawyiaSeeded;
+}
+
+async function findTemplate(id: string) {
+  if (!isId(id)) return null;
+  const [d] = await sql<DbTemplate>("SELECT * FROM email_templates WHERE id = $1", [id]);
+  return d ?? null;
 }
 
 export async function listTemplates(): Promise<{ templates: TemplateView[]; stored: boolean }> {
   if (!dbConfigured()) return { templates: DEFAULT_TEMPLATES.map((t) => ({ ...t, id: t.key, updatedAt: null, updatedBy: "built-in" })), stored: false };
   await seed();
-  const docs = await EmailTemplate.find().sort({ system: -1, name: 1 }).lean();
-  return { templates: docs.map((d) => view(d as unknown as Record<string, unknown>)), stored: true };
+  const rows = await sql<DbTemplate>("SELECT * FROM email_templates ORDER BY system DESC, name ASC");
+  return { templates: rows.map(view), stored: true };
 }
 
 /** The template to send with: the stored one when enabled; the built-in one when the database is unavailable. */
@@ -120,10 +136,10 @@ export async function templateForSending(key: string): Promise<{ template: Templ
   if (dbConfigured()) {
     try {
       await seed();
-      const doc = await EmailTemplate.findOne({ key }).lean();
+      const [doc] = await sql<DbTemplate>("SELECT * FROM email_templates WHERE key = $1", [key]);
       if (doc) {
         if (!doc.enabled) return { template: null, note: `Template "${key}" is disabled.` };
-        return { template: view(doc as unknown as Record<string, unknown>), note: "" };
+        return { template: view(doc), note: "" };
       }
       const fallback = defaultFor(key);
       return fallback ? { template: fallback, note: `Template "${key}" was deleted; used the built-in version.` } : { template: null, note: `Template "${key}" doesn't exist.` };
@@ -138,7 +154,7 @@ export async function templateForSending(key: string): Promise<{ template: Templ
 }
 
 /* ---------------- edits (need the database) ---------------- */
-const needDb = () => { if (!dbConfigured()) throw new ConfigError("Saving templates needs the database. Add MONGODB_URI, then reload."); };
+const needDb = () => { if (!dbConfigured()) throw new ConfigError("Saving templates needs the database. Add DATABASE_URL, then reload."); };
 
 function validate(input: Record<string, unknown>, partial: boolean) {
   const errors: Record<string, string> = {};
@@ -159,48 +175,58 @@ function validate(input: Record<string, unknown>, partial: boolean) {
   return out;
 }
 
+const UPDATE_TEMPLATE = `UPDATE email_templates SET key = $2, name = $3, description = $4, subject = $5, html = $6, text = $7,
+  variables = $8, enabled = $9, updated_by = $10, updated_at = now() WHERE id = $1 RETURNING *`;
+
 export async function createTemplate(input: Record<string, unknown>, actor: string, ip: string) {
   needDb();
   const data = validate(input, false);
-  await db();
-  if (await EmailTemplate.exists({ key: String(data.key) })) throw new ValidationError("A template with this key already exists.", { key: "Choose a different key." });
-  const variables = findVariables({ subject: String(data.subject), html: String(data.html), text: String(data.text ?? "") });
-  const doc = await EmailTemplate.create({ ...data, variables, system: false, updatedBy: actor });
-  await audit(actor, "email.template.created", String(data.key), Object.keys(data), ip);
-  return view(doc.toObject() as unknown as Record<string, unknown>);
+  await seed();
+  const t: TemplateData = {
+    key: String(data.key), name: String(data.name), description: String(data.description ?? ""), subject: String(data.subject),
+    html: String(data.html), text: String(data.text ?? ""), enabled: data.enabled === undefined ? true : !!data.enabled, system: false,
+    variables: findVariables({ subject: String(data.subject), html: String(data.html), text: String(data.text ?? "") }),
+  };
+  const [doc] = await insertTemplate(t, actor);
+  if (!doc) throw new ValidationError("A template with this key already exists.", { key: "Choose a different key." });
+  await audit(actor, "email.template.created", t.key, Object.keys(data), ip);
+  return view(doc);
 }
 
 export async function updateTemplate(id: string, input: Record<string, unknown>, actor: string, ip: string) {
   needDb();
-  await db();
-  const doc = await EmailTemplate.findById(id).catch(() => null);
+  const doc = await findTemplate(id);
   if (!doc) throw new HttpError(404, "Template not found.", "not_found");
   const data = validate(input, true);
   if (doc.system && data.key && data.key !== doc.key) throw new ValidationError("Built-in template keys can't be changed.", { key: "This key is used by the website." });
-  Object.assign(doc, data, { updatedBy: actor });
-  doc.variables = findVariables({ subject: doc.subject, html: doc.html, text: doc.text ?? "" });
-  await doc.save();
-  await audit(actor, "email.template.updated", doc.key, Object.keys(data), ip);
-  return view(doc.toObject() as unknown as Record<string, unknown>);
+  const next = { ...view(doc), ...data } as TemplateView;
+  next.variables = findVariables({ subject: next.subject, html: next.html, text: next.text ?? "" });
+  let saved: DbTemplate[];
+  try {
+    saved = await sql<DbTemplate>(UPDATE_TEMPLATE, [doc.id, next.key, next.name, next.description, next.subject, next.html, next.text, next.variables, next.enabled, actor]);
+  } catch (error) {
+    if ((error as { code?: string }).code === "23505") throw new ValidationError("A template with this key already exists.", { key: "Choose a different key." });
+    throw error;
+  }
+  await audit(actor, "email.template.updated", next.key, Object.keys(data), ip);
+  return view(saved[0]);
 }
 
 export async function resetTemplate(id: string, actor: string, ip: string) {
   needDb();
-  await db();
-  const doc = await EmailTemplate.findById(id).catch(() => null);
+  const doc = await findTemplate(id);
   if (!doc) throw new HttpError(404, "Template not found.", "not_found");
   const original = defaultFor(doc.key);
   if (!original) throw new ValidationError("Only built-in templates can be reset.");
-  Object.assign(doc, { ...original, updatedBy: actor });
-  await doc.save();
+  const [saved] = await sql<DbTemplate>(UPDATE_TEMPLATE, [doc.id, original.key, original.name, original.description, original.subject, original.html, original.text, original.variables, original.enabled, actor]);
   await audit(actor, "email.template.reset", doc.key, ["subject", "html", "text"], ip);
-  return view(doc.toObject() as unknown as Record<string, unknown>);
+  return view(saved);
 }
 
 export async function deleteTemplate(id: string, actor: string, ip: string) {
   needDb();
-  await db();
-  const doc = await EmailTemplate.findByIdAndDelete(id).catch(() => null);
+  if (!isId(id)) throw new HttpError(404, "Template not found.", "not_found");
+  const [doc] = await sql<{ key: string }>("DELETE FROM email_templates WHERE id = $1 RETURNING key", [id]);
   if (!doc) throw new HttpError(404, "Template not found.", "not_found");
   await audit(actor, "email.template.deleted", doc.key, [], ip);
 }
@@ -211,10 +237,9 @@ export async function getTemplate(id: string): Promise<TemplateView> {
     if (!t) throw new HttpError(404, "Template not found.", "not_found");
     return { ...t, id: t.key, updatedAt: null, updatedBy: "built-in" };
   }
-  await db();
-  const doc = await EmailTemplate.findById(id).lean().catch(() => null);
+  const doc = await findTemplate(id);
   if (!doc) throw new HttpError(404, "Template not found.", "not_found");
-  return view(doc as unknown as Record<string, unknown>);
+  return view(doc);
 }
 
 /** Sample values for previews and test sends. */
