@@ -1,7 +1,8 @@
 import { setLang, type LangParams } from "@/lib/i18n";
 import Link from "next/link";
 import { Breadcrumbs, JsonLd, LeadForm, SplitTitle } from "@/components/sections";
-import { company, whatsappLink } from "@/lib/site";
+import { company, mapsLink, whatsappLink } from "@/lib/site";
+import { asLocale, tr } from "@/lib/i18n";
 import { breadcrumbSchema, metaFor } from "@/lib/seo";
 
 const path = "/contact/";
@@ -34,7 +35,7 @@ export default async function ContactPage({ params }: LangParams) {
               {company.email && <a href={`mailto:${company.email}`} className="cd"><small>Email</small><b>{company.email}</b></a>}
               {company.phone && <a href={`tel:${company.phone.replace(/\s/g, "")}`} className="cd"><small>Phone</small><b>{company.phone}</b></a>}
               {company.whatsapp && <a href={whatsappLink(lang)} className="cd" target="_blank" rel="noopener"><small>WhatsApp</small><b>Chat with us</b></a>}
-              {company.address && <div className="cd"><small>Office</small><b>{company.address}</b></div>}
+              {company.address && <a href={mapsLink} className="cd cd-address" target="_blank" rel="noopener"><small>Office</small><b>{tr(asLocale(lang), company.address)}</b><span className="cd-map">View on map</span></a>}
             </div>
           )}
         </div>

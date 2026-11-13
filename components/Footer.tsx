@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { apis, company, products, services, solutions, whatsappLink, type NavLink } from "@/lib/site";
-import { getLang } from "@/lib/i18n";
+import { apis, company, mapsLink, products, services, solutions, whatsappLink, type NavLink } from "@/lib/site";
+import { getLang, tr } from "@/lib/i18n";
 import { Logo } from "./Brand";
 
 const byGroup = (g: string): NavLink[] =>
@@ -36,6 +36,7 @@ export function Footer() {
     company.phone && { href: `tel:${company.phone.replace(/\s/g, "")}`, label: company.phone },
     company.whatsapp && { href: whatsappLink(getLang()), label: "WhatsApp" },
   ].filter(Boolean) as NavLink[];
+  const external = (href: string) => href.startsWith("https://") && { target: "_blank", rel: "noopener" };
 
   return (
     <footer className="footer">
@@ -46,7 +47,10 @@ export function Footer() {
           </Link>
           <p className="f-tagline">Software development, automation and AI solutions, for businesses that want simpler operations and more time for the work that matters.</p>
           {contact.length > 0 && (
-            <ul className="f-contact">{contact.map((c) => <li key={c.href}><a href={c.href} {...(c.href.startsWith("https://wa.me") && { target: "_blank", rel: "noopener" })}>{c.label}</a></li>)}</ul>
+            <ul className="f-contact">{contact.map((c) => <li key={c.href}><a href={c.href} {...external(c.href)}>{c.label}</a></li>)}</ul>
+          )}
+          {company.address && (
+            <address className="f-address"><a href={mapsLink} target="_blank" rel="noopener">{tr(getLang(), company.address)}</a></address>
           )}
         </div>
 

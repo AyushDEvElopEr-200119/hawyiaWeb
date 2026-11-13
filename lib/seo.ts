@@ -74,6 +74,15 @@ export const organizationSchema = {
   description: siteDescription,
   ...(company.email && { email: company.email }),
   ...(company.phone && { telephone: company.phone }),
+  ...(company.address && {
+    address: { "@type": "PostalAddress", streetAddress: company.street, addressLocality: company.locality, addressCountry: company.country },
+    location: {
+      "@type": "Place",
+      name: "Alliance Business Centers Network, DoubleTree by Hilton Muscat Qurum",
+      geo: { "@type": "GeoCoordinates", latitude: company.geo.lat, longitude: company.geo.lng },
+      hasMap: `https://www.google.com/maps/search/?api=1&query=${company.geo.lat},${company.geo.lng}`,
+    },
+  }),
 };
 
 export const websiteSchema = {

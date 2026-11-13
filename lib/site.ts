@@ -20,9 +20,17 @@ export const company = {
   email: "info@hawyiapremium.com",
   phone: "+968 9705 7071",
   whatsapp: "96897057071", // digits only, used for wa.me links
-  address: "",        // office address
+  address: "Alliance Business Centers Network, Al Nahdah Street, Qurum (located at the DoubleTree by Hilton Muscat Qurum)",
+  // structured parts of the same address, for search engines (schema.org)
+  street: "Alliance Business Centers Network, Al Nahdah Street",
+  locality: "Qurum, Muscat",
+  country: "OM",
+  geo: { lat: 23.61048, lng: 58.4974 },
   tagline: "We help you automate your business",
 };
+
+/** Opens the office location in Google Maps (app on phones, browser on computers). */
+export const mapsLink = `https://www.google.com/maps/search/?api=1&query=${company.geo.lat},${company.geo.lng}`;
 
 /** Opens a WhatsApp chat with the company, with a greeting already typed in the visitor's language. */
 export const whatsappLink = (lang: string = "en") => {

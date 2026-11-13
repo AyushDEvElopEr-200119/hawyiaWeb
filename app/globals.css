@@ -1488,6 +1488,12 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline-offset: 4
 .opt span { color: var(--muted); font-size: .875rem; }
 .contact-details { display: flex; flex-wrap: wrap; gap: 1.5rem; padding-top: .5rem; }
 .cd { display: grid; } .cd small { font-size: .75rem; color: var(--muted); } .cd b { font-weight: 600; }
+.cd-address { flex-basis: 100%; max-width: 30rem; gap: .1rem; }
+.cd-address b { line-height: 1.4; }
+.cd-map { margin-top: .25rem; font-size: .8125rem; font-weight: 600; color: var(--mint-600); }
+.cd-map::after { content: " \2197"; }
+.cd-address:hover .cd-map { text-decoration: underline; text-underline-offset: 3px; }
+[dir="rtl"] .cd.cd-address b { direction: rtl; unicode-bidi: normal; }
 .steps { display: grid; gap: 1.1rem; }
 .steps li { display: flex; gap: 1rem; } .steps .mono { color: var(--mint-600); padding-top: .15rem; }
 .steps p { color: var(--muted); font-size: .9rem; }
@@ -2255,6 +2261,14 @@ main:focus { outline: none; }
 .f-tagline { color: var(--f-muted); max-width: 30rem; }
 .f-contact { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; }
 .f-contact a { color: var(--f-ink); font-weight: 500; }
+/* office address: its own line under the brand row, with a pin, opens Google Maps */
+.f-address { grid-column: 1 / -1; font-style: normal; }
+.f-address a { display: inline-flex; gap: .45rem; align-items: flex-start; color: var(--f-text); line-height: 1.45; }
+.f-address a::before {
+  content: ""; flex: none; width: 12px; height: 15px; margin-top: 1px; background: var(--mint-600);
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 30'%3E%3Cpath d='M12 0C5.4 0 0 5.2 0 11.7 0 20.4 12 30 12 30s12-9.6 12-18.3C24 5.2 18.6 0 12 0zm0 16.5a4.8 4.8 0 1 1 0-9.6 4.8 4.8 0 0 1 0 9.6z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.f-address a:hover { color: var(--mint-600); text-decoration: underline; text-underline-offset: 3px; }
 
 .f-dir { display: grid; grid-template-columns: repeat(7, 1fr); gap: 1.5rem; padding-block: 2rem 2.2rem; }
 .f-col h3 { font-size: .75rem; font-weight: 600; color: var(--f-ink); letter-spacing: -0.01em; margin-bottom: .8rem; }
