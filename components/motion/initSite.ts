@@ -162,6 +162,43 @@ export function initSite(): () => void {
     $$("a", menu).forEach((a) => on(a, "click", () => setMenu(false)));
   }
 
+  /* ---------- desktop menu fit: when the full menu doesn't fit the header (longer labels from a browser
+     translator, a narrow window, large text…) the header falls back to the Menu button, as on phones ---------- */
+  const nav = header && $(".nav", header);
+  if (header && nav) {
+    let pending = 0;
+    const shown = (el: Element) => getComputedStyle(el).display !== "none";
+    // a short timer, not requestAnimationFrame: rAF pauses in background tabs, where translators also run
+    const fit = () => {
+      clearTimeout(pending);
+      pending = window.setTimeout(() => {
+        header.classList.remove("nav-compact");
+        if (!shown(nav)) return;   // already the phone layout
+        // compare the visible boxes only (scrollWidth would count the closed dropdown panels)
+        const outside = (el: Element, box: DOMRect) => {
+          const r = el.getBoundingClientRect();
+          return r.width > 0 && (r.left < box.left - 1 || r.right > box.right + 1);
+        };
+        const headerBox = header.getBoundingClientRect();
+        const navBox = nav.getBoundingClientRect();
+        const spills = [...header.children].some((c) => shown(c) && outside(c, headerBox))
+          || $$(".nav-link", nav).some((a) => outside(a, navBox))
+          || $$(".nl", header).some((l) => l.scrollWidth > l.clientWidth + 1 && l.closest(".nav, .btn-nav"));
+        if (spills) {
+          header.classList.add("nav-compact");
+          closeAllMega();
+        }
+      }, 60);
+    };
+    fit();
+    on(window, "resize", fit);
+    // translators replace the label text in place, so re-check whenever it changes
+    const watch = new MutationObserver(fit);
+    [nav, $(".btn-nav", header)].forEach((el) => el && watch.observe(el, { subtree: true, childList: true, characterData: true }));
+    document.fonts?.ready.then(fit);
+    ac.signal.addEventListener("abort", () => { watch.disconnect(); clearTimeout(pending); header.classList.remove("nav-compact"); });
+  }
+
   /* ---------- reveals: a gentle rise the first time each block enters the screen;
      blocks that enter together stagger a little ---------- */
   const reveal = new IntersectionObserver((entries) => {
