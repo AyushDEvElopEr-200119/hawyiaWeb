@@ -72,7 +72,8 @@ export function localizeProps<P>(type: unknown, props: P): P {
   const lang = getLang();
   if (lang === "en") return props;
   const out = { ...props } as Props;
-  if (type !== "script" && type !== "style" && "children" in out) out.children = swapText(out.children, lang);
+  // translate="no" (the standard HTML opt-out, also honoured by browser translators) keeps an element's own text as written
+  if (type !== "script" && type !== "style" && out.translate !== "no" && "children" in out) out.children = swapText(out.children, lang);
   for (const k of TEXT_PROPS) if (typeof out[k] === "string") out[k] = swapText(out[k], lang);
   if (typeof out.href === "string") out.href = localePath(lang, out.href);
   return out as P;

@@ -24,13 +24,13 @@ export function LogoMark() {
   );
 }
 
-/** The full lockup: mark, rule and the two-line "Hawyia / Premium" wordmark. */
+/** The full lockup: mark, rule and the two-line "Hawyia / Premium" wordmark, in English in every language. */
 export function Logo() {
   return (
-    <span className="brand">
+    <span className="brand" translate="no" lang="en">
       <LogoMark />
       <span className="brand-rule" aria-hidden="true" />
-      <span className="brand-words"><b>Hawyia</b><em>Premium</em></span>
+      <span className="brand-words"><b translate="no">Hawyia</b><em translate="no">Premium</em></span>
     </span>
   );
 }

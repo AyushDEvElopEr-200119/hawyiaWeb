@@ -43,7 +43,7 @@ export function Preloader() {
       <div className="pl-ui" aria-hidden="true">
         <span className="pl-glow" />
         <div className="pl-corners mono">
-          <span className="pl-lockup"><LogoMark /><span>Hawyia</span></span>
+          <span className="pl-lockup" lang="en"><LogoMark /><span translate="no">Hawyia</span></span>
           <span>Business automation</span>
           <span className="pl-loading">Loading<i>.</i><i>.</i><i>.</i></span>
           <span className="pl-count" />
@@ -59,7 +59,7 @@ export function Preloader() {
           </p>
           <p className="pl-brand">
             <span className="pl-mark"><LogoMark /></span>
-            <span className="pl-l"><span>Hawyia</span></span>
+            <span className="pl-l" lang="en"><span translate="no">Hawyia</span></span>
           </p>
         </div>
       </div>
