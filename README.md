@@ -1,6 +1,6 @@
-# Hawyia — company website
+# Hawiyah — company website
 
-Marketing site for Hawyia, a software, automation and AI company with ready-made business and travel platforms, in English and Arabic. Built with Next.js (App Router), React and TypeScript, with GSAP and Lenis for motion.
+Marketing site for Hawiyah, a software, automation and AI company with ready-made business and travel platforms, in English and Arabic. Built with Next.js (App Router), React and TypeScript, with GSAP and Lenis for motion.
 
 ## Run it
 
@@ -53,7 +53,7 @@ Booking rules (Sunday to Thursday, 9:00 to 17:00 Oman time, 30-minute slots, 4 h
 
 1. In the Vercel project that hosts the site, add **Resend** from the Marketplace and connect it to the project. This sets `RESEND_API_KEY`.
 2. In Resend, verify the sending domain by adding the DNS records it lists.
-3. Set `DEMO_EMAIL_FROM` to an address on that domain, such as `Hawyia <demos@hawyiapremium.com>`.
+3. Set `DEMO_EMAIL_FROM` to an address on that domain, such as `Hawiyah <demos@hawyiapremium.com>`.
 
 **3. Team**
 

@@ -7,7 +7,7 @@ const trail = [{ label: "Request a Demo" }];
 
 export const generateMetadata = metaFor({
   title: "Request a Demo",
-  description: "Request a live demo of Hawyia automation and business software, configured around your business.",
+  description: "Request a live demo of Hawiyah automation and business software, configured around your business.",
   path,
 });
 
@@ -25,7 +25,7 @@ export default async function RequestDemoPage({ params }: LangParams) {
       <Breadcrumbs trail={trail} />
       <div className="contact-grid">
         <div className="contact-copy">
-          <h1 className="ph-title" data-split><SplitTitle text="See Hawyia on<br />your use case" /></h1>
+          <h1 className="ph-title" data-split><SplitTitle text="See Hawiyah on<br />your use case" /></h1>
           <p>Tell us about your business and we&apos;ll set up a live demo of the modules that matter to you.</p>
           <ul className="steps">
             {steps.map(([t, d], i) => (

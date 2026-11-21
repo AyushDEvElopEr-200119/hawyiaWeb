@@ -1,36 +1,23 @@
-import { useId } from "react";
-
-/** The Hawyia mark: two navy uprights joined by a bar, with an amber flag rising to the right. */
+/** The Hawiyah mark: two navy uprights joined by a bar, with an amber flag rising to the right. */
 export function LogoMark() {
-  const id = useId();
   return (
-    <svg className="logo-mark" viewBox="290 52 556 556" aria-hidden="true">
-      <defs>
-        <linearGradient id={`${id}n`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="var(--logo-blue, #0b45a8)" />
-          <stop offset="1" stopColor="var(--logo-navy, #061a4d)" />
-        </linearGradient>
-        <linearGradient id={`${id}a`} x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stopColor="#fdc12a" />
-          <stop offset="1" stopColor="#f39a05" />
-        </linearGradient>
-      </defs>
-      <g strokeLinejoin="round" strokeWidth="16">
-        <path fill={`url(#${id}n)`} stroke={`url(#${id}n)`} d="M306 214 L466 70 L468 222 L624 224 L522 322 L468 322 L468 462 L308 596 Z" />
-        <path fill={`url(#${id}n)`} stroke={`url(#${id}n)`} d="M528 368 L662 250 L662 488 L528 596 Z" />
-        <path fill={`url(#${id}a)`} stroke={`url(#${id}a)`} d="M518 186 L632 68 L826 68 L826 268 L702 374 L700 188 Z" />
+    <svg className="logo-mark" viewBox="255 154 560 560" aria-hidden="true">
+      <g strokeLinejoin="round" strokeWidth="8">
+        <path fill="var(--logo-blue, #003180)" stroke="var(--logo-blue, #003180)" d="M286 284 L424 160 L424 318 L590 318 L597 326 L495 415 L424 415 L424 588 L286 705 Z" />
+        <path fill="var(--logo-blue, #003180)" stroke="var(--logo-blue, #003180)" d="M491 462 L623 346 L623 587 L491 705 Z" />
+        <path fill="#feb80a" stroke="#feb80a" d="M457 295 L569 165 L782 165 L784 388 L646 504 L646 296 Z" />
       </g>
     </svg>
   );
 }
 
-/** The full lockup: mark, rule and the two-line "Hawyia / Premium" wordmark, in English in every language. */
+/** The full lockup: mark, rule and the two-line "Hawiyah / Premium" wordmark, in English in every language. */
 export function Logo() {
   return (
     <span className="brand" translate="no" lang="en">
       <LogoMark />
       <span className="brand-rule" aria-hidden="true" />
-      <span className="brand-words"><b translate="no">Hawyia</b><em translate="no">Premium</em></span>
+      <span className="brand-words"><b translate="no">Hawiyah</b><em translate="no">Premium</em></span>
     </span>
   );
 }

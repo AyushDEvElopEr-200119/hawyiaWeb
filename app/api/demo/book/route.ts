@@ -45,7 +45,7 @@ export async function POST(request: Request) {
     const team = teamEmails();
     const { meetLink } = await createMeeting({
       start,
-      summary: `Hawyia demo: ${field("company") || name}`,
+      summary: `Hawiyah demo: ${field("company") || name}`,
       description: [["Name", name], ["Email", email], ...details].filter(([, v]) => v).map(([k, v]) => `${k}: ${v}`).join("\n"),
       attendees: [email, ...team],
     });

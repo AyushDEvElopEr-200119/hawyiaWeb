@@ -32,7 +32,7 @@ export default async function HomePage({ params }: LangParams) {
             <span className="hl" style={{ "--i": 0 } as React.CSSProperties}><span>Automate Your Business Workflows —</span></span>
             <span className="hl" style={{ "--i": 1 } as React.CSSProperties}><span>From <em>Operations to Growth</em> on One Platform</span></span>
           </h1>
-          <p className="hw-lead">Hawyia Premium brings your business operations, apps, data and teams together in a single, powerful platform — to automate, integrate and scale with confidence.</p>
+          <p className="hw-lead">Hawiyah Premium brings your business operations, apps, data and teams together in a single, powerful platform — to automate, integrate and scale with confidence.</p>
           <div className="hw-ctas">
             <Link href="/request-demo/" className="hw-btn hw-btn-primary press">Request a Demo <span className="hw-arrow" aria-hidden="true">↗</span></Link>
             <Link href="/automation/" className="hw-btn hw-btn-ghost press"><span className="hw-play" aria-hidden="true" />See How It Works</Link>
@@ -199,7 +199,7 @@ export default async function HomePage({ params }: LangParams) {
         </div>
       </section>
 
-      {/* ============ WHY HAWYIA ============ */}
+      {/* ============ WHY HAWIYAH ============ */}
       <section className="why container" id="why">
         <h2 className="h2 center reveal">We understand technology.<br />We understand business.</h2>
         <div className="why-grid">
@@ -209,7 +209,7 @@ export default async function HomePage({ params }: LangParams) {
         </div>
       </section>
 
-      {/* ============ THE HAWYIA DIFFERENCE ============ */}
+      {/* ============ THE HAWIYAH DIFFERENCE ============ */}
       <section className="effect-sec">
       <div className="effect xp" data-expand>
         <div className="effect-media xp-frame" id="effectMedia">

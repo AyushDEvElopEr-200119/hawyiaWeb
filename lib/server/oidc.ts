@@ -64,7 +64,7 @@ export async function finishLogin(request: Request, code: string, state: string,
   const jwks = createRemoteJWKSet(new URL(`https://login.microsoftonline.com/${encodeURIComponent(tenantId)}/discovery/v2.0/keys`));
   const { payload } = await jwtVerify(json.id_token, jwks, { issuer: `https://login.microsoftonline.com/${tenantId}/v2.0`, audience: clientId });
   if (payload.nonce !== saved.nonce) throw new Error("Sign-in nonce didn't match. Please try again.");
-  if (payload.tid !== tenantId) throw new Error("That account isn't from the Hawyia Microsoft 365 organisation.");
+  if (payload.tid !== tenantId) throw new Error("That account isn't from the Hawiyah Microsoft 365 organisation.");
   const email = String(payload.email ?? payload.preferred_username ?? payload.upn ?? "").toLowerCase();
   if (!email) throw new Error("Microsoft didn't return an email address for this account.");
   return { email, name: String(payload.name ?? email), returnTo: String(saved.returnTo ?? "/admin/") };

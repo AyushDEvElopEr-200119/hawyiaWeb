@@ -1,4 +1,4 @@
-# Hawyia website: deployment guide
+# Hawiyah website: deployment guide
 
 For the team deploying this site to the production server. It's a **Next.js 16** app
 (website, API and admin dashboard in one), so it needs a Node.js server. It can't be

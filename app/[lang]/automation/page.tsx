@@ -13,7 +13,7 @@ import { breadcrumbSchema, faqSchema, metaFor, serviceSchema } from "@/lib/seo";
 
 const path = "/automation/";
 const trail = [{ label: "Automation" }];
-const description = "Hawyia Premium automates approvals, invoices, follow-ups, reporting and other repetitive work, so your team has more time for the work that needs a person.";
+const description = "Hawiyah Premium automates approvals, invoices, follow-ups, reporting and other repetitive work, so your team has more time for the work that needs a person.";
 
 export const generateMetadata = metaFor({ title: "Business Automation", description, path });
 

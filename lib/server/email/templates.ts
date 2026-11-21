@@ -36,12 +36,12 @@ export const findVariables = (t: Pick<TemplateData, "subject" | "html" | "text">
 const layout = (heading: string, body: string, dir: "ltr" | "rtl" = "ltr") => `<!doctype html>
 <html><body style="margin:0;background:#f4f6fb;padding:24px 12px">
 <div dir="${dir}" style="max-width:600px;margin:0 auto;background:#ffffff;border-radius:16px;overflow:hidden;font-family:Arial,Helvetica,sans-serif;color:#0b1020;font-size:15px;line-height:1.6">
-  <div style="background:#0a2463;padding:20px 28px"><span style="color:#ffffff;font-size:18px;font-weight:700">Hawyia</span> <span style="color:#fbb31c;font-size:18px;font-weight:700">Premium</span></div>
+  <div style="background:#0a2463;padding:20px 28px"><span style="color:#ffffff;font-size:18px;font-weight:700">Hawiyah</span> <span style="color:#fbb31c;font-size:18px;font-weight:700">Premium</span></div>
   <div style="padding:28px">
     <h1 style="margin:0 0 16px;font-size:22px;line-height:1.3">${heading}</h1>
 ${body}
   </div>
-  <div style="padding:16px 28px;background:#f4f6fb;color:#556070;font-size:12px">Hawyia Premium · info@hawyiapremium.com</div>
+  <div style="padding:16px 28px;background:#f4f6fb;color:#556070;font-size:12px">Hawiyah Premium · info@hawyiapremium.com</div>
 </div></body></html>`;
 const btn = (href: string, label: string) =>
   `    <p><a href="${href}" style="display:inline-block;padding:12px 22px;border-radius:99px;background:#fbb31c;color:#0b1020;font-weight:700;text-decoration:none">${label}</a></p>`;
@@ -52,16 +52,16 @@ const d = (key: string, name: string, description: string, subject: string, body
 };
 
 export const DEFAULT_TEMPLATES: TemplateData[] = [
-  d("welcome", "Welcome Email", "Sent when a new account is created.", "Welcome to Hawyia Premium, {{name}}",
+  d("welcome", "Welcome Email", "Sent when a new account is created.", "Welcome to Hawiyah Premium, {{name}}",
     `    <p>Hi {{name}},</p>\n    <p>Welcome aboard. Your account is ready, and we're glad to have you with us.</p>\n${btn("{{loginLink}}", "Sign in")}`,
     "Hi {{name}},\n\nWelcome aboard. Your account is ready.\nSign in: {{loginLink}}", "Welcome, {{name}}"),
-  d("otp_verification", "OTP Verification", "One-time code for sign-in or verification.", "Your Hawyia verification code: {{otp}}",
+  d("otp_verification", "OTP Verification", "One-time code for sign-in or verification.", "Your Hawiyah verification code: {{otp}}",
     `    <p>Hi {{name}},</p>\n    <p>Your verification code is:</p>\n    <p style="font-size:30px;font-weight:700;letter-spacing:6px;margin:8px 0 16px">{{otp}}</p>\n    <p style="color:#556070">It expires in {{minutes}} minutes. If you didn't ask for it, you can ignore this email.</p>`,
     "Hi {{name}},\n\nYour verification code is {{otp}}. It expires in {{minutes}} minutes.", "Your verification code"),
-  d("forgot_password", "Forgot Password", "Password reset link.", "Reset your Hawyia password",
+  d("forgot_password", "Forgot Password", "Password reset link.", "Reset your Hawiyah password",
     `    <p>Hi {{name}},</p>\n    <p>We received a request to reset your password. The link below works for {{minutes}} minutes.</p>\n${btn("{{resetLink}}", "Reset password")}\n    <p style="color:#556070">If you didn't ask for this, no action is needed.</p>`,
     "Hi {{name}},\n\nReset your password (valid {{minutes}} minutes): {{resetLink}}", "Reset your password"),
-  d("account_activation", "Account Activation", "Confirms a new account's email address.", "Activate your Hawyia account",
+  d("account_activation", "Account Activation", "Confirms a new account's email address.", "Activate your Hawiyah account",
     `    <p>Hi {{name}},</p>\n    <p>Please confirm your email address to activate your account.</p>\n${btn("{{activationLink}}", "Activate account")}`,
     "Hi {{name}},\n\nActivate your account: {{activationLink}}", "Activate your account"),
   d("order_confirmation", "Order Confirmation", "Confirms an order.", "Order {{orderId}} confirmed",
@@ -70,21 +70,21 @@ export const DEFAULT_TEMPLATES: TemplateData[] = [
   d("payment_confirmation", "Payment Confirmation", "Confirms a payment.", "Payment received for {{orderId}}",
     `    <p>Hi {{name}},</p>\n    <p>We've received your payment.</p>\n    <p><b>Reference:</b> {{orderId}}<br /><b>Amount:</b> {{amount}}<br /><b>Method:</b> {{paymentMethod}}</p>`,
     "Hi {{name}},\n\nPayment received for {{orderId}}: {{amount}} by {{paymentMethod}}.", "Payment received"),
-  d("invoice", "Invoice Email", "Sends an invoice.", "Invoice {{invoiceNumber}} from Hawyia Premium",
+  d("invoice", "Invoice Email", "Sends an invoice.", "Invoice {{invoiceNumber}} from Hawiyah Premium",
     `    <p>Hi {{name}},</p>\n    <p>Your invoice is ready.</p>\n    <p><b>Invoice:</b> {{invoiceNumber}}<br /><b>Amount:</b> {{amount}}<br /><b>Due:</b> {{dueDate}}</p>\n${btn("{{invoiceLink}}", "View invoice")}`,
     "Hi {{name}},\n\nInvoice {{invoiceNumber}}: {{amount}}, due {{dueDate}}.\n{{invoiceLink}}", "Your invoice"),
   d("contact_form_notification", "Contact Form Notification", "Sent to the team when someone submits a website form.", "Website enquiry: {{company}}",
     `    <p>A new enquiry arrived from the website. Reply to this email to answer {{name}} directly.</p>\n    <table cellpadding="6" style="border-collapse:collapse;width:100%">{{{detailsHtml}}}</table>`,
     "New website enquiry\n\n{{detailsText}}", "New website enquiry"),
   d("contact_acknowledgement", "Contact Form Confirmation (English)", "Sent to the visitor after they submit a form.", "We've received your message",
-    `    <p>Hi {{name}},</p>\n    <p>Thanks for contacting Hawyia Premium. We've received your message and a specialist will reply within one business day.</p>\n    <p>If you need to add anything, just reply to this email.</p>\n    <p>— The Hawyia Premium team</p>`,
-    "Hi {{name}},\n\nThanks for contacting Hawyia Premium. We've received your message and a specialist will reply within one business day.\n\nIf you need to add anything, just reply to this email.\n\n— The Hawyia Premium team",
+    `    <p>Hi {{name}},</p>\n    <p>Thanks for contacting Hawiyah Premium. We've received your message and a specialist will reply within one business day.</p>\n    <p>If you need to add anything, just reply to this email.</p>\n    <p>— The Hawiyah Premium team</p>`,
+    "Hi {{name}},\n\nThanks for contacting Hawiyah Premium. We've received your message and a specialist will reply within one business day.\n\nIf you need to add anything, just reply to this email.\n\n— The Hawiyah Premium team",
     "Thanks for getting in touch"),
   d("contact_acknowledgement_ar", "Contact Form Confirmation (Arabic)", "Sent to visitors who used the Arabic site.", "تلقّينا رسالتك",
     `    <p>مرحبًا {{name}}،</p>\n    <p>شكرًا لتواصلك مع هاوية بريميوم. تلقّينا رسالتك وسيرد عليك أحد المختصين خلال يوم عمل واحد.</p>\n    <p>إذا أردت إضافة أي شيء، فقط رد على هذه الرسالة.</p>\n    <p>— فريق هاوية بريميوم</p>`,
     "مرحبًا {{name}}،\n\nشكرًا لتواصلك مع هاوية بريميوم. تلقّينا رسالتك وسيرد عليك أحد المختصين خلال يوم عمل واحد.\n\n— فريق هاوية بريميوم",
     "شكرًا لتواصلك معنا", "rtl"),
-  d("admin_notification", "Admin Notification", "Internal alerts for administrators.", "[Hawyia] {{title}}",
+  d("admin_notification", "Admin Notification", "Internal alerts for administrators.", "[Hawiyah] {{title}}",
     `    <p>{{message}}</p>\n${btn("{{link}}", "Open")}`,
     "{{title}}\n\n{{message}}\n{{link}}", "{{title}}"),
 ];
@@ -247,7 +247,7 @@ export const sampleVariables = (variables: string[]): Record<string, string> => 
   const samples: Record<string, string> = {
     name: "Aisha Rahman", email: "aisha@example.com", otp: "482913", minutes: "10", orderId: "ORD-1001", total: "OMR 120.000",
     amount: "OMR 120.000", paymentMethod: "Card", invoiceNumber: "INV-2026-001", dueDate: "30 Nov 2026", company: "Example Trading LLC",
-    title: "Test notification", message: "This is a test message from the Hawyia admin dashboard.",
+    title: "Test notification", message: "This is a test message from the Hawiyah admin dashboard.",
     loginLink: "https://www.hawyiapremium.com/", resetLink: "https://www.hawyiapremium.com/", activationLink: "https://www.hawyiapremium.com/",
     invoiceLink: "https://www.hawyiapremium.com/", link: "https://www.hawyiapremium.com/",
     detailsHtml: '<tr><td style="color:#556070"><b>Name</b></td><td>Aisha Rahman</td></tr><tr><td style="color:#556070"><b>Message</b></td><td>Sample enquiry</td></tr>',

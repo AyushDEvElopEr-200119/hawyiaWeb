@@ -56,7 +56,7 @@ export default async function ArticlePage({ params }: Props) {
           <p className="article-dek">{post.excerpt}</p>
           <div className="article-byline">
             <span className="byline-avatar"><LogoMark /></span>
-            <span className="byline-who"><b>{t("Hawyia Team")}</b><small>{readMinutes(post)} {t("min read")}</small></span>
+            <span className="byline-who"><b>{t("Hawiyah Team")}</b><small>{readMinutes(post)} {t("min read")}</small></span>
             <ShareLink title={t(post.title)} labels={{ share: t("Share"), copied: t("Link copied") }} />
           </div>
         </header>

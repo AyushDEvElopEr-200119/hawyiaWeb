@@ -39,7 +39,7 @@ export function EmailConfigPage() {
   const [rotating, setRotating] = useState(false);
   const [testing, setTesting] = useState(false);
   const [test, setTest] = useState<TestResult | null>(null);
-  const [mail, setMail] = useState({ to: "", subject: "Test email from Hawyia Premium", message: "This is a test email sent through Microsoft 365 from the Hawyia admin dashboard." });
+  const [mail, setMail] = useState({ to: "", subject: "Test email from Hawiyah Premium", message: "This is a test email sent through Microsoft 365 from the Hawiyah admin dashboard." });
   const [mailErrors, setMailErrors] = useState<Record<string, string>>({});
   const [sending, setSending] = useState(false);
 

@@ -4,7 +4,7 @@ import { LogoMark } from "./Brand";
  * Page-load preloader, about 7.6s of kinetic type (paced so every word can be read), then a shutter reveal:
  *   0.25–3.75s the words, one at a time, in huge type: Business, Household duties, Marketing, Promotions
  *   3.75–5.1s  "We help you automate everything!"
- *   5.1–6.1s   the Hawyia mark and wordmark
+ *   5.1–6.1s   the Hawiyah mark and wordmark
  *   6.15–7.6s  the screen splits into six shutters that lift one after another onto the page
  * Corners carry the brand, a label, "Loading" and a 0–100 counter over a filling hairline.
  * Everything moves with transform and opacity only, so it stays smooth on phones.
@@ -43,7 +43,7 @@ export function Preloader() {
       <div className="pl-ui" aria-hidden="true">
         <span className="pl-glow" />
         <div className="pl-corners mono">
-          <span className="pl-lockup" lang="en"><LogoMark /><span translate="no">Hawyia</span></span>
+          <span className="pl-lockup" lang="en"><LogoMark /><span translate="no">Hawiyah</span></span>
           <span>Business automation</span>
           <span className="pl-loading">Loading<i>.</i><i>.</i><i>.</i></span>
           <span className="pl-count" />
@@ -59,7 +59,7 @@ export function Preloader() {
           </p>
           <p className="pl-brand">
             <span className="pl-mark"><LogoMark /></span>
-            <span className="pl-l" lang="en"><span translate="no">Hawyia</span></span>
+            <span className="pl-l" lang="en"><span translate="no">Hawiyah</span></span>
           </p>
         </div>
       </div>

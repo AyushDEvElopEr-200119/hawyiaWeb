@@ -1,5 +1,5 @@
 import { getLang, localePath, t } from "./i18n";
-// The Hawyia Journal: articles for /blog/ and /blog/[slug]/.
+// The Hawiyah Journal: articles for /blog/ and /blog/[slug]/.
 // Draft copy about business and household automation. Review the wording and the
 // publish dates before launch; add a post by adding an entry here (newest first).
 

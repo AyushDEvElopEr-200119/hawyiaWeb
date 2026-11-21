@@ -9,7 +9,7 @@ const trail = [{ label: "About" }];
 
 export const generateMetadata = metaFor({
   title: "About Us",
-  description: "About Hawyia, a business automation and software company: automation, ready-made modules such as CRM, HRMS and ERP, custom development, AI and integrations.",
+  description: "About Hawiyah, a business automation and software company: automation, ready-made modules such as CRM, HRMS and ERP, custom development, AI and integrations.",
   path,
 });
 
@@ -39,9 +39,9 @@ export default async function AboutPage({ params }: LangParams) {
     <>
       <PageHero
         trail={trail}
-        eyebrow="About Hawyia"
+        eyebrow="About Hawiyah"
         title="We help you<br />automate everything"
-        intro="Hawyia is a business automation and software company. We automate the routine work of businesses and households, provide ready-made modules such as CRM, HRMS and ERP, and build custom software, AI tools and integrations."
+        intro="Hawiyah is a business automation and software company. We automate the routine work of businesses and households, provide ready-made modules such as CRM, HRMS and ERP, and build custom software, AI tools and integrations."
         ctas={false}
         image="p-about"
         highlights={[["Automation", "Business, home, marketing and promotions"], ["Ready-made modules", "CRM, HRMS, ERP and more"], ["Custom & AI", "Built around how you work"]]}

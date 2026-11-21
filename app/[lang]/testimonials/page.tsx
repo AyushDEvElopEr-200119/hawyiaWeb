@@ -12,7 +12,7 @@ const trail = [{ label: "Client Stories" }];
 export const generateMetadata = async ({ params }: LangParams) => ({
   ...pageMeta({
     title: "Client Stories",
-    description: "How retailers, service firms, clinics, distributors and households automate their work with Hawyia.",
+    description: "How retailers, service firms, clinics, distributors and households automate their work with Hawiyah.",
     path,
   }, asLocale((await params).lang)),
   // sample stories are placeholders: keep the page out of search results until real ones replace them

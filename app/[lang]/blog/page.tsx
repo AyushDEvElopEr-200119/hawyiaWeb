@@ -12,7 +12,7 @@ const trail = [{ label: "Blog" }];
 
 export const generateMetadata = metaFor({
   title: "Blog",
-  description: "The Hawyia Journal: practical guides and insights on business automation, CRM, HRMS, ERP, AI and integrations.",
+  description: "The Hawiyah Journal: practical guides and insights on business automation, CRM, HRMS, ERP, AI and integrations.",
   path,
 });
 
@@ -26,7 +26,7 @@ export default async function BlogPage({ params }: LangParams) {
         <Breadcrumbs trail={trail} />
         <div className="journal-head">
           <div>
-            <p className="eyebrow">The Hawyia Journal</p>
+            <p className="eyebrow">The Hawiyah Journal</p>
             <h1 className="ph-title" data-split><SplitTitle text="Notes on automating<br />everything" /></h1>
           </div>
           <div className="ph-intro">

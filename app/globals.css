@@ -1,6 +1,6 @@
 /* ============================================================
-   Hawyia — homepage styles
-   Brand colours follow the Hawyia logo: amber accent in --mint, navy and blue in the --mint-* shades.
+   Hawiyah — homepage styles
+   Brand colours follow the Hawiyah logo: amber accent in --mint, navy and blue in the --mint-* shades.
    Motion & material rules follow the apple-design skill:
    instant press feedback, translucent layers, size-specific
    tracking, and reduced-motion / transparency / contrast modes.
@@ -181,7 +181,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
   box-shadow: inset 0 1px 0 rgb(255 255 255 / .7), 0 4px 18px -8px rgb(0 0 0 / .25);
 }
 
-/* Hawyia lockup: mark | Hawyia (navy) over Premium (amber), as in the logo */
+/* Hawiyah lockup: mark | Hawiyah (navy) over Premium (amber), as in the logo */
 .brand { display: inline-flex; align-items: center; gap: .55em; font-family: var(--sans); color: var(--mint-900); }
 .brand .logo-mark { width: 2.1em; height: 2.1em; flex: none; }
 .brand-rule { align-self: stretch; width: 1.5px; margin-block: .1em; background: currentColor; opacity: .85; }
@@ -190,7 +190,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .brand-words em { font-style: normal; font-weight: 500; font-size: .86em; color: rgb(var(--mint)); }
 .logo .brand { font-size: 1.05rem; }
 /* on dark grounds the mark's uprights lift to a brighter blue */
-.pl-mark, .pl-lockup { --logo-blue: #4f86ec; --logo-navy: #1d55c4; }
+.pl-mark, .pl-lockup { --logo-blue: #4f86ec; }
 
 .nav > ul {
   display: flex;
@@ -972,7 +972,7 @@ html:not(.js) .nav-link:hover { background: rgb(255 255 255 / .85); }
    0.25–3.75s products, one at a time: each word slides up, holds long enough to read, slides out
               just as the next arrives (0.9s each, every 0.65s)
    3.75–5.1s  "One platform. / Your brand."
-   5.1–6.1s   the Hawyia mark and wordmark
+   5.1–6.1s   the Hawiyah mark and wordmark
    6.15s      the type lifts away; six shutters rise one after another onto the page;
               6.41s the page's own entrances resume underneath
    7.6s       the script removes .pl-on and the preloader is gone */
@@ -1725,7 +1725,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline-offset: 4
 .bleed-frame { --w0: calc(100% - var(--gutter) * 2); --h0: 84%; --r0: 40px; color: #fff; }
 .bleed-frame .bleed-media { position: absolute; inset: 0; height: auto; }
 
-/* the Hawyia Effect */
+/* the Hawiyah Effect */
 .effect.xp { width: auto; padding: 0; margin-bottom: 4rem; }
 .effect .xp-frame { --w0: min(1360px, calc(100% - var(--gutter) * 2)); --h0: min(clamp(560px, 56vw, 780px), 86%); --r0: 28px; }
 
@@ -2687,7 +2687,7 @@ main:focus { outline: none; }
 /* logo: no separate pill any more, the bar is the surface */
 .header .logo, .header.on-dark .logo { padding: 2px 0; margin-inline: 0 auto; background: none; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; }
 .header .logo .brand { font-size: 1rem; transition: color .45s var(--ease); }
-.header.on-dark .brand { color: #fff; --logo-blue: #5b8fff; --logo-navy: #2a63d6; }
+.header.on-dark .brand { color: #fff; --logo-blue: #5b8fff; }
 
 /* links: plain text in the bar, a soft pill on hover */
 .header .nav > ul { gap: 0; padding: 0; background: none; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; }
@@ -3273,7 +3273,7 @@ html.is-scrubbing, html.is-scrubbing * { user-select: none; }
   background: #fff;
   box-shadow: inset 0 0 0 1px rgb(10 36 99 / .08), 0 10px 30px -14px rgb(8 30 84 / .25);
 }
-.header.menu-open .brand { color: var(--mint-900); --logo-blue: #0b45a8; --logo-navy: #061a4d; }
+.header.menu-open .brand { color: var(--mint-900); --logo-blue: #003180; }
 .header.menu-open .lang-switch { box-shadow: inset 0 0 0 1px rgb(10 36 99 / .14); }
 .header.menu-open .menu-btn { background: rgb(10 36 99 / .06); }
 .header.menu-open::before { opacity: 0; }

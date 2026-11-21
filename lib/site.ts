@@ -14,8 +14,8 @@ const siteUrl =
 export const indexable = process.env.SITE_INDEXABLE === "true";
 
 export const company = {
-  name: "Hawyia",
-  legal: "HAWYIA",
+  name: "Hawiyah",
+  legal: "HAWIYAH",
   url: siteUrl.replace(/\/$/, ""),
   email: "info@hawyiapremium.com",
   phone: "+968 9705 7071",
@@ -36,7 +36,7 @@ export const mapsLink = `https://www.google.com/maps/search/?api=1&query=${compa
 export const whatsappLink = (lang: string = "en") => {
   const text = lang === "ar"
     ? "مرحباً هاوية، أود معرفة المزيد عن خدماتكم."
-    : "Hello Hawyia, I'd like to know more about your services.";
+    : "Hello Hawiyah, I'd like to know more about your services.";
   return `https://wa.me/${company.whatsapp}?text=${encodeURIComponent(text)}`;
 };
 
@@ -164,7 +164,7 @@ export const nav: NavItem[] = [
     mega: {
       columns: [
         { title: "Company", links: [
-          { href: "/about/", label: "About Hawyia", desc: "Who we are and what we build" },
+          { href: "/about/", label: "About Hawiyah", desc: "Who we are and what we build" },
           { href: "/about/#mission", label: "Mission & Vision", desc: "Why we do it" },
           { href: "/about/#process", label: "How We Work", desc: "Our 10-step delivery process" },
           { href: "/about/#technologies", label: "Technologies", desc: "The stack behind our platforms" },
@@ -172,7 +172,7 @@ export const nav: NavItem[] = [
           { href: "/contact/", label: "Contact", desc: "Talk to a specialist" },
         ] },
         { title: "Resources", links: [
-          { href: "/blog/", label: "Blog", desc: "The Hawyia Journal: guides and insights" },
+          { href: "/blog/", label: "Blog", desc: "The Hawiyah Journal: guides and insights" },
           { href: "/resources/", label: "Resources", desc: "Automation, explained plainly" },
           { href: "/resources/#faq", label: "FAQ", desc: "Answers before you ask" },
           { href: "/pricing/", label: "Pricing", desc: "Starting-from tiers" },

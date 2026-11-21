@@ -21,7 +21,7 @@ export const POST = adminRoute(async ({ request, admin }) => {
   if (!message) errors.message = "Message is required.";
   if (Object.keys(errors).length) throw new ValidationError("Please fix the highlighted fields.", errors);
 
-  const html = `<div style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.6;color:#0b1020">${escapeHtml(message).replace(/\n/g, "<br />")}<p style="color:#556070;font-size:12px;margin-top:24px">Test email sent by ${escapeHtml(admin.email)} from the Hawyia admin dashboard.</p></div>`;
-  const result = await sendEmail({ to, subject, html, text: `${message}\n\n— Test email sent by ${admin.email} from the Hawyia admin dashboard.`, source: "admin:test" });
+  const html = `<div style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.6;color:#0b1020">${escapeHtml(message).replace(/\n/g, "<br />")}<p style="color:#556070;font-size:12px;margin-top:24px">Test email sent by ${escapeHtml(admin.email)} from the Hawiyah admin dashboard.</p></div>`;
+  const result = await sendEmail({ to, subject, html, text: `${message}\n\n— Test email sent by ${admin.email} from the Hawiyah admin dashboard.`, source: "admin:test" });
   return ok({ result });
 });

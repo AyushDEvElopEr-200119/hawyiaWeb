@@ -8,7 +8,7 @@ const sans = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-sans", di
 const mono = Fragment_Mono({ subsets: ["latin"], weight: "400", variable: "--font-mono", display: "swap" });
 
 export const metadata: Metadata = {
-  title: { default: "Admin | Hawyia Premium", template: "%s | Hawyia Admin" },
+  title: { default: "Admin | Hawiyah Premium", template: "%s | Hawiyah Admin" },
   robots: { index: false, follow: false, nocache: true },
 };
 export const viewport: Viewport = { themeColor: "#0a2463" };

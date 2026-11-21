@@ -10,7 +10,7 @@ const trail = [{ label: "Pricing" }];
 
 export const generateMetadata = metaFor({
   title: "Pricing",
-  description: "Starting-from pricing for Hawyia: automation packages, CRM, HRMS, ERP, helpdesk, inventory & POS, AI assistants, integrations and custom platforms.",
+  description: "Starting-from pricing for Hawiyah: automation packages, CRM, HRMS, ERP, helpdesk, inventory & POS, AI assistants, integrations and custom platforms.",
   path,
 });
 

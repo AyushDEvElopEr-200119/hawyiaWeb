@@ -29,9 +29,9 @@ function calendarFile({ start, meetLink, name }: Booking) {
   const stamp = (d: Date) => d.toISOString().replace(/[-:]|\.\d{3}/g, "");
   const text = (v: string) => v.replace(/[\\;,]/g, "\\$&").replace(/\r?\n/g, "\\n");
   return [
-    "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Hawyia//Demo booking//EN", "METHOD:PUBLISH", "BEGIN:VEVENT",
+    "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Hawiyah//Demo booking//EN", "METHOD:PUBLISH", "BEGIN:VEVENT",
     `UID:demo-${start.getTime()}@hawyiapremium.com`, `DTSTAMP:${stamp(new Date())}`, `DTSTART:${stamp(start)}`, `DTEND:${stamp(slotEnd(start))}`,
-    `SUMMARY:${text(`Hawyia demo with ${name}`)}`, `LOCATION:${text(meetLink)}`, `URL:${meetLink}`, `DESCRIPTION:${text(`Join with Google Meet: ${meetLink}`)}`,
+    `SUMMARY:${text(`Hawiyah demo with ${name}`)}`, `LOCATION:${text(meetLink)}`, `URL:${meetLink}`, `DESCRIPTION:${text(`Join with Google Meet: ${meetLink}`)}`,
     "END:VEVENT", "END:VCALENDAR", "",
   ].join("\r\n");
 }
@@ -42,7 +42,7 @@ async function send(message: { to: string[]; replyTo: string; subject: string; h
   if (mailConfigured()) {
     const result = await sendEmail({
       to: message.to, replyTo: message.replyTo, subject: message.subject, html: message.html, text: message.text, source: "demo-booking",
-      attachments: [{ filename: "hawyia-demo.ics", content: message.ics, contentType: "text/calendar; charset=utf-8; method=PUBLISH" }],
+      attachments: [{ filename: "hawiyah-demo.ics", content: message.ics, contentType: "text/calendar; charset=utf-8; method=PUBLISH" }],
     });
     if (!result.ok) throw new Error(`${result.status}: ${result.error}`);
     return;
@@ -57,7 +57,7 @@ async function send(message: { to: string[]; replyTo: string; subject: string; h
       subject: message.subject,
       html: message.html,
       text: message.text,
-      attachments: [{ filename: "hawyia-demo.ics", content: Buffer.from(message.ics).toString("base64") }],
+      attachments: [{ filename: "hawiyah-demo.ics", content: Buffer.from(message.ics).toString("base64") }],
     }),
   });
   if (!res.ok) throw new Error(`Resend failed: ${res.status} ${await res.text()}`);
@@ -81,7 +81,7 @@ export function emailCustomer(b: Booking, teamEmail: string) {
   return send({
     to: [b.email],
     replyTo: teamEmail,
-    subject: t("Your Hawyia demo is booked"),
+    subject: t("Your Hawiyah demo is booked"),
     ics: calendarFile(b),
     text: [b.name, lines.intro, `${lines.whenLabel}: ${time}`, `${lines.join}: ${b.meetLink}`, lines.file, lines.change].join("\n\n"),
     html: shell(b.lang, `

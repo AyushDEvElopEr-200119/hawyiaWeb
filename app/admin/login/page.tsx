@@ -18,11 +18,11 @@ export default async function AdminLogin({ searchParams }: Props) {
       <div className="adm-login-card">
         <div className="adm-brand is-dark">
           <span className="adm-brand-mark"><LogoMark /></span>
-          <span className="adm-brand-words"><b>Hawyia</b><em>Premium</em></span>
+          <span className="adm-brand-words"><b>Hawiyah</b><em>Premium</em></span>
           <span className="adm-brand-tag">Admin</span>
         </div>
         <h1>Sign in to the admin dashboard</h1>
-        <p className="adm-sub">Use your Hawyia Premium Microsoft 365 account. Only approved administrators can sign in.</p>
+        <p className="adm-sub">Use your Hawiyah Premium Microsoft 365 account. Only approved administrators can sign in.</p>
         {error && <p className="adm-login-msg is-bad" role="alert">{error}</p>}
         {signedOut && !error && <p className="adm-login-msg">You&apos;ve been signed out.</p>}
         <a className="adm-btn is-microsoft is-lg" href={href}>

@@ -15,7 +15,7 @@ const columns: { title: string; links: NavLink[] }[] = [
   { title: "Custom development", links: [...services.map((s) => ({ href: `/custom-development/${s.slug}/`, label: s.name })), { href: "/hire-developers/", label: "Hire Developers" }] },
   { title: "Integrations", links: [...apis.map((a) => ({ href: `/api-integrations/${a.slug}/`, label: a.name })), { href: "/api-integrations/", label: "Integration directory" }] },
   { title: "Company", links: [
-    { href: "/automation/", label: "Automation" }, { href: "/about/", label: "About Hawyia" }, { href: "/testimonials/", label: "Client Stories" }, { href: "/industries/", label: "Industries" },
+    { href: "/automation/", label: "Automation" }, { href: "/about/", label: "About Hawiyah" }, { href: "/testimonials/", label: "Client Stories" }, { href: "/industries/", label: "Industries" },
     { href: "/blog/", label: "Blog" }, { href: "/resources/", label: "Resources" }, { href: "/resources/#faq", label: "FAQ" },
     { href: "/contact/", label: "Contact" }, { href: "/request-demo/", label: "Request a Demo" },
   ] },
@@ -76,7 +76,7 @@ export function Footer() {
         <div className="f-legal container">
           <p className="f-fine">
             Feature availability depends on the chosen product, integrations and requirements.
-            Hawyia is the software provider: your data, customers, payments and third-party accounts stay with your business.
+            Hawiyah is the software provider: your data, customers, payments and third-party accounts stay with your business.
           </p>
           <div className="f-legal-row">
             <p>Copyright © {new Date().getFullYear()} {company.legal}. All rights reserved.</p>

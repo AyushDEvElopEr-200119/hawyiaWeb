@@ -1,4 +1,4 @@
-// Page content. All copy is original to Hawyia.
+// Page content. All copy is original to Hawiyah.
 // Keep claims honest: no invented clients, stats, certifications or partners.
 
 /* ======================= SOLUTIONS ======================= */
@@ -423,7 +423,7 @@ export const apiPages: Record<string, ApiContent> = {
     enables: ["Cards, wallets and bank transfers", "Multi-currency checkout", "Subscriptions and recurring billing", "Refunds and partial refunds", "Reconciliation reports"],
     covers: [["International", "Stripe, PayPal and Checkout.com"], ["Middle East", "Telr, PayTabs, Tap and Thawani"], ["India & Asia", "Razorpay, PayU and Cashfree"], ["Bank transfers", "Offline payment recording and matching"]],
     timeline: "Typically one to two weeks per gateway.",
-    faq: [["Whose gateway account is used?", "Yours. Payments go straight to your business. Hawyia is the software provider and never holds your funds."], ["Can I use more than one gateway?", "Yes. Route payments by currency, method or amount."]],
+    faq: [["Whose gateway account is used?", "Yours. Payments go straight to your business. Hawiyah is the software provider and never holds your funds."], ["Can I use more than one gateway?", "Yes. Route payments by currency, method or amount."]],
   },
   "whatsapp-sms-email-integration": {
     eyebrow: "Messaging", h1: "WhatsApp, SMS<br />& email integration",
@@ -439,7 +439,7 @@ export const apiPages: Record<string, ApiContent> = {
     intro: "Keep your books in step with the rest of the business: invoices, payments, bills and expenses posted automatically to your accounting software.",
     meta: "Accounting software integration with QuickBooks, Xero, Zoho Books and others: invoices, payments, bills and expenses synced automatically.",
     enables: ["Invoices posted automatically", "Payments matched to invoices", "Supplier bills synced", "Expense entries posted", "Customer and supplier records kept in step"],
-    covers: [["Cloud accounting", "QuickBooks Online, Xero and Zoho Books"], ["Regional tools", "Popular local accounting systems with an API or import"], ["Our ERP", "Native connection to Hawyia ERP"], ["Exports", "Journal exports for any other system"]],
+    covers: [["Cloud accounting", "QuickBooks Online, Xero and Zoho Books"], ["Regional tools", "Popular local accounting systems with an API or import"], ["Our ERP", "Native connection to Hawiyah ERP"], ["Exports", "Journal exports for any other system"]],
     timeline: "Typically one to three weeks per system.",
     faq: [["Will it create duplicates?", "No. Records are matched by ID and checked before posting, and errors are flagged for review."], ["Can our accountant still work as usual?", "Yes. They keep working in the same accounting software, just with less data entry."]],
   },
@@ -496,14 +496,14 @@ export const industries = [
 
 /* ======================= RESOURCES ======================= */
 export const generalFaq: Pair[] = [
-  ["What does Hawyia do?", "We automate business and everyday processes, build custom software, provide ready-made modules such as CRM, HRMS and ERP, and connect the tools you already use."],
+  ["What does Hawiyah do?", "We automate business and everyday processes, build custom software, provide ready-made modules such as CRM, HRMS and ERP, and connect the tools you already use."],
   ["What is the difference between ready-made and custom?", "Ready-made modules are configured with your settings and branding, so they launch faster and cost less. Custom software is built around your own workflows when off-the-shelf tools won't fit."],
   ["How long does a project take?", "That depends on the modules, workflows and integrations involved. A single automation can take days or weeks, while larger systems are planned in milestones. You get a timeline with your proposal."],
   ["Do we have to replace our existing software?", "Usually not. We connect automation to the applications you already use through their APIs or data exports."],
   ["Which modules do you offer?", "CRM, HRMS, ERP, project management, helpdesk, inventory & POS and expense management. Use one, or connect several."],
   ["Can you automate household tasks too?", "Yes. Bill reminders, family schedules, shopping lists and smart-home routines can all be automated."],
   ["Can you add AI to our processes?", "Yes. Common uses are assistants for customers and staff, document reading, smart search and drafting reports, always with safeguards."],
-  ["Who owns our data?", "You do. Hawyia is the software provider. Your data, customers and payments stay with your business."],
+  ["Who owns our data?", "You do. Hawiyah is the software provider. Your data, customers and payments stay with your business."],
   ["Can you build mobile apps?", "Yes. We build Android and iOS apps for customers, field teams and employees, connected to the same systems as your website."],
   ["Do you support Arabic?", "Yes. Our modules, apps and automations can run in Arabic and English."],
   ["What happens after launch?", "We offer maintenance and support plans, plus optional hosting, so your systems stay secure and up to date."],

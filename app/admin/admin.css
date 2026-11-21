@@ -35,7 +35,7 @@
   color: #fff;
 }
 .adm-brand { display: flex; align-items: center; gap: .6rem; padding: 0 .5rem; }
-.adm-brand-mark { width: 34px; flex: none; --logo-blue: #5b8fff; --logo-navy: #2a63d6; }
+.adm-brand-mark { width: 34px; flex: none; --logo-blue: #5b8fff; }
 .adm-brand-mark .logo-mark { width: 100%; height: auto; display: block; }
 .adm-brand-words { display: grid; line-height: 1; }
 .adm-brand-words b { font-size: 1.05rem; font-weight: 700; }
@@ -43,7 +43,7 @@
 .adm-brand-tag { margin-inline-start: auto; font-size: .68rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: .3rem .55rem; border-radius: 999px; background: rgb(255 255 255 / .1); color: rgb(255 255 255 / .85); }
 .adm-brand.is-dark { color: var(--adm-ink); padding: 0; }
 .adm-brand.is-dark .adm-brand-tag { background: #eef2fa; color: var(--adm-navy); }
-.adm-brand.is-dark .adm-brand-mark { --logo-blue: #0b45a8; --logo-navy: #061a4d; }
+.adm-brand.is-dark .adm-brand-mark { --logo-blue: #003180; }
 .adm-side-close { display: none; color: #fff; }
 
 .adm-nav { flex: 1; display: grid; align-content: start; gap: .35rem; }

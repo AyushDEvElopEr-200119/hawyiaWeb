@@ -1,4 +1,4 @@
--- Hawyia email module: PostgreSQL 13+ schema.
+-- Hawiyah email module: PostgreSQL 13+ schema.
 -- The app creates these tables automatically on first use (lib/server/schema.ts); this file is the same SQL
 -- for database admins who prefer to run it themselves:  psql "$DATABASE_URL" -f db/schema.sql
 
@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS email_configuration (
   auth_type         text NOT NULL DEFAULT 'oauth2',
   username          text NOT NULL DEFAULT '',
   sender_email      text NOT NULL DEFAULT '',
-  sender_name       text NOT NULL DEFAULT 'Hawyia Premium',
+  sender_name       text NOT NULL DEFAULT 'Hawiyah Premium',
   notify_emails     text[] NOT NULL DEFAULT '{}',
   enabled           boolean NOT NULL DEFAULT true,
   tenant_id         text NOT NULL DEFAULT '',

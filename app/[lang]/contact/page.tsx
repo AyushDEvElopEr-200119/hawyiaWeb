@@ -10,7 +10,7 @@ const trail = [{ label: "Contact" }];
 
 export const generateMetadata = metaFor({
   title: "Contact",
-  description: "Contact Hawyia: request a demo, get a quote or book a consultation about business automation and software.",
+  description: "Contact Hawiyah: request a demo, get a quote or book a consultation about business automation and software.",
   path,
 });
 

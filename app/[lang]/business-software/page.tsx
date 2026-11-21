@@ -9,7 +9,7 @@ const trail = [{ label: "Business Software" }];
 
 export const generateMetadata = metaFor({
   title: "Business Software: CRM, HRMS, ERP & More",
-  description: "Ready-made business modules from Hawyia: CRM, HRMS, ERP, project management, helpdesk, inventory & POS and expense management, connected and automated.",
+  description: "Ready-made business modules from Hawiyah: CRM, HRMS, ERP, project management, helpdesk, inventory & POS and expense management, connected and automated.",
   path,
 });
 

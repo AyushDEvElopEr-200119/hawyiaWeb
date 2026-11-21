@@ -1,4 +1,4 @@
-// Homepage content. Original Hawyia copy; edit here rather than in app/page.tsx.
+// Homepage content. Original Hawiyah copy; edit here rather than in app/page.tsx.
 import type { Pair } from "./content";
 
 export const expertise: Pair[] = [
@@ -122,7 +122,7 @@ export const homeSteps: Pair[] = [
 ];
 
 export const homeFaq: Pair[] = [
-  ["What does Hawyia Premium do?", "We automate business and household processes, develop software, add AI to applications and connect systems. We also offer ready-made modules, including CRM, HRMS, ERP, project management, helpdesk and POS."],
+  ["What does Hawiyah Premium do?", "We automate business and household processes, develop software, add AI to applications and connect systems. We also offer ready-made modules, including CRM, HRMS, ERP, project management, helpdesk and POS."],
   ["Do you build custom software?", "Yes. We build web and mobile applications, enterprise systems and digital platforms to your requirements."],
   ["Can you automate the processes we already have?", "Yes. We review how your operations run today, identify the repetitive work and automate it to simplify your workflows."],
   ["Will we have to replace our existing software?", "Not necessarily. Automation can often be added to the applications you already use, through APIs and other integration methods."],

@@ -7,11 +7,11 @@ export default function AppleIcon() {
   return new ImageResponse(
     (
       <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", background: "#ffffff" }}>
-        <svg width="132" height="132" viewBox="290 52 556 556">
-          <g strokeLinejoin="round" strokeWidth="16">
-            <path fill="#0a3a94" stroke="#0a3a94" d="M306 214 L466 70 L468 222 L624 224 L522 322 L468 322 L468 462 L308 596 Z" />
-            <path fill="#0a3a94" stroke="#0a3a94" d="M528 368 L662 250 L662 488 L528 596 Z" />
-            <path fill="#fbb31c" stroke="#fbb31c" d="M518 186 L632 68 L826 68 L826 268 L702 374 L700 188 Z" />
+        <svg width="132" height="132" viewBox="255 154 560 560">
+          <g strokeLinejoin="round" strokeWidth="8">
+            <path fill="#003180" stroke="#003180" d="M286 284 L424 160 L424 318 L590 318 L597 326 L495 415 L424 415 L424 588 L286 705 Z" />
+            <path fill="#003180" stroke="#003180" d="M491 462 L623 346 L623 587 L491 705 Z" />
+            <path fill="#feb80a" stroke="#feb80a" d="M457 295 L569 165 L782 165 L784 388 L646 504 L646 296 Z" />
           </g>
         </svg>
       </div>

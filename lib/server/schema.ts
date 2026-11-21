@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS email_configuration (
   auth_type         text NOT NULL DEFAULT 'oauth2',
   username          text NOT NULL DEFAULT '',
   sender_email      text NOT NULL DEFAULT '',
-  sender_name       text NOT NULL DEFAULT 'Hawyia Premium',
+  sender_name       text NOT NULL DEFAULT 'Hawiyah Premium',
   notify_emails     text[] NOT NULL DEFAULT '{}',
   enabled           boolean NOT NULL DEFAULT true,
   tenant_id         text NOT NULL DEFAULT '',
