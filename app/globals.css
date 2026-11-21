@@ -171,7 +171,20 @@ button { font: inherit; color: inherit; cursor: pointer; }
   margin-inline-end: auto;
   transition: color .4s;
 }
-.logo-mark { width: 26px; height: 26px; }
+/* Hawiyah Premium logo images (components/Brand.tsx). Each spot carries the navy-and-amber version,
+   the white version, or both stacked: with both, the white one shows only where the ground is dark. */
+.logo-img-pair, .logo-mark-pair { display: inline-grid; vertical-align: middle; }
+.logo-img-pair > img, .logo-mark-pair > img { grid-area: 1 / 1; display: block; transition: opacity .4s var(--ease); }
+.logo-img-color + .logo-img-white, .logo-mark-color + .logo-mark-white { opacity: 0; }
+.logo-img { height: 48px; width: auto; }
+.logo-mark-pair { width: 100%; }
+.logo-mark { width: 100%; height: auto; }
+.header .logo-img { height: 46px; }
+.header.on-dark:not(.menu-open) .logo-img-color { opacity: 0; }
+.header.on-dark:not(.menu-open) .logo-img-color + .logo-img-white { opacity: 1; }
+.pl-lockup .logo-img { height: 34px; }
+.pl-brand .pl-mark.pl-logo { width: auto; }
+.pl-brand .logo-img { height: clamp(80px, 13vw, 150px); }
 /* over dark footage the logo keeps its navy and amber and sits on the same frosted glass as the nav; padding is constant so nothing shifts */
 .header .logo { padding: 4px 12px; margin-inline-start: -12px; border-radius: 14px; transition: background .4s, box-shadow .4s; }
 .header.on-dark .logo {

@@ -1,4 +1,4 @@
-import { LogoMark } from "./Brand";
+import { Logo } from "./Brand";
 
 /**
  * Page-load preloader, about 7.6s of kinetic type (paced so every word can be read), then a shutter reveal:
@@ -43,7 +43,7 @@ export function Preloader() {
       <div className="pl-ui" aria-hidden="true">
         <span className="pl-glow" />
         <div className="pl-corners mono">
-          <span className="pl-lockup" lang="en"><LogoMark /><span translate="no">Hawiyah</span></span>
+          <span className="pl-lockup" lang="en"><Logo on="dark" /></span>
           <span>Business automation</span>
           <span className="pl-loading">Loading<i>.</i><i>.</i><i>.</i></span>
           <span className="pl-count" />
@@ -58,8 +58,7 @@ export function Preloader() {
             <span className="pl-l"><em>automate everything!</em></span>
           </p>
           <p className="pl-brand">
-            <span className="pl-mark"><LogoMark /></span>
-            <span className="pl-l" lang="en"><span translate="no">Hawiyah</span></span>
+            <span className="pl-mark pl-logo"><Logo on="dark" /></span>
           </p>
         </div>
       </div>

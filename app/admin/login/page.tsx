@@ -17,7 +17,7 @@ export default async function AdminLogin({ searchParams }: Props) {
     <main className="adm-login">
       <div className="adm-login-card">
         <div className="adm-brand is-dark">
-          <span className="adm-brand-mark"><LogoMark /></span>
+          <span className="adm-brand-mark"><LogoMark on="light" /></span>
           <span className="adm-brand-words"><b>Hawiyah</b><em>Premium</em></span>
           <span className="adm-brand-tag">Admin</span>
         </div>

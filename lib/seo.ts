@@ -70,7 +70,7 @@ export const organizationSchema = {
   "@id": `${company.url}/#organization`,
   name: company.name,
   url: company.url,
-  logo: `${company.url}/icon.svg`,
+  logo: `${company.url}/icon.png`,
   description: siteDescription,
   ...(company.email && { email: company.email }),
   ...(company.phone && { telephone: company.phone }),

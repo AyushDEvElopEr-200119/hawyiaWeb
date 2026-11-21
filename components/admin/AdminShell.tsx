@@ -25,7 +25,7 @@ export function AdminShell({ user, children }: { user: { email: string; name: st
       <div className={`adm-app${open ? " nav-open" : ""}`}>
         <aside className="adm-side" aria-label="Admin navigation">
           <div className="adm-brand">
-            <span className="adm-brand-mark"><LogoMark /></span>
+            <span className="adm-brand-mark"><LogoMark on="dark" /></span>
             <span className="adm-brand-words"><b>Hawiyah</b><em>Premium</em></span>
             <span className="adm-brand-tag">Admin</span>
             <button type="button" className="adm-icon-btn adm-side-close" onClick={() => setOpen(false)} aria-label="Close menu"><X size={18} /></button>

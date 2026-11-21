@@ -1,23 +1,41 @@
-/** The Hawiyah mark: two navy uprights joined by a bar, with an amber flag rising to the right. */
-export function LogoMark() {
+/* Hawiyah Premium logo (public/assets/brand), always on a transparent background.
+   hawiyah-logo-source.png is the file as supplied (white background). Cut out from it:
+   - hawiyah-logo.webp / hawiyah-mark.webp              navy and amber, for light backgrounds
+   - hawiyah-logo-white.webp / hawiyah-mark-white.webp  navy turned white, for dark backgrounds
+   `on` says what the logo sits on: "light", "dark", or "auto" (carries both, and CSS shows the
+   white one where the background turns dark, as in the header over the hero). */
+const BRAND = "/assets/brand";
+
+type On = "auto" | "light" | "dark";
+
+function Pair({ on, name, className, w, h, alt }: { on: On; name: string; className: string; w: number; h: number; alt: string }) {
+  const img = (white: boolean) => (
+    <img
+      className={`${className} ${className}-${white ? "white" : "color"}`}
+      src={`${BRAND}/${name}${white ? "-white" : ""}.webp`}
+      width={w}
+      height={h}
+      alt={white && on === "auto" ? "" : alt}
+    />
+  );
   return (
-    <svg className="logo-mark" viewBox="255 154 560 560" aria-hidden="true">
-      <g strokeLinejoin="round" strokeWidth="8">
-        <path fill="var(--logo-blue, #003180)" stroke="var(--logo-blue, #003180)" d="M286 284 L424 160 L424 318 L590 318 L597 326 L495 415 L424 415 L424 588 L286 705 Z" />
-        <path fill="var(--logo-blue, #003180)" stroke="var(--logo-blue, #003180)" d="M491 462 L623 346 L623 587 L491 705 Z" />
-        <path fill="#feb80a" stroke="#feb80a" d="M457 295 L569 165 L782 165 L784 388 L646 504 L646 296 Z" />
-      </g>
-    </svg>
+    <span className={`${className}-pair`} translate="no">
+      {on !== "dark" && img(false)}
+      {on !== "light" && img(true)}
+    </span>
   );
 }
 
-/** The full lockup: mark, rule and the two-line "Hawiyah / Premium" wordmark, in English in every language. */
-export function Logo() {
+/** Just the mark (the H with the amber flag). */
+export function LogoMark({ on = "light" }: { on?: On }) {
+  return <Pair on={on} name="hawiyah-mark" className="logo-mark" w={438} h={470} alt="" />;
+}
+
+/** The full logo: mark, rule and "Hawiyah / Premium", in English in every language. */
+export function Logo({ on = "auto" }: { on?: On }) {
   return (
-    <span className="brand" translate="no" lang="en">
-      <LogoMark />
-      <span className="brand-rule" aria-hidden="true" />
-      <span className="brand-words"><b translate="no">Hawiyah</b><em translate="no">Premium</em></span>
+    <span className="logo-lockup" lang="en">
+      <Pair on={on} name="hawiyah-logo" className="logo-img" w={1200} h={470} alt="Hawiyah Premium" />
     </span>
   );
 }

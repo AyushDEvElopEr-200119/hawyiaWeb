@@ -1,9 +1,14 @@
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { company } from "@/lib/site";
 
 // One share card for every page, served at /og.png (lib/seo.ts points every page at it).
 // A route with a file extension skips the trailing-slash redirect, so crawlers get it directly.
 export const dynamic = "force-static";
+
+// the white-lettered logo, made for dark backgrounds like this card
+const logo = `data:image/png;base64,${readFileSync(join(process.cwd(), "public/assets/brand/hawiyah-logo-white.png")).toString("base64")}`;
 
 export function GET() {
   return new ImageResponse(
@@ -15,15 +20,9 @@ export function GET() {
           background: "radial-gradient(120% 90% at 70% 30%, #1546b0 0%, #0a2463 45%, #041030 100%)",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-          <svg width="64" height="64" viewBox="255 154 560 560">
-            <g strokeLinejoin="round" strokeWidth="8">
-            <path fill="#ffffff" stroke="#ffffff" d="M286 284 L424 160 L424 318 L590 318 L597 326 L495 415 L424 415 L424 588 L286 705 Z" />
-            <path fill="#ffffff" stroke="#ffffff" d="M491 462 L623 346 L623 587 L491 705 Z" />
-            <path fill="#feb80a" stroke="#feb80a" d="M457 295 L569 165 L782 165 L784 388 L646 504 L646 296 Z" />
-          </g>
-          </svg>
-          <span style={{ fontSize: 44, letterSpacing: -1 }}>{company.name}</span>
+        <div style={{ display: "flex", alignSelf: "flex-start" }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={logo} width={332} height={130} alt={company.name} />
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
           <span style={{ fontSize: 84, lineHeight: 1.02, letterSpacing: -3.5, maxWidth: 980 }}>{company.tagline}.</span>
