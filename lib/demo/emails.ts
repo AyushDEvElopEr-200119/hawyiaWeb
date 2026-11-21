@@ -30,7 +30,7 @@ function calendarFile({ start, meetLink, name }: Booking) {
   const text = (v: string) => v.replace(/[\\;,]/g, "\\$&").replace(/\r?\n/g, "\\n");
   return [
     "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Hawiyah//Demo booking//EN", "METHOD:PUBLISH", "BEGIN:VEVENT",
-    `UID:demo-${start.getTime()}@hawyiapremium.com`, `DTSTAMP:${stamp(new Date())}`, `DTSTART:${stamp(start)}`, `DTEND:${stamp(slotEnd(start))}`,
+    `UID:demo-${start.getTime()}@hawiyahpremium.com`, `DTSTAMP:${stamp(new Date())}`, `DTSTART:${stamp(start)}`, `DTEND:${stamp(slotEnd(start))}`,
     `SUMMARY:${text(`Hawiyah demo with ${name}`)}`, `LOCATION:${text(meetLink)}`, `URL:${meetLink}`, `DESCRIPTION:${text(`Join with Google Meet: ${meetLink}`)}`,
     "END:VEVENT", "END:VCALENDAR", "",
   ].join("\r\n");

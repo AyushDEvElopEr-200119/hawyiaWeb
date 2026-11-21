@@ -17,7 +17,7 @@ export const company = {
   name: "Hawiyah",
   legal: "HAWIYAH",
   url: siteUrl.replace(/\/$/, ""),
-  email: "info@hawyiapremium.com",
+  email: "info@hawiyahpremium.com",
   phone: "+968 9705 7071",
   whatsapp: "96897057071", // digits only, used for wa.me links
   address: "Alliance Business Centers Network, Al Nahdah Street, Qurum (located at the DoubleTree by Hilton Muscat Qurum)",

@@ -111,8 +111,8 @@ automatically on first use. The same SQL is in [`db/schema.sql`](db/schema.sql) 
    Install-Module ExchangeOnlineManagement -Scope CurrentUser
    Connect-ExchangeOnline
    New-ServicePrincipal -AppId <client-id> -ObjectId <enterprise-app-object-id>
-   Add-MailboxPermission -Identity "Info@hawyiapremium.com" -User <enterprise-app-object-id> -AccessRights FullAccess
-   Set-CASMailbox -Identity "Info@hawyiapremium.com" -SmtpClientAuthenticationDisabled $false
+   Add-MailboxPermission -Identity "info@hawiyahpremium.com" -User <enterprise-app-object-id> -AccessRights FullAccess
+   Set-CASMailbox -Identity "info@hawiyahpremium.com" -SmtpClientAuthenticationDisabled $false
    Set-TransportConfig -SmtpClientAuthenticationDisabled $false
    ```
 

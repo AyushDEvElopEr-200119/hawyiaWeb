@@ -41,7 +41,7 @@ const layout = (heading: string, body: string, dir: "ltr" | "rtl" = "ltr") => `<
     <h1 style="margin:0 0 16px;font-size:22px;line-height:1.3">${heading}</h1>
 ${body}
   </div>
-  <div style="padding:16px 28px;background:#f4f6fb;color:#556070;font-size:12px">Hawiyah Premium · info@hawyiapremium.com</div>
+  <div style="padding:16px 28px;background:#f4f6fb;color:#556070;font-size:12px">Hawiyah Premium · info@hawiyahpremium.com</div>
 </div></body></html>`;
 const btn = (href: string, label: string) =>
   `    <p><a href="${href}" style="display:inline-block;padding:12px 22px;border-radius:99px;background:#fbb31c;color:#0b1020;font-weight:700;text-decoration:none">${label}</a></p>`;

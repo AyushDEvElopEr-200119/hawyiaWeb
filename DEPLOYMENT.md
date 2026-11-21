@@ -54,12 +54,12 @@ Get the secret values from the developer over a secure channel, not by email or 
 | `SITE_INDEXABLE` | `true` | Only on the real domain; lets Google index the site |
 | `SMTP_HOST` | `smtp.office365.com` | |
 | `SMTP_PORT` | `587` | |
-| `SMTP_USER` | `Info@hawyiapremium.com` | The mailbox the website sends from |
+| `SMTP_USER` | `info@hawiyahpremium.com` | The mailbox the website sends from |
 | `MS_TENANT_ID` | Directory (tenant) ID | From Azure → App registrations |
 | `MS_CLIENT_ID` | Application (client) ID | |
 | `MS_CLIENT_SECRET` | Client secret **Value** | Secret |
 | `MS_OBJECT_ID` | App registration Object ID | Reference only |
-| `ADMIN_EMAILS` | `info@hawyiapremium.com` | Microsoft 365 accounts allowed into `/admin`, comma-separated |
+| `ADMIN_EMAILS` | `info@hawiyahpremium.com` | Microsoft 365 accounts allowed into `/admin`, comma-separated |
 | `ADMIN_SESSION_SECRET` | 64 random characters | Secret. Signs admin sessions |
 | `EMAIL_SECRET_KEY` | 32 random bytes (base64) | Secret. Encrypts stored secrets; **never change it once set** |
 | `CRON_SECRET` | random string | Secret. Protects the email-retry job |
@@ -90,8 +90,8 @@ Without this, every form shows *"Something went wrong"*, because Microsoft answe
    Install-Module ExchangeOnlineManagement -Scope CurrentUser
    Connect-ExchangeOnline
    New-ServicePrincipal -AppId <client-id> -ObjectId <enterprise-app-object-id>
-   Add-MailboxPermission -Identity "Info@hawyiapremium.com" -User <enterprise-app-object-id> -AccessRights FullAccess
-   Set-CASMailbox -Identity "Info@hawyiapremium.com" -SmtpClientAuthenticationDisabled $false
+   Add-MailboxPermission -Identity "info@hawiyahpremium.com" -User <enterprise-app-object-id> -AccessRights FullAccess
+   Set-CASMailbox -Identity "info@hawiyahpremium.com" -SmtpClientAuthenticationDisabled $false
    Set-TransportConfig -SmtpClientAuthenticationDisabled $false
    ```
    Changes can take up to 30 minutes to apply.
@@ -111,10 +111,10 @@ On Vercel this is automatic (`vercel.json`). **On your own server**, add a cron 
 
 1. Open `https://<final-domain>/`. Pages load in English, and `/ar/` in Arabic.
 2. The green WhatsApp button opens a chat with +968 9705 7071.
-3. Open `https://<final-domain>/admin/` and sign in with Microsoft as Info@hawyiapremium.com.
+3. Open `https://<final-domain>/admin/` and sign in with Microsoft as info@hawiyahpremium.com.
 4. **Settings › Communication Settings › Email Configuration → Test Connection** must show **Connected**.
    If it shows *Authentication Failed*, finish section 4; the page shows the exact commands with a Copy button.
-5. Use **Send Test Email**, then submit the Contact form. Info@hawyiapremium.com should receive the
+5. Use **Send Test Email**, then submit the Contact form. info@hawiyahpremium.com should receive the
    enquiry, and the visitor gets a confirmation email.
 
 ## Notes
